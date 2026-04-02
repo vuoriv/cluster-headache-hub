@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useTranslation } from "react-i18next"
 import { CheckCircle } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -17,20 +18,22 @@ const TRIGGERS = [
 ]
 
 export function TriggersTab() {
+    const { t } = useTranslation()
+
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <h2 className="text-2xl font-bold">Triggers &amp; Avoidance</h2>
-        <p className="mt-1 text-sm text-muted-foreground">Community-identified triggers — especially relevant during active cluster cycles</p>
+        <h2 className="text-2xl font-bold">{t("triggers.title")}</h2>
+        <p className="mt-1 text-sm text-muted-foreground">{t("triggers.subtitle")}</p>
       </div>
 
       <div className="overflow-x-auto rounded-lg border">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Trigger</TableHead>
-              <TableHead>Community Notes</TableHead>
-              <TableHead className="w-[100px]">Severity</TableHead>
+              <TableHead>{t("triggers.trigger")}</TableHead>
+              <TableHead>{t("triggers.communityNotes")}</TableHead>
+              <TableHead className="w-[100px]">{t("triggers.severity")}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -49,7 +52,7 @@ export function TriggersTab() {
 
       <Card className="border-l-4 border-l-ring">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-sm"><CheckCircle className="size-4 text-primary" />During an Active Cycle</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-sm"><CheckCircle className="size-4 text-primary" />{t("triggers.activeCycle")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 text-sm text-muted-foreground md:grid-cols-2">

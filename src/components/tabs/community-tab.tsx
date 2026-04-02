@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
+import { useTranslation } from "react-i18next"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
@@ -17,16 +18,18 @@ const PRIORITY_LIST = [
 ]
 
 export function CommunityTab() {
+    const { t } = useTranslation()
+
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-bold">Patient Community Treatments</h2>
+          <h2 className="text-2xl font-bold">{t("community.title")}</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Empirical knowledge from Clusterbusters, r/ClusterHeadaches, and CH patient groups — not medical advice
+            {t("community.subtitle")}
           </p>
         </div>
-        <Badge variant="warning" className="mt-1 text-xs">Patient-Reported / Empirical</Badge>
+        <Badge variant="warning" className="mt-1 text-xs">{t("community.badge")}</Badge>
       </div>
 
       <Card className="border-l-4 border-l-ring">
@@ -45,7 +48,7 @@ export function CommunityTab() {
       </Alert>
 
       <div>
-        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Trophy className="size-4 text-primary" />Community Priority List</h3>
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Trophy className="size-4 text-primary" />{t("community.priorityList")}</h3>
         <Card className="overflow-hidden p-0">
           <Table>
             <TableHeader>
@@ -71,7 +74,7 @@ export function CommunityTab() {
       <Separator />
 
       <div>
-        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Leaf className="size-4 text-primary" />The Busting Protocol (Clusterbusters)</h3>
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Leaf className="size-4 text-primary" />{t("community.bustingTitle")}</h3>
         <Card>
           <CardContent className="pt-4">
             <p className="mb-4 text-sm text-muted-foreground">
@@ -108,7 +111,7 @@ export function CommunityTab() {
       <Separator />
 
       <div>
-        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Sun className="size-4 text-primary" />Vitamin D3 Anti-Inflammatory Regimen</h3>
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Sun className="size-4 text-primary" />{t("community.vitaminD")}</h3>
         <Card>
           <CardHeader>
             <CardDescription>

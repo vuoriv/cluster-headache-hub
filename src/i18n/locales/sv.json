@@ -1,0 +1,175 @@
+{
+  "header": {
+    "siteName": "Klusterhuvudvärk – Forskningshub",
+    "hero": "Det mest smärtsamma tillståndet som medicinen känner till.",
+    "subtitle": "Aktuella kliniska prövningar, forskningsartiklar och behandlingsinformation om klusterhuvudvärk — uppdateras vid varje sidinladdning.",
+    "stats": {
+      "activeTrials": "Aktiva prövningar",
+      "recruiting": "Rekryterar",
+      "papers": "Artiklar",
+      "psychedelicTrials": "Psykedeliska prövningar"
+    },
+    "dataRefreshed": "Data uppdaterades vid inladdning"
+  },
+  "tabs": {
+    "overview": "Översikt",
+    "trials": "Prövningar",
+    "research": "Forskning",
+    "treatments": "Behandlingar",
+    "community": "Patientgemenskap",
+    "triggers": "Utlösare"
+  },
+  "overview": {
+    "title": "Vad är klusterhuvudvärk?",
+    "subtitle": "Grundläggande fakta, epidemiologi och det aktuella forskningsläget",
+    "basics": {
+      "title": "Grunderna",
+      "pain": "Extremt svår ensidig orbital-, supraorbital- eller temporalsmärta som varar 15–180 minuter — kallas ofta \"självmordsmigrän\"",
+      "autonomic": "Tårflöde, röd öga, hängande ögonlock, nästäppa, svettning — allt på smärtsidan",
+      "pattern": "1–8 attacker/dag, uppträder ofta under sömnen, klustrar sig i perioder på veckor till månader",
+      "types": "Episodisk (cykler med remission) vs. kronisk (ingen remission >3 månader)",
+      "prevalence": "~0,1 % av befolkningen; historiskt 3–4× vanligare hos män, men könsskillnaden minskar",
+      "pathways": "Hypotalamus (cirkadisk timing) + trigeminusautonoma reflexen (smärtgenerering)"
+    },
+    "research": {
+      "title": "Aktuella forskningsområden",
+      "psychedelics": "Flera fas 2-RCT:er med LSD rekryterar aktivt; psilocybinstudier publicerar resultat",
+      "cgrp": "Galcanezumab godkänt för episodisk klusterhuvudvärk; andra visade blandade resultat",
+      "sleep": "SUNCET-studien testar natriumoxybat mot nattliga attacker vid kronisk klusterhuvudvärk",
+      "neuromod": "Ny implanterbar kombinerad trigeminoparietal+occipital stimulator (PRIMUS)",
+      "genetics": "Flera riskgenloci identifierade i nyliga GWAS-studier (Harder et al., Dahl et al.)",
+      "biomarkers": "MikroRNA-profilering pågår vid IRCCS Mondino, Italien"
+    },
+    "approved": {
+      "title": "Vad som för närvarande är godkänt",
+      "acute": "Höghastighetsoxygen O₂ (mest effektivt), SC sumatriptan 6 mg, intranasalt zolmitriptan 5 mg",
+      "preventive": "Verapamil (förstahandsval), litium, galcanezumab (Emgality — episodisk form enbart)",
+      "transitional": "Blockad av n. occipitalis major, kort prednisonkur",
+      "device": "gammaCore (FDA-godkänd nVNS) för akut episodisk behandling och kronisk prevention"
+    },
+    "disclaimer": {
+      "title": "Medicinsk ansvarsfriskrivning",
+      "text": "Denna webbplats är avsedd <strong>enbart för informationsändamål</strong> och utgör inte medicinsk rådgivning. All information om kliniska prövningar hämtas direkt från ClinicalTrials.gov. Vissa ämnen som diskuteras (psilocybin, LSD, LSA) är kontrollerade eller olagliga i många jurisdiktioner — denna webbplats förespråkar inte deras användning. Rådfråga alltid en behörig vårdgivare innan du ändrar din behandling."
+    },
+    "gap": {
+      "title": "Behandlingsgapet — vad nydiagnostiserade patienter behöver veta",
+      "subtitle": "De flesta klusterhuvudvärkspatienter tillbringar år med ineffektiv eller kontraproduktiv behandling innan de hittar det som faktiskt fungerar.",
+      "delay": "Klusterhuvudvärk feldiagnostiseras ofta som migrän, bihåleinflammation eller tandvärk. Många patienter träffar 5+ läkare innan de får rätt diagnos.",
+      "oxygen": "Höghastighetsoxygen är den säkraste, snabbaste och mest effektiva behandlingen med noll biverkningar. Ändå går många patienter år utan att det erbjuds. Om din läkare inte har nämnt oxygen, fråga — eller hitta en huvudvärksspecialist som gör det.",
+      "failures": "Orala triptaner (för långsamma — bara SC-injektion fungerar vid klusterhuvudvärk), standardprofylax mot migrän (topiramat, amitriptylin — ineffektivt vid klusterhuvudvärk), opioider (fungerar inte, skapar beroende) och verapamil i för låg dos (<360 mg är vanligtvis otillräckligt).",
+      "worse": "SSRI och SNRI kan öka attackfrekvensen hos vissa patienter och blockera psykedeliska behandlingar. Betablockerare är ineffektiva. Överanvändning av triptaner kan orsaka rebound.",
+      "community": "Behandlingar som D3-vitaminregimen (80 % svarare i enkätstudier), busting-protokoll (nu i fas 2-prövningar) och förfinade tekniker för höghastighetsoxygen kom alla från patienter som delade med sig av vad som fungerar — ofta år innan klinisk forskning hann ikapp."
+    },
+    "resources": "Viktiga patientresurser"
+  },
+  "trials": {
+    "title": "Aktiva kliniska prövningar",
+    "subtitle": "Alla klusterhuvudvärks-prövningar som för närvarande rekryterar, är aktiva eller startar snart — hämtade live från ClinicalTrials.gov",
+    "search": "Sök prövningar…",
+    "allStatuses": "Alla statusar",
+    "recruiting": "Rekryterar",
+    "startingSoon": "Startar snart",
+    "active": "Aktiv",
+    "allPhases": "Alla faser",
+    "allTypes": "Alla typer",
+    "interventional": "Interventionell",
+    "observational": "Observationell",
+    "trialCount": "{{count}} prövning",
+    "trialCount_other": "{{count}} prövningar",
+    "noMatch": "Inga prövningar matchar dina filter.",
+    "fallback": "Visar cachad data — live-hämtning misslyckades ({{error}}). Uppdatera för att försöka igen.",
+    "dialog": {
+      "sponsor": "Sponsor",
+      "nctId": "NCT-ID",
+      "enrollment": "Inskrivning",
+      "participants": "deltagare",
+      "estCompletion": "Beräknad slutförande",
+      "startDate": "Startdatum",
+      "conditions": "Tillstånd",
+      "interventions": "Interventioner",
+      "studyDescription": "Studiebeskrivning",
+      "viewOnCt": "Visa på ClinicalTrials.gov"
+    }
+  },
+  "research": {
+    "title": "Senaste forskningsartiklar",
+    "subtitle": "Nyliga publikationer om klusterhuvudvärk, hämtade live från PubMed ({{count}}+ totalt, sorterade efter datum)",
+    "search": "Sök på titel, tidskrift, författare…",
+    "allYears": "Alla år",
+    "perPage": "per sida",
+    "paperCount": "{{count}} artikel",
+    "paperCount_other": "{{count}} artiklar",
+    "noMatch": "Inga artiklar matchar din sökning.",
+    "loadError": "Kunde inte ladda artiklar från PubMed: {{error}}",
+    "prev": "← Föregående",
+    "next": "Nästa →"
+  },
+  "treatments": {
+    "title": "Kliniska behandlingar",
+    "subtitle": "Evidensbaserade behandlingar — godkända läkemedel, medicintekniska produkter och procedurella alternativ",
+    "badge": "Evidensbaserad medicin",
+    "newPatientWarning": "Många allmänläkare och neurologer är inte specialister på klusterhuvudvärk och kan förskriva behandlingar som är ineffektiva eller kontraproduktiva vid klusterhuvudvärk (orala triptaner, standardprofylax mot migrän, opioider). Om din nuvarande behandling inte fungerar, sök en huvudvärksspecialist och utforska fliken Patientgemenskap för patienttestade metoder.",
+    "forNewPatients": "För nydiagnostiserade patienter:",
+    "acute": "Akuta abortiva medel",
+    "preventive": "Förebyggande behandlingar",
+    "inTrials": "I aktiva kliniska prövningar",
+    "prescribingFailures": "Vanliga förskrivningsfel",
+    "prescribingFailuresDesc": "Dessa förskrivs ofta till klusterhuvudvärkspatienter av icke-specialiserade läkare men är ineffektiva eller skadliga. Om du får något av dessa som din primära behandling vid klusterhuvudvärk, sök en huvudvärksspecialist."
+  },
+  "community": {
+    "title": "Patientgemenskapens behandlingar",
+    "subtitle": "Empirisk kunskap från Clusterbusters, r/ClusterHeadaches och klusterhuvudvärks-patientgrupper — inte medicinsk rådgivning",
+    "badge": "Patientrapporterad / Empirisk",
+    "whyMatters": "Många av de mest effektiva behandlingarna vid klusterhuvudvärk har upptäckts av patienter, inte läkare. Förfinade tekniker för höghastighetsoxygen, D3-vitaminregimen, energidrycker vid skuggonset och det psykedeliska busting-protokollet — allt kom från patienter som delade vad som fungerar. Flera valideras nu i kliniska prövningar, men patientgemenskapen använde dem effektivt i år innan forskningen hann ikapp. Om din läkares behandlingsplan inte fungerar kan kunskapen här förändra ditt liv.",
+    "whyMattersLabel": "Varför den här fliken är viktig:",
+    "warning": "Dessa behandlingar rapporteras av patienter och är inte alla officiellt godkända. Diskutera alltid med din läkare — men tänk på att många klusterhuvudvärkspatienter hittar sin bästa behandling via patientgemenskapens kunskap, inte sitt ursprungliga recept.",
+    "priorityList": "Patientgemenskapens prioriteringslista",
+    "bustingTitle": "Busting-protokollet (Clusterbusters)",
+    "bustingDesc": "\"Busting\" är patientgemenskapens term för att använda psykedeliska substanser för att bryta klusterhuvudvärkscykler. Populariserades och organiserades formellt av Bob Wold, som grundade Clusterbusters efter sina egna erfarenheter. Utvärderas nu i fas 2-kliniska prövningar.",
+    "substances": "Substanser som används",
+    "protocol": "Protokoll",
+    "vitaminD": "D3-vitaminets antiinflammatoriska regimen",
+    "vitaminDDesc": "Utvecklad av Pete Batcheller (klusterhuvudvärkspatient, pensionerad marinpilot). Enkätstudie av 110 patienter: <strong>80 % rapporterade signifikant minskning</strong> av frekvens, duration och svårighetsgrad. Formell klinisk prövning NCT04570475 pågår.",
+    "coreSupplement": "Grundtillskott",
+    "cofactors": "Viktiga kofaktorer (utelämna inte)",
+    "fullProtocol": "Fullständigt protokoll:"
+  },
+  "triggers": {
+    "title": "Utlösare och undvikande",
+    "subtitle": "Patientgemenskap-identifierade utlösare — särskilt relevanta under aktiva klustercykler",
+    "trigger": "Utlösare",
+    "communityNotes": "Patientgemenskapens kommentarer",
+    "severity": "Svårighetsgrad",
+    "activeCycle": "Under en aktiv cykel"
+  },
+  "footer": {
+    "dataFrom": "Data från",
+    "and": "och",
+    "viaApis": "via publika API:er.",
+    "communityInfo": "Patientgemenskapsinformation från Clusterbusters, r/ClusterHeadaches och patientenkätlitteratur.",
+    "notMedicalAdvice": "Inte medicinsk rådgivning.",
+    "darkModeHint": "Tryck <kbd>d</kbd> för att växla mörkt läge"
+  },
+  "common": {
+    "pain": "Smärta",
+    "autonomicFeatures": "Autonoma symtom",
+    "pattern": "Mönster",
+    "types": "Typer",
+    "prevalence": "Prevalens",
+    "keyPathways": "Centrala mekanismer",
+    "acute": "Akut",
+    "preventive": "Förebyggande",
+    "transitional": "Övergående",
+    "device": "Medicinteknisk produkt",
+    "averageDiagnosticDelay": "Genomsnittlig diagnostisk fördröjning: 5+ år.",
+    "oxygenIsNumber1": "Oxygen är det #1 abortiva medlet — men de flesta läkare förskriver det inte.",
+    "commonPrescribingFailures": "Vanliga förskrivningsfel:",
+    "medicationsMakeWorse": "Läkemedel som kan förvärra tillståndet:",
+    "communityKnowledgeSavesLives": "Patientgemenskapens kunskap räddar liv.",
+    "high": "Hög",
+    "medium": "Medel",
+    "low": "Låg",
+    "predictive": "Prediktiv",
+    "variable": "Variabel"
+  }
+}

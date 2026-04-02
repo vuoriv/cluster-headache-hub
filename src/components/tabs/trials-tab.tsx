@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react"
+import { useTranslation } from "react-i18next"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -70,7 +71,7 @@ function TrialCard({ trial, onSelect }: { trial: Trial; onSelect: () => void }) 
   )
 }
 
-function TrialDialog({ trial, open, onClose }: { trial: Trial | null; open: boolean; onClose: () => void }) {
+function TrialDialog({ trial, open, onClose, t }: { trial: Trial | null; open: boolean; onClose: () => void; t: (key: string) => string }) {
   if (!trial) return null
   const cat = categoryForTrial(trial)
   const pl = phaseLabel(trial.phase)
@@ -186,7 +187,7 @@ function TrialDialog({ trial, open, onClose }: { trial: Trial | null; open: bool
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                View on ClinicalTrials.gov
+                {t("trials.dialog.viewOnCt")}
                 <ExternalLink className="ml-1.5" />
               </a>
             </Button>
@@ -198,6 +199,7 @@ function TrialDialog({ trial, open, onClose }: { trial: Trial | null; open: bool
 }
 
 export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps) {
+  const { t } = useTranslation()
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [phaseFilter, setPhaseFilter] = useState("all")
@@ -232,9 +234,9 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl font-bold">Active Clinical Trials</h2>
+        <h2 className="text-2xl font-bold">{t("trials.title")}</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          All cluster headache trials currently recruiting, active, or starting soon — fetched live from ClinicalTrials.gov
+          {t("trials.subtitle")}
         </p>
       </div>
 
@@ -248,7 +250,7 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
 
       <div className="flex flex-wrap items-center gap-3">
         <Input
-          placeholder="Search trials…"
+          placeholder={t("trials.search")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="min-w-[180px] flex-1"
@@ -257,10 +259,10 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
           <SelectTrigger className="w-[150px]"><SelectValue /></SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="all">All Statuses</SelectItem>
-              <SelectItem value="RECRUITING">Recruiting</SelectItem>
-              <SelectItem value="NOT_YET_RECRUITING">Starting Soon</SelectItem>
-              <SelectItem value="ACTIVE_NOT_RECRUITING">Active</SelectItem>
+              <SelectItem value="all">{t("trials.allStatuses")}</SelectItem>
+              <SelectItem value="RECRUITING">{t("trials.recruiting")}</SelectItem>
+              <SelectItem value="NOT_YET_RECRUITING">{t("trials.startingSoon")}</SelectItem>
+              <SelectItem value="ACTIVE_NOT_RECRUITING">{t("trials.active")}</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -268,7 +270,7 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
           <SelectTrigger className="w-[130px]"><SelectValue /></SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="all">All Phases</SelectItem>
+              <SelectItem value="all">{t("trials.allPhases")}</SelectItem>
               <SelectItem value="PHASE1">Phase 1</SelectItem>
               <SelectItem value="PHASE2">Phase 2</SelectItem>
               <SelectItem value="PHASE3">Phase 3</SelectItem>
@@ -281,9 +283,9 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
           <SelectTrigger className="w-[150px]"><SelectValue /></SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="INTERVENTIONAL">Interventional</SelectItem>
-              <SelectItem value="OBSERVATIONAL">Observational</SelectItem>
+              <SelectItem value="all">{t("trials.allTypes")}</SelectItem>
+              <SelectItem value="INTERVENTIONAL">{t("trials.interventional")}</SelectItem>
+              <SelectItem value="OBSERVATIONAL">{t("trials.observational")}</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -293,7 +295,7 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
       </div>
 
       {filtered.length === 0 ? (
-        <div className="py-16 text-center text-muted-foreground">No trials match your filters.</div>
+        <div className="py-16 text-center text-muted-foreground">{t("trials.noMatch")}</div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {filtered.map((t) => (
@@ -310,6 +312,7 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
         trial={selectedTrial}
         open={selectedTrial !== null}
         onClose={() => setSelectedTrial(null)}
+        t={t}
       />
     </div>
   )

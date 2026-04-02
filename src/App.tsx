@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect, useCallback } from "react"
+import { useTranslation } from "react-i18next"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
@@ -15,6 +16,7 @@ import { usePapers } from "@/hooks/use-papers"
 import { categoryForTrial } from "@/lib/types"
 
 export default function App() {
+  const { t } = useTranslation()
   const { trials, loading: trialsLoading, error: trialsError, isFallback } = useTrials()
   const { papers, totalCount, loading: papersLoading, error: papersError, progress } = usePapers()
 
@@ -60,22 +62,22 @@ export default function App() {
         <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
           <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
             <TabsList className="mb-8 w-full justify-start">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="overview">{t("tabs.overview")}</TabsTrigger>
               <TabsTrigger value="trials">
-                Trials
+                {t("tabs.trials")}
                 {trialStats.total !== null && (
                   <Badge variant="secondary" className="ml-1.5 text-[0.7rem]">{trialStats.total}</Badge>
                 )}
               </TabsTrigger>
               <TabsTrigger value="research">
-                Research
+                {t("tabs.research")}
                 {!papersLoading && papers.length > 0 && (
                   <Badge variant="secondary" className="ml-1.5 text-[0.7rem]">{papers.length}</Badge>
                 )}
               </TabsTrigger>
-              <TabsTrigger value="treatments">Treatments</TabsTrigger>
-              <TabsTrigger value="community">Community</TabsTrigger>
-              <TabsTrigger value="triggers">Triggers</TabsTrigger>
+              <TabsTrigger value="treatments">{t("tabs.treatments")}</TabsTrigger>
+              <TabsTrigger value="community">{t("tabs.community")}</TabsTrigger>
+              <TabsTrigger value="triggers">{t("tabs.triggers")}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview"><OverviewTab /></TabsContent>
@@ -91,16 +93,16 @@ export default function App() {
           <div className="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:justify-between">
             <div className="flex flex-col gap-1 text-xs text-muted-foreground">
               <p>
-                Data from{" "}
+                {t("footer.dataFrom")}{" "}
                 <a href="https://clinicaltrials.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">ClinicalTrials.gov</a>
-                {" "}and{" "}
+                {" "}{t("footer.and")}{" "}
                 <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">PubMed</a>
-                {" "}via public APIs.
+                {" "}{t("footer.viaApis")}
               </p>
-              <p>Community info from Clusterbusters, r/ClusterHeadaches, and patient survey literature.</p>
+              <p>{t("footer.communityInfo")}</p>
             </div>
             <div className="flex flex-col items-end gap-1 text-xs text-muted-foreground">
-              <p className="font-medium">Not medical advice.</p>
+              <p className="font-medium">{t("footer.notMedicalAdvice")}</p>
               <p>Built 2026</p>
             </div>
           </div>

@@ -1,0 +1,175 @@
+{
+  "header": {
+    "siteName": "Cluster Headache Research Hub",
+    "hero": "La pathologie la plus douloureuse connue de la médecine.",
+    "subtitle": "Essais cliniques en cours, articles de recherche et informations thérapeutiques sur la céphalée en grappe — mis à jour à chaque chargement de page.",
+    "stats": {
+      "activeTrials": "Essais actifs",
+      "recruiting": "En recrutement",
+      "papers": "Articles",
+      "psychedelicTrials": "Essais psychédéliques"
+    },
+    "dataRefreshed": "Données actualisées au chargement"
+  },
+  "tabs": {
+    "overview": "Aperçu",
+    "trials": "Essais",
+    "research": "Recherche",
+    "treatments": "Traitements",
+    "community": "Communauté",
+    "triggers": "Facteurs déclenchants"
+  },
+  "overview": {
+    "title": "Qu'est-ce que la céphalée en grappe ?",
+    "subtitle": "Faits essentiels, épidémiologie et panorama de la recherche actuelle",
+    "basics": {
+      "title": "Les fondamentaux",
+      "pain": "Douleur unilatérale orbitaire, supra-orbitaire ou temporale d'une intensité extrême, durant 15 à 180 minutes — souvent qualifiée de « céphalée suicide »",
+      "autonomic": "Larmoiement, œil rouge, ptose palpébrale, congestion nasale, sudation — tous du côté douloureux",
+      "pattern": "1 à 8 crises par jour, survenant fréquemment durant le sommeil, regroupées en périodes de quelques semaines à quelques mois",
+      "types": "Épisodique (cycles avec rémission) vs. Chronique (sans rémission > 3 mois)",
+      "prevalence": "~0,1 % de la population ; historiquement 3 à 4 fois plus fréquent chez l'homme, bien que l'écart entre les sexes se réduise",
+      "pathways": "Hypothalamus (régulation circadienne) + réflexe trigémino-autonomique (génération de la douleur)"
+    },
+    "research": {
+      "title": "Axes de recherche actuels",
+      "psychedelics": "Plusieurs essais randomisés contrôlés de phase 2 avec le LSD en recrutement actif ; résultats d'essais à la psilocybine en cours de publication",
+      "cgrp": "Le galcanézumab est approuvé pour la céphalée en grappe épisodique ; les autres ont montré des résultats mitigés",
+      "sleep": "Essai SUNCET évaluant l'oxybate de sodium pour les crises nocturnes dans la forme chronique",
+      "neuromod": "Nouveau stimulateur implantable combiné trigemino-occipital (PRIMUS)",
+      "genetics": "Plusieurs loci de risque identifiés dans des études GWAS récentes (Harder et al., Dahl et al.)",
+      "biomarkers": "Profilage des microARN en cours à l'IRCCS Mondino, Italie"
+    },
+    "approved": {
+      "title": "Traitements actuellement approuvés",
+      "acute": "O₂ à haut débit (le plus efficace), sumatriptan SC 6 mg, zolmitriptan intranasal 5 mg",
+      "preventive": "Vérapamil (première intention), lithium, galcanézumab (Emgality — forme épisodique uniquement)",
+      "transitional": "Bloc du nerf grand occipital, cure courte de prednisone",
+      "device": "gammaCore (nVNS homologué FDA) pour l'abortif épisodique aigu et la prévention de la forme chronique"
+    },
+    "disclaimer": {
+      "title": "Avertissement médical",
+      "text": "Ce site est fourni à des fins <strong>d'information uniquement</strong> et ne constitue pas un avis médical. Toutes les informations sur les essais cliniques proviennent directement de ClinicalTrials.gov. Certaines substances évoquées (psilocybine, LSD, LSA) sont contrôlées ou illégales dans de nombreuses juridictions — ce site n'en préconise pas l'usage. Consultez toujours un professionnel de santé qualifié avant de modifier votre traitement."
+    },
+    "gap": {
+      "title": "Le vide thérapeutique — Ce que les nouveaux patients doivent savoir",
+      "subtitle": "La plupart des patients atteints de céphalées en grappe passent des années à recevoir des traitements inefficaces ou contre-productifs avant de trouver ce qui fonctionne vraiment.",
+      "delay": "La céphalée en grappe est fréquemment diagnostiquée à tort comme une migraine, une sinusite ou une douleur dentaire. De nombreux patients consultent 5 médecins ou plus avant d'obtenir le bon diagnostic.",
+      "oxygen": "L'O₂ à haut débit est le traitement le plus sûr, le plus rapide et le plus efficace, sans aucun effet indésirable. Pourtant, de nombreux patients n'en bénéficient pas pendant des années. Si votre médecin n'a pas mentionné l'oxygène, posez la question — ou consultez un spécialiste des céphalées qui le prescrira.",
+      "failures": "Les triptans oraux (trop lents — seule l'injection SC est efficace dans la céphalée en grappe), les préventifs antimigraineux standards (topiramate, amitriptyline — inefficaces dans la céphalée en grappe), les opioïdes (sans effet, créent une dépendance) et le vérapamil à dose trop faible (< 360 mg est généralement insuffisant).",
+      "worse": "Les ISRS et les IRSN peuvent augmenter la fréquence des crises chez certains patients et bloquer les traitements psychédéliques. Les bêtabloquants sont inefficaces. La surutilisation des triptans peut provoquer un effet rebond.",
+      "community": "Des traitements comme le protocole à la vitamine D3 (taux de répondeurs de 80 % dans les enquêtes), les protocoles de « busting » (désormais en essais de phase 2) et les améliorations techniques de l'oxygénothérapie à haut débit proviennent tous de patients partageant leur expérience — souvent des années avant que la recherche clinique ne les rattrape."
+    },
+    "resources": "Ressources patients essentielles"
+  },
+  "trials": {
+    "title": "Essais cliniques actifs",
+    "subtitle": "Tous les essais sur la céphalée en grappe actuellement en recrutement, actifs ou sur le point de démarrer — récupérés en direct depuis ClinicalTrials.gov",
+    "search": "Rechercher des essais…",
+    "allStatuses": "Tous les statuts",
+    "recruiting": "En recrutement",
+    "startingSoon": "Démarrage imminent",
+    "active": "Actif",
+    "allPhases": "Toutes les phases",
+    "allTypes": "Tous les types",
+    "interventional": "Interventionnel",
+    "observational": "Observationnel",
+    "trialCount": "{{count}} essai",
+    "trialCount_other": "{{count}} essais",
+    "noMatch": "Aucun essai ne correspond à vos filtres.",
+    "fallback": "Affichage des données en cache — la récupération en direct a échoué ({{error}}). Actualisez pour réessayer.",
+    "dialog": {
+      "sponsor": "Promoteur",
+      "nctId": "NCT ID",
+      "enrollment": "Effectif",
+      "participants": "participants",
+      "estCompletion": "Fin estimée",
+      "startDate": "Date de début",
+      "conditions": "Pathologies",
+      "interventions": "Interventions",
+      "studyDescription": "Description de l'étude",
+      "viewOnCt": "Voir sur ClinicalTrials.gov"
+    }
+  },
+  "research": {
+    "title": "Derniers articles de recherche",
+    "subtitle": "Publications récentes sur la céphalée en grappe, récupérées en direct depuis PubMed ({{count}}+ au total, triées par date)",
+    "search": "Rechercher par titre, revue, auteurs…",
+    "allYears": "Toutes les années",
+    "perPage": "par page",
+    "paperCount": "{{count}} article",
+    "paperCount_other": "{{count}} articles",
+    "noMatch": "Aucun article ne correspond à votre recherche.",
+    "loadError": "Impossible de charger les articles depuis PubMed : {{error}}",
+    "prev": "← Préc.",
+    "next": "Suiv. →"
+  },
+  "treatments": {
+    "title": "Traitements cliniques",
+    "subtitle": "Traitements basés sur les preuves — médicaments approuvés, dispositifs médicaux et options procédurales",
+    "badge": "Médecine fondée sur les preuves",
+    "newPatientWarning": "De nombreux médecins généralistes et neurologues ne sont pas spécialistes des céphalées en grappe et peuvent prescrire des traitements inefficaces ou contre-productifs (triptans oraux, préventifs antimigraineux standards, opioïdes). Si votre traitement actuel ne fonctionne pas, consultez un spécialiste des céphalées et explorez l'onglet Communauté pour les approches testées par les patients.",
+    "forNewPatients": "Pour les patients nouvellement diagnostiqués :",
+    "acute": "Traitements abortifs de crise",
+    "preventive": "Traitements préventifs",
+    "inTrials": "En essais cliniques actifs",
+    "prescribingFailures": "Erreurs de prescription fréquentes",
+    "prescribingFailuresDesc": "Ces traitements sont fréquemment prescrits aux patients atteints de céphalées en grappe par des médecins non spécialistes, mais ils sont inefficaces ou nuisibles. Si vous recevez l'un d'eux comme traitement principal de votre céphalée en grappe, consultez un spécialiste des céphalées."
+  },
+  "community": {
+    "title": "Traitements de la communauté patients",
+    "subtitle": "Connaissances empiriques de Clusterbusters, r/ClusterHeadaches et des groupes de patients — pas un avis médical",
+    "badge": "Rapporté par les patients / Empirique",
+    "whyMatters": "Nombre des traitements les plus efficaces contre la céphalée en grappe ont été découverts par des patients, et non par des médecins. Les améliorations techniques de l'oxygénothérapie à haut débit, le protocole à la vitamine D3, les boissons énergisantes au début d'une attaque atténuée, et le protocole de « busting » psychédélique — tout cela vient de patients partageant leur expérience. Plusieurs de ces approches sont désormais validées dans des essais cliniques, mais la communauté les utilisait efficacement des années avant que la recherche les rattrape. Si le plan de traitement de votre médecin ne fonctionne pas, les connaissances ici pourraient changer votre vie.",
+    "whyMattersLabel": "Pourquoi cet onglet est important :",
+    "warning": "Ces traitements sont rapportés par des patients et ne sont pas tous officiellement approuvés. Discutez-en toujours avec votre médecin — mais sachez que de nombreux patients atteints de céphalées en grappe trouvent leur meilleur traitement grâce aux connaissances communautaires, et non à leur ordonnance initiale.",
+    "priorityList": "Liste de priorité communautaire",
+    "bustingTitle": "Le protocole de busting (Clusterbusters)",
+    "bustingDesc": "Le « busting » est le terme utilisé par la communauté patients pour désigner l'utilisation de substances psychédéliques afin de mettre fin aux cycles de céphalées en grappe. Popularisé et formellement organisé par Bob Wold, qui a fondé Clusterbusters après sa propre expérience. Actuellement évalué dans des essais cliniques de phase 2.",
+    "substances": "Substances utilisées",
+    "protocol": "Protocole",
+    "vitaminD": "Protocole anti-inflammatoire à la vitamine D3",
+    "vitaminDDesc": "Développé par Pete Batcheller (patient atteint de céphalées en grappe, pilote de la Marine à la retraite). Enquête portant sur 110 patients : <strong>80 % ont rapporté une réduction significative</strong> de la fréquence, de la durée et de l'intensité. Essai clinique formel NCT04570475 en cours.",
+    "coreSupplement": "Supplément principal",
+    "cofactors": "Cofacteurs essentiels (ne pas omettre)",
+    "fullProtocol": "Protocole complet :"
+  },
+  "triggers": {
+    "title": "Facteurs déclenchants et leur éviction",
+    "subtitle": "Facteurs déclenchants identifiés par la communauté — particulièrement pertinents pendant les périodes de crise active",
+    "trigger": "Facteur déclenchant",
+    "communityNotes": "Notes de la communauté",
+    "severity": "Sévérité",
+    "activeCycle": "Pendant une période active"
+  },
+  "footer": {
+    "dataFrom": "Données provenant de",
+    "and": "et",
+    "viaApis": "via des API publiques.",
+    "communityInfo": "Informations communautaires issues de Clusterbusters, r/ClusterHeadaches et de la littérature des enquêtes patients.",
+    "notMedicalAdvice": "Pas un avis médical.",
+    "darkModeHint": "Appuyez sur <kbd>d</kbd> pour basculer en mode sombre"
+  },
+  "common": {
+    "pain": "Douleur",
+    "autonomicFeatures": "Signes autonomiques",
+    "pattern": "Profil",
+    "types": "Types",
+    "prevalence": "Prévalence",
+    "keyPathways": "Voies physiopathologiques clés",
+    "acute": "Crise",
+    "preventive": "Préventif",
+    "transitional": "Transitionnel",
+    "device": "Dispositif",
+    "averageDiagnosticDelay": "Délai diagnostique moyen : 5 ans ou plus.",
+    "oxygenIsNumber1": "L'oxygène est le traitement abortif n°1 — mais la plupart des médecins ne le prescrivent pas.",
+    "commonPrescribingFailures": "Erreurs de prescription fréquentes :",
+    "medicationsMakeWorse": "Médicaments pouvant aggraver la situation :",
+    "communityKnowledgeSavesLives": "Les connaissances de la communauté patients sauvent des vies.",
+    "high": "Élevée",
+    "medium": "Modérée",
+    "low": "Faible",
+    "predictive": "Prédictif",
+    "variable": "Variable"
+  }
+}

@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -17,6 +18,7 @@ interface ResearchTabProps {
 }
 
 export function ResearchTab({ papers, totalCount, loading, error, progress }: ResearchTabProps) {
+  const { t } = useTranslation()
   const [search, setSearch] = useState("")
   const [yearFilter, setYearFilter] = useState("all")
   const [perPage, setPerPage] = useState(25)
@@ -69,7 +71,7 @@ export function ResearchTab({ papers, totalCount, loading, error, progress }: Re
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl font-bold">Latest Research Papers</h2>
+        <h2 className="text-2xl font-bold">{t("research.title")}</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Recent cluster headache publications, fetched live from PubMed ({totalCount.toLocaleString()}+ total, sorted by date)
         </p>
@@ -77,7 +79,7 @@ export function ResearchTab({ papers, totalCount, loading, error, progress }: Re
 
       <div className="flex flex-wrap items-center gap-3">
         <Input
-          placeholder="Search by title, journal, authors…"
+          placeholder={t("research.search")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="min-w-[200px] flex-1"
@@ -86,7 +88,7 @@ export function ResearchTab({ papers, totalCount, loading, error, progress }: Re
           <SelectTrigger className="w-[130px]"><SelectValue /></SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="all">All Years</SelectItem>
+              <SelectItem value="all">{t("research.allYears")}</SelectItem>
               {years.map((y) => (
                 <SelectItem key={y} value={y}>{y}</SelectItem>
               ))}
@@ -110,7 +112,7 @@ export function ResearchTab({ papers, totalCount, loading, error, progress }: Re
 
       <div className="flex flex-col gap-3">
         {paginated.length === 0 ? (
-          <p className="py-12 text-center text-muted-foreground">No papers match your search.</p>
+          <p className="py-12 text-center text-muted-foreground">{t("research.noMatch")}</p>
         ) : (
           paginated.map((p) => {
             const year = p.pubdate.slice(0, 4)

@@ -1,0 +1,175 @@
+{
+  "header": {
+    "siteName": "Cluster Headache Research Hub",
+    "hero": "Der schmerzhafteste bekannte Zustand in der Medizin.",
+    "subtitle": "Aktuelle klinische Studien, Forschungsarbeiten und Behandlungsinformationen zum Clusterkopfschmerz — bei jedem Seitenaufruf aktualisiert.",
+    "stats": {
+      "activeTrials": "Aktive Studien",
+      "recruiting": "Rekrutierend",
+      "papers": "Publikationen",
+      "psychedelicTrials": "Psychedelika-Studien"
+    },
+    "dataRefreshed": "Daten beim Laden aktualisiert"
+  },
+  "tabs": {
+    "overview": "Übersicht",
+    "trials": "Studien",
+    "research": "Forschung",
+    "treatments": "Behandlungen",
+    "community": "Community",
+    "triggers": "Trigger"
+  },
+  "overview": {
+    "title": "Was ist Clusterkopfschmerz?",
+    "subtitle": "Grundlegende Fakten, Epidemiologie und die aktuelle Forschungslandschaft",
+    "basics": {
+      "title": "Die Grundlagen",
+      "pain": "Unerträglicher einseitiger orbitaler, supraorbitaler oder temporaler Schmerz, der 15–180 Minuten anhält — oft als „Suizidkopfschmerz“ bezeichnet",
+      "autonomic": "Tränenfluss, gerötetes Auge, hängendes Augenlid, nasale Kongestion, Schwitzen — alles auf der Schmerzseite",
+      "pattern": "1–8 Attacken/Tag, häufig während des Schlafs auftretend, in Perioden von Wochen bis Monaten geclustert",
+      "types": "Episodisch (Zyklen mit Remission) vs. Chronisch (keine Remission >3 Monate)",
+      "prevalence": "~0,1 % der Bevölkerung; historisch 3–4× häufiger bei Männern, wobei sich der Geschlechterunterschied zunehmend angleicht",
+      "pathways": "Hypothalamus (zirkadiane Steuerung) + trigeminaler Autonomreflex (Schmerzgenerierung)"
+    },
+    "research": {
+      "title": "Aktuelle Forschungsschwerpunkte",
+      "psychedelics": "Mehrere Phase-2-LSD-RCTs aktiv rekrutierend; Psilocybin-Studien veröffentlichen Ergebnisse",
+      "cgrp": "Galcanezumab für episodischen CK zugelassen; andere zeigten gemischte Ergebnisse",
+      "sleep": "SUNCET-Studie testet Natriumoxybat bei nächtlichen Attacken beim chronischen CK",
+      "neuromod": "Neuer implantierbarer kombinierter Trigeminus+Okzipital-Stimulator (PRIMUS)",
+      "genetics": "Mehrere Risikoloci in jüngsten GWAS-Studien identifiziert (Harder et al., Dahl et al.)",
+      "biomarkers": "MicroRNA-Profiling läuft am IRCCS Mondino, Italien"
+    },
+    "approved": {
+      "title": "Was derzeit zugelassen ist",
+      "acute": "Hochdosierter Sauerstoff O₂ (am wirksamsten), SC Sumatriptan 6 mg, intranasales Zolmitriptan 5 mg",
+      "preventive": "Verapamil (erste Wahl), Lithium, Galcanezumab (Emgality — nur episodisch)",
+      "transitional": "Okzipitale Nervenblockade, kurze Prednison-Behandlung",
+      "device": "gammaCore (FDA-zugelassenes nVNS) für episodische Akutbehandlung und chronische Prävention"
+    },
+    "disclaimer": {
+      "title": "Medizinischer Haftungsausschluss",
+      "text": "Diese Website dient <strong>ausschließlich zu Informationszwecken</strong> und stellt keine medizinische Beratung dar. Alle Informationen zu klinischen Studien stammen direkt von ClinicalTrials.gov. Einige hier besprochene Substanzen (Psilocybin, LSD, LSA) sind in vielen Ländern kontrolliert oder illegal — diese Website befürwortet deren Verwendung nicht. Konsultieren Sie stets eine qualifizierte medizinische Fachkraft, bevor Sie Ihre Behandlung ändern."
+    },
+    "gap": {
+      "title": "Die Versorgungslücke — Was neu Diagnostizierte wissen müssen",
+      "subtitle": "Die meisten CK-Patienten verbringen Jahre mit unwirksamen oder kontraproduktiven Behandlungen, bevor sie das finden, was wirklich hilft.",
+      "delay": "CK wird häufig als Migräne, Sinusitis oder Zahnschmerz fehldiagnostiziert. Viele Patienten suchen 5 oder mehr Ärzte auf, bevor sie die richtige Diagnose erhalten.",
+      "oxygen": "Hochdosierter Sauerstoff O₂ ist die sicherste, schnellste und wirksamste Behandlung ohne Nebenwirkungen. Dennoch erhalten viele Patienten jahrelang kein Angebot dieser Therapie. Wenn Ihr Arzt Sauerstoff nicht erwähnt hat, fragen Sie danach — oder suchen Sie einen Kopfschmerzspezialisten auf.",
+      "failures": "Orale Triptane (zu langsam — nur die subkutane Injektion wirkt beim CK), Standard-Migräneprophylaktika (Topiramat, Amitriptylin — unwirksam beim CK), Opioide (unwirksam, erzeugen Abhängigkeit) und Verapamil in zu niedriger Dosis (<360 mg ist meist unzureichend).",
+      "worse": "SSRIs und SNRIs können bei manchen Patienten die Attackenhäufigkeit erhöhen und psychedelische Behandlungen blockieren. Betablocker sind unwirksam. Übermäßige Triptan-Einnahme kann zu Medikamenten-Übergebrauchs-Kopfschmerz führen.",
+      "community": "Behandlungen wie das Vitamin-D3-Regime (80 % Responderrate in Umfragen), Busting-Protokolle (jetzt in Phase-2-Studien) und verfeinerte Hochdosierter-Sauerstoff-Techniken entstammen dem Wissen von Patienten, die ihre Erfahrungen geteilt haben — oft Jahre bevor die klinische Forschung aufholte."
+    },
+    "resources": "Wichtige Patientenressourcen"
+  },
+  "trials": {
+    "title": "Aktive klinische Studien",
+    "subtitle": "Alle Clusterkopfschmerz-Studien, die derzeit rekrutieren, aktiv sind oder bald beginnen — live von ClinicalTrials.gov abgerufen",
+    "search": "Studien suchen…",
+    "allStatuses": "Alle Status",
+    "recruiting": "Rekrutierend",
+    "startingSoon": "Startet bald",
+    "active": "Aktiv",
+    "allPhases": "Alle Phasen",
+    "allTypes": "Alle Typen",
+    "interventional": "Interventionell",
+    "observational": "Beobachtend",
+    "trialCount": "{{count}} Studie",
+    "trialCount_other": "{{count}} Studien",
+    "noMatch": "Keine Studien entsprechen Ihren Filtern.",
+    "fallback": "Zwischengespeicherte Daten werden angezeigt — Live-Abruf fehlgeschlagen ({{error}}). Zum Wiederholen neu laden.",
+    "dialog": {
+      "sponsor": "Sponsor",
+      "nctId": "NCT-ID",
+      "enrollment": "Teilnehmerzahl",
+      "participants": "Teilnehmer",
+      "estCompletion": "Voraussichtlicher Abschluss",
+      "startDate": "Startdatum",
+      "conditions": "Erkrankungen",
+      "interventions": "Interventionen",
+      "studyDescription": "Studienbeschreibung",
+      "viewOnCt": "Auf ClinicalTrials.gov ansehen"
+    }
+  },
+  "research": {
+    "title": "Aktuelle Forschungsarbeiten",
+    "subtitle": "Neueste Clusterkopfschmerz-Publikationen, live von PubMed abgerufen ({{count}}+ gesamt, nach Datum sortiert)",
+    "search": "Nach Titel, Zeitschrift, Autoren suchen…",
+    "allYears": "Alle Jahre",
+    "perPage": "pro Seite",
+    "paperCount": "{{count}} Publikation",
+    "paperCount_other": "{{count}} Publikationen",
+    "noMatch": "Keine Publikationen entsprechen Ihrer Suche.",
+    "loadError": "Publikationen konnten nicht von PubMed geladen werden: {{error}}",
+    "prev": "← Zurück",
+    "next": "Weiter →"
+  },
+  "treatments": {
+    "title": "Klinische Behandlungen",
+    "subtitle": "Evidenzbasierte Behandlungen — zugelassene Medikamente, Geräte und verfahrenstechnische Optionen",
+    "badge": "Evidenzbasierte Medizin",
+    "newPatientWarning": "Viele Allgemeinmediziner und Neurologen sind keine CK-Spezialisten und verschreiben möglicherweise Behandlungen, die beim Clusterkopfschmerz unwirksam oder kontraproduktiv sind (orale Triptane, Standard-Migräneprophylaktika, Opioide). Wenn Ihre aktuelle Behandlung nicht wirkt, suchen Sie einen Kopfschmerzspezialisten auf und erkunden Sie den Community-Tab für patientenerprobte Ansätze.",
+    "forNewPatients": "Für neu diagnostizierte Patienten:",
+    "acute": "Akute Abortiva",
+    "preventive": "Prophylaktische Behandlungen",
+    "inTrials": "In aktiven klinischen Studien",
+    "prescribingFailures": "Häufige Verordnungsfehler",
+    "prescribingFailuresDesc": "Diese werden von nicht spezialisierten Ärzten häufig an CK-Patienten verschrieben, sind jedoch unwirksam oder schädlich. Wenn Sie eines dieser Mittel als primäre CK-Behandlung erhalten, suchen Sie einen Kopfschmerzspezialisten auf."
+  },
+  "community": {
+    "title": "Patientencommunity-Behandlungen",
+    "subtitle": "Empirisches Wissen aus Clusterbusters, r/ClusterHeadaches und CK-Patientengruppen — keine medizinische Beratung",
+    "badge": "Patientenberichtet / Empirisch",
+    "whyMatters": "Viele der wirksamsten CK-Behandlungen wurden von Patienten entdeckt, nicht von Ärzten. Verfeinerte Hochdosierter-Sauerstoff-Techniken, das Vitamin-D3-Regime, Energydrinks beim Einsetzen von Vorzeichen und das psychedelische Busting-Protokoll — all das entstand durch Patienten, die ihr Wissen geteilt haben. Einige werden inzwischen in klinischen Studien validiert, doch die Community nutzte sie bereits wirksam, lange bevor die Forschung aufholte. Wenn der Behandlungsplan Ihres Arztes nicht anschlägt, könnte das Wissen hier Ihr Leben verändern.",
+    "whyMattersLabel": "Warum dieser Tab wichtig ist:",
+    "warning": "Diese Behandlungen werden von Patienten berichtet und sind nicht alle offiziell zugelassen. Besprechen Sie sie stets mit Ihrem Arzt — aber wissen Sie, dass viele CK-Patienten ihre beste Behandlung durch Community-Wissen und nicht durch ihre anfängliche Verschreibung finden.",
+    "priorityList": "Community-Prioritätsliste",
+    "bustingTitle": "Das Busting-Protokoll (Clusterbusters)",
+    "bustingDesc": "„Busting“ ist der Begriff der Patientencommunity für den Einsatz psychedelischer Substanzen zur Unterbrechung von CK-Zyklen. Popularisiert und formal organisiert von Bob Wold, der Clusterbusters nach seinen eigenen Erfahrungen gründete. Wird jetzt in Phase-2-klinischen Studien evaluiert.",
+    "substances": "Verwendete Substanzen",
+    "protocol": "Protokoll",
+    "vitaminD": "Vitamin-D3-Antiinflammatorisches Regime",
+    "vitaminDDesc": "Entwickelt von Pete Batcheller (CK-Betroffener, pensionierter Marineflugzeugführer). Umfrage unter 110 Patienten: <strong>80 % berichteten eine deutliche Reduktion</strong> in Häufigkeit, Dauer und Schwere. Formelle klinische Studie NCT04570475 läuft.",
+    "coreSupplement": "Kernergänzung",
+    "cofactors": "Essentielle Kofaktoren (nicht weglassen)",
+    "fullProtocol": "Vollständiges Protokoll:"
+  },
+  "triggers": {
+    "title": "Trigger & Vermeidung",
+    "subtitle": "Von der Community identifizierte Trigger — besonders relevant während aktiver Clusterphasen",
+    "trigger": "Trigger",
+    "communityNotes": "Community-Hinweise",
+    "severity": "Schweregrad",
+    "activeCycle": "Während eines aktiven Zyklus"
+  },
+  "footer": {
+    "dataFrom": "Daten von",
+    "and": "und",
+    "viaApis": "über öffentliche APIs.",
+    "communityInfo": "Community-Informationen von Clusterbusters, r/ClusterHeadaches und Patientenumfrage-Literatur.",
+    "notMedicalAdvice": "Keine medizinische Beratung.",
+    "darkModeHint": "Drücken Sie <kbd>d</kbd>, um den Dunkelmodus umzuschalten"
+  },
+  "common": {
+    "pain": "Schmerz",
+    "autonomicFeatures": "Autonome Begleitsymptome",
+    "pattern": "Muster",
+    "types": "Typen",
+    "prevalence": "Prävalenz",
+    "keyPathways": "Wichtige Signalwege",
+    "acute": "Akut",
+    "preventive": "Prophylaktisch",
+    "transitional": "Überbrückend",
+    "device": "Gerät",
+    "averageDiagnosticDelay": "Durchschnittliche Diagnoseverzögerung: 5+ Jahre.",
+    "oxygenIsNumber1": "Sauerstoff ist das #1-Abortivum — aber die meisten Ärzte verschreiben ihn nicht.",
+    "commonPrescribingFailures": "Häufige Verordnungsfehler:",
+    "medicationsMakeWorse": "Medikamente, die die Situation verschlechtern können:",
+    "communityKnowledgeSavesLives": "Das Wissen der Patientencommunity rettet Leben.",
+    "high": "Hoch",
+    "medium": "Mittel",
+    "low": "Niedrig",
+    "predictive": "Vorhersagbar",
+    "variable": "Variabel"
+  }
+}

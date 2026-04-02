@@ -1,0 +1,175 @@
+{
+  "header": {
+    "siteName": "Cluster Headache Research Hub",
+    "hero": "The most painful condition known to medicine.",
+    "subtitle": "Live clinical trials, research papers, and treatment information for cluster headache — updated on every page load.",
+    "stats": {
+      "activeTrials": "Active Trials",
+      "recruiting": "Recruiting",
+      "papers": "Papers",
+      "psychedelicTrials": "Psychedelic Trials"
+    },
+    "dataRefreshed": "Data refreshed on load"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "trials": "Trials",
+    "research": "Research",
+    "treatments": "Treatments",
+    "community": "Community",
+    "triggers": "Triggers"
+  },
+  "overview": {
+    "title": "What Is Cluster Headache?",
+    "subtitle": "Key facts, epidemiology, and the current research landscape",
+    "basics": {
+      "title": "The Basics",
+      "pain": "Excruciating unilateral orbital, supraorbital, or temporal pain lasting 15–180 minutes — often called \"suicide headache\"",
+      "autonomic": "Tearing, red eye, drooping eyelid, nasal congestion, sweating — all on the pain side",
+      "pattern": "1–8 attacks/day, frequently occurring during sleep, clustering in periods of weeks to months",
+      "types": "Episodic (cycles with remission) vs. Chronic (no remission >3 months)",
+      "prevalence": "~0.1% of population; 3–4× more common in men historically, though the gender gap is narrowing",
+      "pathways": "Hypothalamus (circadian timing) + trigeminal-autonomic reflex (pain generation)"
+    },
+    "research": {
+      "title": "Current Research Focus Areas",
+      "psychedelics": "Multiple Phase 2 LSD RCTs actively recruiting; psilocybin trials publishing results",
+      "cgrp": "Galcanezumab approved for episodic CH; others showed mixed results",
+      "sleep": "SUNCET trial testing sodium oxybate for nocturnal attacks in chronic CH",
+      "neuromod": "New implantable combined trigeminal+occipital stimulator (PRIMUS)",
+      "genetics": "Multiple risk loci identified in recent GWAS studies (Harder et al., Dahl et al.)",
+      "biomarkers": "MicroRNA profiling underway at IRCCS Mondino, Italy"
+    },
+    "approved": {
+      "title": "What's Currently Approved",
+      "acute": "High-flow O₂ (most effective), SC sumatriptan 6mg, intranasal zolmitriptan 5mg",
+      "preventive": "Verapamil (first-line), lithium, galcanezumab (Emgality — episodic only)",
+      "transitional": "Greater occipital nerve block, short prednisone course",
+      "device": "gammaCore (FDA-cleared nVNS) for episodic acute & chronic prevention"
+    },
+    "disclaimer": {
+      "title": "Medical Disclaimer",
+      "text": "This site is for <strong>informational purposes only</strong> and does not constitute medical advice. All clinical trial information is sourced directly from ClinicalTrials.gov. Some substances discussed (psilocybin, LSD, LSA) are controlled or illegal in many jurisdictions — this site does not advocate their use. Always consult a qualified healthcare professional before changing your treatment."
+    },
+    "gap": {
+      "title": "The Treatment Gap — What New Patients Need to Know",
+      "subtitle": "Most CH patients spend years receiving ineffective or counterproductive treatment before finding what actually works.",
+      "delay": "CH is frequently misdiagnosed as migraine, sinusitis, or dental pain. Many patients see 5+ doctors before getting the correct diagnosis.",
+      "oxygen": "High-flow O₂ is the safest, fastest, most effective treatment with zero side effects. Yet many patients go years without being offered it. If your doctor hasn't mentioned oxygen, ask — or find a headache specialist who will.",
+      "failures": "Oral triptans (too slow — only SC injection works for CH), standard migraine preventives (topiramate, amitriptyline — ineffective for CH), opioids (don't work, create dependency), and verapamil dosed too low (<360mg is usually insufficient).",
+      "worse": "SSRIs and SNRIs can increase attack frequency for some patients and block psychedelic treatments. Beta-blockers are ineffective. Overuse of triptans can cause rebound.",
+      "community": "Treatments like the Vitamin D3 regimen (80% responder rate in surveys), busting protocols (now in Phase 2 trials), and high-flow oxygen technique refinements all came from patients sharing what works — often years before clinical research caught up."
+    },
+    "resources": "Key Patient Resources"
+  },
+  "trials": {
+    "title": "Active Clinical Trials",
+    "subtitle": "All cluster headache trials currently recruiting, active, or starting soon — fetched live from ClinicalTrials.gov",
+    "search": "Search trials…",
+    "allStatuses": "All Statuses",
+    "recruiting": "Recruiting",
+    "startingSoon": "Starting Soon",
+    "active": "Active",
+    "allPhases": "All Phases",
+    "allTypes": "All Types",
+    "interventional": "Interventional",
+    "observational": "Observational",
+    "trialCount": "{{count}} trial",
+    "trialCount_other": "{{count}} trials",
+    "noMatch": "No trials match your filters.",
+    "fallback": "Showing cached data — live fetch failed ({{error}}). Refresh to retry.",
+    "dialog": {
+      "sponsor": "Sponsor",
+      "nctId": "NCT ID",
+      "enrollment": "Enrollment",
+      "participants": "participants",
+      "estCompletion": "Est. Completion",
+      "startDate": "Start Date",
+      "conditions": "Conditions",
+      "interventions": "Interventions",
+      "studyDescription": "Study Description",
+      "viewOnCt": "View on ClinicalTrials.gov"
+    }
+  },
+  "research": {
+    "title": "Latest Research Papers",
+    "subtitle": "Recent cluster headache publications, fetched live from PubMed ({{count}}+ total, sorted by date)",
+    "search": "Search by title, journal, authors…",
+    "allYears": "All Years",
+    "perPage": "per page",
+    "paperCount": "{{count}} paper",
+    "paperCount_other": "{{count}} papers",
+    "noMatch": "No papers match your search.",
+    "loadError": "Could not load papers from PubMed: {{error}}",
+    "prev": "← Prev",
+    "next": "Next →"
+  },
+  "treatments": {
+    "title": "Clinical Treatments",
+    "subtitle": "Evidence-based treatments — approved drugs, devices, and procedural options",
+    "badge": "Evidence-Based Medicine",
+    "newPatientWarning": "Many GPs and neurologists are not CH specialists and may prescribe treatments that are ineffective or counterproductive for cluster headache (oral triptans, standard migraine preventives, opioids). If your current treatment isn't working, seek a headache specialist and explore the Community tab for patient-tested approaches.",
+    "forNewPatients": "For newly diagnosed patients:",
+    "acute": "Acute Abortives",
+    "preventive": "Preventive Treatments",
+    "inTrials": "In Active Clinical Trials",
+    "prescribingFailures": "Common Prescribing Failures",
+    "prescribingFailuresDesc": "These are frequently prescribed to CH patients by non-specialist doctors but are ineffective or harmful. If you're receiving any of these as your primary CH treatment, seek a headache specialist."
+  },
+  "community": {
+    "title": "Patient Community Treatments",
+    "subtitle": "Empirical knowledge from Clusterbusters, r/ClusterHeadaches, and CH patient groups — not medical advice",
+    "badge": "Patient-Reported / Empirical",
+    "whyMatters": "Many of the most effective CH treatments were discovered by patients, not doctors. High-flow oxygen technique refinements, the Vitamin D3 regimen, energy drinks at shadow onset, and the psychedelic busting protocol — all came from patients sharing what works. Several are now being validated in clinical trials, but the community was using them effectively for years before research caught up. If your doctor's treatment plan isn't working, the knowledge here may change your life.",
+    "whyMattersLabel": "Why this tab matters:",
+    "warning": "These treatments are reported by patients and are not all officially approved. Always discuss with your doctor — but know that many CH patients find their best treatment through community knowledge, not their initial prescription.",
+    "priorityList": "Community Priority List",
+    "bustingTitle": "The Busting Protocol (Clusterbusters)",
+    "bustingDesc": "\"Busting\" is the patient-community term for using psychedelic substances to break CH cycles. Popularized and formally organized by Bob Wold, who founded Clusterbusters after his own experience. Now being evaluated in Phase 2 clinical trials.",
+    "substances": "Substances used",
+    "protocol": "Protocol",
+    "vitaminD": "Vitamin D3 Anti-Inflammatory Regimen",
+    "vitaminDDesc": "Developed by Pete Batcheller (CH sufferer, retired Navy pilot). Survey of 110 patients: <strong>80% reported significant reduction</strong> in frequency, duration, and severity. Formal clinical trial NCT04570475 ongoing.",
+    "coreSupplement": "Core supplement",
+    "cofactors": "Essential cofactors (do not skip)",
+    "fullProtocol": "Full protocol:"
+  },
+  "triggers": {
+    "title": "Triggers & Avoidance",
+    "subtitle": "Community-identified triggers — especially relevant during active cluster cycles",
+    "trigger": "Trigger",
+    "communityNotes": "Community Notes",
+    "severity": "Severity",
+    "activeCycle": "During an Active Cycle"
+  },
+  "footer": {
+    "dataFrom": "Data from",
+    "and": "and",
+    "viaApis": "via public APIs.",
+    "communityInfo": "Community info from Clusterbusters, r/ClusterHeadaches, and patient survey literature.",
+    "notMedicalAdvice": "Not medical advice.",
+    "darkModeHint": "Press <kbd>d</kbd> to toggle dark mode"
+  },
+  "common": {
+    "pain": "Pain",
+    "autonomicFeatures": "Autonomic features",
+    "pattern": "Pattern",
+    "types": "Types",
+    "prevalence": "Prevalence",
+    "keyPathways": "Key pathways",
+    "acute": "Acute",
+    "preventive": "Preventive",
+    "transitional": "Transitional",
+    "device": "Device",
+    "averageDiagnosticDelay": "Average diagnostic delay: 5+ years.",
+    "oxygenIsNumber1": "Oxygen is the #1 abortive — but most doctors don't prescribe it.",
+    "commonPrescribingFailures": "Common prescribing failures:",
+    "medicationsMakeWorse": "Medications that can make things worse:",
+    "communityKnowledgeSavesLives": "Patient community knowledge saves lives.",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "predictive": "Predictive",
+    "variable": "Variable"
+  }
+}
