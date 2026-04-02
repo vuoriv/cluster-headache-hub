@@ -12,7 +12,7 @@ interface HeaderProps {
 
 function StatItem({ value, label, loading }: { value: string | number | null; label: string; loading?: boolean }) {
   return (
-    <div className="flex flex-col items-center gap-0.5 px-3 py-2.5">
+    <div className="flex flex-col items-center gap-0.5 px-3 py-2.5 border-b border-primary-foreground/10 sm:border-b-0">
       <span className={cn("text-xl font-extrabold text-primary-foreground", loading && "animate-pulse opacity-40")}>
         {value ?? "—"}
       </span>
@@ -44,7 +44,7 @@ export function Header({ trialCount, recruitingCount, paperCount, psychedelicCou
         </div>
       </div>
       <div className="bg-primary/90 border-t border-primary-foreground/10 px-6">
-        <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-0 divide-x divide-primary-foreground/10">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 sm:grid-cols-4 divide-primary-foreground/10 sm:divide-x">
           <StatItem value={trialCount} label="Active Trials" loading={loading} />
           <StatItem value={recruitingCount} label="Recruiting Now" loading={loading} />
           <StatItem value={paperCount} label="Papers (All Time)" loading={loading} />

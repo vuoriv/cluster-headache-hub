@@ -17,7 +17,7 @@ interface TreatmentProps {
 
 function TreatmentCard({ title, badge, badgeVariant = "secondary", accent = "primary", items, note }: TreatmentProps) {
   return (
-    <Card className={cn("border-l-4", accent === "destructive" ? "border-l-destructive" : accent === "muted" ? "border-l-muted-foreground" : "border-l-primary")}>
+    <Card className={cn("border-l-4", accent === "destructive" ? "border-l-destructive" : "border-l-ring")}>
       <CardHeader className="pb-2">
         <CardTitle className="flex flex-wrap items-center gap-2 text-sm">
           {title}

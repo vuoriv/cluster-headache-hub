@@ -46,7 +46,7 @@ export function TriggersTab() {
         </Table>
       </div>
 
-      <Card className="border-l-4 border-l-primary">
+      <Card className="border-l-4 border-l-ring">
         <CardHeader>
           <CardTitle className="text-sm">✅ During an Active Cycle</CardTitle>
         </CardHeader>

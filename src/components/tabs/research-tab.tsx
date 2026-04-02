@@ -112,7 +112,7 @@ export function ResearchTab({ papers, totalCount, loading, error, progress }: Re
           <p className="py-12 text-center text-muted-foreground">No papers match your search.</p>
         ) : (
           paginated.map((p) => (
-            <Card key={p.pmid} className="transition-colors hover:border-primary/30">
+            <Card key={p.pmid} className="transition-colors hover:border-ring">
               <CardContent className="flex gap-4 py-3">
                 <div className="min-w-[72px] pt-0.5">
                   <a

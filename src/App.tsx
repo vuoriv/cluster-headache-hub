@@ -39,7 +39,7 @@ export default function App() {
 
         <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
           <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="mb-6 flex w-full flex-wrap justify-start gap-1 bg-transparent p-0">
+            <TabsList className="mb-6 flex w-full flex-wrap justify-start gap-0.5 bg-transparent p-0">
               <TabsTrigger value="overview">
                 Overview
               </TabsTrigger>
@@ -85,6 +85,7 @@ export default function App() {
           </p>
           <p className="mt-1">Community treatment information sourced from Clusterbusters, r/ClusterHeadaches, and patient survey literature. Not medical advice.</p>
           <p className="mt-1 opacity-50">Built 2026 — Cluster Headache Research Hub</p>
+          <p className="mt-2 opacity-30 text-[0.7rem]">Press <kbd className="rounded border border-primary-foreground/20 px-1 py-0.5 font-mono">d</kbd> to toggle dark mode</p>
         </footer>
       </div>
     </TooltipProvider>
