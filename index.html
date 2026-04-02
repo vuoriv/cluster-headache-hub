@@ -47,6 +47,13 @@
   .nav-tab.active { color: var(--navy); border-bottom-color: var(--blue); }
   .nav-badge { background: var(--accent); color: #fff; border-radius: 20px; padding: 1px 7px; font-size: 0.72rem; margin-left: 5px; font-weight: 700; }
 
+
+  /* ── Nav scroll indicator ── */
+  .nav-inner { position: relative; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  nav::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 40px; background: linear-gradient(to right, transparent, white); pointer-events: none; z-index: 101; }
+  @media (min-width: 768px) { nav::after { display: none; } }
+
   /* ── Layout ── */
   main { max-width: 1200px; margin: 0 auto; padding: 28px 24px; }
   .tab-content { display: none; }
@@ -180,8 +187,8 @@
 <header>
   <div class="header-inner">
     <div class="header-title">
-      <h1>🧠 Cluster Headache Research Hub</h1>
-      <p>Live data from ClinicalTrials.gov &amp; PubMed &mdash; updated every time you open this page</p>
+      <h1><span aria-hidden="true">🧠</span> Cluster Headache Research Hub</h1>
+      <p>Data from ClinicalTrials.gov &amp; PubMed &mdash; fetched live on every page load when available</p>
     </div>
     <div class="header-meta">
       <strong id="last-updated">Loading&hellip;</strong>
@@ -196,7 +203,7 @@
     <div class="stat-item"><div class="stat-num loading" id="stat-recruiting">—</div><div class="stat-label">Recruiting Now</div></div>
     <div class="stat-item"><div class="stat-num loading" id="stat-papers">—</div><div class="stat-label">Papers (All Time)</div></div>
     <div class="stat-item"><div class="stat-num">16</div><div class="stat-label">Treatments Listed</div></div>
-    <div class="stat-item"><div class="stat-num">2+</div><div class="stat-label">Psychedelic Trials Active</div></div>
+    <div class="stat-item"><div class="stat-num loading" id="stat-psychedelic">2+</div><div class="stat-label">Psychedelic Trials</div></div>
   </div>
 </div>
 
@@ -222,18 +229,18 @@
 
   <div class="overview-grid">
     <div class="info-box">
-      <h3>⚡ The Basics</h3>
+      <h3><span aria-hidden="true">⚡</span> The Basics</h3>
       <ul>
         <li><strong>Pain:</strong> Excruciating unilateral orbital, supraorbital, or temporal pain lasting 15–180 minutes — often called "suicide headache"</li>
         <li><strong>Autonomic features:</strong> Tearing, red eye, drooping eyelid, nasal congestion, sweating — all on the pain side</li>
-        <li><strong>Pattern:</strong> 1–8 attacks/day, often nocturnal, clustering in periods of weeks to months</li>
+        <li><strong>Pattern:</strong> 1–8 attacks/day, frequently occurring during sleep, clustering in periods of weeks to months</li>
         <li><strong>Types:</strong> Episodic (cycles with remission) vs. Chronic (no remission &gt;3 months)</li>
         <li><strong>Prevalence:</strong> ~0.1% of population; 3–4× more common in men historically, though the gender gap is narrowing</li>
-        <li><strong>Driver:</strong> Hypothalamus — regulates the circadian "headache clock"</li>
+        <li><strong>Key pathways:</strong> Hypothalamus (circadian timing) + trigeminal-autonomic reflex (pain generation)</li>
       </ul>
     </div>
     <div class="info-box">
-      <h3>🔬 Current Research Focus Areas</h3>
+      <h3><span aria-hidden="true">🔬</span> Current Research Focus Areas</h3>
       <ul>
         <li><strong>Psychedelics:</strong> 2 Phase 2 LSD RCTs actively recruiting; psilocybin trials publishing results</li>
         <li><strong>CGRP pathway:</strong> Galcanezumab approved for episodic CH; others showed mixed results</li>
@@ -244,7 +251,7 @@
       </ul>
     </div>
     <div class="info-box">
-      <h3>💊 What's Currently Approved</h3>
+      <h3><span aria-hidden="true">💊</span> What's Currently Approved</h3>
       <ul>
         <li><strong>Acute:</strong> High-flow O₂ (most effective), SC sumatriptan 6mg, intranasal zolmitriptan 5mg</li>
         <li><strong>Preventive:</strong> Verapamil (first-line), lithium, galcanezumab (Emgality — episodic only)</li>
@@ -260,7 +267,7 @@
   </div>
 
   <div class="card" style="border-left: 4px solid var(--green);">
-    <h3 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:10px;">📡 Key Patient Resources</h3>
+    <h3 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:10px;"><span aria-hidden="true">📡</span> Key Patient Resources</h3>
     <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:0.88rem;">
       <a href="https://clusterbusters.org" target="_blank" rel="noopener noreferrer" style="color:var(--blue);">🔗 Clusterbusters.org</a>
       <a href="https://www.reddit.com/r/clusterheadaches" target="_blank" rel="noopener noreferrer" style="color:var(--blue);">🔗 r/ClusterHeadaches</a>
@@ -509,6 +516,7 @@
     <div class="treatment-card" style="border-left-color:#0891b2;">
       <h3>💉 Ketamine + Magnesium IV</h3>
       <span class="badge badge-blue">Phase 4 (KETALGIA)</span>
+      <p style="font-size:0.78rem;color:var(--muted);margin-top:4px;">Phase 4 designation reflects ketamine’s approved status for other indications (anesthesia), not for CH.</p>
       <ul style="margin-top:10px;">
         <li>Single IV infusion for refractory chronic CH</li>
         <li>Pilot: 13/17 patients ≥50% attack reduction</li>
@@ -644,7 +652,7 @@
         <tr><td><strong>Strong chemical smells</strong></td><td>Gasoline, paint fumes, perfume, cleaning products, solvents. Wear a mask if exposure is unavoidable. Common workplace trigger.</td><td><span class="badge badge-red">High ⚠️</span></td></tr>
         <tr><td><strong>Sleep disruption</strong></td><td>CH attacks frequently occur during or around REM sleep transitions. Jet lag, shift work, naps, or any disruption to sleep schedule reliably worsen cycles for many. Direct hypothalamic mechanism.</td><td><span class="badge badge-red">High ⚠️</span></td></tr>
         <tr><td><strong>Vasodilating drugs</strong></td><td>Nitrates (GTN sprays), sildenafil/tadalafil, some blood pressure medications. Always inform prescribers about CH diagnosis.</td><td><span class="badge badge-red">High ⚠️</span></td></tr>
-        <tr><td><strong>Histamine-rich foods</strong></td><td>Aged cheeses, cured/processed meats, fermented foods, red wine. Not universal but frequently reported, especially during active cycles.</td><td><span class="badge badge-amber">Medium</span></td></tr>
+        <tr><td><strong>Histamine-rich foods</strong></td><td>Aged cheeses, cured/processed meats, fermented foods. Not universal but frequently reported, especially during active cycles. (Red wine is a double trigger — both histamine and alcohol/vasodilation.)</td><td><span class="badge badge-amber">Medium</span></td></tr>
         <tr><td><strong>Heat exposure</strong></td><td>Hot baths, saunas, intense exercise in heat. Triggers for some; others find hot showers offer temporary relief during an attack. Individual variation.</td><td><span class="badge badge-amber">Medium</span></td></tr>
         <tr><td><strong>Bright / flickering light</strong></td><td>Less consistent than migraine triggers but reported by a subset of patients, especially during attacks.</td><td><span class="badge badge-blue">Low-Medium</span></td></tr>
         <tr><td><strong>Season changes</strong></td><td>Many episodic CH patients have predictable seasonal patterns (spring, autumn). Not avoidable, but useful to anticipate and start preventives early.</td><td><span class="badge badge-blue">Predictive</span></td></tr>
@@ -654,7 +662,7 @@
   </div>
 
   <div class="card" style="margin-top:20px;border-left:4px solid var(--green);">
-    <h3 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px;">✅ During an Active Cycle</h3>
+    <h3 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px;"><span aria-hidden="true">✅</span> During an Active Cycle</h3>
     <div class="overview-grid" style="font-size:0.86rem;color:var(--muted);">
       <ul style="padding-left:18px;">
         <li>Zero alcohol — even one drink can trigger an attack within 30–60 minutes</li>
@@ -790,6 +798,11 @@ async function loadTrials() {
     document.getElementById('stat-recruiting').classList.remove('loading');
     document.getElementById('nav-badge-trials').textContent = allTrials.length;
 
+    // Update psychedelic trial count dynamically
+    const psychedelicCount = allTrials.filter(t => categoryForTrial(t) === 'psychedelic').length;
+    const psychEl = document.getElementById('stat-psychedelic');
+    if (psychEl) { psychEl.textContent = psychedelicCount; psychEl.classList.remove('loading'); }
+
     loading.style.display = 'none';
     wrap.style.display = 'block';
     renderTrials(allTrials);
@@ -825,9 +838,9 @@ function renderTrials(trials) {
     return `<tr>
       <td><a href="https://clinicaltrials.gov/study/${esc(t.nct)}" target="_blank" rel="noopener noreferrer">${esc(t.nct)}</a></td>
       <td>
-        <span class="category-tag" style="background:${color}22;color:${color};">${catLabel}</span><br>
+        <span class="category-tag" style="background:${esc(color)}22;color:${esc(color)};">${esc(catLabel)}</span><br>
         <span title="${esc(t.title)}">${esc(shortTitle)}</span>
-        ${hasSummary ? `<br><button class="expand-btn" onclick="toggleSummary('${t.nct}')">▸ Details</button><div class="trial-summary" id="${summaryId}">${esc(t.summary.slice(0,400))}${t.summary.length>400?'…':''}</div>` : ''}
+        ${hasSummary ? `<br><button class="expand-btn" onclick="toggleSummary('${esc(t.nct)}')">▸ Details</button><div class="trial-summary" id="${summaryId}">${esc(t.summary.slice(0,400))}${t.summary.length>400?'…':''}</div>` : ''}
       </td>
       <td><span class="status-badge status-${esc(t.status)}">${statusLabel(t.status)}</span></td>
       <td>${phases !== '—' ? `<span class="phase-badge">${esc(phases)}</span>` : '—'}</td>
@@ -863,6 +876,8 @@ function filterTrials() {
 }
 
 function sortTable(_, col) {
+  const allowed = ['nct','title','status','phase','sponsor','enrollment','end'];
+  if (!allowed.includes(col)) return;
   if (trialsSortCol === col) trialsSortDir *= -1;
   else { trialsSortCol = col; trialsSortDir = 1; }
 
