@@ -1,8 +1,8 @@
 {
   "header": {
     "siteName": "Cluster Headache Research Hub",
-    "hero": "Der schmerzhafteste bekannte Zustand in der Medizin.",
-    "subtitle": "Aktuelle klinische Studien, Forschungsarbeiten und Behandlungsinformationen zum Clusterkopfschmerz — bei jedem Seitenaufruf aktualisiert.",
+    "hero": "Die schmerzhafteste bekannte Erkrankung der Medizin.",
+    "subtitle": "Aktuelle klinische Studien, Forschungsarbeiten und Behandlungsinformationen zu Clusterkopfschmerz — wird bei jedem Seitenaufruf aktualisiert.",
     "stats": {
       "activeTrials": "Aktive Studien",
       "recruiting": "Rekrutierend",
@@ -115,7 +115,7 @@
     "inTrials": "In aktiven klinischen Studien",
     "prescribingFailures": "Häufige Verordnungsfehler",
     "prescribingFailuresDesc": "Diese werden von nicht spezialisierten Ärzten häufig an CK-Patienten verschrieben, sind jedoch unwirksam oder schädlich. Wenn Sie eines dieser Mittel als primäre CK-Behandlung erhalten, suchen Sie einen Kopfschmerzspezialisten auf.",
-    "comparisonTitle": "What Actually Works — Community Consensus vs Standard Care",
+    "comparisonTitle": "Was wirklich hilft — Community vs. Standardversorgung",
     "comparisonDesc": "Based on decades of patient experience from Clusterbusters, r/ClusterHeadaches, and patient surveys. Many of these are now validated by clinical research.",
     "colTreatment": "Treatment",
     "colCommunity": "Community view",
@@ -350,7 +350,7 @@
     }
   },
   "community": {
-    "title": "Patientencommunity-Behandlungen",
+    "title": "Behandlungen aus der Patienten-Community",
     "subtitle": "Empirisches Wissen aus Clusterbusters, r/ClusterHeadaches und CK-Patientengruppen — keine medizinische Beratung",
     "badge": "Patientenberichtet / Empirisch",
     "whyMatters": "Viele der wirksamsten CK-Behandlungen wurden von Patienten entdeckt, nicht von Ärzten. Verfeinerte Hochdosierter-Sauerstoff-Techniken, das Vitamin-D3-Regime, Energydrinks beim Einsetzen von Vorzeichen und das psychedelische Busting-Protokoll — all das entstand durch Patienten, die ihr Wissen geteilt haben. Einige werden inzwischen in klinischen Studien validiert, doch die Community nutzte sie bereits wirksam, lange bevor die Forschung aufholte. Wenn der Behandlungsplan Ihres Arztes nicht anschlägt, könnte das Wissen hier Ihr Leben verändern.",

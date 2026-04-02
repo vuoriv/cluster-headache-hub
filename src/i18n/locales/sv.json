@@ -1,8 +1,8 @@
 {
   "header": {
-    "siteName": "Klusterhuvudvärk – Forskningshub",
-    "hero": "Det mest smärtsamma tillståndet som medicinen känner till.",
-    "subtitle": "Aktuella kliniska prövningar, forskningsartiklar och behandlingsinformation om klusterhuvudvärk — uppdateras vid varje sidinladdning.",
+    "siteName": "Klusterhuvudvärk — Forskningshub",
+    "hero": "Det mest smärtsamma tillståndet som är känt inom medicinen.",
+    "subtitle": "Aktuella kliniska prövningar, forskningsartiklar och behandlingsinformation om klusterhuvudvärk — uppdateras vid varje sidladdning.",
     "stats": {
       "activeTrials": "Aktiva prövningar",
       "recruiting": "Rekryterar",
@@ -115,7 +115,7 @@
     "inTrials": "I aktiva kliniska prövningar",
     "prescribingFailures": "Vanliga förskrivningsfel",
     "prescribingFailuresDesc": "Dessa förskrivs ofta till klusterhuvudvärkspatienter av icke-specialiserade läkare men är ineffektiva eller skadliga. Om du får något av dessa som din primära behandling vid klusterhuvudvärk, sök en huvudvärksspecialist.",
-    "comparisonTitle": "What Actually Works — Community Consensus vs Standard Care",
+    "comparisonTitle": "Vad som faktiskt fungerar — vad patientgemenskapen använder vs standardvård",
     "comparisonDesc": "Based on decades of patient experience from Clusterbusters, r/ClusterHeadaches, and patient surveys. Many of these are now validated by clinical research.",
     "colTreatment": "Treatment",
     "colCommunity": "Community view",
@@ -350,7 +350,7 @@
     }
   },
   "community": {
-    "title": "Patientgemenskapens behandlingar",
+    "title": "Behandlingar från patientgemenskapen",
     "subtitle": "Empirisk kunskap från Clusterbusters, r/ClusterHeadaches och klusterhuvudvärks-patientgrupper — inte medicinsk rådgivning",
     "badge": "Patientrapporterad / Empirisk",
     "whyMatters": "Många av de mest effektiva behandlingarna vid klusterhuvudvärk har upptäckts av patienter, inte läkare. Förfinade tekniker för höghastighetsoxygen, D3-vitaminregimen, energidrycker vid skuggonset och det psykedeliska busting-protokollet — allt kom från patienter som delade vad som fungerar. Flera valideras nu i kliniska prövningar, men patientgemenskapen använde dem effektivt i år innan forskningen hann ikapp. Om din läkares behandlingsplan inte fungerar kan kunskapen här förändra ditt liv.",

@@ -1,8 +1,8 @@
 {
   "header": {
     "siteName": "Cluster Headache Research Hub",
-    "hero": "La pathologie la plus douloureuse connue de la médecine.",
-    "subtitle": "Essais cliniques en cours, articles de recherche et informations thérapeutiques sur la céphalée en grappe — mis à jour à chaque chargement de page.",
+    "hero": "La maladie la plus douloureuse connue en médecine.",
+    "subtitle": "Essais cliniques, publications scientifiques et informations thérapeutiques sur la céphalée en grappe — mis à jour à chaque chargement de page.",
     "stats": {
       "activeTrials": "Essais actifs",
       "recruiting": "En recrutement",
@@ -115,7 +115,7 @@
     "inTrials": "En essais cliniques actifs",
     "prescribingFailures": "Erreurs de prescription fréquentes",
     "prescribingFailuresDesc": "Ces traitements sont fréquemment prescrits aux patients atteints de céphalées en grappe par des médecins non spécialistes, mais ils sont inefficaces ou nuisibles. Si vous recevez l'un d'eux comme traitement principal de votre céphalée en grappe, consultez un spécialiste des céphalées.",
-    "comparisonTitle": "What Actually Works — Community Consensus vs Standard Care",
+    "comparisonTitle": "Ce qui fonctionne vraiment — communauté vs soins standards",
     "comparisonDesc": "Based on decades of patient experience from Clusterbusters, r/ClusterHeadaches, and patient surveys. Many of these are now validated by clinical research.",
     "colTreatment": "Treatment",
     "colCommunity": "Community view",
@@ -350,7 +350,7 @@
     }
   },
   "community": {
-    "title": "Traitements de la communauté patients",
+    "title": "Approches issues de la communauté de patients",
     "subtitle": "Connaissances empiriques de Clusterbusters, r/ClusterHeadaches et des groupes de patients — pas un avis médical",
     "badge": "Rapporté par les patients / Empirique",
     "whyMatters": "Nombre des traitements les plus efficaces contre la céphalée en grappe ont été découverts par des patients, et non par des médecins. Les améliorations techniques de l'oxygénothérapie à haut débit, le protocole à la vitamine D3, les boissons énergisantes au début d'une attaque atténuée, et le protocole de « busting » psychédélique — tout cela vient de patients partageant leur expérience. Plusieurs de ces approches sont désormais validées dans des essais cliniques, mais la communauté les utilisait efficacement des années avant que la recherche les rattrape. Si le plan de traitement de votre médecin ne fonctionne pas, les connaissances ici pourraient changer votre vie.",

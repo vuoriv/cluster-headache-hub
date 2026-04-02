@@ -1,15 +1,15 @@
 {
   "header": {
     "siteName": "Sarjoittaisen päänsäryn tutkimuskeskus",
-    "hero": "Lääketieteen tunnetuin kivuliain tila.",
-    "subtitle": "Ajantasaiset kliiniset tutkimukset, tieteelliset julkaisut ja hoitotiedot sarjoittaisesta päänsärystä — päivitetään joka sivunlatauksella.",
+    "hero": "Lääketieteen kivuliain tunnettu sairaus.",
+    "subtitle": "Ajantasaiset kliiniset tutkimukset, tutkimusartikkelit ja hoitotiedot sarjoittaisesta päänsärystä — päivittyy jokaisella sivun latauksella.",
     "stats": {
       "activeTrials": "Aktiiviset tutkimukset",
       "recruiting": "Rekrytoivat",
       "papers": "Julkaisuja",
       "psychedelicTrials": "Psykedeelitutkimukset"
     },
-    "dataRefreshed": "Tiedot päivitetty latauksessa"
+    "dataRefreshed": "Tiedot päivitetään latauksen yhteydessä"
   },
   "tabs": {
     "overview": "Yleiskatsaus",
@@ -20,16 +20,16 @@
     "triggers": "Laukaisijat"
   },
   "overview": {
-    "title": "Mitä on sarjoittainen päänsärky?",
+    "title": "Mikä on sarjoittainen päänsärky?",
     "subtitle": "Keskeiset faktat, epidemiologia ja nykyinen tutkimuskenttä",
     "basics": {
       "title": "Perustiedot",
-      "pain": "Sietämätön yksipuolinen orbitaalinen, supraorbitaalinen tai temporaalinen kipu, joka kestää 15–180 minuuttia — kutsutaan usein \"itsemurhapäänsäryksi\"",
+      "pain": "Erittäin voimakas yksipuolinen kipu silmän, kulmakaaren tai ohimon alueella, kesto 15–180 minuuttia — usein kutsutaan \"itsemurhapäänsäryksi\"",
       "autonomic": "Kyynelehtiminen, punainen silmä, silmäluomen roikkuminen, nenän tukkoisuus, hikoilu — kaikki kipupuolella",
-      "pattern": "1–8 kohtausta/vrk, esiintyvät usein unen aikana, sarjoittuvat viikkojen tai kuukausien jaksoihin",
-      "types": "Episodinen (jaksot remissioineen) vs. krooninen (ei remissiota yli 3 kuukautta)",
+      "pattern": "1–8 kohtausta vuorokaudessa, usein unen aikana, jaksoittain viikkojen tai kuukausien ajan",
+      "types": "Episodinen (jaksoja ja remissioita) vs. krooninen (ei remissiota yli 3 kuukauteen)",
       "prevalence": "~0,1 % väestöstä; historiallisesti 3–4× yleisempi miehillä, sukupuoliero on kuitenkin kaventunut",
-      "pathways": "Hypotalamus (vuorokausirytmin säätely) + trigeminaalis-autonominen refleksi (kivun synty)"
+      "pathways": "Hypotalamus (vuorokausirytmi) + trigeminaali-autonominen refleksi (kivun synty)"
     },
     "research": {
       "title": "Nykyiset tutkimuksen painopistealueet",
@@ -53,7 +53,7 @@
     },
     "gap": {
       "title": "Hoitoaukko — mitä uusien potilaiden tulee tietää",
-      "subtitle": "Useimmat sarjoittaista päänsärkyä sairastavat viettävät vuosia tehoton tai haitallinen hoito ennen kuin löytävät toimivan ratkaisun.",
+      "subtitle": "Useimmat potilaat käyvät läpi vuosia tehottomia tai jopa haitallisia hoitoja ennen kuin löytävät toimivan ratkaisun.",
       "delay": "Sarjoittainen päänsärky sekoitetaan usein migreeniin, sinuiittiin tai hammassärkyyn. Monet potilaat käyvät yli 5 lääkärillä ennen oikeaa diagnoosia.",
       "oxygen": "Suurivirtauksinen happi on turvallisin, nopein ja tehokkain hoito ilman sivuvaikutuksia. Silti monet potilaat elävät vuosia ilman sitä. Jos lääkärisi ei ole maininnut happea, kysy — tai löydä päänsärkyyn erikoistunut lääkäri joka sen määrää.",
       "failures": "Suun kautta otettavat triptaanit (liian hitaita — vain SC-injektio toimii sarjoittaisessa päänsäryssä), tavalliset migreenin estolääkkeet (topiramaatti, amitriptyliini — tehottomat sarjoittaisessa päänsäryssä), opioidit (eivät toimi, aiheuttavat riippuvuutta) ja riittämättömästi annosteltu verapamil (alle 360 mg on yleensä riittämätön).",
@@ -106,7 +106,7 @@
   },
   "treatments": {
     "title": "Kliiniset hoidot",
-    "subtitle": "Näyttöön perustuvat hoidot — hyväksytyt lääkkeet, laitteet ja toimenpiteet",
+    "subtitle": "Näyttöön perustuvat hoidot — lääkkeet, laitteet ja toimenpiteet",
     "badge": "Näyttöön perustuva lääketiede",
     "newPatientWarning": "Monet yleislääkärit ja neurologit eivät ole sarjoittaisen päänsäryn erikoislääkäreitä ja saattavat määrätä hoitoja, jotka ovat tehottomia tai haitallisia (suun kautta otettavat triptaanit, tavalliset migreenilääkkeet, opioidit). Jos nykyinen hoitosi ei toimi, hakeudu päänsärkyyn erikoistuneen lääkärin vastaanotolle ja tutustu Yhteisö-välilehteen.",
     "forNewPatients": "Vastadiagnosoiduille potilaille:",
@@ -115,11 +115,11 @@
     "inTrials": "Aktiivisissa kliinisissä tutkimuksissa",
     "prescribingFailures": "Yleiset määräämisvirheet",
     "prescribingFailuresDesc": "Näitä määrätään usein sarjoittaisen päänsäryn potilaille lääkäreiltä, jotka eivät ole erikoistuneet sairauteen. Ne ovat tehottomia tai haitallisia. Jos saat näitä pääasiallisena hoitonasi, hakeudu päänsärkyasiantuntijalle.",
-    "comparisonTitle": "Mikä todella toimii — potilasyhteisön tieto",
-    "comparisonDesc": "Potilaiden löytämiä tai kehittämiä hoitoja, usein vuosia ennen kliinistä tutkimusta. Näitä ei ole asetettu järjestykseen — eri potilaat hyötyvät eri hoidoista.",
+    "comparisonTitle": "Mikä oikeasti toimii — yhteisön kokemukset vs. tavanomainen hoito",
+    "comparisonDesc": "Perustuu vuosikymmenten potilaskokemukseen (Clusterbusters, r/ClusterHeadaches, kyselyt). Monet näistä on myöhemmin vahvistettu kliinisessä tutkimuksessa.",
     "colTreatment": "Hoito",
     "colCommunity": "Yhteisön näkemys",
-    "colDoctor": "Tyypillinen lääkäri",
+    "colDoctor": "Tyypillinen lääkärikäytäntö",
     "newPatientWarningLabel": "Vastadiagnosoiduille potilaille:",
     "comp": {
       "o2": {
@@ -345,12 +345,12 @@
     }
   },
   "community": {
-    "title": "Potilaiden yhteisöhoidot",
-    "subtitle": "Kokemuksellinen tieto Clusterbusters-yhteisöltä, r/ClusterHeadaches-foorumilta ja sarjoittaisen päänsäryn potilasryhmiltä — ei lääketieteellistä neuvontaa",
+    "title": "Potilasyhteisön hoidot",
+    "subtitle": "Kokemusperäinen tieto potilasyhteisöiltä — ei lääketieteellinen suositus",
     "badge": "Potilaiden raportoima / kokemuksellinen",
     "whyMatters": "Monet tehokkaimmista sarjoittaisen päänsäryn hoidoista löysivät potilaat, eivät lääkärit. Suurivirtauksisen hapen käyttötekniikan hiominen, D3-vitamiiniohjelma, energiajuomat oireiden ensioireissa ja psykedeelibusting-protokolla — kaikki ovat peräisin potilaiden jakamasta tiedosta. Useita näistä validoidaan nyt kliinisissä tutkimuksissa, mutta yhteisö käytti niitä tehokkaasti vuosia ennen tutkimustiedon karttumista. Jos lääkärisi hoitosuunnitelma ei toimi, täältä löytyvä tieto voi muuttaa elämäsi.",
     "whyMattersLabel": "Miksi tämä välilehti on tärkeä:",
-    "warning": "Nämä hoidot ovat potilaiden raportoimia eikä kaikkia ole virallisesti hyväksytty. Keskustele aina lääkärisi kanssa — mutta tiedä, että monet sarjoittaista päänsärkyä sairastavat löytävät parhaan hoitonsa yhteisön tiedon kautta, ei ensimmäisellä reseptillä.",
+    "warning": "Nämä hoidot perustuvat potilaiden kokemuksiin, eikä kaikkia ole virallisesti hyväksytty. Keskustele aina lääkärisi kanssa — mutta huomaa, että moni löytää toimivan hoidon juuri yhteisön kautta.",
     "priorityList": "Yhteisön prioriteettilista",
     "bustingTitle": "Busting-protokolla (Clusterbusters)",
     "bustingDesc": "\"Busting\" on potilasyhteisön termi psykedeelisten aineiden käyttämiselle sarjoittaisen päänsäryn jaksojen katkaisemiseen. Bob Wold popularisoi ja järjesti toiminnan virallisesti perustettuaan Clusterbusters-järjestön omien kokemustensa pohjalta. Menetelmää arvioidaan nyt vaiheen 2 kliinisissä tutkimuksissa.",

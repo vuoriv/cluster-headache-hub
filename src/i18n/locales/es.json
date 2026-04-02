@@ -1,8 +1,8 @@
 {
   "header": {
     "siteName": "Centro de Investigación sobre Cefalea en Racimos",
-    "hero": "La condición más dolorosa conocida por la medicina.",
-    "subtitle": "Ensayos clínicos activos, artículos de investigación e información sobre tratamientos para la cefalea en racimos — actualizado en cada carga de página.",
+    "hero": "La condición más dolorosa conocida en la medicina.",
+    "subtitle": "Ensayos clínicos activos, publicaciones científicas y tratamientos para la cefalea en racimos — actualizado en cada carga de página.",
     "stats": {
       "activeTrials": "Ensayos Activos",
       "recruiting": "Reclutando",
@@ -20,7 +20,7 @@
     "triggers": "Desencadenantes"
   },
   "overview": {
-    "title": "¿Qué es la Cefalea en Racimos?",
+    "title": "¿Qué es la cefalea en racimos?",
     "subtitle": "Datos clave, epidemiología y el panorama actual de la investigación",
     "basics": {
       "title": "Conceptos Básicos",
@@ -115,7 +115,7 @@
     "inTrials": "En Ensayos Clínicos Activos",
     "prescribingFailures": "Errores Frecuentes de Prescripción",
     "prescribingFailuresDesc": "Estos tratamientos son prescritos con frecuencia a pacientes con cefalea en racimos por médicos no especializados, pero son ineficaces o perjudiciales. Si alguno de estos es su tratamiento principal para la cefalea en racimos, busque un especialista en cefaleas.",
-    "comparisonTitle": "What Actually Works — Community Consensus vs Standard Care",
+    "comparisonTitle": "Lo que realmente funciona — comunidad vs atención estándar",
     "comparisonDesc": "Based on decades of patient experience from Clusterbusters, r/ClusterHeadaches, and patient surveys. Many of these are now validated by clinical research.",
     "colTreatment": "Treatment",
     "colCommunity": "Community view",
@@ -350,7 +350,7 @@
     }
   },
   "community": {
-    "title": "Tratamientos de la Comunidad de Pacientes",
+    "title": "Tratamientos de la comunidad de pacientes",
     "subtitle": "Conocimiento empírico de Clusterbusters, r/ClusterHeadaches y grupos de pacientes con cefalea en racimos — no constituye asesoramiento médico",
     "badge": "Reportado por Pacientes / Empírico",
     "whyMatters": "Muchos de los tratamientos más eficaces para la cefalea en racimos fueron descubiertos por pacientes, no por médicos. Los refinamientos de la técnica del oxígeno a alto flujo, el régimen de vitamina D3, las bebidas energéticas al inicio de la sombra del ataque y el protocolo de «busting» psicodélico — todos surgieron de pacientes compartiendo lo que les funcionaba. Varios están siendo validados en ensayos clínicos, pero la comunidad los utilizaba con eficacia años antes de que la investigación los respaldara. Si el plan de tratamiento de su médico no está funcionando, la información aquí podría cambiarle la vida.",
