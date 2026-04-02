@@ -1,4 +1,6 @@
+import { useState } from "react"
 import { Brain } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 interface HeaderProps {
   trialCount: number | null
@@ -11,7 +13,7 @@ interface HeaderProps {
 function StatItem({ value, label, loading }: { value: string | number | null; label: string; loading?: boolean }) {
   return (
     <div className="flex flex-col items-center gap-0.5 px-3 py-2.5">
-      <span className={`text-xl font-extrabold text-primary-foreground ${loading ? "animate-pulse opacity-40" : ""}`}>
+      <span className={cn("text-xl font-extrabold text-primary-foreground", loading && "animate-pulse opacity-40")}>
         {value ?? "—"}
       </span>
       <span className="text-[0.68rem] uppercase tracking-wide text-primary-foreground/70">{label}</span>
@@ -20,6 +22,8 @@ function StatItem({ value, label, loading }: { value: string | number | null; la
 }
 
 export function Header({ trialCount, recruitingCount, paperCount, psychedelicCount, loading }: HeaderProps) {
+  const [loadTime] = useState(() => new Date().toLocaleString())
+
   return (
     <header>
       <div className="bg-primary px-6 py-6">
@@ -34,7 +38,7 @@ export function Header({ trialCount, recruitingCount, paperCount, psychedelicCou
             </p>
           </div>
           <div className="text-right text-xs text-primary-foreground/60">
-            <strong className="block text-sm text-primary-foreground/80">{new Date().toLocaleString()}</strong>
+            <strong className="block text-sm text-primary-foreground/80">{loadTime}</strong>
             <span>Data refreshed on load</span>
           </div>
         </div>

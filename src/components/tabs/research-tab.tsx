@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -26,17 +26,18 @@ export function ResearchTab({ papers, totalCount, loading, error, progress }: Re
     return ys.sort().reverse()
   }, [papers])
 
+  useEffect(() => {
+    setPage(1)
+  }, [papers, search, yearFilter])
+
   const filtered = useMemo(() => {
     const q = search.toLowerCase()
-    const result = papers.filter((p) => {
+    return papers.filter((p) => {
       const text = `${p.title} ${p.authors} ${p.journal}`.toLowerCase()
       if (q && !text.includes(q)) return false
       if (yearFilter !== "all" && !p.pubdate.startsWith(yearFilter)) return false
       return true
     })
-    setPage(1)
-    return result
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [papers, search, yearFilter])
 
   const totalPages = Math.ceil(filtered.length / perPage)

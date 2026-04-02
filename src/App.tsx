@@ -1,6 +1,7 @@
 import { useMemo } from "react"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/layout/header"
 import { OverviewTab } from "@/components/tabs/overview-tab"
@@ -40,28 +41,28 @@ export default function App() {
         <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
           <Tabs defaultValue="overview" className="w-full">
             <TabsList className="mb-6 flex w-full flex-wrap justify-start gap-1 bg-transparent p-0">
-              <TabsTrigger value="overview" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="overview">
                 Overview
               </TabsTrigger>
-              <TabsTrigger value="trials" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="trials">
                 Trials
                 {trialStats.total !== null && (
                   <Badge variant="secondary" className="ml-1.5 text-[0.65rem]">{trialStats.total}</Badge>
                 )}
               </TabsTrigger>
-              <TabsTrigger value="research" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="research">
                 Research
                 {!papersLoading && papers.length > 0 && (
                   <Badge variant="secondary" className="ml-1.5 text-[0.65rem]">{papers.length}</Badge>
                 )}
               </TabsTrigger>
-              <TabsTrigger value="treatments" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="treatments">
                 Treatments
               </TabsTrigger>
-              <TabsTrigger value="community" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="community">
                 Community
               </TabsTrigger>
-              <TabsTrigger value="triggers" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="triggers">
                 Triggers
               </TabsTrigger>
             </TabsList>

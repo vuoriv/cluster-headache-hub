@@ -3,16 +3,16 @@ import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
 const TRIGGERS = [
-  { name: "Alcohol (any type)", notes: "Even a small amount reliably triggers attacks during an active bout. The community universally avoids all alcohol during cycles.", severity: "High", sevClass: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300" },
-  { name: "Altitude / Low oxygen", notes: "Flights, mountains, high altitude environments. Some patients pre-treat with supplemental O₂ before flying. Directly relevant to CH's O₂ mechanism.", severity: "High", sevClass: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300" },
-  { name: "Strong chemical smells", notes: "Gasoline, paint fumes, perfume, cleaning products, solvents. Wear a mask if exposure is unavoidable. Common workplace trigger.", severity: "High", sevClass: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300" },
-  { name: "Sleep disruption", notes: "CH attacks frequently occur during or around REM sleep transitions. Jet lag, shift work, naps, or any disruption to sleep schedule reliably worsen cycles for many.", severity: "High", sevClass: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300" },
-  { name: "Vasodilating drugs", notes: "Nitrates (GTN sprays), sildenafil/tadalafil, some blood pressure medications. Always inform prescribers about CH diagnosis.", severity: "High", sevClass: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300" },
-  { name: "Histamine-rich foods", notes: "Aged cheeses, cured/processed meats, fermented foods. Not universal but frequently reported, especially during active cycles. (Red wine is a double trigger — both histamine and alcohol/vasodilation.)", severity: "Medium", sevClass: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300" },
-  { name: "Heat exposure", notes: "Hot baths, saunas, intense exercise in heat. Triggers for some; others find hot showers offer temporary relief during an attack. Individual variation.", severity: "Medium", sevClass: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300" },
-  { name: "Bright / flickering light", notes: "Less consistent than migraine triggers but reported by a subset of patients, especially during attacks.", severity: "Low-Medium", sevClass: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300" },
-  { name: "Season changes", notes: "Many episodic CH patients have predictable seasonal patterns (spring, autumn). Not avoidable, but useful to anticipate and start preventives early.", severity: "Predictive", sevClass: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300" },
-  { name: "Stress / relaxation after stress", notes: "\"Let-down\" headache — attacks often occur after stress resolves (weekends, vacations). Classic pattern in episodic patients.", severity: "Variable", sevClass: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300" },
+  { name: "Alcohol (any type)", notes: "Even a small amount reliably triggers attacks during an active bout. The community universally avoids all alcohol during cycles.", severity: "High", sevVariant: "danger" as const },
+  { name: "Altitude / Low oxygen", notes: "Flights, mountains, high altitude environments. Some patients pre-treat with supplemental O₂ before flying. Directly relevant to CH's O₂ mechanism.", severity: "High", sevVariant: "danger" as const },
+  { name: "Strong chemical smells", notes: "Gasoline, paint fumes, perfume, cleaning products, solvents. Wear a mask if exposure is unavoidable. Common workplace trigger.", severity: "High", sevVariant: "danger" as const },
+  { name: "Sleep disruption", notes: "CH attacks frequently occur during or around REM sleep transitions. Jet lag, shift work, naps, or any disruption to sleep schedule reliably worsen cycles for many.", severity: "High", sevVariant: "danger" as const },
+  { name: "Vasodilating drugs", notes: "Nitrates (GTN sprays), sildenafil/tadalafil, some blood pressure medications. Always inform prescribers about CH diagnosis.", severity: "High", sevVariant: "danger" as const },
+  { name: "Histamine-rich foods", notes: "Aged cheeses, cured/processed meats, fermented foods. Not universal but frequently reported, especially during active cycles. (Red wine is a double trigger — both histamine and alcohol/vasodilation.)", severity: "Medium", sevVariant: "amber" as const },
+  { name: "Heat exposure", notes: "Hot baths, saunas, intense exercise in heat. Triggers for some; others find hot showers offer temporary relief during an attack. Individual variation.", severity: "Medium", sevVariant: "amber" as const },
+  { name: "Bright / flickering light", notes: "Less consistent than migraine triggers but reported by a subset of patients, especially during attacks.", severity: "Low-Medium", sevVariant: "info" as const },
+  { name: "Season changes", notes: "Many episodic CH patients have predictable seasonal patterns (spring, autumn). Not avoidable, but useful to anticipate and start preventives early.", severity: "Predictive", sevVariant: "info" as const },
+  { name: "Stress / relaxation after stress", notes: "\"Let-down\" headache — attacks often occur after stress resolves (weekends, vacations). Classic pattern in episodic patients.", severity: "Variable", sevVariant: "info" as const },
 ]
 
 export function TriggersTab() {
@@ -38,7 +38,7 @@ export function TriggersTab() {
                 <TableCell className="font-semibold">{t.name}</TableCell>
                 <TableCell className="text-sm text-muted-foreground">{t.notes}</TableCell>
                 <TableCell>
-                  <Badge variant="secondary" className={t.sevClass}>{t.severity}</Badge>
+                  <Badge variant={t.sevVariant}>{t.severity}</Badge>
                 </TableCell>
               </TableRow>
             ))}
@@ -46,7 +46,7 @@ export function TriggersTab() {
         </Table>
       </div>
 
-      <Card className="border-l-4 border-l-green-500">
+      <Card className="border-l-4 border-l-primary">
         <CardHeader>
           <CardTitle className="text-sm">✅ During an Active Cycle</CardTitle>
         </CardHeader>

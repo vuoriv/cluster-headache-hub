@@ -19,6 +19,20 @@ const badgeVariants = cva(
         ghost:
           "hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
         link: "text-primary underline-offset-4 hover:underline",
+        success:
+          "bg-[oklch(0.95_0.05_150)] text-[oklch(0.35_0.1_150)] dark:bg-[oklch(0.25_0.05_150)] dark:text-[oklch(0.8_0.1_150)]",
+        warning:
+          "bg-[oklch(0.95_0.05_85)] text-[oklch(0.4_0.1_70)] dark:bg-[oklch(0.25_0.05_85)] dark:text-[oklch(0.85_0.08_85)]",
+        info:
+          "bg-[oklch(0.95_0.03_250)] text-[oklch(0.4_0.1_250)] dark:bg-[oklch(0.25_0.04_250)] dark:text-[oklch(0.8_0.08_250)]",
+        danger:
+          "bg-[oklch(0.95_0.05_25)] text-[oklch(0.45_0.15_25)] dark:bg-[oklch(0.25_0.06_25)] dark:text-[oklch(0.85_0.1_25)]",
+        purple:
+          "bg-[oklch(0.95_0.04_300)] text-[oklch(0.4_0.15_300)] dark:bg-[oklch(0.25_0.06_300)] dark:text-[oklch(0.8_0.1_300)]",
+        cyan:
+          "bg-[oklch(0.95_0.03_200)] text-[oklch(0.4_0.1_200)] dark:bg-[oklch(0.25_0.04_200)] dark:text-[oklch(0.8_0.08_200)]",
+        amber:
+          "bg-[oklch(0.95_0.05_85)] text-[oklch(0.4_0.12_70)] dark:bg-[oklch(0.25_0.05_85)] dark:text-[oklch(0.85_0.08_85)]",
       },
     },
     defaultVariants: {

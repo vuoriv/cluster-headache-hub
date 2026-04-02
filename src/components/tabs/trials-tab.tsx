@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button"
 import { ChevronDown, ChevronRight } from "lucide-react"
 import type { Trial } from "@/lib/types"
-import { categoryForTrial, statusLabel, phaseLabel, CATEGORY_COLORS, CATEGORY_LABELS } from "@/lib/types"
+import { categoryForTrial, statusLabel, phaseLabel, CATEGORY_VARIANTS, CATEGORY_LABELS } from "@/lib/types"
 
 interface TrialsTabProps {
   trials: Trial[]
@@ -17,10 +17,10 @@ interface TrialsTabProps {
   isFallback: boolean
 }
 
-const STATUS_BADGE_VARIANT: Record<string, string> = {
-  RECRUITING: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
-  NOT_YET_RECRUITING: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
-  ACTIVE_NOT_RECRUITING: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+const STATUS_BADGE_VARIANTS: Record<string, "success" | "warning" | "info" | "secondary"> = {
+  RECRUITING: "success",
+  NOT_YET_RECRUITING: "warning",
+  ACTIVE_NOT_RECRUITING: "info",
 }
 
 export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps) {
@@ -61,8 +61,8 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
       </div>
 
       {isFallback && error && (
-        <Alert className="border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30">
-          <AlertDescription className="text-sm text-amber-800 dark:text-amber-300">
+        <Alert variant="warning">
+          <AlertDescription>
             Showing cached data — live fetch failed ({error}). Refresh to retry.
           </AlertDescription>
         </Alert>
@@ -143,7 +143,7 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
                       </a>
                     </TableCell>
                     <TableCell>
-                      <Badge variant="secondary" className={`mb-1 text-[0.68rem] ${CATEGORY_COLORS[cat]}`}>
+                      <Badge variant={CATEGORY_VARIANTS[cat]} className="mb-1 text-[0.68rem]">
                         {CATEGORY_LABELS[cat]}
                       </Badge>
                       <br />
@@ -170,7 +170,7 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
                       )}
                     </TableCell>
                     <TableCell>
-                      <Badge variant="secondary" className={STATUS_BADGE_VARIANT[t.status] || ""}>
+                      <Badge variant={STATUS_BADGE_VARIANTS[t.status] || "secondary"}>
                         {statusLabel(t.status)}
                       </Badge>
                     </TableCell>

@@ -1,29 +1,33 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
+
+type BadgeVariant = "success" | "info" | "warning" | "purple" | "cyan" | "amber" | "danger" | "secondary" | "outline"
+type AccentColor = "primary" | "destructive" | "muted"
 
 interface TreatmentProps {
   title: string
   badge: string
-  badgeClass: string
-  borderClass: string
+  badgeVariant?: BadgeVariant
+  accent?: AccentColor
   items: string[]
   note?: string
 }
 
-function TreatmentCard({ title, badge, badgeClass, borderClass, items, note }: TreatmentProps) {
+function TreatmentCard({ title, badge, badgeVariant = "secondary", accent = "primary", items, note }: TreatmentProps) {
   return (
-    <Card className={`border-l-4 ${borderClass}`}>
+    <Card className={cn("border-l-4", accent === "destructive" ? "border-l-destructive" : accent === "muted" ? "border-l-muted-foreground" : "border-l-primary")}>
       <CardHeader className="pb-2">
         <CardTitle className="flex flex-wrap items-center gap-2 text-sm">
           {title}
-          <Badge variant="secondary" className={`text-[0.68rem] ${badgeClass}`}>{badge}</Badge>
+          <Badge variant={badgeVariant} className="text-[0.68rem]">{badge}</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent>
         <ul className="flex flex-col gap-1 text-sm text-muted-foreground">
-          {items.map((item, i) => (
-            <li key={i}>• {item}</li>
+          {items.map((item) => (
+            <li key={item.slice(0, 40)}>• {item}</li>
           ))}
         </ul>
         {note && <p className="mt-2 text-xs text-muted-foreground italic">{note}</p>}
@@ -46,8 +50,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="🫁 High-Flow Oxygen"
             badge="First-line ✓"
-            badgeClass="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
-            borderClass="border-l-green-500"
+            badgeVariant="success"
+            accent="primary"
             items={[
               "12–25 L/min via non-rebreather (NRB) mask",
               "78% efficacy in pivotal RCT (Cohen 2009, BMJ) at 12 L/min; higher flows often more effective",
@@ -59,8 +63,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="💉 Sumatriptan SC 6mg"
             badge="First-line ✓"
-            badgeClass="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
-            borderClass="border-l-blue-500"
+            badgeVariant="info"
+            accent="primary"
             items={[
               "Onset ~10 minutes; most reliable pharma abortive",
               "Subcutaneous injection only (oral too slow)",
@@ -72,8 +76,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="🔌 gammaCore (nVNS)"
             badge="FDA-cleared"
-            badgeClass="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
-            borderClass="border-l-amber-500"
+            badgeVariant="amber"
+            accent="primary"
             items={[
               "Non-invasive vagus nerve stimulator (neck device)",
               "FDA-cleared: acute episodic + prevention chronic CH",
@@ -85,8 +89,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="💊 Civamide (Zucapsaicin)"
             badge="Phase 3 completed"
-            badgeClass="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
-            borderClass="border-l-purple-500"
+            badgeVariant="purple"
+            accent="primary"
             items={[
               "Synthetic capsaicin analogue, intranasal",
               "Phase 3 trials showed efficacy for episodic CH",
@@ -105,8 +109,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="💊 Verapamil"
             badge="First-line ✓"
-            badgeClass="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
-            borderClass="border-l-green-500"
+            badgeVariant="success"
+            accent="primary"
             items={[
               "Most widely used preventive; onset 2–3 weeks",
               "Effective dose: 360–960 mg/day (divided doses)",
@@ -118,8 +122,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="💊 Galcanezumab (Emgality)"
             badge="FDA-approved ✓"
-            badgeClass="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
-            borderClass="border-l-green-500"
+            badgeVariant="success"
+            accent="primary"
             items={[
               "Only anti-CGRP mAb approved for CH (episodic only)",
               "Monthly 300mg injection; onset within days",
@@ -131,8 +135,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="💊 Lithium"
             badge="Second-line"
-            badgeClass="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
-            borderClass="border-l-red-500"
+            badgeVariant="amber"
+            accent="destructive"
             items={[
               "Effective for chronic CH, especially refractory",
               "Narrow therapeutic window (0.6–1.2 mEq/L)",
@@ -143,8 +147,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="💊 Melatonin (10–25mg)"
             badge="Adjunct option"
-            badgeClass="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
-            borderClass="border-l-amber-500"
+            badgeVariant="amber"
+            accent="primary"
             items={[
               "RCT: 50% responder rate at 10mg at bedtime (n=20)",
               "Particularly effective for nocturnal attacks",
@@ -155,8 +159,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="💉 GON Block"
             badge="Transitional ✓"
-            badgeClass="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
-            borderClass="border-l-blue-500"
+            badgeVariant="info"
+            accent="primary"
             items={[
               "Corticosteroid + local anesthetic at skull base",
               "Onset 24–72h; duration 2–8 weeks",
@@ -168,8 +172,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="🧠 SPG Stimulation"
             badge="Refractory CH"
-            badgeClass="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
-            borderClass="border-l-purple-500"
+            badgeVariant="purple"
+            accent="primary"
             items={[
               "Implantable sphenopalatine ganglion neurostimulator",
               "On-demand acute relief; strong evidence base",
@@ -188,8 +192,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="🍄 Psilocybin"
             badge="Phase 2"
-            badgeClass="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
-            borderClass="border-l-violet-500"
+            badgeVariant="purple"
+            accent="primary"
             items={[
               "Repeat pulse reduces attacks by 50% (2024 RCT)",
               "Australian MRFF-funded trial underway (2025)",
@@ -200,8 +204,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="🔬 LSD (Micro/Low Dose)"
             badge="Phase 2"
-            badgeClass="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
-            borderClass="border-l-violet-500"
+            badgeVariant="purple"
+            accent="primary"
             items={[
               "Basel RCT: 3×100µg, double-blind crossover (NCT03781128)",
               "Radboud RCT: minidosing for chronic CH (NCT05477459)",
@@ -212,8 +216,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="💉 Ketamine + Magnesium IV"
             badge="Phase 4 (KETALGIA)"
-            badgeClass="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
-            borderClass="border-l-cyan-500"
+            badgeVariant="info"
+            accent="primary"
             items={[
               "Single IV infusion for refractory chronic CH",
               "Pilot: 13/17 patients ≥50% attack reduction",
@@ -225,8 +229,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="😴 Sodium Oxybate (SUNCET)"
             badge="Phase 2"
-            badgeClass="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
-            borderClass="border-l-cyan-500"
+            badgeVariant="info"
+            accent="primary"
             items={[
               "Targets nocturnal CH via sleep deepening (↑SWS, ↓REM)",
               "RCT at Leiden University (NCT06950281)",
@@ -237,8 +241,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="☀️ Light Therapy"
             badge="Proof of concept"
-            badgeClass="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
-            borderClass="border-l-yellow-500"
+            badgeVariant="amber"
+            accent="primary"
             items={[
               "Luminettes® device for chronic CH prevention",
               "Hypothesis: circadian/hypothalamic reset",
@@ -248,8 +252,8 @@ export function TreatmentsTab() {
           <TreatmentCard
             title="💉 Botulinum Toxin A (SPG)"
             badge="Phase 3"
-            badgeClass="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
-            borderClass="border-l-yellow-500"
+            badgeVariant="amber"
+            accent="primary"
             items={[
               "SPG blockade with BoNT-A for refractory chronic CH",
               "5 European sites; 112 patients (NCT03944876)",

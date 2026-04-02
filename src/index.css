@@ -128,3 +128,8 @@
     @apply font-sans;
     }
 }
+/* Tab trigger active state */
+[data-slot="tabs-trigger"][data-state="active"] {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}

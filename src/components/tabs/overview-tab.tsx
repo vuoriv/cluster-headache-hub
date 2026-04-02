@@ -67,7 +67,7 @@ export function OverviewTab() {
           </CardContent>
         </Card>
 
-        <Alert variant="destructive" className="border-amber-300 bg-amber-50 text-amber-900 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-200">
+        <Alert variant="warning">
           <AlertTriangle className="size-4" />
           <AlertTitle>Medical Disclaimer</AlertTitle>
           <AlertDescription className="text-sm">

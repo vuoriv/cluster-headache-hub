@@ -11,6 +11,8 @@ const alertVariants = cva(
         default: "bg-card text-card-foreground",
         destructive:
           "bg-card text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
+        warning:
+          "border-[oklch(0.8_0.08_85)] bg-[oklch(0.97_0.03_85)] text-[oklch(0.4_0.12_70)] *:data-[slot=alert-description]:text-[oklch(0.45_0.1_70)] *:[svg]:text-current dark:border-[oklch(0.35_0.06_85)] dark:bg-[oklch(0.2_0.03_85)] dark:text-[oklch(0.85_0.08_85)] dark:*:data-[slot=alert-description]:text-[oklch(0.75_0.06_85)]",
       },
     },
     defaultVariants: {
