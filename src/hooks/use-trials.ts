@@ -18,6 +18,7 @@ export function useTrials(): TrialsState {
   })
 
   useEffect(() => {
+    let cancelled = false
     async function load() {
       try {
         const statuses = "RECRUITING,NOT_YET_RECRUITING,ACTIVE_NOT_RECRUITING"
@@ -53,9 +54,9 @@ export function useTrials(): TrialsState {
           }
         })
 
-        setState({ trials, loading: false, error: null, isFallback: false })
+        if (!cancelled) setState({ trials, loading: false, error: null, isFallback: false })
       } catch (e) {
-        setState({
+        if (!cancelled) setState({
           trials: [...STATIC_TRIALS],
           loading: false,
           error: (e as Error).message,
@@ -64,6 +65,7 @@ export function useTrials(): TrialsState {
       }
     }
     load()
+    return () => { cancelled = true }
   }, [])
 
   return state

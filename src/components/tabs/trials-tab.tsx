@@ -180,9 +180,7 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      {phaseLabel(t.phase) !== "—" ? (
-                        <Badge variant="outline" className="text-xs">{phaseLabel(t.phase)}</Badge>
-                      ) : "—"}
+                      {(() => { const pl = phaseLabel(t.phase); return pl !== "—" ? <Badge variant="outline" className="text-xs">{pl}</Badge> : "—"; })()}
                     </TableCell>
                     <TableCell className="text-sm">{t.sponsor}</TableCell>
                     <TableCell className="text-right text-sm">{String(t.enrollment)}</TableCell>

@@ -19,6 +19,7 @@ export function usePapers(): PapersState {
   })
 
   useEffect(() => {
+    let cancelled = false
     async function load() {
       try {
         const searchUrl =
@@ -37,7 +38,7 @@ export function usePapers(): PapersState {
 
         for (let i = 0; i < pmids.length; i += batchSize) {
           const batchNum = Math.floor(i / batchSize) + 1
-          setState((prev) => ({ ...prev, progress: `Loading batch ${batchNum}/${totalBatches}…` }))
+          if (!cancelled) setState((prev) => ({ ...prev, progress: `Loading batch ${batchNum}/${totalBatches}…` }))
 
           const batch = pmids.slice(i, i + batchSize).join(",")
           const sumUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=${batch}&retmode=json`
@@ -68,12 +69,13 @@ export function usePapers(): PapersState {
           }
         }
 
-        setState({ papers, totalCount: total, loading: false, error: null, progress: "" })
+        if (!cancelled) setState({ papers, totalCount: total, loading: false, error: null, progress: "" })
       } catch (e) {
-        setState((prev) => ({ ...prev, loading: false, error: (e as Error).message }))
+        if (!cancelled) setState((prev) => ({ ...prev, loading: false, error: (e as Error).message }))
       }
     }
     load()
+    return () => { cancelled = true }
   }, [])
 
   return state

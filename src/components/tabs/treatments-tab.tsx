@@ -29,7 +29,7 @@ function TreatmentCard({ title, badge, badgeVariant = "secondary", accent = "pri
       <CardContent>
         <ul className="flex flex-col gap-1 text-sm text-muted-foreground">
           {items.map((item) => (
-            <li key={item.slice(0, 40)}>• {item}</li>
+            <li key={item}>• {item}</li>
           ))}
         </ul>
         {note && <p className="mt-2 text-xs text-muted-foreground italic">{note}</p>}

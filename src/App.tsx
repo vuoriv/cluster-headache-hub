@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useMemo, useState, useEffect, useCallback } from "react"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
@@ -26,6 +26,25 @@ export default function App() {
 
   const paperCount = papersLoading ? null : totalCount
 
+  const validTabs = ["overview", "trials", "research", "treatments", "community", "triggers"]
+  const getTabFromHash = useCallback(() => {
+    const hash = window.location.hash.slice(1)
+    return validTabs.includes(hash) ? hash : "overview"
+  }, [])
+
+  const [activeTab, setActiveTab] = useState(getTabFromHash)
+
+  useEffect(() => {
+    const onHashChange = () => setActiveTab(getTabFromHash())
+    window.addEventListener("hashchange", onHashChange)
+    return () => window.removeEventListener("hashchange", onHashChange)
+  }, [getTabFromHash])
+
+  const handleTabChange = useCallback((value: string) => {
+    setActiveTab(value)
+    window.history.replaceState(null, "", `#${value}`)
+  }, [])
+
   return (
     <TooltipProvider>
       <div className="min-h-screen bg-background">
@@ -38,7 +57,7 @@ export default function App() {
         />
 
         <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
-          <Tabs defaultValue="overview" className="w-full">
+          <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
             <TabsList className="mb-6 flex w-full flex-wrap justify-start gap-0.5 bg-transparent p-0">
               <TabsTrigger value="overview">
                 Overview
