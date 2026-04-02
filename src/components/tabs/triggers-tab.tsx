@@ -3,22 +3,37 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { CheckCircle, Wine, Mountain, Wind, Moon, Pill, Utensils, Thermometer, Sun, CloudRain, Heart } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 
-const TRIGGERS = [
-  { name: "Alcohol (any type)", notes: "Even a small amount reliably triggers attacks during an active bout. The community universally avoids all alcohol during cycles.", severity: "High", sevVariant: "danger" as const, icon: Wine },
-  { name: "Altitude / Low oxygen", notes: "Flights, mountains, high altitude environments. Some patients pre-treat with supplemental O₂ before flying.", severity: "High", sevVariant: "danger" as const, icon: Mountain },
-  { name: "Strong chemical smells", notes: "Gasoline, paint fumes, perfume, cleaning products, solvents. Wear a mask if exposure is unavoidable.", severity: "High", sevVariant: "danger" as const, icon: Wind },
-  { name: "Sleep disruption", notes: "CH attacks frequently occur during or around REM sleep transitions. Jet lag, shift work, naps, or any disruption to sleep schedule.", severity: "High", sevVariant: "danger" as const, icon: Moon },
-  { name: "Vasodilating drugs", notes: "Nitrates (GTN sprays), sildenafil/tadalafil, some blood pressure medications. Always inform prescribers about CH.", severity: "High", sevVariant: "danger" as const, icon: Pill },
-  { name: "Histamine-rich foods", notes: "Aged cheeses, cured meats, fermented foods. Red wine is a double trigger — both histamine and alcohol/vasodilation.", severity: "Medium", sevVariant: "amber" as const, icon: Utensils },
-  { name: "Heat exposure", notes: "Hot baths, saunas, intense exercise in heat. Individual variation — some find hot showers offer temporary relief during an attack.", severity: "Medium", sevVariant: "amber" as const, icon: Thermometer },
-  { name: "Bright / flickering light", notes: "Less consistent than migraine triggers but reported by a subset of patients, especially during attacks.", severity: "Low", sevVariant: "info" as const, icon: Sun },
-  { name: "Season changes", notes: "Many episodic CH patients have predictable seasonal patterns (spring, autumn). Useful to anticipate and start preventives early.", severity: "Predictive", sevVariant: "info" as const, icon: CloudRain },
-  { name: "Stress let-down", notes: "Attacks often occur after stress resolves — weekends, vacations, holidays. Classic pattern in episodic patients.", severity: "Variable", sevVariant: "info" as const, icon: Heart },
+interface Trigger {
+  name: string
+  notes: string
+  severity: string
+  sevVariant: "danger" | "amber" | "info"
+  icon: LucideIcon
+  borderClass: string
+  iconBg: string
+}
+
+const TRIGGERS: Trigger[] = [
+  { name: "Alcohol (any type)", notes: "Even a small amount reliably triggers attacks during an active bout. The community universally avoids all alcohol during cycles.", severity: "High", sevVariant: "danger", icon: Wine, borderClass: "border-l-4 border-l-destructive", iconBg: "bg-destructive/10 text-destructive" },
+  { name: "Altitude / Low oxygen", notes: "Flights, mountains, high altitude environments. Some patients pre-treat with supplemental O₂ before flying.", severity: "High", sevVariant: "danger", icon: Mountain, borderClass: "border-l-4 border-l-destructive", iconBg: "bg-destructive/10 text-destructive" },
+  { name: "Strong chemical smells", notes: "Gasoline, paint fumes, perfume, cleaning products, solvents. Wear a mask if exposure is unavoidable.", severity: "High", sevVariant: "danger", icon: Wind, borderClass: "border-l-4 border-l-destructive", iconBg: "bg-destructive/10 text-destructive" },
+  { name: "Sleep disruption", notes: "CH attacks frequently occur during or around REM sleep transitions. Jet lag, shift work, naps, or any disruption to sleep schedule.", severity: "High", sevVariant: "danger", icon: Moon, borderClass: "border-l-4 border-l-destructive", iconBg: "bg-destructive/10 text-destructive" },
+  { name: "Vasodilating drugs", notes: "Nitrates (GTN sprays), sildenafil/tadalafil, some blood pressure medications. Always inform prescribers about CH.", severity: "High", sevVariant: "danger", icon: Pill, borderClass: "border-l-4 border-l-destructive", iconBg: "bg-destructive/10 text-destructive" },
+  { name: "Histamine-rich foods", notes: "Aged cheeses, cured meats, fermented foods. Red wine is a double trigger — both histamine and alcohol/vasodilation.", severity: "Medium", sevVariant: "amber", icon: Utensils, borderClass: "border-l-4 border-l-ring", iconBg: "bg-ring/10 text-ring" },
+  { name: "Heat exposure", notes: "Hot baths, saunas, intense exercise in heat. Individual variation — some find hot showers offer temporary relief during an attack.", severity: "Medium", sevVariant: "amber", icon: Thermometer, borderClass: "border-l-4 border-l-ring", iconBg: "bg-ring/10 text-ring" },
+  { name: "Bright / flickering light", notes: "Less consistent than migraine triggers but reported by a subset of patients, especially during attacks.", severity: "Low", sevVariant: "info", icon: Sun, borderClass: "border-l-2 border-l-border", iconBg: "bg-muted text-muted-foreground" },
+  { name: "Season changes", notes: "Many episodic CH patients have predictable seasonal patterns (spring, autumn). Useful to anticipate and start preventives early.", severity: "Predictive", sevVariant: "info", icon: CloudRain, borderClass: "border-l-2 border-l-border", iconBg: "bg-muted text-muted-foreground" },
+  { name: "Stress let-down", notes: "Attacks often occur after stress resolves — weekends, vacations, holidays. Classic pattern in episodic patients.", severity: "Variable", sevVariant: "info", icon: Heart, borderClass: "border-l-2 border-l-border", iconBg: "bg-muted text-muted-foreground" },
 ]
 
 export function TriggersTab() {
   const { t } = useTranslation()
+
+  const highTriggers = TRIGGERS.filter((tr) => tr.severity === "High")
+  const mediumTriggers = TRIGGERS.filter((tr) => tr.severity === "Medium")
+  const lowTriggers = TRIGGERS.filter((tr) => !["High", "Medium"].includes(tr.severity))
 
   return (
     <div className="flex flex-col gap-8">
@@ -27,26 +42,82 @@ export function TriggersTab() {
         <p className="mt-1 text-sm text-muted-foreground">{t("triggers.subtitle")}</p>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        {TRIGGERS.map((trigger) => {
-          const Icon = trigger.icon
-          return (
-            <Card key={trigger.name} className="group transition-all hover:shadow-md">
-              <CardContent className="flex gap-4 py-4">
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/8 text-primary">
-                  <Icon className="size-5" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold">{trigger.name}</span>
-                    <Badge variant={trigger.sevVariant} className="text-[0.6rem]">{trigger.severity}</Badge>
+      {/* High severity */}
+      <div>
+        <div className="mb-3 flex items-center gap-2">
+          <Badge variant="danger">High Risk</Badge>
+          <span className="text-xs text-muted-foreground">Reliably trigger attacks during active cycles</span>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {highTriggers.map((trigger) => {
+            const Icon = trigger.icon
+            return (
+              <Card key={trigger.name} className={trigger.borderClass}>
+                <CardContent className="flex gap-3 py-4">
+                  <div className={`flex size-9 shrink-0 items-center justify-center rounded-lg ${trigger.iconBg}`}>
+                    <Icon className="size-4" />
                   </div>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{trigger.notes}</p>
-                </div>
-              </CardContent>
-            </Card>
-          )
-        })}
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold">{trigger.name}</p>
+                    <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{trigger.notes}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Medium severity */}
+      <div>
+        <div className="mb-3 flex items-center gap-2">
+          <Badge variant="amber">Medium Risk</Badge>
+          <span className="text-xs text-muted-foreground">Reported by many but not universal</span>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {mediumTriggers.map((trigger) => {
+            const Icon = trigger.icon
+            return (
+              <Card key={trigger.name} className={trigger.borderClass}>
+                <CardContent className="flex gap-3 py-4">
+                  <div className={`flex size-9 shrink-0 items-center justify-center rounded-lg ${trigger.iconBg}`}>
+                    <Icon className="size-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold">{trigger.name}</p>
+                    <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{trigger.notes}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Low / predictive */}
+      <div>
+        <div className="mb-3 flex items-center gap-2">
+          <Badge variant="info">Low / Variable</Badge>
+          <span className="text-xs text-muted-foreground">Inconsistent or predictive — useful to be aware of</span>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {lowTriggers.map((trigger) => {
+            const Icon = trigger.icon
+            return (
+              <Card key={trigger.name} className={trigger.borderClass}>
+                <CardContent className="flex gap-3 py-4">
+                  <div className={`flex size-9 shrink-0 items-center justify-center rounded-lg ${trigger.iconBg}`}>
+                    <Icon className="size-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold">{trigger.name}</p>
+                    <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{trigger.notes}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
       </div>
 
       <Separator />
