@@ -1,10 +1,11 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useTranslation } from "react-i18next"
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
-import { AlertTriangle, Zap, Shield, FlaskConical, Ban } from "lucide-react"
+import { AlertTriangle, Zap, Shield, FlaskConical, Ban, Star } from "lucide-react"
 
 type BadgeVariant = "success" | "info" | "warning" | "purple" | "cyan" | "amber" | "danger" | "secondary" | "outline"
 type AccentColor = "primary" | "destructive" | "muted"
@@ -58,6 +59,82 @@ export function TreatmentsTab() {
           <strong>For newly diagnosed patients:</strong> Many GPs and neurologists are not CH specialists and may prescribe treatments that are ineffective or counterproductive for cluster headache (oral triptans, standard migraine preventives, opioids). If your current treatment isn't working, seek a headache specialist and explore the Community tab for patient-tested approaches.
         </AlertDescription>
       </Alert>
+
+      <Card className="border-2 border-ring">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-base">
+            <Star className="size-4 text-primary" />
+            What Actually Works — Community Consensus vs Standard Care
+          </CardTitle>
+          <CardDescription>
+            Based on decades of patient experience from Clusterbusters, r/ClusterHeadaches, and patient surveys. Many of these are now validated by clinical research.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-8">#</TableHead>
+                <TableHead>Treatment</TableHead>
+                <TableHead>Community view</TableHead>
+                <TableHead className="w-[140px]">Typical doctor</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-bold text-primary">1</TableCell>
+                <TableCell className="font-semibold">High-flow O₂ (15–25 L/min)</TableCell>
+                <TableCell className="text-sm text-muted-foreground">The #1 treatment. Get this first. 78% efficacy, zero side effects. Demand-valve mask is fastest.</TableCell>
+                <TableCell><Badge variant="danger" className="text-[0.65rem]">Often not prescribed</Badge></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-bold text-primary">2</TableCell>
+                <TableCell className="font-semibold">Vitamin D3 Batch Protocol</TableCell>
+                <TableCell className="text-sm text-muted-foreground">80% responder rate in surveys. Start at 10,000 IU/day with cofactors (K2, Mg, Omega-3). Begin early in cycle.</TableCell>
+                <TableCell><Badge variant="warning" className="text-[0.65rem]">Rarely mentioned</Badge></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-bold text-primary">3</TableCell>
+                <TableCell className="font-semibold">SC sumatriptan 6mg</TableCell>
+                <TableCell className="text-sm text-muted-foreground">Best pharma abortive when O₂ unavailable. Injection only — oral is useless for CH. Carry at all times.</TableCell>
+                <TableCell><Badge variant="success" className="text-[0.65rem]">Usually prescribed</Badge></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-bold text-primary">4</TableCell>
+                <TableCell className="font-semibold">Energy drink at shadow onset</TableCell>
+                <TableCell className="text-sm text-muted-foreground">Caffeine + taurine at first sign of an attack. Free, instant, no side effects. Works for many.</TableCell>
+                <TableCell><Badge variant="warning" className="text-[0.65rem]">Not discussed</Badge></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-bold text-primary">5</TableCell>
+                <TableCell className="font-semibold">Melatonin 10–25mg</TableCell>
+                <TableCell className="text-sm text-muted-foreground">RCT-backed at 10mg. Much higher than sleep dosing. Take before usual attack time. OTC, safe.</TableCell>
+                <TableCell><Badge variant="warning" className="text-[0.65rem]">Underdosed if mentioned</Badge></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-bold text-primary">6</TableCell>
+                <TableCell className="font-semibold">Verapamil (360–960mg)</TableCell>
+                <TableCell className="text-sm text-muted-foreground">Standard preventive but must be dosed high enough. Most GPs start too low. Push for headache specialist dosing.</TableCell>
+                <TableCell><Badge variant="info" className="text-[0.65rem]">Often underdosed</Badge></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-bold text-primary">7</TableCell>
+                <TableCell className="font-semibold">GON block (bridge)</TableCell>
+                <TableCell className="text-sm text-muted-foreground">Fast-acting bridge while verapamil takes effect. Can break an active cycle. Ask neurologist.</TableCell>
+                <TableCell><Badge variant="success" className="text-[0.65rem]">Specialist-level</Badge></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-bold text-primary">8</TableCell>
+                <TableCell className="font-semibold">Busting (psilocybin/LSA)</TableCell>
+                <TableCell className="text-sm text-muted-foreground">Life-changing for many refractory patients. Now in Phase 2 RCTs. See Community tab for protocol.</TableCell>
+                <TableCell><Badge variant="danger" className="text-[0.65rem]">Not discussed</Badge></TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+
+      <Separator />
 
       <div>
         <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Zap className="size-4 text-primary" />{t("treatments.acute")}</h3>
