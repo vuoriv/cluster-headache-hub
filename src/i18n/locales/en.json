@@ -115,8 +115,8 @@
     "inTrials": "In Active Clinical Trials",
     "prescribingFailures": "Common Prescribing Failures",
     "prescribingFailuresDesc": "These are frequently prescribed to CH patients by non-specialist doctors but are ineffective or harmful. If you're receiving any of these as your primary CH treatment, seek a headache specialist.",
-    "comparisonTitle": "What Actually Works — Community Consensus vs Standard Care",
-    "comparisonDesc": "Based on decades of patient experience from Clusterbusters, r/ClusterHeadaches, and patient surveys. Many of these are now validated by clinical research.",
+    "comparisonTitle": "What Actually Works — Patient Community Knowledge",
+    "comparisonDesc": "Treatments discovered or refined by patients, often years before clinical research caught up. These are not ranked — different patients respond to different treatments.",
     "colTreatment": "Treatment",
     "colCommunity": "Community view",
     "colDoctor": "Typical doctor",
@@ -147,11 +147,6 @@
         "community": "RCT-backed at 10mg. Much higher than sleep dosing. Take before usual attack time. OTC, safe.",
         "doctor": "Underdosed if mentioned"
       },
-      "verapamil": {
-        "name": "Verapamil (360–960mg)",
-        "community": "Standard preventive but must be dosed high enough. Most GPs start too low. Push for headache specialist dosing.",
-        "doctor": "Often underdosed"
-      },
       "gon": {
         "name": "GON block (bridge)",
         "community": "Fast-acting bridge while verapamil takes effect. Can break an active cycle. Ask neurologist.",
@@ -159,7 +154,7 @@
       },
       "busting": {
         "name": "Busting (psilocybin/LSA)",
-        "community": "Life-changing for many refractory patients. Now in Phase 2 RCTs. See Community tab for protocol.",
+        "community": "Life-changing for many patients. Psilocybin, LSD, and LSA seeds all used. Now validated in Phase 2 RCTs. See Community tab for protocol.",
         "doctor": "Ignored by doctors — life-changing for many"
       }
     },

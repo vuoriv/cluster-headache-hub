@@ -17,14 +17,13 @@ interface TreatmentCardProps {
 }
 
 const COMP_ITEMS = [
-  { key: "o2", rank: 1, doctorVariant: "danger" as const },
-  { key: "d3", rank: 2, doctorVariant: "warning" as const },
-  { key: "sumatriptan", rank: 3, doctorVariant: "success" as const },
-  { key: "energy", rank: 4, doctorVariant: "warning" as const },
-  { key: "melatonin", rank: 5, doctorVariant: "warning" as const },
-  { key: "verapamil", rank: 6, doctorVariant: "info" as const },
-  { key: "gon", rank: 7, doctorVariant: "success" as const },
-  { key: "busting", rank: 8, doctorVariant: "purple" as const },
+  { key: "o2", doctorVariant: "danger" as const },
+  { key: "d3", doctorVariant: "warning" as const },
+  { key: "sumatriptan", doctorVariant: "success" as const },
+  { key: "energy", doctorVariant: "warning" as const },
+  { key: "melatonin", doctorVariant: "warning" as const },
+  { key: "gon", doctorVariant: "success" as const },
+  { key: "busting", doctorVariant: "purple" as const },
 ]
 
 function TreatmentCard({ cardKey, badgeText, badgeVariant = "secondary", accent = "primary" }: TreatmentCardProps) {
@@ -85,9 +84,6 @@ export function TreatmentsTab() {
           <div className="flex flex-col gap-3">
             {COMP_ITEMS.map((item) => (
               <div key={item.key} className="flex items-start gap-3 rounded-lg border p-3 transition-colors hover:bg-muted/50">
-                <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                  {item.rank}
-                </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="text-sm font-semibold">{t(`treatments.comp.${item.key}.name`)}</span>

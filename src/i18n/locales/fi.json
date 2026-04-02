@@ -115,8 +115,8 @@
     "inTrials": "Aktiivisissa kliinisissä tutkimuksissa",
     "prescribingFailures": "Yleiset määräämisvirheet",
     "prescribingFailuresDesc": "Näitä määrätään usein sarjoittaisen päänsäryn potilaille lääkäreiltä, jotka eivät ole erikoistuneet sairauteen. Ne ovat tehottomia tai haitallisia. Jos saat näitä pääasiallisena hoitonasi, hakeudu päänsärkyasiantuntijalle.",
-    "comparisonTitle": "Mikä todella toimii — yhteisön kokemus vs. tavallinen hoito",
-    "comparisonDesc": "Perustuu vuosikymmenten potilaskokemukseen Clusterbusters-, r/ClusterHeadaches- ja potilaskyselyistä. Monet näistä on nyt vahvistettu kliinisessä tutkimuksessa.",
+    "comparisonTitle": "Mikä todella toimii — potilasyhteisön tieto",
+    "comparisonDesc": "Potilaiden löytämiä tai kehittämiä hoitoja, usein vuosia ennen kliinistä tutkimusta. Näitä ei ole asetettu järjestykseen — eri potilaat hyötyvät eri hoidoista.",
     "colTreatment": "Hoito",
     "colCommunity": "Yhteisön näkemys",
     "colDoctor": "Tyypillinen lääkäri",
@@ -147,11 +147,6 @@
         "community": "RCT-tutkimuksessa vahvistettu 10mg annos. Paljon suurempi kuin uniannostus. Ota ennen tavanomaista kohtausaikaa.",
         "doctor": "Aliannosteltu jos mainitaan"
       },
-      "verapamil": {
-        "name": "Verapamil (360–960mg)",
-        "community": "Vakioestohoito, mutta annos on oltava tarpeeksi suuri. Useimmat yleislääkärit aloittavat liian pienellä annoksella.",
-        "doctor": "Usein aliannosteltu"
-      },
       "gon": {
         "name": "GON-puudutus (silta)",
         "community": "Nopeasti vaikuttava silta verapamilin vaikutuksen odottamiseen. Voi katkaista aktiivisen jakson. Kysy neurologilta.",
@@ -159,7 +154,7 @@
       },
       "busting": {
         "name": "Busting (psilosybiini/LSA)",
-        "community": "Elämää muuttava monille vaikeahoitoisille potilaille. Nyt vaiheen 2 tutkimuksissa. Katso Yhteisö-välilehti.",
+        "community": "Elämää muuttava monille potilaille. Psilosybiini, LSD ja LSA-siemenet kaikki käytössä. Nyt vahvistettu vaiheen 2 tutkimuksissa. Katso Yhteisö-välilehti.",
         "doctor": "Lääkärit eivät mainitse — monille elämää muuttava"
       }
     },
