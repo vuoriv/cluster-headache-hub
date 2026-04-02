@@ -4,10 +4,11 @@ import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { ChevronDown, ChevronRight, ExternalLink, Users, Calendar, FlaskConical } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { ExternalLink, Users, Calendar, FlaskConical, MapPin, FileText } from "lucide-react"
 import type { Trial } from "@/lib/types"
 import { categoryForTrial, statusLabel, phaseLabel, CATEGORY_VARIANTS, CATEGORY_LABELS } from "@/lib/types"
 
@@ -24,12 +25,12 @@ const STATUS_BADGE_VARIANTS: Record<string, "success" | "warning" | "info" | "se
   ACTIVE_NOT_RECRUITING: "info",
 }
 
-function TrialCard({ trial, expanded, onToggle }: { trial: Trial; expanded: boolean; onToggle: () => void }) {
+function TrialCard({ trial, onSelect }: { trial: Trial; onSelect: () => void }) {
   const cat = categoryForTrial(trial)
   const pl = phaseLabel(trial.phase)
 
   return (
-    <Card className="group transition-all hover:shadow-md">
+    <Card className="group cursor-pointer transition-all hover:shadow-md" onClick={onSelect}>
       <CardHeader className="pb-2">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div className="flex flex-wrap items-center gap-2">
@@ -43,15 +44,9 @@ function TrialCard({ trial, expanded, onToggle }: { trial: Trial; expanded: bool
               <Badge variant="outline" className="text-[0.68rem]">{pl}</Badge>
             )}
           </div>
-          <a
-            href={`https://clinicaltrials.gov/study/${trial.nct}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 text-xs font-mono text-muted-foreground transition-colors hover:text-primary"
-          >
+          <span className="text-xs font-mono text-muted-foreground">
             {trial.nct}
-            <ExternalLink className="size-3" />
-          </a>
+          </span>
         </div>
         <CardTitle className="text-sm leading-snug">
           {trial.title}
@@ -61,51 +56,144 @@ function TrialCard({ trial, expanded, onToggle }: { trial: Trial; expanded: bool
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">
             <FlaskConical className="size-3" />
-            {trial.sponsor}
+            {trial.sponsor.length > 40 ? trial.sponsor.slice(0, 38) + "…" : trial.sponsor}
           </span>
           {trial.enrollment !== "—" && (
             <span className="flex items-center gap-1">
               <Users className="size-3" />
-              {String(trial.enrollment)} enrolled
-            </span>
-          )}
-          {trial.end && (
-            <span className="flex items-center gap-1">
-              <Calendar className="size-3" />
-              Est. end: {trial.end}
+              n={String(trial.enrollment)}
             </span>
           )}
         </div>
-
-        {trial.interventions && (
-          <p className="mt-2 text-xs text-muted-foreground">
-            <strong className="text-foreground/70">Interventions:</strong> {trial.interventions}
-          </p>
-        )}
-
-        {trial.summary && trial.summary.length > 20 && (
-          <>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="mt-2 h-auto px-0 py-0.5 text-xs"
-              onClick={onToggle}
-            >
-              {expanded ? <ChevronDown className="mr-1" /> : <ChevronRight className="mr-1" />}
-              {expanded ? "Hide details" : "Show details"}
-            </Button>
-            {expanded && (
-              <>
-                <Separator className="my-2" />
-                <p className="text-xs leading-relaxed text-muted-foreground">
-                  {trial.summary}
-                </p>
-              </>
-            )}
-          </>
-        )}
       </CardContent>
     </Card>
+  )
+}
+
+function TrialDialog({ trial, open, onClose }: { trial: Trial | null; open: boolean; onClose: () => void }) {
+  if (!trial) return null
+  const cat = categoryForTrial(trial)
+  const pl = phaseLabel(trial.phase)
+
+  return (
+    <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
+      <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+        <DialogHeader>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <Badge variant={CATEGORY_VARIANTS[cat]} className="text-[0.68rem]">
+              {CATEGORY_LABELS[cat]}
+            </Badge>
+            <Badge variant={STATUS_BADGE_VARIANTS[trial.status] || "secondary"}>
+              {statusLabel(trial.status)}
+            </Badge>
+            {pl !== "—" && (
+              <Badge variant="outline" className="text-[0.68rem]">{pl}</Badge>
+            )}
+            <Badge variant="outline" className="text-[0.68rem] font-mono">{trial.type}</Badge>
+          </div>
+          <DialogTitle className="text-lg leading-snug">{trial.title}</DialogTitle>
+          <DialogDescription className="sr-only">Details for clinical trial {trial.nct}</DialogDescription>
+        </DialogHeader>
+
+        <div className="flex flex-col gap-4 mt-2">
+          {/* Key info grid */}
+          <div className="grid grid-cols-2 gap-3 text-sm">
+            <div className="flex flex-col gap-1">
+              <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Sponsor</span>
+              <span className="flex items-center gap-1.5">
+                <FlaskConical className="size-3.5 text-muted-foreground" />
+                {trial.sponsor}
+              </span>
+            </div>
+            <div className="flex flex-col gap-1">
+              <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">NCT ID</span>
+              <a
+                href={`https://clinicaltrials.gov/study/${trial.nct}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 font-mono text-primary hover:underline"
+              >
+                {trial.nct}
+                <ExternalLink className="size-3" />
+              </a>
+            </div>
+            {trial.enrollment !== "—" && (
+              <div className="flex flex-col gap-1">
+                <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Enrollment</span>
+                <span className="flex items-center gap-1.5">
+                  <Users className="size-3.5 text-muted-foreground" />
+                  {String(trial.enrollment)} participants
+                </span>
+              </div>
+            )}
+            {trial.end && (
+              <div className="flex flex-col gap-1">
+                <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Est. Completion</span>
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="size-3.5 text-muted-foreground" />
+                  {trial.end}
+                </span>
+              </div>
+            )}
+            {trial.start && (
+              <div className="flex flex-col gap-1">
+                <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Start Date</span>
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="size-3.5 text-muted-foreground" />
+                  {trial.start}
+                </span>
+              </div>
+            )}
+            {trial.conditions && (
+              <div className="flex flex-col gap-1">
+                <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Conditions</span>
+                <span className="flex items-center gap-1.5">
+                  <MapPin className="size-3.5 text-muted-foreground" />
+                  {trial.conditions}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {trial.interventions && (
+            <>
+              <Separator />
+              <div>
+                <h4 className="mb-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground">Interventions</h4>
+                <p className="text-sm">{trial.interventions}</p>
+              </div>
+            </>
+          )}
+
+          {trial.summary && (
+            <>
+              <Separator />
+              <div>
+                <h4 className="mb-1.5 flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  <FileText className="size-3" />
+                  Study Description
+                </h4>
+                <p className="text-sm leading-relaxed text-muted-foreground">{trial.summary}</p>
+              </div>
+            </>
+          )}
+
+          <Separator />
+          <div className="flex justify-end">
+            <Button variant="outline" size="sm" asChild>
+              <a
+                href={`https://clinicaltrials.gov/study/${trial.nct}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on ClinicalTrials.gov
+                <ExternalLink className="ml-1.5" />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }
 
@@ -114,7 +202,7 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
   const [statusFilter, setStatusFilter] = useState("all")
   const [phaseFilter, setPhaseFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
-  const [expandedNct, setExpandedNct] = useState<string | null>(null)
+  const [selectedTrial, setSelectedTrial] = useState<Trial | null>(null)
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase()
@@ -212,12 +300,17 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
             <TrialCard
               key={t.nct}
               trial={t}
-              expanded={expandedNct === t.nct}
-              onToggle={() => setExpandedNct(expandedNct === t.nct ? null : t.nct)}
+              onSelect={() => setSelectedTrial(t)}
             />
           ))}
         </div>
       )}
+
+      <TrialDialog
+        trial={selectedTrial}
+        open={selectedTrial !== null}
+        onClose={() => setSelectedTrial(null)}
+      />
     </div>
   )
 }
