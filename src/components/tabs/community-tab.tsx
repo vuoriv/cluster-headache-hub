@@ -29,11 +29,18 @@ export function CommunityTab() {
         <Badge variant="warning" className="mt-1 text-xs">Patient-Reported / Empirical</Badge>
       </div>
 
+      <Card className="border-l-4 border-l-ring">
+        <CardContent className="pt-4">
+          <p className="text-sm text-muted-foreground">
+            <strong className="text-foreground">Why this tab matters:</strong> Many of the most effective CH treatments were discovered by patients, not doctors. High-flow oxygen technique refinements, the Vitamin D3 regimen, energy drinks at shadow onset, and the psychedelic busting protocol — all came from patients sharing what works. Several are now being validated in clinical trials, but the community was using them effectively for years before research caught up. If your doctor's treatment plan isn't working, the knowledge here may change your life.
+          </p>
+        </CardContent>
+      </Card>
+
       <Alert variant="warning">
         <AlertTriangle className="size-4" />
         <AlertDescription>
-          The treatments below are reported by patients. They are not all officially approved. Always discuss with your doctor.
-          Notably, the psychedelic busting approach — used empirically by patients for over 20 years — is now being evaluated in Phase 2 clinical trials.
+          These treatments are reported by patients and are not all officially approved. Always discuss with your doctor — but know that many CH patients find their best treatment through community knowledge, not their initial prescription.
         </AlertDescription>
       </Alert>
 

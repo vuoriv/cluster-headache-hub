@@ -1,5 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Separator } from "@/components/ui/separator"
 import { AlertTriangle } from "lucide-react"
 
 const RESOURCES = [
@@ -75,6 +76,26 @@ export function OverviewTab() {
           </AlertDescription>
         </Alert>
       </div>
+
+      <Card className="border-l-4 border-l-destructive">
+        <CardHeader>
+          <CardTitle className="text-base">🚨 The Treatment Gap — What New Patients Need to Know</CardTitle>
+          <CardDescription>
+            Most CH patients spend years receiving ineffective or counterproductive treatment before finding what actually works.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
+            <li><strong className="text-foreground">Average diagnostic delay: 5+ years.</strong> CH is frequently misdiagnosed as migraine, sinusitis, or dental pain. Many patients see 5+ doctors before getting the correct diagnosis.</li>
+            <li><strong className="text-foreground">Oxygen is the #1 abortive — but most doctors don't prescribe it.</strong> High-flow O₂ is the safest, fastest, most effective treatment with zero side effects. Yet many patients go years without being offered it. If your doctor hasn't mentioned oxygen, ask — or find a headache specialist who will.</li>
+            <li><strong className="text-foreground">Common prescribing failures:</strong> Oral triptans (too slow — only SC injection works for CH), standard migraine preventives (topiramate, amitriptyline — ineffective for CH), opioids (don't work, create dependency), and verapamil dosed too low (&lt;360mg is usually insufficient).</li>
+            <li><strong className="text-foreground">Medications that can make things worse:</strong> SSRIs and SNRIs can increase attack frequency for some patients and block psychedelic treatments. Beta-blockers are ineffective. Overuse of triptans can cause rebound.</li>
+            <li><strong className="text-foreground">Patient community knowledge saves lives.</strong> Treatments like the Vitamin D3 regimen (80% responder rate in surveys), busting protocols (now in Phase 2 trials), and high-flow oxygen technique refinements all came from patients sharing what works — often years before clinical research caught up.</li>
+          </ul>
+        </CardContent>
+      </Card>
+
+      <Separator />
 
       <Card>
         <CardHeader>

@@ -1,7 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
+import { AlertTriangle } from "lucide-react"
 
 type BadgeVariant = "success" | "info" | "warning" | "purple" | "cyan" | "amber" | "danger" | "secondary" | "outline"
 type AccentColor = "primary" | "destructive" | "muted"
@@ -46,6 +48,13 @@ export function TreatmentsTab() {
         </div>
         <Badge variant="outline" className="mt-1 text-xs">Evidence-Based Medicine</Badge>
       </div>
+
+      <Alert variant="warning">
+        <AlertTriangle className="size-4" />
+        <AlertDescription>
+          <strong>For newly diagnosed patients:</strong> Many GPs and neurologists are not CH specialists and may prescribe treatments that are ineffective or counterproductive for cluster headache (oral triptans, standard migraine preventives, opioids). If your current treatment isn't working, seek a headache specialist and explore the Community tab for patient-tested approaches.
+        </AlertDescription>
+      </Alert>
 
       <div>
         <h3 className="mb-3 text-base font-semibold">⚡ Acute Abortives</h3>
@@ -262,6 +271,62 @@ export function TreatmentsTab() {
               "5 European sites; 112 patients (NCT03944876)",
               "Norwegian University of Science & Technology",
               "Primary completion Sep 2025",
+            ]}
+          />
+        </div>
+      </div>
+
+      <Separator />
+
+      <div>
+        <h3 className="mb-3 text-base font-semibold">🚫 Common Prescribing Failures</h3>
+        <p className="mb-4 text-sm text-muted-foreground">
+          These are frequently prescribed to CH patients by non-specialist doctors but are ineffective or harmful. If you're receiving any of these as your primary CH treatment, seek a headache specialist.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <TreatmentCard
+            title="Oral Triptans"
+            badge="Ineffective"
+            badgeVariant="danger"
+            accent="destructive"
+            items={[
+              "Oral sumatriptan/rizatriptan onset is 30–60 min — far too slow for CH attacks lasting 15–180 min",
+              "Only subcutaneous injection (onset ~10 min) or nasal spray works for CH",
+              "Commonly prescribed by GPs unfamiliar with CH — ask for SC sumatriptan",
+            ]}
+          />
+          <TreatmentCard
+            title="Opioids / Painkillers"
+            badge="Don't work"
+            badgeVariant="danger"
+            accent="destructive"
+            items={[
+              "Opioids do not abort CH attacks — the attack typically ends before they take effect",
+              "Create dependency with no therapeutic benefit for CH",
+              "Often prescribed in emergency rooms by doctors unfamiliar with the condition",
+            ]}
+          />
+          <TreatmentCard
+            title="Standard Migraine Preventives"
+            badge="Wrong condition"
+            badgeVariant="danger"
+            accent="destructive"
+            items={[
+              "Topiramate, amitriptyline, propranolol — effective for migraine but not for CH",
+              "Frequently prescribed due to misdiagnosis as migraine",
+              "Months wasted on ineffective treatment while attacks continue",
+            ]}
+          />
+          <TreatmentCard
+            title="SSRIs / SNRIs"
+            badge="Caution"
+            badgeVariant="danger"
+            accent="destructive"
+            items={[
+              "May increase attack frequency in some CH patients",
+              "Block serotonin receptors needed for psychedelic treatments (busting)",
+              "Require 2–5 week washout before busting can be attempted",
+              "Discuss alternatives with your doctor if considering other treatment paths",
             ]}
           />
         </div>
