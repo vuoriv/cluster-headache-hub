@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -66,9 +67,9 @@ export function ResearchTab({ papers, totalCount, loading, error, progress }: Re
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-xl font-bold">Latest Research Papers</h2>
+        <h2 className="text-2xl font-bold">Latest Research Papers</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Recent cluster headache publications, fetched live from PubMed ({totalCount.toLocaleString()}+ total, sorted by date)
         </p>
@@ -111,18 +112,21 @@ export function ResearchTab({ papers, totalCount, loading, error, progress }: Re
         {paginated.length === 0 ? (
           <p className="py-12 text-center text-muted-foreground">No papers match your search.</p>
         ) : (
-          paginated.map((p) => (
-            <Card key={p.pmid} className="transition-colors hover:border-ring">
-              <CardContent className="flex gap-4 py-3">
-                <div className="min-w-[72px] pt-0.5">
+          paginated.map((p) => {
+            const year = p.pubdate.slice(0, 4)
+            const yearVariant = year >= "2025" ? "success" : year >= "2024" ? "info" : "secondary"
+            return (
+            <Card key={p.pmid} className="transition-all hover:shadow-md hover:border-ring">
+              <CardContent className="flex gap-4 py-3.5">
+                <div className="flex flex-col items-center gap-1 pt-0.5">
+                  <Badge variant={yearVariant as "success" | "info" | "secondary"} className="text-[0.65rem] tabular-nums">{year}</Badge>
                   <a
                     href={`https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-bold text-muted-foreground hover:text-primary"
+                    className="text-[0.6rem] text-muted-foreground/50 hover:text-primary"
+                    title={`PubMed ID: ${p.pmid}`}
                   >
-                    PMID
-                    <br />
                     {p.pmid}
                   </a>
                 </div>
@@ -131,19 +135,19 @@ export function ResearchTab({ papers, totalCount, loading, error, progress }: Re
                     href={`https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-semibold leading-snug text-foreground hover:text-primary hover:underline"
+                    className="text-sm font-semibold leading-snug text-foreground hover:text-primary"
                   >
                     {p.title}
                   </a>
-                  <div className="mt-1 flex flex-wrap gap-3 text-xs text-muted-foreground">
+                  <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                     <span>{p.authors}</span>
-                    <span className="italic">{p.journal}</span>
-                    <span>{p.pubdate}</span>
+                    {p.journal && <Badge variant="outline" className="text-[0.6rem] font-normal">{p.journal}</Badge>}
                   </div>
                 </div>
               </CardContent>
             </Card>
-          ))
+            )
+          })
         )}
       </div>
 

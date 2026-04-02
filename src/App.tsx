@@ -2,6 +2,7 @@ import { useMemo, useState, useEffect, useCallback } from "react"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
 import { Header } from "@/components/layout/header"
 import { OverviewTab } from "@/components/tabs/overview-tab"
 import { TrialsTab } from "@/components/tabs/trials-tab"
@@ -56,33 +57,25 @@ export default function App() {
           loading={trialsLoading || papersLoading}
         />
 
-        <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+        <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
           <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-            <TabsList className="mb-6 flex w-full flex-wrap justify-start gap-0.5 bg-transparent p-0">
-              <TabsTrigger value="overview">
-                Overview
-              </TabsTrigger>
+            <TabsList className="mb-8 w-full justify-start">
+              <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="trials">
                 Trials
                 {trialStats.total !== null && (
-                  <Badge variant="secondary" className="ml-1.5 text-[0.65rem]">{trialStats.total}</Badge>
+                  <Badge variant="secondary" className="ml-1.5 text-[0.7rem]">{trialStats.total}</Badge>
                 )}
               </TabsTrigger>
               <TabsTrigger value="research">
                 Research
                 {!papersLoading && papers.length > 0 && (
-                  <Badge variant="secondary" className="ml-1.5 text-[0.65rem]">{papers.length}</Badge>
+                  <Badge variant="secondary" className="ml-1.5 text-[0.7rem]">{papers.length}</Badge>
                 )}
               </TabsTrigger>
-              <TabsTrigger value="treatments">
-                Treatments
-              </TabsTrigger>
-              <TabsTrigger value="community">
-                Community
-              </TabsTrigger>
-              <TabsTrigger value="triggers">
-                Triggers
-              </TabsTrigger>
+              <TabsTrigger value="treatments">Treatments</TabsTrigger>
+              <TabsTrigger value="community">Community</TabsTrigger>
+              <TabsTrigger value="triggers">Triggers</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview"><OverviewTab /></TabsContent>
@@ -94,17 +87,27 @@ export default function App() {
           </Tabs>
         </main>
 
-        <footer className="mt-12 bg-primary px-6 py-5 text-center text-xs text-primary-foreground/60">
-          <p>
-            Data sourced from{" "}
-            <a href="https://clinicaltrials.gov" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:underline">ClinicalTrials.gov</a>
-            {" "}and{" "}
-            <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:underline">PubMed / NCBI</a>
-            {" "}via public APIs — refreshed on every page load.
+        <footer className="border-t bg-muted/50 px-6 py-8">
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:justify-between">
+            <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+              <p>
+                Data from{" "}
+                <a href="https://clinicaltrials.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">ClinicalTrials.gov</a>
+                {" "}and{" "}
+                <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">PubMed</a>
+                {" "}via public APIs.
+              </p>
+              <p>Community info from Clusterbusters, r/ClusterHeadaches, and patient survey literature.</p>
+            </div>
+            <div className="flex flex-col items-end gap-1 text-xs text-muted-foreground">
+              <p className="font-medium">Not medical advice.</p>
+              <p>Built 2026</p>
+            </div>
+          </div>
+          <Separator className="my-4" />
+          <p className="text-center text-[0.7rem] text-muted-foreground/50">
+            Press <kbd className="rounded border px-1 py-0.5 font-mono text-[0.65rem]">d</kbd> to toggle dark mode
           </p>
-          <p className="mt-1">Community treatment information sourced from Clusterbusters, r/ClusterHeadaches, and patient survey literature. Not medical advice.</p>
-          <p className="mt-1 opacity-50">Built 2026 — Cluster Headache Research Hub</p>
-          <p className="mt-2 opacity-30 text-[0.7rem]">Press <kbd className="rounded border border-primary-foreground/20 px-1 py-0.5 font-mono">d</kbd> to toggle dark mode</p>
         </footer>
       </div>
     </TooltipProvider>

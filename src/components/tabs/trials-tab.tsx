@@ -142,9 +142,9 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
   }
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-xl font-bold">Active Clinical Trials</h2>
+        <h2 className="text-2xl font-bold">Active Clinical Trials</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           All cluster headache trials currently recruiting, active, or starting soon — fetched live from ClinicalTrials.gov
         </p>

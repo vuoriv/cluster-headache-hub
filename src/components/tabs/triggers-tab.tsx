@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CheckCircle } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
@@ -17,9 +18,9 @@ const TRIGGERS = [
 
 export function TriggersTab() {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
       <div>
-        <h2 className="text-xl font-bold">Triggers &amp; Avoidance</h2>
+        <h2 className="text-2xl font-bold">Triggers &amp; Avoidance</h2>
         <p className="mt-1 text-sm text-muted-foreground">Community-identified triggers — especially relevant during active cluster cycles</p>
       </div>
 
@@ -48,7 +49,7 @@ export function TriggersTab() {
 
       <Card className="border-l-4 border-l-ring">
         <CardHeader>
-          <CardTitle className="text-sm">✅ During an Active Cycle</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-sm"><CheckCircle className="size-4 text-primary" />During an Active Cycle</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 text-sm text-muted-foreground md:grid-cols-2">

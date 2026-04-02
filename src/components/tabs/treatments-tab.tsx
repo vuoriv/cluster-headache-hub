@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
-import { AlertTriangle } from "lucide-react"
+import { AlertTriangle, Zap, Shield, FlaskConical, Ban } from "lucide-react"
 
 type BadgeVariant = "success" | "info" | "warning" | "purple" | "cyan" | "amber" | "danger" | "secondary" | "outline"
 type AccentColor = "primary" | "destructive" | "muted"
@@ -40,10 +40,10 @@ function TreatmentCard({ title, badge, badgeVariant = "secondary", accent = "pri
 
 export function TreatmentsTab() {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold">Clinical Treatments</h2>
+          <h2 className="text-2xl font-bold">Clinical Treatments</h2>
           <p className="mt-1 text-sm text-muted-foreground">Evidence-based treatments — approved drugs, devices, and procedural options</p>
         </div>
         <Badge variant="outline" className="mt-1 text-xs">Evidence-Based Medicine</Badge>
@@ -57,7 +57,7 @@ export function TreatmentsTab() {
       </Alert>
 
       <div>
-        <h3 className="mb-3 text-base font-semibold">⚡ Acute Abortives</h3>
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Zap className="size-4 text-primary" />Acute Abortives</h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <TreatmentCard
             title="🫁 High-Flow Oxygen"
@@ -116,7 +116,7 @@ export function TreatmentsTab() {
       <Separator />
 
       <div>
-        <h3 className="mb-3 text-base font-semibold">🛡️ Preventive Treatments</h3>
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Shield className="size-4 text-primary" />Preventive Treatments</h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <TreatmentCard
             title="💊 Verapamil"
@@ -199,7 +199,7 @@ export function TreatmentsTab() {
       <Separator />
 
       <div>
-        <h3 className="mb-3 text-base font-semibold">🔬 In Active Clinical Trials</h3>
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><FlaskConical className="size-4 text-primary" />In Active Clinical Trials</h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <TreatmentCard
             title="🍄 Psilocybin"
@@ -279,7 +279,7 @@ export function TreatmentsTab() {
       <Separator />
 
       <div>
-        <h3 className="mb-3 text-base font-semibold">🚫 Common Prescribing Failures</h3>
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Ban className="size-4 text-destructive" />Common Prescribing Failures</h3>
         <p className="mb-4 text-sm text-muted-foreground">
           These are frequently prescribed to CH patients by non-specialist doctors but are ineffective or harmful. If you're receiving any of these as your primary CH treatment, seek a headache specialist.
         </p>

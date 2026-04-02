@@ -1,7 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { AlertTriangle } from "lucide-react"
+import { AlertTriangle, Zap, Microscope, Pill, Globe } from "lucide-react"
 
 const RESOURCES = [
   { href: "https://clusterbusters.org", label: "Clusterbusters.org" },
@@ -13,18 +14,23 @@ const RESOURCES = [
   { href: "https://migrainedisorders.org/cluster-headache-guide", label: "AMD CH Guide (for doctors)" },
 ]
 
+
+function SectionIcon({ children }: { children: React.ReactNode }) {
+  return <span className="inline-flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary">{children}</span>
+}
+
 export function OverviewTab() {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
       <div>
-        <h2 className="text-xl font-bold text-foreground">What Is Cluster Headache?</h2>
+        <h2 className="text-2xl font-bold text-foreground">What Is Cluster Headache?</h2>
         <p className="mt-1 text-sm text-muted-foreground">Key facts, epidemiology, and the current research landscape</p>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2">
-        <Card>
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card className="bg-accent/30">
           <CardHeader>
-            <CardTitle className="text-base">⚡ The Basics</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base"><SectionIcon><Zap className="size-4" /></SectionIcon>The Basics</CardTitle>
           </CardHeader>
           <CardContent>
             <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
@@ -40,7 +46,7 @@ export function OverviewTab() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">🔬 Current Research Focus Areas</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base"><SectionIcon><Microscope className="size-4" /></SectionIcon>Current Research Focus Areas</CardTitle>
           </CardHeader>
           <CardContent>
             <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
@@ -56,7 +62,7 @@ export function OverviewTab() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">💊 What's Currently Approved</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base"><SectionIcon><Pill className="size-4" /></SectionIcon>What's Currently Approved</CardTitle>
           </CardHeader>
           <CardContent>
             <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
@@ -77,9 +83,9 @@ export function OverviewTab() {
         </Alert>
       </div>
 
-      <Card className="border-l-4 border-l-destructive">
+      <Card className="border-l-4 border-l-destructive bg-destructive/3">
         <CardHeader>
-          <CardTitle className="text-base">🚨 The Treatment Gap — What New Patients Need to Know</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-base"><SectionIcon><AlertTriangle className="size-4" /></SectionIcon>The Treatment Gap — What New Patients Need to Know</CardTitle>
           <CardDescription>
             Most CH patients spend years receiving ineffective or counterproductive treatment before finding what actually works.
           </CardDescription>
@@ -99,7 +105,7 @@ export function OverviewTab() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">📡 Key Patient Resources</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-base"><SectionIcon><Globe className="size-4" /></SectionIcon>Key Patient Resources</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-3">

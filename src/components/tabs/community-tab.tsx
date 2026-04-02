@@ -3,7 +3,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { AlertTriangle } from "lucide-react"
+import { AlertTriangle, Trophy, Leaf, Sun } from "lucide-react"
 
 const PRIORITY_LIST = [
   { rank: 1, name: "High-flow O₂ (12–25 L/min, NRB mask)", why: "Fastest, safest, most effective abortive. Get it prescribed first. Clusterbusters has free doctor letter templates." },
@@ -18,10 +18,10 @@ const PRIORITY_LIST = [
 
 export function CommunityTab() {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold">Patient Community Treatments</h2>
+          <h2 className="text-2xl font-bold">Patient Community Treatments</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Empirical knowledge from Clusterbusters, r/ClusterHeadaches, and CH patient groups — not medical advice
           </p>
@@ -45,7 +45,7 @@ export function CommunityTab() {
       </Alert>
 
       <div>
-        <h3 className="mb-3 text-base font-semibold">🏆 Community Priority List</h3>
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Trophy className="size-4 text-primary" />Community Priority List</h3>
         <Card className="overflow-hidden p-0">
           <Table>
             <TableHeader>
@@ -71,7 +71,7 @@ export function CommunityTab() {
       <Separator />
 
       <div>
-        <h3 className="mb-3 text-base font-semibold">🍄 The Busting Protocol (Clusterbusters)</h3>
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Leaf className="size-4 text-primary" />The Busting Protocol (Clusterbusters)</h3>
         <Card>
           <CardContent className="pt-4">
             <p className="mb-4 text-sm text-muted-foreground">
@@ -108,7 +108,7 @@ export function CommunityTab() {
       <Separator />
 
       <div>
-        <h3 className="mb-3 text-base font-semibold">☀️ Vitamin D3 Anti-Inflammatory Regimen (Batch Protocol)</h3>
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold"><Sun className="size-4 text-primary" />Vitamin D3 Anti-Inflammatory Regimen</h3>
         <Card>
           <CardHeader>
             <CardDescription>
