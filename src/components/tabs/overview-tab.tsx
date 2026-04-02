@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
-import { AlertTriangle, Zap, Microscope, Pill, Globe, Users, MessageCircle, Heart, Sun, BookOpen, Shield, ExternalLink } from "lucide-react"
+import { AlertTriangle, Zap, Microscope, Globe, Users, MessageCircle, Heart, Sun, BookOpen, Shield, ExternalLink } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
 interface Resource {
@@ -74,23 +74,6 @@ export function OverviewTab() {
               <li><strong className="text-foreground">Neuromodulation:</strong> {t("overview.research.neuromod")}</li>
               <li><strong className="text-foreground">Genetics:</strong> {t("overview.research.genetics")}</li>
               <li><strong className="text-foreground">Biomarkers:</strong> {t("overview.research.biomarkers")}</li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <SectionIcon><Pill className="size-4" /></SectionIcon>
-              {t("overview.approved.title")}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
-              <li><strong className="text-foreground">{t("common.acute")}:</strong> {t("overview.approved.acute")}</li>
-              <li><strong className="text-foreground">{t("common.preventive")}:</strong> {t("overview.approved.preventive")}</li>
-              <li><strong className="text-foreground">{t("common.transitional")}:</strong> {t("overview.approved.transitional")}</li>
-              <li><strong className="text-foreground">{t("common.device")}:</strong> {t("overview.approved.device")}</li>
             </ul>
           </CardContent>
         </Card>
