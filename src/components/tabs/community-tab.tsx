@@ -6,24 +6,27 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { AlertTriangle } from "lucide-react"
 
 const PRIORITY_LIST = [
-  { rank: 1, name: "High-flow O₂ (12–25 L/min, NRB mask)", why: "Fastest, safest, most effective abortive. Get it prescribed first. Clusterbusters has free doctor letter templates.", color: "" },
-  { rank: 2, name: "SC sumatriptan 6mg", why: "Best pharmaceutical abortive when O₂ unavailable. Onset ~10 min. Keep on you at all times.", color: "" },
-  { rank: 3, name: "Energy drink at shadow onset", why: "Caffeine + taurine at the very first sign. Free, instant, works for some. Nothing to lose by trying.", color: "" },
-  { rank: 4, name: "Melatonin 10–25mg at bedtime", why: "Safe OTC, RCT-backed for nocturnal attacks. Take well before usual attack time.", color: "" },
-  { rank: 5, name: "Verapamil (push for 360–960mg)", why: "Standard first-line preventive. Most GPs dose too low. Ask for a referral to a headache specialist.", color: "" },
-  { rank: 6, name: "Vitamin D3 Batch Protocol", why: "80% of survey respondents report significant improvement. Start early in cycle. See vitamindregimen.com.", color: "" },
-  { rank: 7, name: "GON block (bridge therapy)", why: "Ask neurologist. Fast-acting bridge while verapamil takes effect. Can break an active cycle.", color: "" },
-  { rank: 8, name: "Busting (psilocybin/LSA seeds)", why: "Last resort for many; transforms life for some. Read Clusterbusters forums thoroughly before attempting. Now in Phase 2 RCTs.", color: "" },
+  { rank: 1, name: "High-flow O₂ (12–25 L/min, NRB mask)", why: "Fastest, safest, most effective abortive. Get it prescribed first. Clusterbusters has free doctor letter templates." },
+  { rank: 2, name: "SC sumatriptan 6mg", why: "Best pharmaceutical abortive when O₂ unavailable. Onset ~10 min. Keep on you at all times." },
+  { rank: 3, name: "Energy drink at shadow onset", why: "Caffeine + taurine at the very first sign. Free, instant, works for some. Nothing to lose by trying." },
+  { rank: 4, name: "Melatonin 10–25mg at bedtime", why: "Safe OTC, RCT-backed for nocturnal attacks. Take well before usual attack time." },
+  { rank: 5, name: "Verapamil (push for 360–960mg)", why: "Standard first-line preventive. Most GPs dose too low. Ask for a referral to a headache specialist." },
+  { rank: 6, name: "Vitamin D3 Batch Protocol", why: "80% of survey respondents report significant improvement. Start early in cycle. See vitamindregimen.com." },
+  { rank: 7, name: "GON block (bridge therapy)", why: "Ask neurologist. Fast-acting bridge while verapamil takes effect. Can break an active cycle." },
+  { rank: 8, name: "Busting (psilocybin/LSA seeds)", why: "Last resort for many; transforms life for some. Read Clusterbusters forums thoroughly before attempting. Now in Phase 2 RCTs." },
 ]
 
 export function CommunityTab() {
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <h2 className="text-xl font-bold">Patient Community Treatments</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Empirical knowledge from Clusterbusters, r/ClusterHeadaches, and CH patient groups — not medical advice
-        </p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h2 className="text-xl font-bold">Patient Community Treatments</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Empirical knowledge from Clusterbusters, r/ClusterHeadaches, and CH patient groups — not medical advice
+          </p>
+        </div>
+        <Badge variant="warning" className="mt-1 text-xs">Patient-Reported / Empirical</Badge>
       </div>
 
       <Alert variant="warning">
@@ -48,7 +51,7 @@ export function CommunityTab() {
             <TableBody>
               {PRIORITY_LIST.map((item) => (
                 <TableRow key={item.rank}>
-                  <TableCell className={`font-bold ${item.color}`}>{item.rank}</TableCell>
+                  <TableCell className="font-bold">{item.rank}</TableCell>
                   <TableCell className="font-semibold">{item.name}</TableCell>
                   <TableCell className="text-sm text-muted-foreground">{item.why}</TableCell>
                 </TableRow>

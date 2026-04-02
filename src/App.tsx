@@ -1,7 +1,6 @@
 import { useMemo } from "react"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/layout/header"
 import { OverviewTab } from "@/components/tabs/overview-tab"

@@ -39,9 +39,12 @@ function TreatmentCard({ title, badge, badgeVariant = "secondary", accent = "pri
 export function TreatmentsTab() {
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <h2 className="text-xl font-bold">Clinical Treatments</h2>
-        <p className="mt-1 text-sm text-muted-foreground">Evidence-based treatments — approved drugs, devices, and procedural options</p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h2 className="text-xl font-bold">Clinical Treatments</h2>
+          <p className="mt-1 text-sm text-muted-foreground">Evidence-based treatments — approved drugs, devices, and procedural options</p>
+        </div>
+        <Badge variant="outline" className="mt-1 text-xs">Evidence-Based Medicine</Badge>
       </div>
 
       <div>

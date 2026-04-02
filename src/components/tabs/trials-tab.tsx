@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { ChevronDown, ChevronRight } from "lucide-react"
 import type { Trial } from "@/lib/types"
@@ -78,29 +78,35 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
         <Select value={statusFilter} onValueChange={setStatusFilter}>
           <SelectTrigger className="w-[160px]"><SelectValue /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Statuses</SelectItem>
-            <SelectItem value="RECRUITING">Recruiting</SelectItem>
-            <SelectItem value="NOT_YET_RECRUITING">Starting Soon</SelectItem>
-            <SelectItem value="ACTIVE_NOT_RECRUITING">Active</SelectItem>
+            <SelectGroup>
+              <SelectItem value="all">All Statuses</SelectItem>
+              <SelectItem value="RECRUITING">Recruiting</SelectItem>
+              <SelectItem value="NOT_YET_RECRUITING">Starting Soon</SelectItem>
+              <SelectItem value="ACTIVE_NOT_RECRUITING">Active</SelectItem>
+            </SelectGroup>
           </SelectContent>
         </Select>
         <Select value={phaseFilter} onValueChange={setPhaseFilter}>
           <SelectTrigger className="w-[140px]"><SelectValue /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Phases</SelectItem>
-            <SelectItem value="PHASE1">Phase 1</SelectItem>
-            <SelectItem value="PHASE2">Phase 2</SelectItem>
-            <SelectItem value="PHASE3">Phase 3</SelectItem>
-            <SelectItem value="PHASE4">Phase 4</SelectItem>
-            <SelectItem value="NA">N/A (Obs.)</SelectItem>
+            <SelectGroup>
+              <SelectItem value="all">All Phases</SelectItem>
+              <SelectItem value="PHASE1">Phase 1</SelectItem>
+              <SelectItem value="PHASE2">Phase 2</SelectItem>
+              <SelectItem value="PHASE3">Phase 3</SelectItem>
+              <SelectItem value="PHASE4">Phase 4</SelectItem>
+              <SelectItem value="NA">N/A (Obs.)</SelectItem>
+            </SelectGroup>
           </SelectContent>
         </Select>
         <Select value={typeFilter} onValueChange={setTypeFilter}>
           <SelectTrigger className="w-[160px]"><SelectValue /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Types</SelectItem>
-            <SelectItem value="INTERVENTIONAL">Interventional</SelectItem>
-            <SelectItem value="OBSERVATIONAL">Observational</SelectItem>
+            <SelectGroup>
+              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="INTERVENTIONAL">Interventional</SelectItem>
+              <SelectItem value="OBSERVATIONAL">Observational</SelectItem>
+            </SelectGroup>
           </SelectContent>
         </Select>
         <span className="ml-auto text-sm text-muted-foreground">{filtered.length} trial{filtered.length !== 1 ? "s" : ""}</span>
@@ -146,7 +152,6 @@ export function TrialsTab({ trials, loading, error, isFallback }: TrialsTabProps
                       <Badge variant={CATEGORY_VARIANTS[cat]} className="mb-1 text-[0.68rem]">
                         {CATEGORY_LABELS[cat]}
                       </Badge>
-                      <br />
                       <span className="text-sm" title={t.title}>
                         {t.title.length > 80 ? t.title.slice(0, 78) + "…" : t.title}
                       </span>
