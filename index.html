@@ -317,6 +317,11 @@
       <option value="2026">2026</option>
       <option value="2025">2025</option>
       <option value="2024">2024</option>
+      <option value="2023">2023</option>
+      <option value="2022">2022</option>
+      <option value="2021">2021</option>
+      <option value="2020">2020</option>
+      <option value="2019">2019</option>
     </select>
     <select class="filter-select" id="papers-perpage" onchange="changePapersPerPage()">
       <option value="25">25 per page</option>
@@ -867,7 +872,7 @@ async function loadPapers() {
 
   try {
     // Step 1: Search
-    const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=cluster+headache%5BTitle%2FAbstract%5D&datetype=pdat&mindate=2024&maxdate=2026&retmax=500&retmode=json&sort=date`;
+    const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=cluster+headache%5BTitle%2FAbstract%5D&retmax=500&retmode=json&sort=date`;
     const searchRes = await fetch(searchUrl);
     if (!searchRes.ok) throw new Error('PubMed search HTTP ' + searchRes.status);
     const searchData = await searchRes.json();
