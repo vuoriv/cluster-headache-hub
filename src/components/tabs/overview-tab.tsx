@@ -2,16 +2,27 @@ import { useTranslation } from "react-i18next"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Separator } from "@/components/ui/separator"
-import { AlertTriangle, Zap, Microscope, Pill, Globe } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { AlertTriangle, Zap, Microscope, Pill, Globe, Users, MessageCircle, Heart, Sun, BookOpen, Shield, ExternalLink } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 
-const RESOURCES = [
-  { href: "https://clusterbusters.org", label: "Clusterbusters.org" },
-  { href: "https://www.reddit.com/r/clusterheadaches", label: "r/ClusterHeadaches" },
-  { href: "https://ouchuk.org", label: "OUCH UK" },
-  { href: "https://clusterfree.org", label: "ClusterFree.org" },
-  { href: "https://vitamindregimen.com", label: "Vitamin D3 Regimen" },
-  { href: "https://clusterheadachewarriors.org", label: "CH Warriors" },
-  { href: "https://migrainedisorders.org/cluster-headache-guide", label: "AMD CH Guide" },
+interface Resource {
+  href: string
+  label: string
+  desc: string
+  icon: LucideIcon
+  badge?: string
+  badgeVariant?: "success" | "info" | "purple" | "secondary"
+}
+
+const RESOURCES: Resource[] = [
+  { href: "https://clusterbusters.org", label: "Clusterbusters", desc: "The largest CH patient org. Busting protocols, doctor letter templates, forums.", icon: Users, badge: "Essential", badgeVariant: "success" },
+  { href: "https://www.reddit.com/r/clusterheadaches", label: "r/ClusterHeadaches", desc: "Active patient community. Real-time advice, support, and shared experience.", icon: MessageCircle, badge: "Community", badgeVariant: "info" },
+  { href: "https://vitamindregimen.com", label: "Vitamin D3 Regimen", desc: "Full Batch Protocol details. 80% responder rate. Start early in your cycle.", icon: Sun, badge: "Treatment", badgeVariant: "purple" },
+  { href: "https://ouchuk.org", label: "OUCH UK", desc: "UK patient charity. Support groups, helpline, medical professional resources.", icon: Heart },
+  { href: "https://clusterfree.org", label: "ClusterFree.org", desc: "Research advocacy. Funds clinical trials for new CH treatments.", icon: Shield },
+  { href: "https://clusterheadachewarriors.org", label: "CH Warriors", desc: "US-based advocacy and support. Patient stories and awareness campaigns.", icon: Users },
+  { href: "https://migrainedisorders.org/cluster-headache-guide", label: "AMD CH Guide", desc: "Printable guide for your doctor if they're unfamiliar with cluster headache.", icon: BookOpen, badge: "For doctors", badgeVariant: "secondary" },
 ]
 
 function SectionIcon({ children }: { children: React.ReactNode }) {
@@ -112,23 +123,44 @@ export function OverviewTab() {
 
       <Separator />
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-base">
-            <SectionIcon><Globe className="size-4" /></SectionIcon>
-            {t("overview.resources")}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-wrap gap-3">
-            {RESOURCES.map((r) => (
-              <a key={r.href} href={r.href} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-primary underline-offset-4 hover:underline">
-                {r.label}
+      <div>
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold">
+          <Globe className="size-4 text-primary" />
+          {t("overview.resources")}
+        </h3>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {RESOURCES.map((r) => {
+            const Icon = r.icon
+            return (
+              <a
+                key={r.href}
+                href={r.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <Card className="h-full transition-all hover:shadow-md hover:border-primary/30">
+                  <CardContent className="flex gap-3 py-4">
+                    <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/8 text-primary transition-colors group-hover:bg-primary/15">
+                      <Icon className="size-4" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-semibold group-hover:text-primary">{r.label}</span>
+                        <ExternalLink className="size-3 text-muted-foreground/40 transition-colors group-hover:text-primary" />
+                        {r.badge && r.badgeVariant && (
+                          <Badge variant={r.badgeVariant} className="text-[0.6rem]">{r.badge}</Badge>
+                        )}
+                      </div>
+                      <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{r.desc}</p>
+                    </div>
+                  </CardContent>
+                </Card>
               </a>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+            )
+          })}
+        </div>
+      </div>
     </div>
   )
 }
