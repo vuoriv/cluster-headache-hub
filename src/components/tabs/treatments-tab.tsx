@@ -24,7 +24,7 @@ const COMP_ITEMS = [
   { key: "melatonin", rank: 5, doctorVariant: "warning" as const },
   { key: "verapamil", rank: 6, doctorVariant: "info" as const },
   { key: "gon", rank: 7, doctorVariant: "success" as const },
-  { key: "busting", rank: 8, doctorVariant: "danger" as const },
+  { key: "busting", rank: 8, doctorVariant: "purple" as const },
 ]
 
 function TreatmentCard({ cardKey, badgeText, badgeVariant = "secondary", accent = "primary" }: TreatmentCardProps) {
