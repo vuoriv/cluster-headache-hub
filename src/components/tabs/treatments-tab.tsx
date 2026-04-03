@@ -16,14 +16,30 @@ interface TreatmentCardProps {
   accent?: AccentColor
 }
 
+// Effectiveness data from Schindler et al. 2015 patient survey
+// complete = "complete effectiveness", moderate = "moderate effectiveness", n = sample size
+// null = no survey data available (abortive treatments, not preventives)
 const COMP_ITEMS = [
-  { key: "o2", doctorVariant: "purple" as const },
-  { key: "d3", doctorVariant: "warning" as const },
-  { key: "sumatriptan", doctorVariant: "success" as const },
-  { key: "energy", doctorVariant: "warning" as const },
-  { key: "melatonin", doctorVariant: "warning" as const },
-  { key: "gon", doctorVariant: "success" as const },
-  { key: "busting", doctorVariant: "purple" as const },
+  { key: "o2", doctorVariant: "purple" as const, efficacy: null },
+  { key: "d3", doctorVariant: "warning" as const, efficacy: null },
+  { key: "sumatriptan", doctorVariant: "success" as const, efficacy: null },
+  { key: "energy", doctorVariant: "warning" as const, efficacy: null },
+  { key: "melatonin", doctorVariant: "warning" as const, efficacy: { complete: 10, moderate: 20, n: 258 } },
+  { key: "gon", doctorVariant: "success" as const, efficacy: null },
+  { key: "busting", doctorVariant: "purple" as const, efficacy: { complete: 40, moderate: 32, n: 363 } },
+]
+
+// Conventional preventives for comparison bar
+const CONVENTIONAL_EFFICACY = [
+  { name: "Psilocybin", complete: 41, moderate: 30, n: 181 },
+  { name: "LSD", complete: 39, moderate: 39, n: 74 },
+  { name: "LSA", complete: 19, moderate: 40, n: 108 },
+  { name: "Prednisone", complete: 19, moderate: 27, n: 312 },
+  { name: "Lithium", complete: 20, moderate: 17, n: 148 },
+  { name: "Melatonin", complete: 10, moderate: 20, n: 258 },
+  { name: "Verapamil", complete: 7, moderate: 29, n: 364 },
+  { name: "Topiramate", complete: 3, moderate: 12, n: 224 },
+  { name: "Propranolol", complete: 2, moderate: 3, n: 132 },
 ]
 
 function TreatmentCard({ cardKey, badgeText, badgeVariant = "secondary", accent = "primary" }: TreatmentCardProps) {
@@ -97,6 +113,54 @@ export function TreatmentsTab() {
                 </div>
               </div>
             ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Effectiveness chart — Schindler 2015 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base">Treatment Effectiveness — Patient Survey</CardTitle>
+          <CardDescription>
+            Schindler et al. 2015 — preventive treatments rated by {CONVENTIONAL_EFFICACY.reduce((s, e) => s + e.n, 0).toLocaleString()} patients. Shows % reporting complete or moderate effectiveness.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col gap-2.5">
+            {CONVENTIONAL_EFFICACY.map((item) => {
+              const total = item.complete + item.moderate
+              const isPhychedelic = ["Psilocybin", "LSD", "LSA"].includes(item.name)
+              return (
+                <div key={item.name} className="flex items-center gap-3">
+                  <span className="w-24 shrink-0 text-right text-xs font-medium">{item.name}</span>
+                  <div className="relative h-5 flex-1 overflow-hidden rounded-full bg-muted">
+                    <div
+                      className={cn(
+                        "absolute inset-y-0 left-0 rounded-full transition-all",
+                        isPhychedelic ? "bg-[oklch(0.55_0.15_300)]" : "bg-ring/60"
+                      )}
+                      style={{ width: `${total}%` }}
+                    />
+                    <div
+                      className={cn(
+                        "absolute inset-y-0 left-0 rounded-full transition-all",
+                        isPhychedelic ? "bg-[oklch(0.45_0.2_300)]" : "bg-ring"
+                      )}
+                      style={{ width: `${item.complete}%` }}
+                    />
+                  </div>
+                  <span className="w-16 shrink-0 text-xs tabular-nums text-muted-foreground">
+                    {total}% <span className="text-[0.6rem]">n={item.n}</span>
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+          <div className="mt-3 flex flex-wrap items-center gap-4 text-[0.65rem] text-muted-foreground">
+            <span className="flex items-center gap-1.5"><span className="inline-block size-2.5 rounded-full bg-[oklch(0.45_0.2_300)]" /> Complete (psychedelic)</span>
+            <span className="flex items-center gap-1.5"><span className="inline-block size-2.5 rounded-full bg-[oklch(0.55_0.15_300)]" /> Moderate (psychedelic)</span>
+            <span className="flex items-center gap-1.5"><span className="inline-block size-2.5 rounded-full bg-ring" /> Complete (conventional)</span>
+            <span className="flex items-center gap-1.5"><span className="inline-block size-2.5 rounded-full bg-ring/60" /> Moderate (conventional)</span>
           </div>
         </CardContent>
       </Card>
