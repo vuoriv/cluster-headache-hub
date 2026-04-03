@@ -41,13 +41,13 @@ function TreatmentCard({ cardKey, badgeText, badgeVariant = "secondary", accent 
   return (
     <Card className={cn("border-l-4", accent === "destructive" ? "border-l-destructive" : "border-l-ring")}>
       <CardHeader className="pb-2">
-        <CardTitle className="flex flex-wrap items-center gap-1.5 text-sm">
-          {t(`treatments.cards.${cardKey}.title`)}
+        <CardTitle className="text-sm">{t(`treatments.cards.${cardKey}.title`)}</CardTitle>
+        <div className="flex flex-wrap items-center gap-1.5">
           <Badge variant={badgeVariant} className="text-[0.68rem]">{badgeText}</Badge>
           {labels.map((l) => (
             <Badge key={l.text} variant={l.variant} className="text-[0.58rem] font-normal">{l.text}</Badge>
           ))}
-        </CardTitle>
+        </div>
       </CardHeader>
       <CardContent>
         <ul className="flex flex-col gap-1 text-sm text-muted-foreground">
