@@ -125,7 +125,7 @@
       "o2": {
         "name": "Suurivirtauksinen happi (15–25 L/min)",
         "community": "Tärkein hoito. Hanki tämä ensin. 78 % teho, ei sivuvaikutuksia. Demand-venttiilimaski on nopein.",
-        "doctor": "Usein ei määrätä"
+        "doctor": "Itsehoito / Potilasyhteisö"
       },
       "d3": {
         "name": "D3-vitamiinin Batch-protokolla",
@@ -155,7 +155,7 @@
       "busting": {
         "name": "Busting (psilosybiini/LSA)",
         "community": "Elämää muuttava monille potilaille. Psilosybiini, LSD ja LSA-siemenet kaikki käytössä. Nyt vahvistettu vaiheen 2 tutkimuksissa. Katso Yhteisö-välilehti.",
-        "doctor": "Lääkärit eivät mainitse — monille elämää muuttava"
+        "doctor": "Itsehoito / Potilasyhteisö"
       }
     },
     "cards": {

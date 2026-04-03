@@ -17,7 +17,7 @@ interface TreatmentCardProps {
 }
 
 const COMP_ITEMS = [
-  { key: "o2", doctorVariant: "danger" as const },
+  { key: "o2", doctorVariant: "purple" as const },
   { key: "d3", doctorVariant: "warning" as const },
   { key: "sumatriptan", doctorVariant: "success" as const },
   { key: "energy", doctorVariant: "warning" as const },

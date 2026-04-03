@@ -125,7 +125,7 @@
       "o2": {
         "name": "High-flow O₂ (15–25 L/min)",
         "community": "The #1 treatment. Get this first. 78% efficacy, zero side effects. Demand-valve mask is fastest.",
-        "doctor": "Often not prescribed"
+        "doctor": "Self-care / Patient community"
       },
       "d3": {
         "name": "Vitamin D3 Batch Protocol",
@@ -155,7 +155,7 @@
       "busting": {
         "name": "Busting (psilocybin/LSA)",
         "community": "Life-changing for many patients. Psilocybin, LSD, and LSA seeds all used. Now validated in Phase 2 RCTs. See Community tab for protocol.",
-        "doctor": "Ignored by doctors — life-changing for many"
+        "doctor": "Self-care / Patient community"
       }
     },
     "cards": {
