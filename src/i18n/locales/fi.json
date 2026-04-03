@@ -116,7 +116,7 @@
     "prescribingFailures": "Yleiset määräämisvirheet",
     "prescribingFailuresDesc": "Näitä määrätään usein sarjoittaisen päänsäryn potilaille lääkäreiltä, jotka eivät ole erikoistuneet sairauteen. Ne ovat tehottomia tai haitallisia. Jos saat näitä pääasiallisena hoitonasi, hakeudu päänsärkyasiantuntijalle.",
     "comparisonTitle": "Mikä oikeasti toimii — yhteisön kokemukset vs. tavanomainen hoito",
-    "comparisonDesc": "Potilaiden löytämiä tai kehittämiä hoitoja, usein vuosia ennen kliinistä tutkimusta. Tehokkuustiedot Schindler ym. 2015 -potilaskyselystä saatavissa.",
+    "comparisonDesc": "Perustuu vuosikymmenten potilaskokemukseen (Clusterbusters, r/ClusterHeadaches, kyselyt). Monet näistä on myöhemmin vahvistettu kliinisessä tutkimuksessa.",
     "colTreatment": "Hoito",
     "colCommunity": "Yhteisön näkemys",
     "colDoctor": "Tyypillinen lääkärikäytäntö",
@@ -124,12 +124,12 @@
     "comp": {
       "o2": {
         "name": "Suurivirtauksinen happi (15–25 L/min)",
-        "community": "Tärkein abortiivihoito. 78 % teho (Cohen 2009 RCT). Ei sivuvaikutuksia. Demand-venttiilimaski on nopein.",
+        "community": "Tärkein hoito. Hanki tämä ensin. 78 % teho, ei sivuvaikutuksia. Demand-venttiilimaski on nopein.",
         "doctor": "Itsehoito / Potilasyhteisö"
       },
       "d3": {
         "name": "D3-vitamiinin Batch-protokolla",
-        "community": "80 % vasteprosentti potilaskyselyissä. Aloita 10 000 IU/vrk yhdessä K2-, Mg- ja Omega-3-lisien kanssa. Aloita aikaisin jaksossa.",
+        "community": "80 % vasteprosentti kyselyissä. Aloita 10 000 IU/vrk yhdessä K2-, Mg- ja Omega-3-lisien kanssa. Aloita aikaisin jaksossa.",
         "doctor": "Harvoin mainitaan"
       },
       "sumatriptan": {
@@ -144,7 +144,7 @@
       },
       "melatonin": {
         "name": "Melatoniini 10–25mg",
-        "community": "RCT-tutkimuksessa vahvistettu 10mg. 10 % täydellinen, 20 % kohtuullinen teho kyselyissä (n=258). Paljon suurempi kuin uniannostus. (Schindler 2015)",
+        "community": "RCT-tutkimuksessa vahvistettu 10mg annos. Paljon suurempi kuin uniannostus. Ota ennen tavanomaista kohtausaikaa.",
         "doctor": "Aliannosteltu jos mainitaan"
       },
       "gon": {
@@ -154,7 +154,7 @@
       },
       "busting": {
         "name": "Busting (psilosybiini/LSA)",
-        "community": "Psilosybiini: 41 % täydellinen, 30 % kohtuullinen teho (n=181). LSD: 39 % täydellinen (n=74). Nyt vaiheen 2 tutkimuksissa. (Schindler 2015 -kysely)",
+        "community": "Elämää muuttava monille potilaille. Psilosybiini, LSD ja LSA-siemenet kaikki käytössä. Nyt vahvistettu vaiheen 2 tutkimuksissa. Katso Yhteisö-välilehti.",
         "doctor": "Itsehoito / Potilasyhteisö"
       }
     },
@@ -205,8 +205,7 @@
           "Tehokas annos: 360–960 mg/vrk (jaettuina annoksina)",
           "EKG-seuranta vaadittava suuremmilla annoksilla (AV-katkosriski)",
           "Aktiivinen sydänturvallisuustutkimus: NCT04406259 (Nizza)",
-          "Siltahoito GON-puudutuksella tai prednisonilla aloitettaessa",
-          "Schindler 2015: vain 7 % täydellinen teho (n=364) — eniten määrätty estolääke, mutta yksi tehottomimmista"
+          "Siltahoito GON-puudutuksella tai prednisonilla aloitettaessa"
         ]
       },
       "galcanezumab": {
@@ -225,8 +224,7 @@
           "Tehokas kroonisessa, erityisesti vaikeahoitoisessa",
           "Kapea terapeuttinen ikkuna (0,6–1,2 mEq/L)",
           "Säännöllinen veriseuranta vaadittava",
-          "Harkitse yhdessä verapamilin kanssa erikoislääkärin valvonnassa",
-          "Schindler 2015: 20 % täydellinen teho (n=148) — parempi kuin useimmat tavanomaiset estolääkkeet"
+          "Harkitse yhdessä verapamilin kanssa erikoislääkärin valvonnassa"
         ]
       },
       "melatonin": {
@@ -235,8 +233,7 @@
           "RCT: 50 % vasteprosentti 10mg annoksella nukkumaanmenoaikaan (n=20)",
           "Erityisen tehokas yöllisiin kohtauksiin",
           "Erinomainen siedettävyys; ilman reseptiä useimmissa maissa",
-          "10mg on RCT-tutkittu annos; suuremmat annokset ovat kokemusperäisiä",
-          "Schindler 2015: 10 % täydellinen, 20 % kohtuullinen teho (n=258)"
+          "10mg on RCT-tutkittu annos; suuremmat annokset ovat kokemusperäisiä"
         ]
       },
       "gonBlock": {
@@ -264,8 +261,7 @@
           "Toistuva pulssiannostelu vähentää kohtauksia 50 % (2024 RCT)",
           "Australialainen MRFF-rahoitettu tutkimus käynnissä (2025)",
           "Health Canada: ensimmäinen laillinen käyttölupa sarjoittaiseen (2024)",
-          "Sub-hallusinogeeniset annokset näyttävät riittävän",
-          "Schindler 2015 -kysely: 41 % täydellinen teho, 30 % kohtuullinen (n=181) — korkein kaikista tutkituista estohoidoista"
+          "Sub-hallusinogeeniset annokset näyttävät riittävän"
         ]
       },
       "lsd": {
@@ -274,8 +270,7 @@
           "Baselin RCT: 3×100µg, kaksoissokkovaihto (NCT03781128)",
           "Radboudin RCT: miniannostelu krooniseen (NCT05477459)",
           "Molemmat rekrytoivat; tulokset odotettu 2025–2027",
-          "Yhteisökäyttö (\"busting\") yli 20 vuotta",
-          "Schindler 2015 -kysely: 39 % täydellinen teho (n=74) — psilosybiiniin verrattava"
+          "Yhteisökäyttö (\"busting\") yli 20 vuotta"
         ]
       },
       "ketamine": {
@@ -335,8 +330,7 @@
         "items": [
           "Topiramaatti, amitriptyliini, propranololi — tehokkaita migreeniin mutta eivät sarjoittaiseen",
           "Usein määrätään virheellisen migreenidiagnoosin vuoksi",
-          "Kuukausia hukkaan tehottomaan hoitoon kohtausten jatkuessa",
-          "Schindler 2015: Topiramaatti 3 % täydellinen teho (n=224), Gabapentiini 2 % (n=127), Amitriptyliini 3 % (n=151) — vs. psilosybiini 41 % (n=181)"
+          "Kuukausia hukkaan tehottomaan hoitoon kohtausten jatkuessa"
         ]
       },
       "ssris": {
@@ -345,8 +339,7 @@
           "Voivat lisätä kohtaustiheyttä joillain potilailla",
           "Estävät psykedeelisten hoitojen (busting) vaatimat serotoniireseptorit",
           "Vaativat 2–5 viikon pesutauon ennen busting-hoitoa",
-          "Keskustele vaihtoehdoista lääkärisi kanssa jos harkitset muita hoitopolkuja",
-          "Vertaa: psilosybiini 41 % täydellinen teho vs. propranololi 2 %, topiramaatti 3 % (Schindler 2015)"
+          "Keskustele vaihtoehdoista lääkärisi kanssa jos harkitset muita hoitopolkuja"
         ]
       }
     }
