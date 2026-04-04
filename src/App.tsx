@@ -11,6 +11,7 @@ import { ResearchTab } from "@/components/tabs/research-tab"
 import { TreatmentsTab } from "@/components/tabs/treatments-tab"
 import { CommunityTab } from "@/components/tabs/community-tab"
 import { TriggersTab } from "@/components/tabs/triggers-tab"
+import { ClusterBustersTab } from "@/components/tabs/clusterbusters-tab"
 import { useTrials } from "@/hooks/use-trials"
 import { usePapers } from "@/hooks/use-papers"
 import { categoryForTrial } from "@/lib/types"
@@ -29,10 +30,11 @@ export default function App() {
 
   const paperCount = papersLoading ? null : totalCount
 
-  const validTabs = ["overview", "trials", "research", "treatments", "community", "triggers"]
+  const validTabs = ["overview", "trials", "research", "treatments", "community", "triggers", "clusterbusters"]
   const getTabFromHash = useCallback(() => {
     const hash = window.location.hash.slice(1)
-    return validTabs.includes(hash) ? hash : "overview"
+    const base = hash.split("/")[0]
+    return validTabs.includes(base) ? base : "overview"
   }, [])
 
   const [activeTab, setActiveTab] = useState(getTabFromHash)
@@ -78,6 +80,7 @@ export default function App() {
               <TabsTrigger value="treatments">{t("tabs.treatments")}</TabsTrigger>
               <TabsTrigger value="community">{t("tabs.community")}</TabsTrigger>
               <TabsTrigger value="triggers">{t("tabs.triggers")}</TabsTrigger>
+              <TabsTrigger value="clusterbusters">ClusterBusters</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview"><OverviewTab /></TabsContent>
@@ -86,6 +89,7 @@ export default function App() {
             <TabsContent value="treatments"><TreatmentsTab /></TabsContent>
             <TabsContent value="community"><CommunityTab /></TabsContent>
             <TabsContent value="triggers"><TriggersTab /></TabsContent>
+            <TabsContent value="clusterbusters"><ClusterBustersTab /></TabsContent>
           </Tabs>
         </main>
 
