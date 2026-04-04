@@ -1,5 +1,8 @@
 {
-  "users_with_progression": 1108,
+  "users_tracked": 1108,
+  "avg_initial_treatments": 2.0,
+  "avg_final_treatments": 4.8,
+  "toolkit_growth_factor": 2.4,
   "first_treatments": [
     {
       "treatment": "Oxygen",
@@ -54,160 +57,189 @@
       "count": 9
     }
   ],
-  "final_treatments": [
+  "full_toolkit_ranking": [
     {
       "treatment": "Oxygen",
-      "count": 448
+      "count": 885
     },
     {
       "treatment": "Psilocybin / Mushrooms",
-      "count": 315
+      "count": 709
     },
     {
       "treatment": "Triptans",
-      "count": 212
-    },
-    {
-      "treatment": "Vitamin D3",
-      "count": 169
+      "count": 648
     },
     {
       "treatment": "Energy Drinks",
-      "count": 143
+      "count": 535
     },
     {
-      "treatment": "RC Seeds / LSA",
-      "count": 138
+      "treatment": "Vitamin D3",
+      "count": 457
     },
     {
       "treatment": "Verapamil",
-      "count": 126
+      "count": 441
     },
     {
-      "treatment": "LSD",
-      "count": 112
+      "treatment": "RC Seeds / LSA",
+      "count": 419
     },
     {
       "treatment": "Prednisone",
-      "count": 101
+      "count": 365
     },
     {
-      "treatment": "Melatonin",
-      "count": 36
-    },
-    {
-      "treatment": "Ketamine",
-      "count": 23
-    },
-    {
-      "treatment": "Lithium",
-      "count": 17
-    },
-    {
-      "treatment": "BOL-148",
-      "count": 6
-    }
-  ],
-  "top_transitions": [
-    {
-      "from": "Oxygen",
-      "to": "Psilocybin / Mushrooms",
-      "count": 808
-    },
-    {
-      "from": "Psilocybin / Mushrooms",
-      "to": "Oxygen",
-      "count": 751
-    },
-    {
-      "from": "Oxygen",
-      "to": "Energy Drinks",
-      "count": 687
-    },
-    {
-      "from": "Oxygen",
-      "to": "Triptans",
-      "count": 631
-    },
-    {
-      "from": "Oxygen",
-      "to": "RC Seeds / LSA",
-      "count": 615
-    },
-    {
-      "from": "Oxygen",
-      "to": "Vitamin D3",
-      "count": 583
-    },
-    {
-      "from": "RC Seeds / LSA",
-      "to": "Oxygen",
-      "count": 556
-    },
-    {
-      "from": "Triptans",
-      "to": "Oxygen",
-      "count": 425
-    },
-    {
-      "from": "Psilocybin / Mushrooms",
-      "to": "RC Seeds / LSA",
-      "count": 420
-    },
-    {
-      "from": "Psilocybin / Mushrooms",
-      "to": "Triptans",
-      "count": 404
-    },
-    {
-      "from": "Oxygen",
-      "to": "LSD",
-      "count": 360
-    },
-    {
-      "from": "RC Seeds / LSA",
-      "to": "Psilocybin / Mushrooms",
-      "count": 349
-    },
-    {
-      "from": "Oxygen",
-      "to": "Verapamil",
-      "count": 347
-    },
-    {
-      "from": "Triptans",
-      "to": "Psilocybin / Mushrooms",
+      "treatment": "LSD",
       "count": 343
     },
     {
-      "from": "Energy Drinks",
-      "to": "Oxygen",
-      "count": 340
+      "treatment": "Melatonin",
+      "count": 241
     },
     {
-      "from": "Psilocybin / Mushrooms",
-      "to": "Energy Drinks",
-      "count": 337
+      "treatment": "Lithium",
+      "count": 124
     },
     {
-      "from": "Vitamin D3",
-      "to": "Oxygen",
-      "count": 335
+      "treatment": "Ketamine",
+      "count": 77
     },
     {
-      "from": "Psilocybin / Mushrooms",
-      "to": "LSD",
-      "count": 333
+      "treatment": "BOL-148",
+      "count": 50
+    }
+  ],
+  "toolkit_size_distribution": [
+    {
+      "size": "1",
+      "count": 68
     },
     {
-      "from": "LSD",
-      "to": "Oxygen",
-      "count": 326
+      "size": "2",
+      "count": 141
     },
     {
-      "from": "Oxygen",
-      "to": "Prednisone",
-      "count": 296
+      "size": "3",
+      "count": 171
+    },
+    {
+      "size": "4",
+      "count": 190
+    },
+    {
+      "size": "5",
+      "count": 169
+    },
+    {
+      "size": "6",
+      "count": 116
+    },
+    {
+      "size": "7",
+      "count": 103
+    },
+    {
+      "size": "8",
+      "count": 58
+    },
+    {
+      "size": "9",
+      "count": 33
+    },
+    {
+      "size": "10",
+      "count": 26
+    },
+    {
+      "size": "11",
+      "count": 14
+    },
+    {
+      "size": "12",
+      "count": 13
+    },
+    {
+      "size": "13",
+      "count": 6
+    }
+  ],
+  "top_combinations": [
+    {
+      "treatment1": "Oxygen",
+      "treatment2": "Psilocybin / Mushrooms",
+      "count": 567
+    },
+    {
+      "treatment1": "Oxygen",
+      "treatment2": "Triptans",
+      "count": 560
+    },
+    {
+      "treatment1": "Energy Drinks",
+      "treatment2": "Oxygen",
+      "count": 483
+    },
+    {
+      "treatment1": "Psilocybin / Mushrooms",
+      "treatment2": "Triptans",
+      "count": 418
+    },
+    {
+      "treatment1": "Oxygen",
+      "treatment2": "Vitamin D3",
+      "count": 399
+    },
+    {
+      "treatment1": "Oxygen",
+      "treatment2": "Verapamil",
+      "count": 389
+    },
+    {
+      "treatment1": "Energy Drinks",
+      "treatment2": "Psilocybin / Mushrooms",
+      "count": 378
+    },
+    {
+      "treatment1": "Oxygen",
+      "treatment2": "RC Seeds / LSA",
+      "count": 357
+    },
+    {
+      "treatment1": "Energy Drinks",
+      "treatment2": "Triptans",
+      "count": 354
+    },
+    {
+      "treatment1": "Triptans",
+      "treatment2": "Verapamil",
+      "count": 341
+    },
+    {
+      "treatment1": "Oxygen",
+      "treatment2": "Prednisone",
+      "count": 332
+    },
+    {
+      "treatment1": "Triptans",
+      "treatment2": "Vitamin D3",
+      "count": 301
+    },
+    {
+      "treatment1": "Psilocybin / Mushrooms",
+      "treatment2": "RC Seeds / LSA",
+      "count": 299
+    },
+    {
+      "treatment1": "Psilocybin / Mushrooms",
+      "treatment2": "Verapamil",
+      "count": 292
+    },
+    {
+      "treatment1": "Psilocybin / Mushrooms",
+      "treatment2": "Vitamin D3",
+      "count": 292
     }
   ]
 }

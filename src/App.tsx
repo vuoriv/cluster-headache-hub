@@ -1,5 +1,5 @@
-import { lazy, Suspense } from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { lazy, Suspense, useEffect } from "react"
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { DataDbProvider } from "@/lib/data-db"
 import { Layout } from "@/components/layout/layout"
@@ -20,9 +20,18 @@ function ClusterBustersFallback() {
   )
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 export default function App() {
   return (
     <BrowserRouter basename="/cluster-headache-hub">
+      <ScrollToTop />
       <TooltipProvider>
         <DataDbProvider>
           <Routes>

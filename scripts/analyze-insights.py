@@ -282,11 +282,11 @@ def analyze_episodic_vs_chronic(posts):
     return result
 
 
-# ── Insight 3: Treatment Paths ──
+# ── Insight 3: Treatment Toolkits ──
 
 def analyze_treatment_paths(posts):
-    """Track treatment sequences for repeat posters."""
-    print("\n  3. Treatment Paths...")
+    """Track how patients build treatment toolkits over time."""
+    print("\n  3. Treatment Toolkits...")
 
     author_treatments = defaultdict(list)
     for p in posts:
@@ -295,14 +295,16 @@ def analyze_treatment_paths(posts):
         treatments = extract_treatments(p["content_text"])
         if treatments:
             author_treatments[p["author"]].append({
-                "date": p["posted_date"][:7],  # YYYY-MM
+                "date": p["posted_date"][:7],
                 "treatments": treatments,
             })
 
-    # Find treatment transitions
-    transitions = Counter()
+    # Per-author: build full toolkit (all treatments ever mentioned)
     first_treatments = Counter()
-    final_treatments = Counter()
+    toolkit_sizes = Counter()
+    treatment_combos = Counter()
+    toolkit_growth = []  # (initial size, final size) pairs
+    all_toolkits = Counter()  # how many patients use each treatment total
 
     for author, entries in author_treatments.items():
         if len(entries) < 2:
@@ -310,38 +312,54 @@ def analyze_treatment_paths(posts):
 
         entries.sort(key=lambda x: x["date"])
 
-        # First mentioned treatments
+        # First post treatments
         for t in entries[0]["treatments"]:
             first_treatments[t] += 1
 
-        # Last mentioned treatments
-        for t in entries[-1]["treatments"]:
-            final_treatments[t] += 1
+        # Full toolkit = union of all treatments ever mentioned
+        full_toolkit = set()
+        for entry in entries:
+            full_toolkit.update(entry["treatments"])
 
-        # Track transitions between consecutive posts
-        prev_set = set(entries[0]["treatments"])
-        for entry in entries[1:]:
-            curr_set = set(entry["treatments"])
-            new_treatments = curr_set - prev_set
-            for old in prev_set:
-                for new in new_treatments:
-                    if old != new:
-                        transitions[(old, new)] += 1
-            prev_set = curr_set
+        toolkit_sizes[len(full_toolkit)] += 1
 
-    # Top transitions
-    top_transitions = []
-    for (from_t, to_t), count in transitions.most_common(20):
-        top_transitions.append({"from": from_t, "to": to_t, "count": count})
+        for t in full_toolkit:
+            all_toolkits[t] += 1
+
+        # Track growth: first post count vs full toolkit
+        initial_size = len(set(entries[0]["treatments"]))
+        toolkit_growth.append({"initial": initial_size, "final": len(full_toolkit)})
+
+        # Common pairs (combinations of 2)
+        toolkit_list = sorted(full_toolkit)
+        for i in range(len(toolkit_list)):
+            for j in range(i + 1, len(toolkit_list)):
+                treatment_combos[(toolkit_list[i], toolkit_list[j])] += 1
+
+    # Most common treatment pairs
+    top_combos = [{"treatment1": t1, "treatment2": t2, "count": c}
+                  for (t1, t2), c in treatment_combos.most_common(15)]
+
+    # Toolkit size distribution
+    size_dist = [{"size": str(k), "count": v} for k, v in sorted(toolkit_sizes.items())]
+
+    # Average toolkit growth
+    users_tracked = len(toolkit_growth)
+    avg_initial = round(sum(g["initial"] for g in toolkit_growth) / max(users_tracked, 1), 1)
+    avg_final = round(sum(g["final"] for g in toolkit_growth) / max(users_tracked, 1), 1)
 
     result = {
-        "users_with_progression": len([a for a in author_treatments if len(author_treatments[a]) >= 2]),
+        "users_tracked": users_tracked,
+        "avg_initial_treatments": avg_initial,
+        "avg_final_treatments": avg_final,
+        "toolkit_growth_factor": round(avg_final / max(avg_initial, 0.1), 1),
         "first_treatments": [{"treatment": t, "count": c} for t, c in first_treatments.most_common(13)],
-        "final_treatments": [{"treatment": t, "count": c} for t, c in final_treatments.most_common(13)],
-        "top_transitions": top_transitions,
+        "full_toolkit_ranking": [{"treatment": t, "count": c} for t, c in all_toolkits.most_common(13)],
+        "toolkit_size_distribution": size_dist,
+        "top_combinations": top_combos,
     }
 
-    print(f"    {result['users_with_progression']} users with treatment progression")
+    print(f"    {users_tracked} users tracked, avg toolkit: {avg_initial} → {avg_final} treatments")
     return result
 
 
