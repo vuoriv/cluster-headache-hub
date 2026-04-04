@@ -68,10 +68,10 @@ export function PatientJourneys() {
 
   const spanData = useMemo(() => {
     if (!data?.span_distribution) return []
-    return Object.entries(data.span_distribution).map(([label, count]) => ({
-      label,
-      count,
-    }))
+    const order = ["<1 year", "1-2 years", "3-5 years", "6-10 years", "10+ years"]
+    return order
+      .filter((label) => label in data.span_distribution)
+      .map((label) => ({ label, count: data.span_distribution[label] }))
   }, [data])
 
   const treatmentData = useMemo(() => {
@@ -155,78 +155,56 @@ export function PatientJourneys() {
         />
       </div>
 
-      {/* Span distribution chart */}
-      <Card>
-        <CardHeader>
-          <CardTitle>How long do patients stay engaged?</CardTitle>
-          <CardDescription>
-            Distribution of total activity span — from first post to last. Short spans may indicate
-            episodic patients who found relief; long spans suggest chronic sufferers or those who
-            cycle back repeatedly.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={spanChartConfig} className="aspect-[2/1] w-full">
-            <BarChart
-              data={spanData}
-              margin={{ top: 8, right: 8, bottom: 8, left: 8 }}
-            >
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis
-                dataKey="label"
-                tickLine={false}
-                axisLine={false}
-                tick={{ fontSize: 12 }}
-              />
-              <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="count" radius={[4, 4, 0, 0]}>
-                {spanData.map((_, i) => (
-                  <Cell key={i} fill={SPAN_COLORS[i % SPAN_COLORS.length]} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
+      {/* Charts side by side */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">How long do patients stay engaged?</CardTitle>
+            <CardDescription className="text-xs">
+              From first post to last. Long spans suggest chronic sufferers or recurring cycles.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={spanChartConfig} className="h-[220px] w-full">
+              <BarChart data={spanData} margin={{ top: 8, right: 8, bottom: 8, left: 8 }}>
+                <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                <XAxis dataKey="label" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />
+                <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+                  {spanData.map((_, i) => (
+                    <Cell key={i} fill={SPAN_COLORS[i % SPAN_COLORS.length]} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
 
-      {/* Return treatments chart */}
-      <Card>
-        <CardHeader>
-          <CardTitle>What do returning patients talk about?</CardTitle>
-          <CardDescription>
-            When patients return after a gap in activity, these are the treatments they discuss most.
-            This reveals what matters when cycles restart — often a shift from what they tried before
-            to what the community now recommends.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={treatmentChartConfig} className="aspect-[2/1] w-full">
-            <BarChart
-              data={treatmentData}
-              layout="vertical"
-              margin={{ top: 8, right: 8, bottom: 8, left: 100 }}
-            >
-              <CartesianGrid horizontal={false} strokeDasharray="3 3" />
-              <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
-              <YAxis
-                type="category"
-                dataKey="treatment"
-                tickLine={false}
-                axisLine={false}
-                tick={{ fontSize: 12 }}
-                width={90}
-              />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="count" radius={[0, 4, 4, 0]}>
-                {treatmentData.map((_, i) => (
-                  <Cell key={i} fill={TREATMENT_COLORS[i % TREATMENT_COLORS.length]} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">What do returning patients discuss?</CardTitle>
+            <CardDescription className="text-xs">
+              Treatments discussed when patients return after a gap in activity.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={treatmentChartConfig} className="h-[220px] w-full">
+              <BarChart data={treatmentData} layout="vertical" margin={{ top: 8, right: 8, bottom: 8, left: 80 }}>
+                <CartesianGrid horizontal={false} strokeDasharray="3 3" />
+                <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />
+                <YAxis type="category" dataKey="treatment" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} width={80} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Bar dataKey="count" radius={[0, 4, 4, 0]}>
+                  {treatmentData.map((_, i) => (
+                    <Cell key={i} fill={TREATMENT_COLORS[i % TREATMENT_COLORS.length]} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Closing context */}
       <Card className="border-blue-200 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-950/20">

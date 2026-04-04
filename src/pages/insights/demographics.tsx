@@ -1,8 +1,7 @@
 import { useMemo } from "react"
 import { Link } from "react-router-dom"
 import { ArrowLeft, Users, Crown, TrendingUp, Calendar } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useDataDb } from "@/lib/data-db"
@@ -80,7 +79,8 @@ export function DemographicsInsight() {
 
   const powerUserCount = useMemo(() => {
     if (!data) return 0
-    return data.power_users.length
+    const dist = data.activity_distribution
+    return (dist["21-100 posts"] ?? 0) + (dist["100+ posts"] ?? 0)
   }, [data])
 
   const avgPowerUserYears = useMemo(() => {
@@ -130,7 +130,7 @@ export function DemographicsInsight() {
         <p className="mt-2 text-lg text-muted-foreground leading-relaxed max-w-2xl">
           Most members post once and disappear. But{" "}
           <span className="font-semibold text-foreground">{powerUserCount} veterans</span>{" "}
-          with 10+ posts are the backbone — their collective experience spans decades of
+          with 20+ posts are the backbone — their collective experience spans decades of
           cluster headache treatment knowledge.
         </p>
       </div>
@@ -155,7 +155,7 @@ export function DemographicsInsight() {
             </div>
             <div>
               <p className="text-2xl font-bold">{powerUserCount}</p>
-              <p className="text-xs text-muted-foreground">Power Users (10+ posts)</p>
+              <p className="text-xs text-muted-foreground">Power Users (20+ posts)</p>
             </div>
           </CardContent>
         </Card>
@@ -187,73 +187,49 @@ export function DemographicsInsight() {
 
       <Separator />
 
-      {/* Community Growth */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Community Growth Over Time</CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Posts and new authors per year. The growth curve tells the story of a community
-            finding its voice — from a handful of pioneers to thousands sharing treatment
-            experiences.
-          </p>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={postsPerYearConfig} className="h-[300px] w-full">
-            <AreaChart data={postsChartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="year" tick={{ fontSize: 12 }} />
-              <YAxis tick={{ fontSize: 12 }} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Area
-                type="monotone"
-                dataKey="posts"
-                stroke="var(--color-posts)"
-                fill="var(--color-posts)"
-                fillOpacity={0.15}
-                strokeWidth={2}
-              />
-              <Area
-                type="monotone"
-                dataKey="newAuthors"
-                stroke="var(--color-newAuthors)"
-                fill="var(--color-newAuthors)"
-                fillOpacity={0.1}
-                strokeWidth={2}
-              />
-            </AreaChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
+      {/* Community Growth + Activity Distribution side by side */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">Community Growth Over Time</CardTitle>
+            <CardDescription className="text-xs">
+              Posts and new authors per year — from pioneers to thousands.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={postsPerYearConfig} className="h-[220px] w-full">
+              <AreaChart data={postsChartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="year" tick={{ fontSize: 10 }} />
+                <YAxis tick={{ fontSize: 10 }} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Area type="monotone" dataKey="posts" stroke="var(--color-posts)" fill="var(--color-posts)" fillOpacity={0.15} strokeWidth={2} />
+                <Area type="monotone" dataKey="newAuthors" stroke="var(--color-newAuthors)" fill="var(--color-newAuthors)" fillOpacity={0.1} strokeWidth={2} />
+              </AreaChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
 
-      {/* Activity Distribution */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Lurkers vs Veterans</CardTitle>
-          <p className="text-sm text-muted-foreground">
-            The long tail of community participation. Most people post once — often in
-            crisis, searching for answers. The small group of repeat contributors carries
-            the institutional knowledge that makes this community invaluable.
-          </p>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={activityConfig} className="h-[300px] w-full">
-            <BarChart data={activityChartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="bucket" tick={{ fontSize: 12 }} />
-              <YAxis tick={{ fontSize: 12 }} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="count" fill="var(--color-count)" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ChartContainer>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {activityChartData.slice(0, 2).map((item) => (
-              <Badge key={item.bucket} variant="secondary">
-                {item.bucket}: {item.count.toLocaleString()} authors
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">Lurkers vs Veterans</CardTitle>
+            <CardDescription className="text-xs">
+              Most post once in crisis. Repeat contributors carry institutional knowledge.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={activityConfig} className="h-[220px] w-full">
+              <BarChart data={activityChartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="bucket" tick={{ fontSize: 10 }} />
+                <YAxis tick={{ fontSize: 10 }} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Bar dataKey="count" fill="var(--color-count)" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Forum Activity */}
       <Card>

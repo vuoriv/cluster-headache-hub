@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { Link } from "react-router-dom"
 import { ArrowLeft, Heart, Users, Scale, AlertCircle } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -277,82 +277,53 @@ export function GenderCaregiversInsight() {
         </CardContent>
       </Card>
 
-      {/* Top Concerns */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Caregiver Top Concerns</CardTitle>
-          <p className="text-sm text-muted-foreground">
-            What keeps caregivers up at night. These aren't abstract worries — they're the
-            raw, desperate questions from people trying to help someone survive the "suicide
-            headache."
-          </p>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={concernConfig} className="h-[300px] w-full">
-            <BarChart
-              data={data.caregiver_top_concerns.slice(0, 8)}
-              layout="vertical"
-              margin={{ left: 20 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" tick={{ fontSize: 12 }} />
-              <YAxis
-                type="category"
-                dataKey="concern"
-                width={160}
-                tick={{ fontSize: 11 }}
-              />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="count" fill="var(--color-count)" radius={[0, 4, 4, 0]} />
-            </BarChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
+      {/* Top Concerns + Treatment Comparison side by side */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">Caregiver Top Concerns</CardTitle>
+            <CardDescription className="text-xs">
+              Desperate questions from people trying to help someone survive the "suicide headache."
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={concernConfig} className="h-[220px] w-full">
+              <BarChart data={data.caregiver_top_concerns.slice(0, 5)} layout="vertical" margin={{ left: 10 }}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis type="number" tick={{ fontSize: 10 }} />
+                <YAxis type="category" dataKey="concern" width={130} tick={{ fontSize: 9 }} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Bar dataKey="count" fill="var(--color-count)" radius={[0, 4, 4, 0]} />
+              </BarChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
 
-      {/* Treatment Comparison */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">
-            Caregiver vs Patient: Treatment Discussions
-          </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            An interesting divergence emerges when you compare what caregivers ask about
-            versus what patients discuss. Caregivers often search for conventional options
-            first, while patients — having exhausted those — gravitate toward community-proven
-            alternatives.
-          </p>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={treatmentCompareConfig} className="h-[350px] w-full">
-            <BarChart data={treatmentCompareData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="treatment"
-                tick={{ fontSize: 11 }}
-                angle={-30}
-                textAnchor="end"
-                height={60}
-              />
-              <YAxis tick={{ fontSize: 12 }} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar
-                dataKey="caregiver"
-                fill="var(--color-caregiver)"
-                radius={[4, 4, 0, 0]}
-              />
-              <Bar
-                dataKey="patient"
-                fill="var(--color-patient)"
-                radius={[4, 4, 0, 0]}
-              />
-            </BarChart>
-          </ChartContainer>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <Badge variant="danger">Caregiver Posts</Badge>
-            <Badge variant="info">Patient Posts</Badge>
-          </div>
-        </CardContent>
-      </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">Caregiver vs Patient Treatments</CardTitle>
+            <CardDescription className="text-xs">
+              Caregivers search for conventional options; patients gravitate to community-proven alternatives.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={treatmentCompareConfig} className="h-[220px] w-full">
+              <BarChart data={treatmentCompareData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="treatment" tick={{ fontSize: 9 }} angle={-30} textAnchor="end" height={50} />
+                <YAxis tick={{ fontSize: 10 }} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Bar dataKey="caregiver" fill="var(--color-caregiver)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="patient" fill="var(--color-patient)" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ChartContainer>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <Badge variant="danger" className="text-[0.6rem]">Caregiver</Badge>
+              <Badge variant="info" className="text-[0.6rem]">Patient</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }

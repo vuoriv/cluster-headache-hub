@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { Link } from "react-router-dom"
 import { ArrowLeft, Moon, Snowflake, TrendingUp, Calendar } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -177,60 +177,49 @@ export function CyclePatternsInsight() {
 
       <Separator />
 
-      {/* Seasonal Patterns */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Seasonal Posting Patterns</CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Cluster headaches are notoriously seasonal. Forum activity mirrors real-world
-            suffering — when cycles hit, patients rush online for help. The spring and
-            autumn equinoxes are known triggers, and the winter peak aligns with shorter
-            daylight hours disrupting circadian rhythms.
-          </p>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={seasonalConfig} className="h-[300px] w-full">
-            <BarChart data={data.seasonal}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" tick={{ fontSize: 12 }} />
-              <YAxis tick={{ fontSize: 12 }} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="posts" fill="var(--color-posts)" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ChartContainer>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <Badge variant="info">Peak: {data.peak_month}</Badge>
-            <Badge variant="secondary">CH cycles often follow circadian disruptions</Badge>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Seasonal + Hourly side by side */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">Seasonal Posting Patterns</CardTitle>
+            <CardDescription className="text-xs">
+              Forum activity mirrors real-world suffering — winter peak aligns with circadian disruptions.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={seasonalConfig} className="h-[220px] w-full">
+              <BarChart data={data.seasonal}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" tick={{ fontSize: 10 }} />
+                <YAxis tick={{ fontSize: 10 }} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Bar dataKey="posts" fill="var(--color-posts)" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ChartContainer>
+            <Badge variant="info" className="mt-2">Peak: {data.peak_month}</Badge>
+          </CardContent>
+        </Card>
 
-      {/* Hourly Patterns */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Time-of-Day Activity</CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Cluster headaches are called "alarm clock headaches" because attacks often strike
-            during sleep. The late-night and early-morning posting spike isn't insomnia — it's
-            patients waking in agony and reaching for their phones.
-          </p>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={hourlyConfig} className="h-[300px] w-full">
-            <BarChart data={hourlyChartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="label"
-                tick={{ fontSize: 11 }}
-                interval={2}
-              />
-              <YAxis tick={{ fontSize: 12 }} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="posts" fill="var(--color-posts)" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">Time-of-Day Activity</CardTitle>
+            <CardDescription className="text-xs">
+              "Alarm clock headaches" — patients wake in agony and reach for their phones.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={hourlyConfig} className="h-[220px] w-full">
+              <BarChart data={hourlyChartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="label" tick={{ fontSize: 9 }} interval={3} />
+                <YAxis tick={{ fontSize: 10 }} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Bar dataKey="posts" fill="var(--color-posts)" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Treatment Trends */}
       <Card>
