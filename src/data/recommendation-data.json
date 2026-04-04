@@ -1,226 +1,160 @@
 {
-  "treatments": [
+  "filters": {
+    "chTypes": [
+      "episodic",
+      "chronic"
+    ],
+    "cycleStatus": [
+      "in-cycle",
+      "remission",
+      "new-patient"
+    ],
+    "treatments": [
+      {
+        "slug": "psilocybin-mushrooms",
+        "name": "Psilocybin / Mushrooms"
+      },
+      {
+        "slug": "oxygen",
+        "name": "Oxygen"
+      },
+      {
+        "slug": "rc-seeds-lsa",
+        "name": "RC Seeds / LSA"
+      },
+      {
+        "slug": "vitamin-d3",
+        "name": "Vitamin D3 Regimen"
+      },
+      {
+        "slug": "lsd",
+        "name": "LSD"
+      },
+      {
+        "slug": "triptans",
+        "name": "Triptans"
+      },
+      {
+        "slug": "energy-drinks-caffeine",
+        "name": "Energy Drinks / Caffeine"
+      },
+      {
+        "slug": "prednisone-steroids",
+        "name": "Prednisone / Steroids"
+      },
+      {
+        "slug": "verapamil",
+        "name": "Verapamil"
+      },
+      {
+        "slug": "bol-148",
+        "name": "BOL-148"
+      },
+      {
+        "slug": "melatonin",
+        "name": "Melatonin"
+      },
+      {
+        "slug": "lithium",
+        "name": "Lithium"
+      },
+      {
+        "slug": "ketamine",
+        "name": "Ketamine"
+      }
+    ]
+  },
+  "rankings": [
     {
-      "treatment": "Psilocybin / Mushrooms",
       "slug": "psilocybin-mushrooms",
-      "composite_score": 0.868,
-      "total_mentions": 13093,
-      "positive_rate": 0.78,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "Psilocybin / Mushrooms",
+      "category": "conventional",
+      "positiveRate": 78.0,
+      "score": 0.868
     },
     {
-      "treatment": "Oxygen",
       "slug": "oxygen",
-      "composite_score": 0.674,
-      "total_mentions": 7209,
-      "positive_rate": 0.757,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "Oxygen",
+      "category": "conventional",
+      "positiveRate": 75.7,
+      "score": 0.674
     },
     {
-      "treatment": "RC Seeds / LSA",
       "slug": "rc-seeds-lsa",
-      "composite_score": 0.574,
-      "total_mentions": 4229,
-      "positive_rate": 0.741,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "RC Seeds / LSA",
+      "category": "conventional",
+      "positiveRate": 74.1,
+      "score": 0.574
     },
     {
-      "treatment": "Vitamin D3 Regimen",
       "slug": "vitamin-d3",
-      "composite_score": 0.531,
-      "total_mentions": 2307,
-      "positive_rate": 0.767,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "Vitamin D3 Regimen",
+      "category": "conventional",
+      "positiveRate": 76.7,
+      "score": 0.531
     },
     {
-      "treatment": "LSD",
       "slug": "lsd",
-      "composite_score": 0.528,
-      "total_mentions": 2520,
-      "positive_rate": 0.752,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "LSD",
+      "category": "conventional",
+      "positiveRate": 75.2,
+      "score": 0.528
     },
     {
-      "treatment": "Triptans",
       "slug": "triptans",
-      "composite_score": 0.526,
-      "total_mentions": 3407,
-      "positive_rate": 0.702,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "Triptans",
+      "category": "conventional",
+      "positiveRate": 70.2,
+      "score": 0.526
     },
     {
-      "treatment": "Energy Drinks / Caffeine",
       "slug": "energy-drinks-caffeine",
-      "composite_score": 0.519,
-      "total_mentions": 1823,
-      "positive_rate": 0.772,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "Energy Drinks / Caffeine",
+      "category": "conventional",
+      "positiveRate": 77.2,
+      "score": 0.519
     },
     {
-      "treatment": "Prednisone / Steroids",
       "slug": "prednisone-steroids",
-      "composite_score": 0.494,
-      "total_mentions": 1247,
-      "positive_rate": 0.759,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "Prednisone / Steroids",
+      "category": "conventional",
+      "positiveRate": 75.9,
+      "score": 0.494
     },
     {
-      "treatment": "Verapamil",
       "slug": "verapamil",
-      "composite_score": 0.492,
-      "total_mentions": 1708,
-      "positive_rate": 0.733,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "Verapamil",
+      "category": "conventional",
+      "positiveRate": 73.3,
+      "score": 0.492
     },
     {
-      "treatment": "BOL-148",
       "slug": "bol-148",
-      "composite_score": 0.483,
-      "total_mentions": 223,
-      "positive_rate": 0.794,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "BOL-148",
+      "category": "conventional",
+      "positiveRate": 79.4,
+      "score": 0.483
     },
     {
-      "treatment": "Melatonin",
       "slug": "melatonin",
-      "composite_score": 0.454,
-      "total_mentions": 761,
-      "positive_rate": 0.718,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "Melatonin",
+      "category": "conventional",
+      "positiveRate": 71.8,
+      "score": 0.454
     },
     {
-      "treatment": "Lithium",
       "slug": "lithium",
-      "composite_score": 0.444,
-      "total_mentions": 358,
-      "positive_rate": 0.722,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "Lithium",
+      "category": "conventional",
+      "positiveRate": 72.2,
+      "score": 0.444
     },
     {
-      "treatment": "Ketamine",
       "slug": "ketamine",
-      "composite_score": 0.434,
-      "total_mentions": 310,
-      "positive_rate": 0.707,
-      "sample_size": 0,
-      "avg_outcome": null,
-      "outcome_distribution": {},
-      "common_dosages": [],
-      "common_preparations": [],
-      "common_protocols": [],
-      "side_effects": [],
-      "co_treatments": [],
-      "time_to_effect": [],
-      "ch_type_distribution": {}
+      "name": "Ketamine",
+      "category": "conventional",
+      "positiveRate": 70.7,
+      "score": 0.434
     }
-  ],
-  "generated_at": "2026-04-04T15:06:09.374054"
+  ]
 }
