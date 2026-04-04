@@ -6,15 +6,32 @@ import { CbStatsRow } from "./cb-stats-row"
 import { CbTreatmentRankings } from "./cb-treatment-rankings"
 import { CbTimelineChart } from "./cb-timeline-chart"
 import { CbTreatmentCard } from "./cb-treatment-card"
-import { CbRecommendation } from "./cb-recommendation"
 import { useDataDb } from "@/lib/data-db"
+import {
+  Activity,
+  BarChart3,
+  ArrowRightLeft,
+  Users,
+  Clock,
+  Heart,
+  ArrowRight,
+} from "lucide-react"
+
+const INSIGHT_CARDS = [
+  { slug: "patient-journeys", title: "Patient Journeys", stat: "371 returned after remission", icon: Activity, accent: "text-blue-500 bg-blue-50 dark:bg-blue-950/40 dark:text-blue-400" },
+  { slug: "episodic-vs-chronic", title: "Episodic vs Chronic", stat: "2,729 typed posts", icon: BarChart3, accent: "text-purple-500 bg-purple-50 dark:bg-purple-950/40 dark:text-purple-400" },
+  { slug: "treatment-paths", title: "Treatment Paths", stat: "1,108 progressions", icon: ArrowRightLeft, accent: "text-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 dark:text-emerald-400" },
+  { slug: "demographics", title: "Community Demographics", stat: "2,749 authors", icon: Users, accent: "text-amber-500 bg-amber-50 dark:bg-amber-950/40 dark:text-amber-400" },
+  { slug: "cycle-patterns", title: "Cycle Patterns", stat: "Peak: December", icon: Clock, accent: "text-cyan-500 bg-cyan-50 dark:bg-cyan-950/40 dark:text-cyan-400" },
+  { slug: "gender-caregivers", title: "Gender & Caregivers", stat: "1,540 caregiver posts", icon: Heart, accent: "text-rose-500 bg-rose-50 dark:bg-rose-950/40 dark:text-rose-400" },
+] as const
 
 interface CbLandingProps {
   onNavigate: (path: string) => void
 }
 
 export function CbLanding({ onNavigate }: CbLandingProps) {
-  const { loading, error, getForumStats, getTreatmentRankings, getTimeline, getRecommendationData } = useDataDb()
+  const { loading, error, getForumStats, getTreatmentRankings, getTimeline } = useDataDb()
 
   if (loading) {
     return (
@@ -41,9 +58,8 @@ export function CbLanding({ onNavigate }: CbLandingProps) {
   const stats = getForumStats()
   const rankings = getTreatmentRankings()
   const timelineData = getTimeline()
-  const recData = getRecommendationData()
 
-  if (!stats || !timelineData || !recData) {
+  if (!stats || !timelineData) {
     return <div className="py-12 text-center text-muted-foreground">No data available.</div>
   }
 
@@ -73,12 +89,15 @@ export function CbLanding({ onNavigate }: CbLandingProps) {
 
       <Separator />
 
-      <CbTreatmentRankings rankings={rankings} onNavigate={onNavigate} />
-
-      <CbTimelineChart timeline={timelineData} />
+      {/* Rankings + Timeline side by side */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <CbTreatmentRankings rankings={rankings} onNavigate={onNavigate} />
+        <CbTimelineChart timeline={timelineData} />
+      </div>
 
       <Separator />
 
+      {/* Explore Treatments */}
       <div>
         <h3 className="mb-4 text-lg font-semibold">Explore Treatments</h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -95,25 +114,38 @@ export function CbLanding({ onNavigate }: CbLandingProps) {
 
       <Separator />
 
-      {/* Insights link */}
-      <Card
-        className="cursor-pointer transition-all hover:shadow-md"
-        onClick={() => onNavigate("insights")}
-      >
-        <CardContent className="flex items-center justify-between py-4">
-          <div>
-            <h3 className="text-sm font-semibold">Community Insights</h3>
-            <p className="mt-0.5 text-xs text-muted-foreground">
-              Deep analytics — patient journeys, episodic vs chronic, gender, cycle patterns, and more
-            </p>
-          </div>
-          <span className="text-sm font-medium text-primary">Explore →</span>
-        </CardContent>
-      </Card>
-
-      <Separator />
-
-      <CbRecommendation data={recData} onNavigate={onNavigate} />
+      {/* Community Insights */}
+      <div>
+        <div className="mb-4 flex items-center justify-between">
+          <h3 className="text-lg font-semibold">Community Insights</h3>
+          <button
+            onClick={() => onNavigate("insights")}
+            className="text-xs font-medium text-primary hover:underline"
+          >
+            View all →
+          </button>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {INSIGHT_CARDS.map(({ slug, title, stat, icon: Icon, accent }) => (
+            <Card
+              key={slug}
+              className="cursor-pointer transition-all hover:shadow-md hover:-translate-y-0.5"
+              onClick={() => onNavigate(`insights/${slug}`)}
+            >
+              <CardContent className="flex items-center gap-3 py-3">
+                <div className={`flex size-9 shrink-0 items-center justify-center rounded-lg ${accent}`}>
+                  <Icon className="size-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h4 className="text-sm font-semibold">{title}</h4>
+                  <p className="text-[0.65rem] text-muted-foreground">{stat}</p>
+                </div>
+                <ArrowRight className="size-3.5 shrink-0 text-muted-foreground/40" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
