@@ -5,9 +5,7 @@ import {
   BookOpen,
   FlaskConical,
   ArrowRight,
-  Brain,
   AlertTriangle,
-  TrendingUp,
   Users,
   FileText,
 } from "lucide-react"
@@ -26,14 +24,11 @@ export function FrontPage() {
     const forum = getForumStats()
     const active = getActiveTrials()
     const recruiting = active.filter((t) => t.status === "RECRUITING").length
-    const psychedelic = active.filter((t) => t.category === "psychedelic").length
 
     return {
       papers: meta?.paperCount ?? 0,
-      totalTrials: meta?.trialCount ?? 0,
       activeTrials: active.length,
       recruiting,
-      psychedelic,
       forumPosts: forum?.total_posts_cleaned ?? 0,
       forumTopics: forum?.total_topics ?? 0,
     }
@@ -62,9 +57,9 @@ export function FrontPage() {
 
       {/* Live Stats */}
       <section>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="grid grid-cols-3 gap-3">
           {loading || !stats ? (
-            Array.from({ length: 4 }).map((_, i) => (
+            Array.from({ length: 3 }).map((_, i) => (
               <Skeleton key={i} className="h-[88px] rounded-xl" />
             ))
           ) : (
@@ -80,12 +75,6 @@ export function FrontPage() {
                 label="Research Papers"
                 sublabel="From PubMed"
                 icon={<FileText className="size-4" />}
-              />
-              <StatCard
-                value={stats.psychedelic}
-                label="Psychedelic Studies"
-                sublabel="Active trials"
-                icon={<TrendingUp className="size-4" />}
               />
               <StatCard
                 value={stats.forumPosts.toLocaleString()}
@@ -162,39 +151,6 @@ export function FrontPage() {
         </Card>
       </section>
 
-      {/* Data Sources */}
-      <section className="pb-2">
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
-          <span className="font-medium text-foreground/60">Data sources:</span>
-          <a
-            href="https://clinicaltrials.gov"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 hover:text-foreground/80"
-          >
-            <Brain className="size-3" />
-            ClinicalTrials.gov
-          </a>
-          <a
-            href="https://pubmed.ncbi.nlm.nih.gov"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 hover:text-foreground/80"
-          >
-            <FileText className="size-3" />
-            PubMed
-          </a>
-          <a
-            href="https://clusterbusters.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 hover:text-foreground/80"
-          >
-            <MessageCircle className="size-3" />
-            ClusterBusters.org
-          </a>
-        </div>
-      </section>
     </div>
   )
 }

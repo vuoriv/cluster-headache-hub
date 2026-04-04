@@ -20,7 +20,8 @@ const PAGE_SIZE = 25
 
 export function ResearchSearchPage() {
   const { t } = useTranslation()
-  const { loading, error, searchPapers, getCategories } = useDataDb()
+  const { loading, error, searchPapers, getCategories, getMeta } = useDataDb()
+  const stats = useMemo(() => (loading ? null : getMeta()), [loading, getMeta])
 
   const [query, setQuery] = useState("")
   const [category, setCategory] = useState<string>("all")
@@ -63,9 +64,11 @@ export function ResearchSearchPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl font-bold">{t("research.title", "Research Search")}</h2>
+        <h2 className="text-2xl font-bold">{t("research.title", "Latest Research Papers")}</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          {t("research.subtitle", "Search cluster headache research papers from PubMed")}
+          Recent cluster headache publications fetched live from{" "}
+          <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">PubMed</a>
+          {" "}({stats?.paperCount?.toLocaleString() ?? "—"}+ total, sorted by date)
         </p>
       </div>
 

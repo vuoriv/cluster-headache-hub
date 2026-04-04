@@ -72,9 +72,10 @@ export function ActiveTrialsPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-bold">{t("trials.title", "Active Trials")}</h2>
+          <h2 className="text-2xl font-bold">{t("trials.title", "Active Clinical Trials")}</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            {t("trials.subtitle", "Currently active cluster headache clinical trials")}
+            All cluster headache trials currently recruiting, active, or starting soon — fetched live from{" "}
+            <a href="https://clinicaltrials.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">ClinicalTrials.gov</a>
           </p>
         </div>
         {stats && (
