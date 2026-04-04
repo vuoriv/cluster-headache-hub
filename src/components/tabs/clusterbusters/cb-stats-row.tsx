@@ -3,9 +3,10 @@ import type { ForumStats } from "@/lib/clusterbusters-types"
 
 interface CbStatsRowProps {
   stats: ForumStats
+  avgPositiveRate: number
 }
 
-export function CbStatsRow({ stats }: CbStatsRowProps) {
+export function CbStatsRow({ stats, avgPositiveRate }: CbStatsRowProps) {
   const years = Object.keys(stats.posts_per_year)
   const yearSpan = years.length > 0 ? `${years[0]}\u2013${years[years.length - 1]}` : "N/A"
 
@@ -13,7 +14,7 @@ export function CbStatsRow({ stats }: CbStatsRowProps) {
     { value: stats.total_posts_cleaned.toLocaleString(), label: "Forum Posts Analyzed" },
     { value: stats.total_topics.toLocaleString(), label: "Discussion Topics" },
     { value: yearSpan, label: "Years of Data" },
-    { value: "78%", label: "Avg. Positive Rate" },
+    { value: `${avgPositiveRate}%`, label: "Avg. Positive Rate" },
   ]
 
   return (

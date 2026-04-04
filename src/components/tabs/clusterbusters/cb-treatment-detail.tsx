@@ -91,6 +91,7 @@ export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) 
         <div>
           <div className="flex items-center gap-2">
             <button
+              aria-label="Back to ClusterBusters"
               className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
               onClick={() => onNavigate("")}
             >
@@ -143,44 +144,48 @@ export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) 
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        {profile.protocol.dosing.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-sm">Protocol Guide</CardTitle>
-              <CardDescription className="text-xs">Community-reported dosing and preparation</CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-3">
-              {profile.protocol.dosing.length > 0 && (
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">Dosing</p>
-                  <ul className="mt-1 flex flex-col gap-1 text-sm">
-                    {profile.protocol.dosing.map((d) => <li key={d}>{d}</li>)}
-                  </ul>
-                </div>
-              )}
-              {profile.protocol.preparations.length > 0 && (
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">Preparations</p>
-                  <ul className="mt-1 flex flex-col gap-1 text-sm">
-                    {profile.protocol.preparations.map((p) => <li key={p}>{p}</li>)}
-                  </ul>
-                </div>
-              )}
-              {profile.protocol.schedule.length > 0 && (
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">Schedule</p>
-                  <ul className="mt-1 flex flex-col gap-1 text-sm">
-                    {profile.protocol.schedule.map((s) => <li key={s}>{s}</li>)}
-                  </ul>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        )}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">Protocol Guide</CardTitle>
+            <CardDescription className="text-xs">Community-reported dosing and preparation</CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-3">
+            {profile.protocol.dosing.length === 0 && profile.protocol.preparations.length === 0 && profile.protocol.schedule.length === 0 ? (
+              <p className="text-xs italic text-muted-foreground/60">Protocol data extraction coming soon</p>
+            ) : (
+              <>
+                {profile.protocol.dosing.length > 0 && (
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground">Dosing</p>
+                    <ul className="mt-1 flex flex-col gap-1 text-sm">
+                      {profile.protocol.dosing.map((d) => <li key={d}>{d}</li>)}
+                    </ul>
+                  </div>
+                )}
+                {profile.protocol.preparations.length > 0 && (
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground">Preparations</p>
+                    <ul className="mt-1 flex flex-col gap-1 text-sm">
+                      {profile.protocol.preparations.map((p) => <li key={p}>{p}</li>)}
+                    </ul>
+                  </div>
+                )}
+                {profile.protocol.schedule.length > 0 && (
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground">Schedule</p>
+                    <ul className="mt-1 flex flex-col gap-1 text-sm">
+                      {profile.protocol.schedule.map((s) => <li key={s}>{s}</li>)}
+                    </ul>
+                  </div>
+                )}
+              </>
+            )}
+          </CardContent>
+        </Card>
 
         <CbOutcomeChart outcomes={profile.outcomes} treatmentName={profile.name} />
 
-        <Card className={profile.protocol.dosing.length > 0 ? "lg:col-span-2" : ""}>
+        <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle className="text-sm">Discussion Timeline</CardTitle>
             <CardDescription className="text-xs">Forum mentions per year</CardDescription>
@@ -205,48 +210,59 @@ export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) 
         </Card>
       </div>
 
-      {(profile.sideEffects.length > 0 || profile.contraindications.length > 0 || profile.coTreatments.length > 0) && (
-        <div className="grid gap-4 sm:grid-cols-3">
-          {profile.sideEffects.length > 0 && (
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">Side Effects</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="flex flex-col gap-1 text-sm text-muted-foreground">
-                  {profile.sideEffects.map((s) => <li key={s}>- {s}</li>)}
-                </ul>
-              </CardContent>
-            </Card>
-          )}
-          {profile.contraindications.length > 0 && (
-            <Card className="border-l-4 border-l-destructive">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">Contraindications</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="flex flex-col gap-1 text-sm text-muted-foreground">
-                  {profile.contraindications.map((c) => <li key={c}>- {c}</li>)}
-                </ul>
-              </CardContent>
-            </Card>
-          )}
-          {profile.coTreatments.length > 0 && (
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">Commonly Used With</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-1.5">
-                  {profile.coTreatments.map((ct) => (
-                    <Badge key={ct} variant="secondary" className="text-xs">{ct}</Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          )}
-        </div>
-      )}
+      <div className="grid gap-4 sm:grid-cols-3">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm">Side Effects</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {profile.sideEffects.length > 0 ? (
+              <ul className="flex flex-col gap-1 text-sm text-muted-foreground">
+                {profile.sideEffects.map((s) => <li key={s}>- {s}</li>)}
+              </ul>
+            ) : (
+              <p className="text-xs italic text-muted-foreground/60">Data extraction coming soon</p>
+            )}
+          </CardContent>
+        </Card>
+        {profile.contraindications.length > 0 ? (
+          <Card className="border-l-4 border-l-destructive">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm">Contraindications</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="flex flex-col gap-1 text-sm text-muted-foreground">
+                {profile.contraindications.map((c) => <li key={c}>- {c}</li>)}
+              </ul>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm">Contraindications</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-xs italic text-muted-foreground/60">Data extraction coming soon</p>
+            </CardContent>
+          </Card>
+        )}
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm">Commonly Used With</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {profile.coTreatments.length > 0 ? (
+              <div className="flex flex-wrap gap-1.5">
+                {profile.coTreatments.map((ct) => (
+                  <Badge key={ct} variant="secondary" className="text-xs">{ct}</Badge>
+                ))}
+              </div>
+            ) : (
+              <p className="text-xs italic text-muted-foreground/60">Data extraction coming soon</p>
+            )}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }

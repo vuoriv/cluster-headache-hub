@@ -34,7 +34,8 @@ export function ClusterBustersTab() {
   const content = (() => {
     switch (route.page) {
       case "treatment":
-        return <CbTreatmentDetail slug={route.param!} onNavigate={onNavigate} />
+        if (!route.param) return <CbLanding onNavigate={onNavigate} />
+        return <CbTreatmentDetail slug={route.param} onNavigate={onNavigate} />
       case "compare":
         return <CbCompare onNavigate={onNavigate} />
       case "methodology":

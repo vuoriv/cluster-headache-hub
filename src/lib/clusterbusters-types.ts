@@ -13,6 +13,7 @@ export interface ForumStats {
 export interface TreatmentRanking {
   treatment: string
   slug: string
+  category: string
   total_mentions: number
   positive_rate: number
   normalized_mentions: number

@@ -31,6 +31,7 @@ export function AnalysisDbProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const initRef = useRef(false)
+  const dbRef = useRef<Database | null>(null)
 
   useEffect(() => {
     if (initRef.current) return
@@ -47,6 +48,7 @@ export function AnalysisDbProvider({ children }: { children: ReactNode }) {
         if (!response.ok) throw new Error(`Failed to fetch analysis.db: ${response.status}`)
         const buffer = await response.arrayBuffer()
         const database = new SQL.Database(new Uint8Array(buffer))
+        dbRef.current = database
         setDb(database)
       } catch (e) {
         setError(e instanceof Error ? e.message : "Failed to load database")
@@ -56,6 +58,12 @@ export function AnalysisDbProvider({ children }: { children: ReactNode }) {
     }
 
     load()
+
+    return () => {
+      if (dbRef.current) {
+        dbRef.current.close()
+      }
+    }
   }, [])
 
   const getForumStats = useCallback((): ForumStats | null => {
@@ -78,6 +86,7 @@ export function AnalysisDbProvider({ children }: { children: ReactNode }) {
     return rows[0].values.map((row) => ({
       treatment: row[1] as string,
       slug: row[0] as string,
+      category: row[2] as string,
       total_mentions: row[3] as number,
       positive_rate: row[4] as number,
       normalized_mentions: row[5] as number,

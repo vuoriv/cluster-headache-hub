@@ -12,22 +12,6 @@ interface CbLandingProps {
   onNavigate: (path: string) => void
 }
 
-const CATEGORY_FOR_SLUG: Record<string, string> = {
-  "psilocybin-mushrooms": "psychedelic",
-  "oxygen": "acute",
-  "rc-seeds-lsa": "psychedelic",
-  "vitamin-d3": "supportive",
-  "lsd": "psychedelic",
-  "triptans": "acute",
-  "energy-drinks-caffeine": "acute",
-  "prednisone-steroids": "conventional",
-  "verapamil": "conventional",
-  "bol-148": "psychedelic",
-  "melatonin": "supportive",
-  "lithium": "conventional",
-  "ketamine": "psychedelic",
-}
-
 export function CbLanding({ onNavigate }: CbLandingProps) {
   const { loading, error, getForumStats, getTreatmentRankings, getTimeline, getRecommendationData } = useAnalysisDb()
 
@@ -80,7 +64,11 @@ export function CbLanding({ onNavigate }: CbLandingProps) {
 
       <CbDisclaimer onNavigate={onNavigate} />
 
-      <CbStatsRow stats={stats} />
+      <CbStatsRow stats={stats} avgPositiveRate={
+        rankings.length > 0
+          ? Math.round(rankings.reduce((sum, r) => sum + r.positive_rate, 0) / rankings.length)
+          : 0
+      } />
 
       <Separator />
 
@@ -97,7 +85,7 @@ export function CbLanding({ onNavigate }: CbLandingProps) {
             <CbTreatmentCard
               key={r.slug}
               ranking={r}
-              category={CATEGORY_FOR_SLUG[r.slug] ?? "conventional"}
+              category={r.category ?? "conventional"}
               onNavigate={onNavigate}
             />
           ))}
