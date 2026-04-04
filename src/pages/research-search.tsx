@@ -1,5 +1,4 @@
 import { useState, useMemo } from "react"
-import { useTranslation } from "react-i18next"
 import { Search, BookOpen, ChevronDown, ChevronUp, ExternalLink } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -13,7 +12,6 @@ import { cn } from "@/lib/utils"
 const PAGE_SIZE = 25
 
 export function ResearchSearchPage() {
-  const { t } = useTranslation()
   const { loading, error, searchPapers, getCategories, getMeta } = useDataDb()
   const stats = useMemo(() => (loading ? null : getMeta()), [loading, getMeta])
 
@@ -54,7 +52,7 @@ export function ResearchSearchPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl font-bold">{t("research.title", "Latest Research Papers")}</h2>
+        <h2 className="text-2xl font-bold">Latest Research Papers</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           {stats?.paperCount?.toLocaleString() ?? "—"}+ cluster headache papers from{" "}
           <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">PubMed</a>

@@ -1,5 +1,4 @@
 import { useState, useMemo } from "react"
-import { useTranslation } from "react-i18next"
 import {
   FlaskConical,
   Search,
@@ -18,7 +17,6 @@ import { CATEGORY_CONFIG, STATUS_CONFIG, phaseLabel } from "@/lib/research-categ
 import { cn } from "@/lib/utils"
 
 export function ActiveTrialsPage() {
-  const { t } = useTranslation()
   const { loading, error, getActiveTrials, searchTrials } = useDataDb()
 
   const [query, setQuery] = useState("")
@@ -72,7 +70,7 @@ export function ActiveTrialsPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-bold">{t("trials.title", "Active Clinical Trials")}</h2>
+          <h2 className="text-2xl font-bold">Active Clinical Trials</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             All cluster headache trials currently recruiting, active, or starting soon — from{" "}
             <a href="https://clinicaltrials.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">ClinicalTrials.gov</a>

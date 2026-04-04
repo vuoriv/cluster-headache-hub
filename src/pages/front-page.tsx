@@ -65,21 +65,24 @@ export function FrontPage() {
           ) : (
             <>
               <StatCard
+                to="/trials"
                 value={stats.activeTrials}
                 label="Active Trials"
                 sublabel={`${stats.recruiting} recruiting`}
                 icon={<FlaskConical className="size-4" />}
               />
               <StatCard
+                to="/research"
                 value={stats.papers.toLocaleString()}
                 label="Research Papers"
                 sublabel="From PubMed"
                 icon={<FileText className="size-4" />}
               />
               <StatCard
+                to="/clusterbusters"
                 value={stats.forumPosts.toLocaleString()}
-                label="Forum Posts Analyzed"
-                sublabel={`${stats.forumTopics.toLocaleString()} topics`}
+                label="ClusterBusters Forum"
+                sublabel={`${stats.forumTopics.toLocaleString()} topics analyzed`}
                 icon={<Users className="size-4" />}
               />
             </>
@@ -156,31 +159,35 @@ export function FrontPage() {
 }
 
 function StatCard({
+  to,
   value,
   label,
   sublabel,
   icon,
 }: {
+  to: string
   value: string | number
   label: string
   sublabel: string
   icon: React.ReactNode
 }) {
   return (
-    <Card className="group relative overflow-hidden">
-      <CardContent className="flex flex-col gap-1 py-4">
-        <div className="flex items-center gap-2 text-muted-foreground">
-          {icon}
-          <span className="text-[0.65rem] font-medium uppercase tracking-wider">
-            {label}
+    <Link to={to} className="group">
+      <Card className="transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
+        <CardContent className="flex flex-col gap-1 py-4">
+          <div className="flex items-center gap-2 text-muted-foreground">
+            {icon}
+            <span className="text-[0.65rem] font-medium uppercase tracking-wider">
+              {label}
+            </span>
+          </div>
+          <span className="text-2xl font-bold tabular-nums tracking-tight">
+            {value}
           </span>
-        </div>
-        <span className="text-2xl font-bold tabular-nums tracking-tight">
-          {value}
-        </span>
-        <span className="text-[0.65rem] text-muted-foreground">{sublabel}</span>
-      </CardContent>
-    </Card>
+          <span className="text-[0.65rem] text-muted-foreground">{sublabel}</span>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }
 
