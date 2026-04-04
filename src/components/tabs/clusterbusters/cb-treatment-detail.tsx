@@ -157,10 +157,10 @@ export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) 
       </div>
 
       {/* Protocol (left, spans 2 rows) + Side Effects (top-right) + Co-Treatments (bottom-right) */}
-      <div className="grid gap-6 lg:grid-cols-2 lg:grid-rows-[auto_auto]">
+      <div className="grid gap-6 md:grid-cols-2 md:grid-rows-[auto_auto]">
         {/* Protocol Guide — spans both rows */}
         {hasProtocol && (
-          <Card className="lg:row-span-2">
+          <Card className="md:row-span-2">
             <CardHeader>
               <CardTitle className="text-sm">Protocol Guide</CardTitle>
               <CardDescription className="text-xs">
@@ -250,7 +250,7 @@ export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) 
       <Separator />
 
       {/* Charts — Outcomes + Timeline side by side */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         <CbOutcomeChart outcomes={profile.outcomes} treatmentName={profile.name} />
         <Card>
           <CardHeader className="pb-2">

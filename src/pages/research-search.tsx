@@ -56,9 +56,9 @@ export function ResearchSearchPage() {
       <div>
         <h2 className="text-2xl font-bold">{t("research.title", "Latest Research Papers")}</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Recent cluster headache publications from{" "}
+          {stats?.paperCount?.toLocaleString() ?? "—"}+ cluster headache papers from{" "}
           <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">PubMed</a>
-          {" "}({stats?.paperCount?.toLocaleString() ?? "—"}+ total)
+          , categorized and scored for relevance
         </p>
       </div>
 
