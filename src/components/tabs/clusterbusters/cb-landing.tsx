@@ -66,7 +66,7 @@ export function CbLanding({ onNavigate }: CbLandingProps) {
 
       <CbStatsRow stats={stats} avgPositiveRate={
         rankings.length > 0
-          ? Math.round(rankings.reduce((sum, r) => sum + r.positive_rate, 0) / rankings.length)
+          ? Math.round(rankings.reduce((sum, r) => sum + r.positive_rate, 0) / rankings.length * 100)
           : 0
       } />
 
