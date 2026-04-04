@@ -27,3 +27,5 @@ dist
 .superpowers
 .playwright-mcp
 scripts/pipeline/.cache
+*.db-shm
+*.db-wal
