@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next"
 import {
   FlaskConical,
   Search,
-  Filter,
   ExternalLink,
   Users,
   Calendar,
@@ -13,16 +12,10 @@ import {
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useDataDb, type ResearchTrial } from "@/lib/data-db"
 import { CATEGORY_CONFIG, STATUS_CONFIG, phaseLabel } from "@/lib/research-categories"
+import { cn } from "@/lib/utils"
 
 export function ActiveTrialsPage() {
   const { t } = useTranslation()
@@ -33,10 +26,18 @@ export function ActiveTrialsPage() {
   const [categoryFilter, setCategoryFilter] = useState<string>("all")
   const [expandedNct, setExpandedNct] = useState<string | null>(null)
 
+  const allTrials = useMemo(() => (loading ? [] : getActiveTrials()), [loading, getActiveTrials])
+
+  // Get categories that actually exist in active trials
+  const activeCategories = useMemo(() => {
+    const cats = new Set(allTrials.map((t) => t.category))
+    return Object.keys(CATEGORY_CONFIG).filter((k) => cats.has(k))
+  }, [allTrials])
+
   const trials = useMemo(() => {
     if (loading) return []
     if (!query && statusFilter === "all" && categoryFilter === "all") {
-      return getActiveTrials()
+      return allTrials
     }
     return searchTrials({
       query: query || undefined,
@@ -47,17 +48,16 @@ export function ActiveTrialsPage() {
         ? ["RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING"].includes(t.status)
         : true,
     )
-  }, [loading, getActiveTrials, searchTrials, query, statusFilter, categoryFilter])
+  }, [loading, allTrials, searchTrials, query, statusFilter, categoryFilter])
 
   const stats = useMemo(() => {
     if (loading) return null
-    const all = getActiveTrials()
     return {
-      total: all.length,
-      recruiting: all.filter((t) => t.status === "RECRUITING").length,
-      psychedelic: all.filter((t) => t.category === "psychedelic").length,
+      total: allTrials.length,
+      recruiting: allTrials.filter((t) => t.status === "RECRUITING").length,
+      psychedelic: allTrials.filter((t) => t.category === "psychedelic").length,
     }
-  }, [loading, getActiveTrials])
+  }, [loading, allTrials])
 
   if (error) {
     return (
@@ -74,7 +74,7 @@ export function ActiveTrialsPage() {
         <div>
           <h2 className="text-2xl font-bold">{t("trials.title", "Active Clinical Trials")}</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            All cluster headache trials currently recruiting, active, or starting soon — fetched live from{" "}
+            All cluster headache trials currently recruiting, active, or starting soon — from{" "}
             <a href="https://clinicaltrials.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">ClinicalTrials.gov</a>
           </p>
         </div>
@@ -87,52 +87,80 @@ export function ActiveTrialsPage() {
         )}
       </div>
 
-      {/* Filters */}
-      <div className="flex flex-wrap items-center gap-2">
-        <div className="relative flex-1 sm:max-w-xs">
-          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder={t("trials.searchPlaceholder", "Search trials...")}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="pl-9"
-          />
-        </div>
+      {/* Search */}
+      <div className="relative sm:max-w-md">
+        <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          placeholder="Search by title, intervention, or sponsor..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="pl-9"
+        />
+      </div>
 
-        <Filter className="size-3.5 text-muted-foreground" />
+      {/* Status label filters */}
+      <div className="flex flex-wrap gap-1.5">
+        <span className="mr-1 flex items-center text-[0.65rem] font-medium uppercase tracking-wider text-muted-foreground">Status</span>
+        {(["all", "RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING"] as const).map((status) => {
+          const active = statusFilter === status
+          const label = status === "all" ? "All" : STATUS_CONFIG[status]?.label ?? status
+          return (
+            <button
+              key={status}
+              onClick={() => setStatusFilter(active && status !== "all" ? "all" : status)}
+              className={cn(
+                "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+                active
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {label}
+            </button>
+          )
+        })}
+      </div>
 
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="h-9 w-[150px] text-xs">
-            <SelectValue placeholder="Status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All statuses</SelectItem>
-            <SelectItem value="RECRUITING">Recruiting</SelectItem>
-            <SelectItem value="NOT_YET_RECRUITING">Starting Soon</SelectItem>
-            <SelectItem value="ACTIVE_NOT_RECRUITING">Active</SelectItem>
-          </SelectContent>
-        </Select>
-
-        <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-          <SelectTrigger className="h-9 w-[150px] text-xs">
-            <SelectValue placeholder="Category" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All categories</SelectItem>
-            {Object.entries(CATEGORY_CONFIG).map(([key, cfg]) => (
-              <SelectItem key={key} value={key}>
-                {cfg.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      {/* Category label filters */}
+      <div className="flex flex-wrap gap-1.5">
+        <span className="mr-1 flex items-center text-[0.65rem] font-medium uppercase tracking-wider text-muted-foreground">Type</span>
+        <button
+          onClick={() => setCategoryFilter("all")}
+          className={cn(
+            "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+            categoryFilter === "all"
+              ? "border-primary bg-primary text-primary-foreground"
+              : "border-border text-muted-foreground hover:text-foreground",
+          )}
+        >
+          All
+        </button>
+        {activeCategories.map((cat) => {
+          const cfg = CATEGORY_CONFIG[cat]
+          if (!cfg) return null
+          const active = categoryFilter === cat
+          return (
+            <button
+              key={cat}
+              onClick={() => setCategoryFilter(active ? "all" : cat)}
+              className={cn(
+                "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+                active
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {cfg.label}
+            </button>
+          )
+        })}
       </div>
 
       {/* Trial Cards */}
       {loading ? (
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="flex flex-col gap-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <Skeleton key={i} className="h-36 w-full rounded-lg" />
+            <Skeleton key={i} className="h-28 w-full rounded-lg" />
           ))}
         </div>
       ) : trials.length === 0 ? (
@@ -152,6 +180,7 @@ export function ActiveTrialsPage() {
               onToggle={() =>
                 setExpandedNct(expandedNct === trial.nctId ? null : trial.nctId)
               }
+              onSponsorClick={(sponsor) => setQuery(sponsor)}
             />
           ))}
         </div>
@@ -175,10 +204,12 @@ function TrialCard({
   trial,
   expanded,
   onToggle,
+  onSponsorClick,
 }: {
   trial: ResearchTrial
   expanded: boolean
   onToggle: () => void
+  onSponsorClick: (sponsor: string) => void
 }) {
   const catConfig = CATEGORY_CONFIG[trial.category]
   const statConfig = STATUS_CONFIG[trial.status]
@@ -189,7 +220,17 @@ function TrialCard({
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
             <h3 className="text-sm font-semibold leading-snug">{trial.title}</h3>
-            <p className="mt-1 text-xs text-muted-foreground">{trial.sponsor}</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              <button
+                className="font-medium text-foreground/70 hover:underline"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onSponsorClick(trial.sponsor)
+                }}
+              >
+                {trial.sponsor}
+              </button>
+            </p>
           </div>
           {expanded ? (
             <ChevronUp className="mt-0.5 size-4 shrink-0 text-muted-foreground" />

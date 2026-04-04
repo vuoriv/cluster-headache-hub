@@ -1,20 +1,14 @@
 import { useState, useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { Search, BookOpen, Filter, ChevronDown, ChevronUp, ExternalLink } from "lucide-react"
+import { Search, BookOpen, ChevronDown, ChevronUp, ExternalLink } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useDataDb, type ResearchPaper } from "@/lib/data-db"
 import { CATEGORY_CONFIG } from "@/lib/research-categories"
+import { cn } from "@/lib/utils"
 
 const PAGE_SIZE = 25
 
@@ -44,12 +38,8 @@ export function ResearchSearchPage() {
     })
   }, [loading, searchPapers, query, category, yearFrom, yearTo, page])
 
-  const handleSearch = () => {
-    setPage(0)
-  }
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") handleSearch()
+    if (e.key === "Enter") setPage(0)
   }
 
   if (error) {
@@ -66,79 +56,89 @@ export function ResearchSearchPage() {
       <div>
         <h2 className="text-2xl font-bold">{t("research.title", "Latest Research Papers")}</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Recent cluster headache publications fetched live from{" "}
+          Recent cluster headache publications from{" "}
           <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">PubMed</a>
-          {" "}({stats?.paperCount?.toLocaleString() ?? "—"}+ total, sorted by date)
+          {" "}({stats?.paperCount?.toLocaleString() ?? "—"}+ total)
         </p>
       </div>
 
-      {/* Search & Filters */}
-      <Card>
-        <CardContent className="pt-4">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  placeholder={t("research.searchPlaceholder", "Search papers by title, abstract, or author...")}
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="pl-9"
-                />
-              </div>
-            </div>
-            <Button onClick={handleSearch} size="sm">
-              <Search className="mr-1.5 size-3.5" />
-              {t("research.search", "Search")}
-            </Button>
-          </div>
+      {/* Search */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            placeholder="Search by title, abstract, or researcher name..."
+            value={query}
+            onChange={(e) => { setQuery(e.target.value); setPage(0) }}
+            onKeyDown={handleKeyDown}
+            className="pl-9"
+          />
+        </div>
+        <div className="flex gap-2">
+          <Input
+            type="number"
+            placeholder="From"
+            value={yearFrom}
+            onChange={(e) => { setYearFrom(e.target.value); setPage(0) }}
+            className="h-9 w-[80px] text-xs"
+            min="1950"
+            max="2030"
+          />
+          <span className="flex items-center text-xs text-muted-foreground">–</span>
+          <Input
+            type="number"
+            placeholder="To"
+            value={yearTo}
+            onChange={(e) => { setYearTo(e.target.value); setPage(0) }}
+            className="h-9 w-[80px] text-xs"
+            min="1950"
+            max="2030"
+          />
+        </div>
+      </div>
 
-          <div className="mt-3 flex flex-wrap items-center gap-2">
-            <Filter className="size-3.5 text-muted-foreground" />
-            <Select value={category} onValueChange={(v) => { setCategory(v); setPage(0) }}>
-              <SelectTrigger className="h-8 w-[160px] text-xs">
-                <SelectValue placeholder="Category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All categories</SelectItem>
-                {categories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>
-                    {CATEGORY_CONFIG[cat]?.label ?? cat}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+      {/* Category label filters */}
+      <div className="flex flex-wrap gap-1.5">
+        <button
+          onClick={() => { setCategory("all"); setPage(0) }}
+          className={cn(
+            "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+            category === "all"
+              ? "border-primary bg-primary text-primary-foreground"
+              : "border-border text-muted-foreground hover:text-foreground",
+          )}
+        >
+          All
+        </button>
+        {categories.map((cat) => {
+          const cfg = CATEGORY_CONFIG[cat]
+          if (!cfg) return null
+          const active = category === cat
+          return (
+            <button
+              key={cat}
+              onClick={() => { setCategory(active ? "all" : cat); setPage(0) }}
+              className={cn(
+                "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+                active
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {cfg.label}
+            </button>
+          )
+        })}
+      </div>
 
-            <Input
-              type="number"
-              placeholder="From year"
-              value={yearFrom}
-              onChange={(e) => { setYearFrom(e.target.value); setPage(0) }}
-              className="h-8 w-[100px] text-xs"
-              min="1950"
-              max="2030"
-            />
-            <span className="text-xs text-muted-foreground">–</span>
-            <Input
-              type="number"
-              placeholder="To year"
-              value={yearTo}
-              onChange={(e) => { setYearTo(e.target.value); setPage(0) }}
-              className="h-8 w-[100px] text-xs"
-              min="1950"
-              max="2030"
-            />
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Results */}
+      {/* Results hint */}
       {!loading && !query && category === "all" && !yearFrom && !yearTo && papers.length > 0 && (
         <p className="text-xs font-medium text-muted-foreground">
           Showing highest-relevance papers. Use search and filters to narrow results.
         </p>
       )}
+
+      {/* Results */}
       {loading ? (
         <div className="flex flex-col gap-3">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -164,12 +164,12 @@ export function ResearchSearchPage() {
                   onToggle={() =>
                     setExpandedPmid(expandedPmid === paper.pmid ? null : paper.pmid)
                   }
+                  onAuthorClick={(author) => { setQuery(author); setPage(0) }}
                 />
               ))
             )}
           </div>
 
-          {/* Pagination */}
           {papers.length > 0 && (
             <div className="flex items-center justify-between">
               <Button
@@ -203,13 +203,18 @@ function PaperCard({
   paper,
   expanded,
   onToggle,
+  onAuthorClick,
 }: {
   paper: ResearchPaper
   expanded: boolean
   onToggle: () => void
+  onAuthorClick: (author: string) => void
 }) {
   const catConfig = CATEGORY_CONFIG[paper.category]
   const year = paper.pubDate?.slice(0, 4) || ""
+
+  // Extract first author surname for clickable filter
+  const firstAuthor = paper.authors?.split(",")[0]?.trim()
 
   return (
     <Card className="transition-all hover:shadow-sm">
@@ -218,7 +223,20 @@ function PaperCard({
           <div className="min-w-0 flex-1">
             <h3 className="text-sm font-semibold leading-snug">{paper.title}</h3>
             <p className="mt-1 text-xs text-muted-foreground">
-              {paper.authors}
+              {firstAuthor && (
+                <button
+                  className="font-medium text-foreground/70 hover:underline"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onAuthorClick(firstAuthor)
+                  }}
+                >
+                  {firstAuthor}
+                </button>
+              )}
+              {paper.authors?.includes(",") && (
+                <span>, {paper.authors.split(",").slice(1).join(",")}</span>
+              )}
             </p>
           </div>
           {expanded ? (
