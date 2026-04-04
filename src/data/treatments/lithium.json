@@ -1,0 +1,132 @@
+{
+  "slug": "lithium",
+  "name": "Lithium",
+  "category": "conventional",
+  "stats": {
+    "mentions": 358,
+    "positiveRate": 0.722,
+    "peakYear": 2017,
+    "score": 0.444
+  },
+  "protocol": {
+    "dosing": [
+      "900 mg/day",
+      "600 mg/day",
+      "1500 mg/day",
+      "Dose unspecified (prescription)",
+      "Low-dose lithium orotate (supplement)"
+    ],
+    "preparations": [
+      "Oral tablets (lithium carbonate, prescription)",
+      "Lithium orotate (OTC supplement)",
+      "Ionized lithium in mineral supplement"
+    ],
+    "schedule": [
+      "Daily preventive \u2014 ongoing use during cycle or chronic period",
+      "Combined with verapamil as dual preventive",
+      "Requires regular blood level monitoring",
+      "Discontinued before psilocybin/LSD busting (dangerous interaction)",
+      "Titrated up until therapeutic blood levels reached"
+    ]
+  },
+  "outcomes": {
+    "effective": 151,
+    "partial": 11,
+    "noEffect": 28,
+    "sampleSize": 209
+  },
+  "timeline": [
+    {
+      "year": 2009,
+      "mentions": 3
+    },
+    {
+      "year": 2010,
+      "mentions": 32
+    },
+    {
+      "year": 2011,
+      "mentions": 42
+    },
+    {
+      "year": 2012,
+      "mentions": 27
+    },
+    {
+      "year": 2013,
+      "mentions": 20
+    },
+    {
+      "year": 2014,
+      "mentions": 23
+    },
+    {
+      "year": 2015,
+      "mentions": 21
+    },
+    {
+      "year": 2016,
+      "mentions": 15
+    },
+    {
+      "year": 2017,
+      "mentions": 58
+    },
+    {
+      "year": 2018,
+      "mentions": 29
+    },
+    {
+      "year": 2019,
+      "mentions": 32
+    },
+    {
+      "year": 2020,
+      "mentions": 10
+    },
+    {
+      "year": 2021,
+      "mentions": 6
+    },
+    {
+      "year": 2022,
+      "mentions": 11
+    },
+    {
+      "year": 2023,
+      "mentions": 18
+    },
+    {
+      "year": 2024,
+      "mentions": 7
+    },
+    {
+      "year": 2025,
+      "mentions": 4
+    }
+  ],
+  "sideEffects": [
+    "Cognitive fog / dulled alertness / feeling cloudy",
+    "Thyroid enlargement or dysfunction",
+    "Lethargy / fatigue",
+    "Weight gain",
+    "Dulled libido",
+    "Dangerous potentiation of psychedelics (risk of seizures)",
+    "Kidney concerns (long-term use)",
+    "Tinnitus / ear ringing",
+    "Neuropathy",
+    "General unspecified side effects (reason for refusal or discontinuation)"
+  ],
+  "contraindications": [],
+  "coTreatments": [
+    "Verapamil",
+    "Oxygen (high-flow)",
+    "Triptans (sumatriptan/imitrex)",
+    "Psilocybin mushrooms (busting)",
+    "Prednisone / corticosteroids",
+    "Topamax (topiramate)",
+    "Vitamin D3 regimen",
+    "Melatonin"
+  ],
+  "sampleSize": 50
+}

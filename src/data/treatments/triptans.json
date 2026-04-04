@@ -1,0 +1,138 @@
+{
+  "slug": "triptans",
+  "name": "Triptans",
+  "category": "acute",
+  "stats": {
+    "mentions": 3407,
+    "positiveRate": 0.702,
+    "peakYear": 2022,
+    "score": 0.526
+  },
+  "protocol": {
+    "dosing": [
+      "Sumatriptan 6mg injection (Imitrex auto-injector)",
+      "Triptan type/dose unspecified",
+      "Sumatriptan 20mg nasal spray (Imigran/Imitrex)",
+      "Rizatriptan 10mg oral wafer/tablet (Maxalt)",
+      "Sumatriptan 50-100mg oral tablet",
+      "Zolmitriptan 5mg nasal spray (Zomig)"
+    ],
+    "preparations": [
+      "Subcutaneous injection (auto-injector pen)",
+      "Oral tablet or wafer (dissolving)",
+      "Nasal spray",
+      "Self-injection from vial with syringe"
+    ],
+    "schedule": [
+      "Inject at first sign of attack onset for fastest abort",
+      "Detox from triptans (5+ day washout) before busting with psychedelics",
+      "Limit use strictly to avoid rebound/medication overuse headaches",
+      "Use as emergency backup only when O2 is unavailable or fails",
+      "Oral triptan taken at onset (slower but used when no other option)"
+    ]
+  },
+  "outcomes": {
+    "effective": 1456,
+    "partial": 81,
+    "noEffect": 331,
+    "sampleSize": 2073
+  },
+  "timeline": [
+    {
+      "year": 2009,
+      "mentions": 16
+    },
+    {
+      "year": 2010,
+      "mentions": 200
+    },
+    {
+      "year": 2011,
+      "mentions": 245
+    },
+    {
+      "year": 2012,
+      "mentions": 195
+    },
+    {
+      "year": 2013,
+      "mentions": 208
+    },
+    {
+      "year": 2014,
+      "mentions": 211
+    },
+    {
+      "year": 2015,
+      "mentions": 230
+    },
+    {
+      "year": 2016,
+      "mentions": 173
+    },
+    {
+      "year": 2017,
+      "mentions": 237
+    },
+    {
+      "year": 2018,
+      "mentions": 227
+    },
+    {
+      "year": 2019,
+      "mentions": 225
+    },
+    {
+      "year": 2020,
+      "mentions": 171
+    },
+    {
+      "year": 2021,
+      "mentions": 240
+    },
+    {
+      "year": 2022,
+      "mentions": 339
+    },
+    {
+      "year": 2023,
+      "mentions": 227
+    },
+    {
+      "year": 2024,
+      "mentions": 165
+    },
+    {
+      "year": 2025,
+      "mentions": 78
+    },
+    {
+      "year": 2026,
+      "mentions": 20
+    }
+  ],
+  "sideEffects": [
+    "Rebound/medication overuse headaches (more frequent and longer cycles)",
+    "Blocks or interferes with psilocybin/LSD busting effectiveness (must detox first)",
+    "Increased attack frequency and pain intensity with overuse",
+    "Loss of effectiveness over time (tolerance)",
+    "Cycle prolongation (episodes last significantly longer with heavy triptan use)",
+    "Difficult and painful detox period when stopping before busting",
+    "High cost and insurance/prescription supply limitations",
+    "Chest tightness, pressure, or difficulty breathing",
+    "Feeling loopy, dizzy, or zombie-like after use",
+    "Oral forms too slow to effectively abort CH attacks (30-60+ min)"
+  ],
+  "contraindications": [],
+  "coTreatments": [
+    "Oxygen (high-flow)",
+    "Psilocybin mushrooms (busting)",
+    "Verapamil",
+    "Prednisone/corticosteroids",
+    "Vitamin D3 regimen",
+    "Energy drinks / caffeine",
+    "LSA / RC seeds (busting)",
+    "LSD (busting)"
+  ],
+  "sampleSize": 3407
+}

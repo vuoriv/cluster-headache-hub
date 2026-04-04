@@ -1,0 +1,139 @@
+{
+  "slug": "rc-seeds-lsa",
+  "name": "RC Seeds / LSA",
+  "category": "psychedelic",
+  "stats": {
+    "mentions": 4229,
+    "positiveRate": 0.741,
+    "peakYear": 2011,
+    "score": 0.574
+  },
+  "protocol": {
+    "dosing": [
+      "RC Seeds: 30-40 seeds",
+      "RC Seeds: 50-60 seeds",
+      "HBWR: 2-4 seeds",
+      "HBWR: 6-8 seeds (or equivalent via extraction)",
+      "RC Seeds: 15-25 seeds (low/starting dose)",
+      "RC Seeds: 100-200 seeds (high dose / preventive)"
+    ],
+    "preparations": [
+      "Crush/grind seeds with mortar and pestle",
+      "Soak crushed seeds in water (1-4 hours)",
+      "Strain and drink liquid only (discard sludge)",
+      "Add lemon juice to soak water (lemon tek)",
+      "Drink everything including seed sludge"
+    ],
+    "schedule": [
+      "Dose every 5 days",
+      "Detox from triptans 5+ days before first dose",
+      "2-3 doses to break a cycle",
+      "Maintenance dosing every 2-6 months during remission",
+      "Dose at bedtime / evening"
+    ]
+  },
+  "outcomes": {
+    "effective": 1300,
+    "partial": 111,
+    "noEffect": 213,
+    "sampleSize": 1754
+  },
+  "timeline": [
+    {
+      "year": 2009,
+      "mentions": 37
+    },
+    {
+      "year": 2010,
+      "mentions": 797
+    },
+    {
+      "year": 2011,
+      "mentions": 826
+    },
+    {
+      "year": 2012,
+      "mentions": 343
+    },
+    {
+      "year": 2013,
+      "mentions": 204
+    },
+    {
+      "year": 2014,
+      "mentions": 291
+    },
+    {
+      "year": 2015,
+      "mentions": 355
+    },
+    {
+      "year": 2016,
+      "mentions": 158
+    },
+    {
+      "year": 2017,
+      "mentions": 155
+    },
+    {
+      "year": 2018,
+      "mentions": 113
+    },
+    {
+      "year": 2019,
+      "mentions": 129
+    },
+    {
+      "year": 2020,
+      "mentions": 134
+    },
+    {
+      "year": 2021,
+      "mentions": 197
+    },
+    {
+      "year": 2022,
+      "mentions": 164
+    },
+    {
+      "year": 2023,
+      "mentions": 136
+    },
+    {
+      "year": 2024,
+      "mentions": 104
+    },
+    {
+      "year": 2025,
+      "mentions": 84
+    },
+    {
+      "year": 2026,
+      "mentions": 2
+    }
+  ],
+  "sideEffects": [
+    "Slapback headaches (rebound attacks after dosing)",
+    "Nausea",
+    "Sedation / drowsiness / heavy feeling",
+    "Mild psychoactive effects (slight buzz, relaxed, mellow mood)",
+    "Stomach upset / cramping",
+    "No noticeable side effects",
+    "Vomiting",
+    "Vasoconstriction (cold extremities, cold nose)",
+    "Restlessness / body energy",
+    "Mild visual effects (brighter colors, slight distortions)"
+  ],
+  "contraindications": [],
+  "coTreatments": [
+    "Oxygen (O2)",
+    "Vitamin D3 regimen",
+    "Psilocybin mushrooms",
+    "Energy drinks / caffeine (Red Bull, 5-Hour Energy, coffee)",
+    "Triptans (sumatriptan / Imitrex)",
+    "Melatonin",
+    "LSD",
+    "Prednisone"
+  ],
+  "sampleSize": 4229
+}

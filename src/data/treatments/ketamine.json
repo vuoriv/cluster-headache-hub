@@ -1,0 +1,139 @@
+{
+  "slug": "ketamine",
+  "name": "Ketamine",
+  "category": "psychedelic",
+  "stats": {
+    "mentions": 310,
+    "positiveRate": 0.707,
+    "peakYear": 2011,
+    "score": 0.434
+  },
+  "protocol": {
+    "dosing": [
+      "15-20 mg intranasal per dose",
+      "50 mg/ml intranasal spray (prescription)",
+      "75-100 mg oral troches/lozenges",
+      "IV infusion (clinic-administered, dose unspecified)",
+      "600 mg - 1 g/day oral (high-dose chronic use)",
+      "25 mg/ml intranasal spray (lower prescription dose)"
+    ],
+    "preparations": [
+      "Intranasal spray (prescription compounded)",
+      "IV infusion (clinical setting)",
+      "Oral troches/lozenges (prescription)",
+      "Self-administered insufflation (off-label)",
+      "Spravato (esketamine nasal spray, FDA-approved for depression)"
+    ],
+    "schedule": [
+      "Intranasal at onset of attack, repeat every 15 min as needed (up to 3-4 doses)",
+      "IV infusion series: 6-7 sessions over 2 weeks, then booster every 4-6 weeks",
+      "Daily maintenance dose (nasal or oral) as preventive",
+      "Bedtime dose (15-20 mg intranasal) when shadows appear",
+      "5-day ketamine-free break each month to prevent tolerance"
+    ]
+  },
+  "outcomes": {
+    "effective": 104,
+    "partial": 11,
+    "noEffect": 22,
+    "sampleSize": 147
+  },
+  "timeline": [
+    {
+      "year": 2009,
+      "mentions": 1
+    },
+    {
+      "year": 2010,
+      "mentions": 4
+    },
+    {
+      "year": 2011,
+      "mentions": 78
+    },
+    {
+      "year": 2012,
+      "mentions": 18
+    },
+    {
+      "year": 2013,
+      "mentions": 31
+    },
+    {
+      "year": 2014,
+      "mentions": 7
+    },
+    {
+      "year": 2015,
+      "mentions": 5
+    },
+    {
+      "year": 2016,
+      "mentions": 3
+    },
+    {
+      "year": 2017,
+      "mentions": 10
+    },
+    {
+      "year": 2018,
+      "mentions": 6
+    },
+    {
+      "year": 2019,
+      "mentions": 19
+    },
+    {
+      "year": 2020,
+      "mentions": 4
+    },
+    {
+      "year": 2021,
+      "mentions": 23
+    },
+    {
+      "year": 2022,
+      "mentions": 27
+    },
+    {
+      "year": 2023,
+      "mentions": 33
+    },
+    {
+      "year": 2024,
+      "mentions": 18
+    },
+    {
+      "year": 2025,
+      "mentions": 22
+    },
+    {
+      "year": 2026,
+      "mentions": 1
+    }
+  ],
+  "sideEffects": [
+    "Dissociation / feeling zonked out",
+    "Need to lie down / inability to function",
+    "Tolerance buildup over time",
+    "Enhanced psychedelic effects when combined with psilocybin or LSD",
+    "Cognitive impairment / scrambled memory",
+    "Potential for compulsive use",
+    "Bladder/bowel inflammation risk with long-term use",
+    "High cost ($450+/month for troches)",
+    "Incapacitation at high doses (hours-long)",
+    "May block psilocybin busting effectiveness (NMDA/serotonin interaction concern)"
+  ],
+  "contraindications": [],
+  "coTreatments": [
+    "Oxygen (high-flow)",
+    "Psilocybin mushrooms",
+    "Vitamin D3 regimen",
+    "Sumatriptan/triptans",
+    "Verapamil",
+    "LSD",
+    "Prednisone/steroids",
+    "Naltrexone (low-dose, 4.5 mg)"
+  ],
+  "sampleSize": 50
+}

@@ -1,0 +1,134 @@
+{
+  "slug": "oxygen",
+  "name": "Oxygen",
+  "category": "acute",
+  "stats": {
+    "mentions": 7209,
+    "positiveRate": 0.757,
+    "peakYear": 2011,
+    "score": 0.674
+  },
+  "protocol": {
+    "dosing": [
+      "15 LPM",
+      "25 LPM",
+      "High-flow (unspecified LPM)",
+      "Hospital/ER administered (unspecified)"
+    ],
+    "preparations": [
+      "Non-rebreather mask",
+      "ClusterO2 mask / OptiMask",
+      "Home oxygen tanks (medical supply)",
+      "Welding oxygen tanks",
+      "E-tank (portable)"
+    ],
+    "schedule": [
+      "Breathe O2 at onset of attack until pain subsides (10-20 min typical)",
+      "Inhale through mask, remove mask to exhale (creates negative sinus pressure)",
+      "Continue O2 for several minutes after pain stops to prevent rebound",
+      "Combine O2 with energy drink (Red Bull/5-Hour Energy) at onset",
+      "Hyperventilation / forceful deep breathing through mask"
+    ]
+  },
+  "outcomes": {
+    "effective": 3036,
+    "partial": 143,
+    "noEffect": 490,
+    "sampleSize": 4011
+  },
+  "timeline": [
+    {
+      "year": 2009,
+      "mentions": 34
+    },
+    {
+      "year": 2010,
+      "mentions": 645
+    },
+    {
+      "year": 2011,
+      "mentions": 675
+    },
+    {
+      "year": 2012,
+      "mentions": 570
+    },
+    {
+      "year": 2013,
+      "mentions": 403
+    },
+    {
+      "year": 2014,
+      "mentions": 622
+    },
+    {
+      "year": 2015,
+      "mentions": 665
+    },
+    {
+      "year": 2016,
+      "mentions": 325
+    },
+    {
+      "year": 2017,
+      "mentions": 475
+    },
+    {
+      "year": 2018,
+      "mentions": 367
+    },
+    {
+      "year": 2019,
+      "mentions": 457
+    },
+    {
+      "year": 2020,
+      "mentions": 336
+    },
+    {
+      "year": 2021,
+      "mentions": 362
+    },
+    {
+      "year": 2022,
+      "mentions": 442
+    },
+    {
+      "year": 2023,
+      "mentions": 362
+    },
+    {
+      "year": 2024,
+      "mentions": 263
+    },
+    {
+      "year": 2025,
+      "mentions": 175
+    },
+    {
+      "year": 2026,
+      "mentions": 31
+    }
+  ],
+  "sideEffects": [
+    "Rebound attack after stopping O2 too soon",
+    "Oxygen becoming less effective over prolonged cycle",
+    "Tank depletion anxiety (running out during attack)",
+    "Cost burden (insurance often won't cover for CH)",
+    "Difficulty obtaining prescription",
+    "Limited mobility / not portable enough",
+    "Ineffective for some attacks (not 100% reliable)"
+  ],
+  "contraindications": [],
+  "coTreatments": [
+    "Psilocybin mushrooms (busting)",
+    "Vitamin D3 regimen",
+    "Triptans (sumatriptan/rizatriptan)",
+    "Energy drinks / caffeine (Red Bull, 5-Hour Energy, coffee)",
+    "Verapamil",
+    "LSD (Vitamin L)",
+    "Prednisone taper",
+    "Melatonin"
+  ],
+  "sampleSize": 7209
+}

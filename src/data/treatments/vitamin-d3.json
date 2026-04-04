@@ -1,0 +1,132 @@
+{
+  "slug": "vitamin-d3",
+  "name": "Vitamin D3 Regimen",
+  "category": "supportive",
+  "stats": {
+    "mentions": 2307,
+    "positiveRate": 0.767,
+    "peakYear": 2022,
+    "score": 0.531
+  },
+  "protocol": {
+    "dosing": [
+      "10,000 IU/day (maintenance)",
+      "50,000 IU/day (loading)",
+      "5,000 IU/day",
+      "20,000 IU/day",
+      "140,000 IU/day (accelerated loading: 100,000 IU Bio-Tech D3-50 + 40,000 IU Micro D3 sublingual)",
+      "50,000 IU/week (Bio-Tech D3-50)"
+    ],
+    "preparations": [
+      "Vitamin K2 (MK-4 or MK-7) cofactor",
+      "Magnesium cofactor (citrate, glycinate, or oxide)",
+      "Omega-3 Fish Oil cofactor",
+      "Oil-based D3 softgels (standard)",
+      "Bio-Tech D3-50 water-soluble capsules (50,000 IU)"
+    ],
+    "schedule": [
+      "Batch's Anti-Inflammatory Regimen (D3 + all cofactors daily)",
+      "Loading dose phase followed by maintenance dose",
+      "Blood testing for 25(OH)D3 serum levels",
+      "Target 25(OH)D3 level 80-100 ng/mL",
+      "Monitor serum calcium to avoid hypercalcemia"
+    ]
+  },
+  "outcomes": {
+    "effective": 973,
+    "partial": 54,
+    "noEffect": 134,
+    "sampleSize": 1268
+  },
+  "timeline": [
+    {
+      "year": 2010,
+      "mentions": 1
+    },
+    {
+      "year": 2011,
+      "mentions": 127
+    },
+    {
+      "year": 2012,
+      "mentions": 64
+    },
+    {
+      "year": 2013,
+      "mentions": 83
+    },
+    {
+      "year": 2014,
+      "mentions": 99
+    },
+    {
+      "year": 2015,
+      "mentions": 174
+    },
+    {
+      "year": 2016,
+      "mentions": 92
+    },
+    {
+      "year": 2017,
+      "mentions": 187
+    },
+    {
+      "year": 2018,
+      "mentions": 180
+    },
+    {
+      "year": 2019,
+      "mentions": 211
+    },
+    {
+      "year": 2020,
+      "mentions": 130
+    },
+    {
+      "year": 2021,
+      "mentions": 202
+    },
+    {
+      "year": 2022,
+      "mentions": 278
+    },
+    {
+      "year": 2023,
+      "mentions": 167
+    },
+    {
+      "year": 2024,
+      "mentions": 218
+    },
+    {
+      "year": 2025,
+      "mentions": 84
+    },
+    {
+      "year": 2026,
+      "mentions": 10
+    }
+  ],
+  "sideEffects": [
+    "No side effects reported (well tolerated)",
+    "Hypercalcemia risk at very high doses (serum calcium above normal range)",
+    "Stopped working after period of effectiveness (possible allergic reaction interference)",
+    "Reduced severity but did not eliminate attacks",
+    "No effect / regimen did not work",
+    "Required 25(OH)D levels above 150 ng/mL (potentially unsafe range) for efficacy",
+    "Kidney issues at very high vitamin D levels (urinary discomfort with concurrent Topiramate)"
+  ],
+  "contraindications": [],
+  "coTreatments": [
+    "Oxygen (high-flow O2, 15-25 LPM)",
+    "Psilocybin mushrooms (busting)",
+    "Energy drinks / caffeine (Red Bull, 5-Hour Energy, coffee)",
+    "Verapamil",
+    "Triptans (sumatriptan / Imitrex)",
+    "Melatonin (at bedtime, 10-25 mg)",
+    "Prednisone taper",
+    "LSA seeds (RC seeds / HBWR)"
+  ],
+  "sampleSize": 50
+}

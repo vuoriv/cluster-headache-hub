@@ -95,7 +95,9 @@ def build_db():
     rankings = load_json("treatment-rankings.json")
     # Build slug->category map from recommendation data for category info
     rec_data = load_json("recommendation-data.json")
-    category_map = {r["slug"]: r["category"] for r in rec_data["rankings"]}
+    # Handle both old format (rankings) and new format (treatments)
+    rec_list = rec_data.get("rankings", rec_data.get("treatments", []))
+    category_map = {r["slug"]: r.get("category", "conventional") for r in rec_list}
 
     for r in rankings:
         category = category_map.get(r["slug"], "conventional")
