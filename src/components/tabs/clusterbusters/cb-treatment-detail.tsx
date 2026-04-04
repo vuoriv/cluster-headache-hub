@@ -156,11 +156,11 @@ export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) 
         </Card>
       </div>
 
-      {/* Protocol + Outcomes */}
-      <div className="grid gap-6 lg:grid-cols-2">
-        {/* Protocol Guide */}
+      {/* Protocol (left, spans 2 rows) + Side Effects (top-right) + Co-Treatments (bottom-right) */}
+      <div className="grid gap-6 lg:grid-cols-2 lg:grid-rows-[auto_auto]">
+        {/* Protocol Guide — spans both rows */}
         {hasProtocol && (
-          <Card>
+          <Card className="lg:row-span-2">
             <CardHeader>
               <CardTitle className="text-sm">Protocol Guide</CardTitle>
               <CardDescription className="text-xs">
@@ -193,13 +193,7 @@ export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) 
           </Card>
         )}
 
-        {/* Outcome Distribution */}
-        <CbOutcomeChart outcomes={profile.outcomes} treatmentName={profile.name} />
-      </div>
-
-      {/* Side Effects + Co-Treatments */}
-      <div className="grid gap-6 sm:grid-cols-2">
-        {/* Side Effects */}
+        {/* Side Effects — top-right */}
         <Card>
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-sm">
@@ -226,7 +220,7 @@ export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) 
           </CardContent>
         </Card>
 
-        {/* Commonly Used With */}
+        {/* Commonly Used With — bottom-right */}
         <Card>
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-sm">
@@ -255,30 +249,33 @@ export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) 
 
       <Separator />
 
-      {/* Discussion Timeline — compact, at bottom */}
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-sm">Discussion Timeline</CardTitle>
-          <CardDescription className="text-xs">Forum mentions per year</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={timelineConfig} className="h-[160px] w-full">
-            <AreaChart data={profile.timeline} margin={{ left: 0, right: 0 }}>
-              <CartesianGrid vertical={false} />
-              <XAxis dataKey="year" tickLine={false} axisLine={false} />
-              <YAxis tickLine={false} axisLine={false} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Area
-                dataKey="mentions"
-                type="monotone"
-                fill={color}
-                stroke={color}
-                fillOpacity={0.2}
-              />
-            </AreaChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
+      {/* Charts — Outcomes + Timeline side by side */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        <CbOutcomeChart outcomes={profile.outcomes} treatmentName={profile.name} />
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm">Discussion Timeline</CardTitle>
+            <CardDescription className="text-xs">Forum mentions per year</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={timelineConfig} className="h-[160px] w-full">
+              <AreaChart data={profile.timeline} margin={{ left: 0, right: 0 }}>
+                <CartesianGrid vertical={false} />
+                <XAxis dataKey="year" tickLine={false} axisLine={false} />
+                <YAxis tickLine={false} axisLine={false} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Area
+                  dataKey="mentions"
+                  type="monotone"
+                  fill={color}
+                  stroke={color}
+                  fillOpacity={0.2}
+                />
+              </AreaChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }
