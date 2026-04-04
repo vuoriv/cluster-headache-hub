@@ -65,6 +65,11 @@ CREATE TABLE IF NOT EXISTS recommendation_data (
   key TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS insights (
+  slug TEXT PRIMARY KEY,
+  data TEXT NOT NULL
+);
 """
 
 
@@ -185,6 +190,24 @@ def build_db():
             (key, json.dumps(value)),
         )
     print(f"  recommendation_data: {len(rec_data)} rows")
+
+    # insights
+    insights_dir = os.path.join(DATA_DIR, "insights")
+    if os.path.isdir(insights_dir):
+        insight_count = 0
+        for filename in sorted(os.listdir(insights_dir)):
+            if not filename.endswith(".json"):
+                continue
+            slug = filename.replace(".json", "")
+            filepath = os.path.join(insights_dir, filename)
+            with open(filepath, "r") as f:
+                data = json.load(f)
+            cursor.execute(
+                "INSERT INTO insights (slug, data) VALUES (?, ?)",
+                (slug, json.dumps(data)),
+            )
+            insight_count += 1
+        print(f"  insights: {insight_count} rows")
 
     conn.commit()
     conn.close()

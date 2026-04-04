@@ -98,6 +98,9 @@ interface DataDbContextValue {
   getPaper: (pmid: string) => ResearchPaper | null
   getMeta: () => PipelineMeta | null
   getCategories: () => string[]
+
+  // Insights
+  getInsight: <T = unknown>(slug: string) => T | null
 }
 
 const DataDbContext = createContext<DataDbContextValue | null>(null)
@@ -492,6 +495,22 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     return rows[0].values.map((r) => r[0] as string)
   }, [db])
 
+  const getInsight = useCallback(
+    <T = unknown>(slug: string): T | null => {
+      if (!db) return null
+      const stmt = db.prepare("SELECT data FROM insights WHERE slug = ?")
+      stmt.bind([slug])
+      if (!stmt.step()) {
+        stmt.free()
+        return null
+      }
+      const row = stmt.get()
+      stmt.free()
+      return JSON.parse(row[0] as string) as T
+    },
+    [db],
+  )
+
   const value: DataDbContextValue = {
     loading,
     error,
@@ -510,6 +529,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     getPaper,
     getMeta,
     getCategories,
+    getInsight,
   }
 
   return <DataDbContext.Provider value={value}>{children}</DataDbContext.Provider>

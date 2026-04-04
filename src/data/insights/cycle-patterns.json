@@ -1,0 +1,274 @@
+{
+  "seasonal": [
+    {
+      "month": "Jan",
+      "posts": 3608
+    },
+    {
+      "month": "Feb",
+      "posts": 3292
+    },
+    {
+      "month": "Mar",
+      "posts": 3322
+    },
+    {
+      "month": "Apr",
+      "posts": 3009
+    },
+    {
+      "month": "May",
+      "posts": 2897
+    },
+    {
+      "month": "Jun",
+      "posts": 2757
+    },
+    {
+      "month": "Jul",
+      "posts": 3389
+    },
+    {
+      "month": "Aug",
+      "posts": 3362
+    },
+    {
+      "month": "Sep",
+      "posts": 3463
+    },
+    {
+      "month": "Oct",
+      "posts": 3520
+    },
+    {
+      "month": "Nov",
+      "posts": 3321
+    },
+    {
+      "month": "Dec",
+      "posts": 4001
+    }
+  ],
+  "hourly": [
+    {
+      "hour": 0,
+      "posts": 1868
+    },
+    {
+      "hour": 1,
+      "posts": 1852
+    },
+    {
+      "hour": 2,
+      "posts": 1898
+    },
+    {
+      "hour": 3,
+      "posts": 1781
+    },
+    {
+      "hour": 4,
+      "posts": 1308
+    },
+    {
+      "hour": 5,
+      "posts": 887
+    },
+    {
+      "hour": 6,
+      "posts": 787
+    },
+    {
+      "hour": 7,
+      "posts": 701
+    },
+    {
+      "hour": 8,
+      "posts": 612
+    },
+    {
+      "hour": 9,
+      "posts": 567
+    },
+    {
+      "hour": 10,
+      "posts": 834
+    },
+    {
+      "hour": 11,
+      "posts": 1055
+    },
+    {
+      "hour": 12,
+      "posts": 1270
+    },
+    {
+      "hour": 13,
+      "posts": 1550
+    },
+    {
+      "hour": 14,
+      "posts": 2063
+    },
+    {
+      "hour": 15,
+      "posts": 2317
+    },
+    {
+      "hour": 16,
+      "posts": 2341
+    },
+    {
+      "hour": 17,
+      "posts": 2472
+    },
+    {
+      "hour": 18,
+      "posts": 2502
+    },
+    {
+      "hour": 19,
+      "posts": 2338
+    },
+    {
+      "hour": 20,
+      "posts": 2388
+    },
+    {
+      "hour": 21,
+      "posts": 2328
+    },
+    {
+      "hour": 22,
+      "posts": 2221
+    },
+    {
+      "hour": 23,
+      "posts": 2001
+    }
+  ],
+  "weekly": [
+    {
+      "day": "Mon",
+      "posts": 6039
+    },
+    {
+      "day": "Tue",
+      "posts": 6386
+    },
+    {
+      "day": "Wed",
+      "posts": 6073
+    },
+    {
+      "day": "Thu",
+      "posts": 5975
+    },
+    {
+      "day": "Fri",
+      "posts": 6084
+    },
+    {
+      "day": "Sat",
+      "posts": 4767
+    },
+    {
+      "day": "Sun",
+      "posts": 4617
+    }
+  ],
+  "treatment_trends": [
+    {
+      "year": "2009",
+      "psychedelic": 107,
+      "pharmaceutical": 36
+    },
+    {
+      "year": "2010",
+      "psychedelic": 1191,
+      "pharmaceutical": 403
+    },
+    {
+      "year": "2011",
+      "psychedelic": 1267,
+      "pharmaceutical": 460
+    },
+    {
+      "year": "2012",
+      "psychedelic": 964,
+      "pharmaceutical": 354
+    },
+    {
+      "year": "2013",
+      "psychedelic": 711,
+      "pharmaceutical": 335
+    },
+    {
+      "year": "2014",
+      "psychedelic": 758,
+      "pharmaceutical": 465
+    },
+    {
+      "year": "2015",
+      "psychedelic": 632,
+      "pharmaceutical": 402
+    },
+    {
+      "year": "2016",
+      "psychedelic": 266,
+      "pharmaceutical": 290
+    },
+    {
+      "year": "2017",
+      "psychedelic": 388,
+      "pharmaceutical": 496
+    },
+    {
+      "year": "2018",
+      "psychedelic": 340,
+      "pharmaceutical": 472
+    },
+    {
+      "year": "2019",
+      "psychedelic": 442,
+      "pharmaceutical": 519
+    },
+    {
+      "year": "2020",
+      "psychedelic": 328,
+      "pharmaceutical": 343
+    },
+    {
+      "year": "2021",
+      "psychedelic": 475,
+      "pharmaceutical": 348
+    },
+    {
+      "year": "2022",
+      "psychedelic": 334,
+      "pharmaceutical": 457
+    },
+    {
+      "year": "2023",
+      "psychedelic": 350,
+      "pharmaceutical": 440
+    },
+    {
+      "year": "2024",
+      "psychedelic": 235,
+      "pharmaceutical": 270
+    },
+    {
+      "year": "2025",
+      "psychedelic": 171,
+      "pharmaceutical": 163
+    },
+    {
+      "year": "2026",
+      "psychedelic": 23,
+      "pharmaceutical": 39
+    }
+  ],
+  "peak_month": "Dec",
+  "peak_hour": 18
+}

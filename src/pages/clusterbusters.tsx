@@ -4,6 +4,8 @@ import { CbLanding } from "@/components/tabs/clusterbusters/cb-landing"
 import { CbTreatmentDetail } from "@/components/tabs/clusterbusters/cb-treatment-detail"
 import { CbCompare } from "@/components/tabs/clusterbusters/cb-compare"
 import { CbMethodology } from "@/components/tabs/clusterbusters/cb-methodology"
+import { InsightsIndex } from "@/pages/insights/index"
+import { InsightPage } from "@/pages/insights/insight-page"
 
 export default function ClusterBustersPage() {
   const navigate = useNavigate()
@@ -21,6 +23,8 @@ export default function ClusterBustersPage() {
       <Route index element={<CbLanding onNavigate={onNavigate} />} />
       <Route path="compare" element={<CbCompare onNavigate={onNavigate} />} />
       <Route path="methodology" element={<CbMethodology onNavigate={onNavigate} />} />
+      <Route path="insights" element={<InsightsIndex />} />
+      <Route path="insights/:slug" element={<InsightPage />} />
       <Route
         path=":slug"
         element={<TreatmentDetailWrapper onNavigate={onNavigate} />}

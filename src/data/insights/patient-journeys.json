@@ -1,0 +1,85 @@
+{
+  "total_returning_users": 1486,
+  "users_with_gaps": 371,
+  "avg_year_span": 1.7,
+  "max_year_span": 17,
+  "span_distribution": {
+    "10+ years": 29,
+    "6-10 years": 115,
+    "<1 year": 795,
+    "3-5 years": 218,
+    "1-2 years": 329
+  },
+  "users_by_active_years": {
+    "1": 795,
+    "2": 359,
+    "3": 145,
+    "4": 70,
+    "5": 47,
+    "6": 32,
+    "7": 12,
+    "8": 6,
+    "10": 4,
+    "11": 3
+  },
+  "return_after_gap_treatments": [
+    {
+      "treatment": "Oxygen",
+      "count": 197
+    },
+    {
+      "treatment": "Psilocybin / Mushrooms",
+      "count": 141
+    },
+    {
+      "treatment": "Triptans",
+      "count": 112
+    },
+    {
+      "treatment": "Vitamin D3",
+      "count": 92
+    },
+    {
+      "treatment": "Energy Drinks",
+      "count": 89
+    },
+    {
+      "treatment": "RC Seeds / LSA",
+      "count": 79
+    },
+    {
+      "treatment": "Verapamil",
+      "count": 68
+    },
+    {
+      "treatment": "Prednisone",
+      "count": 63
+    },
+    {
+      "treatment": "LSD",
+      "count": 50
+    },
+    {
+      "treatment": "Melatonin",
+      "count": 32
+    }
+  ],
+  "returning_per_year": {
+    "2025": 45,
+    "2022": 40,
+    "2024": 39,
+    "2021": 37,
+    "2023": 37,
+    "2020": 37,
+    "2014": 37,
+    "2018": 34,
+    "2012": 33,
+    "2017": 29,
+    "2015": 29,
+    "2026": 28,
+    "2019": 27,
+    "2016": 25,
+    "2013": 25,
+    "2011": 2
+  }
+}

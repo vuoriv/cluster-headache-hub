@@ -1,0 +1,121 @@
+{
+  "post_counts": {
+    "episodic": 682,
+    "chronic": 1548,
+    "both": 499,
+    "unspecified": 37212
+  },
+  "conversion_mentions": 66,
+  "episodic_treatments": [
+    {
+      "treatment": "Oxygen",
+      "count": 270
+    },
+    {
+      "treatment": "Triptans",
+      "count": 174
+    },
+    {
+      "treatment": "Psilocybin / Mushrooms",
+      "count": 131
+    },
+    {
+      "treatment": "Verapamil",
+      "count": 121
+    },
+    {
+      "treatment": "Vitamin D3",
+      "count": 90
+    },
+    {
+      "treatment": "Prednisone",
+      "count": 88
+    },
+    {
+      "treatment": "RC Seeds / LSA",
+      "count": 88
+    },
+    {
+      "treatment": "Energy Drinks",
+      "count": 77
+    },
+    {
+      "treatment": "LSD",
+      "count": 33
+    },
+    {
+      "treatment": "Melatonin",
+      "count": 29
+    },
+    {
+      "treatment": "Lithium",
+      "count": 14
+    },
+    {
+      "treatment": "Ketamine",
+      "count": 6
+    },
+    {
+      "treatment": "BOL-148",
+      "count": 2
+    }
+  ],
+  "chronic_treatments": [
+    {
+      "treatment": "Oxygen",
+      "count": 421
+    },
+    {
+      "treatment": "Psilocybin / Mushrooms",
+      "count": 368
+    },
+    {
+      "treatment": "Triptans",
+      "count": 256
+    },
+    {
+      "treatment": "Verapamil",
+      "count": 192
+    },
+    {
+      "treatment": "RC Seeds / LSA",
+      "count": 179
+    },
+    {
+      "treatment": "Vitamin D3",
+      "count": 154
+    },
+    {
+      "treatment": "LSD",
+      "count": 148
+    },
+    {
+      "treatment": "Energy Drinks",
+      "count": 137
+    },
+    {
+      "treatment": "Prednisone",
+      "count": 119
+    },
+    {
+      "treatment": "Lithium",
+      "count": 69
+    },
+    {
+      "treatment": "Melatonin",
+      "count": 36
+    },
+    {
+      "treatment": "Ketamine",
+      "count": 30
+    },
+    {
+      "treatment": "BOL-148",
+      "count": 13
+    }
+  ],
+  "episodic_positive_rate": 54.7,
+  "chronic_positive_rate": 58.1,
+  "episodic_negative_rate": 16.4,
+  "chronic_negative_rate": 16.1
+}

@@ -1,0 +1,145 @@
+{
+  "total_caregiver_posts": 1540,
+  "patient_gender_estimate": {
+    "male": 753,
+    "female": 798,
+    "unknown": 0
+  },
+  "gender_ratio": 0.9,
+  "caregiver_relationships": [
+    {
+      "type": "Parent",
+      "count": 489
+    },
+    {
+      "type": "Husband / Partner (female patient)",
+      "count": 415
+    },
+    {
+      "type": "Wife / Partner (male patient)",
+      "count": 324
+    },
+    {
+      "type": "Son / Daughter",
+      "count": 145
+    },
+    {
+      "type": "Sibling",
+      "count": 86
+    },
+    {
+      "type": "Girlfriend (male patient)",
+      "count": 55
+    },
+    {
+      "type": "Boyfriend (female patient)",
+      "count": 26
+    }
+  ],
+  "caregiver_top_concerns": [
+    {
+      "concern": "Oxygen access / insurance",
+      "count": 501
+    },
+    {
+      "concern": "Emotional support / coping",
+      "count": 256
+    },
+    {
+      "concern": "Fear for patient's life / suicidal ideation",
+      "count": 230
+    },
+    {
+      "concern": "Help with diagnosis",
+      "count": 194
+    },
+    {
+      "concern": "Seeking treatment options",
+      "count": 184
+    }
+  ],
+  "caregiver_treatments_discussed": [
+    {
+      "treatment": "Oxygen",
+      "count": 477
+    },
+    {
+      "treatment": "Psilocybin / Mushrooms",
+      "count": 286
+    },
+    {
+      "treatment": "Triptans",
+      "count": 229
+    },
+    {
+      "treatment": "Energy Drinks",
+      "count": 147
+    },
+    {
+      "treatment": "Prednisone",
+      "count": 129
+    },
+    {
+      "treatment": "Vitamin D3",
+      "count": 128
+    },
+    {
+      "treatment": "RC Seeds / LSA",
+      "count": 120
+    },
+    {
+      "treatment": "Verapamil",
+      "count": 117
+    },
+    {
+      "treatment": "LSD",
+      "count": 86
+    },
+    {
+      "treatment": "Melatonin",
+      "count": 47
+    }
+  ],
+  "patient_treatments_discussed": [
+    {
+      "treatment": "Oxygen",
+      "count": 6339
+    },
+    {
+      "treatment": "Psilocybin / Mushrooms",
+      "count": 4252
+    },
+    {
+      "treatment": "Triptans",
+      "count": 2887
+    },
+    {
+      "treatment": "RC Seeds / LSA",
+      "count": 2616
+    },
+    {
+      "treatment": "Energy Drinks",
+      "count": 2282
+    },
+    {
+      "treatment": "Vitamin D3",
+      "count": 1954
+    },
+    {
+      "treatment": "LSD",
+      "count": 1622
+    },
+    {
+      "treatment": "Verapamil",
+      "count": 1472
+    },
+    {
+      "treatment": "Prednisone",
+      "count": 1120
+    },
+    {
+      "treatment": "Melatonin",
+      "count": 689
+    }
+  ]
+}

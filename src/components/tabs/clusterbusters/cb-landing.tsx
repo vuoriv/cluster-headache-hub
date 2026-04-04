@@ -1,3 +1,4 @@
+import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
 import { CbDisclaimer } from "./cb-disclaimer"
@@ -91,6 +92,24 @@ export function CbLanding({ onNavigate }: CbLandingProps) {
           ))}
         </div>
       </div>
+
+      <Separator />
+
+      {/* Insights link */}
+      <Card
+        className="cursor-pointer transition-all hover:shadow-md"
+        onClick={() => onNavigate("insights")}
+      >
+        <CardContent className="flex items-center justify-between py-4">
+          <div>
+            <h3 className="text-sm font-semibold">Community Insights</h3>
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              Deep analytics — patient journeys, episodic vs chronic, gender, cycle patterns, and more
+            </p>
+          </div>
+          <span className="text-sm font-medium text-primary">Explore →</span>
+        </CardContent>
+      </Card>
 
       <Separator />
 

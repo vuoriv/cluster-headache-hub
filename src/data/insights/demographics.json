@@ -1,0 +1,111 @@
+{
+  "total_authors": 2749,
+  "posts_per_year": {
+    "2009": 250,
+    "2010": 4749,
+    "2011": 5324,
+    "2012": 3638,
+    "2013": 2678,
+    "2014": 3193,
+    "2015": 2928,
+    "2016": 1278,
+    "2017": 1862,
+    "2018": 1684,
+    "2019": 2405,
+    "2020": 1564,
+    "2021": 2083,
+    "2022": 2187,
+    "2023": 1924,
+    "2024": 1301,
+    "2025": 756,
+    "2026": 137
+  },
+  "new_authors_per_year": {
+    "2009": 72,
+    "2010": 202,
+    "2011": 210,
+    "2012": 154,
+    "2013": 143,
+    "2014": 172,
+    "2015": 145,
+    "2016": 197,
+    "2017": 223,
+    "2018": 223,
+    "2019": 242,
+    "2020": 158,
+    "2021": 153,
+    "2022": 131,
+    "2023": 124,
+    "2024": 107,
+    "2025": 81,
+    "2026": 12
+  },
+  "activity_distribution": {
+    "100+ posts": 55,
+    "2-5 posts": 767,
+    "1 post": 1263,
+    "6-20 posts": 476,
+    "21-100 posts": 188
+  },
+  "forum_activity": {
+    "Share Your Busting Stories": 19179,
+    "Theory & Implementation": 11624,
+    "General Board": 4072,
+    "Research & Scientific News": 3310,
+    "Advocacy Events and Conferences": 1350,
+    "ClusterBuster Files": 248,
+    "ClusterBuster Fund Raising": 158
+  },
+  "power_users": [
+    {
+      "posts": 2785,
+      "years_active": 17,
+      "forums": 7
+    },
+    {
+      "posts": 2442,
+      "years_active": 17,
+      "forums": 7
+    },
+    {
+      "posts": 1981,
+      "years_active": 14,
+      "forums": 7
+    },
+    {
+      "posts": 924,
+      "years_active": 5,
+      "forums": 6
+    },
+    {
+      "posts": 876,
+      "years_active": 5,
+      "forums": 6
+    },
+    {
+      "posts": 804,
+      "years_active": 18,
+      "forums": 7
+    },
+    {
+      "posts": 749,
+      "years_active": 14,
+      "forums": 7
+    },
+    {
+      "posts": 706,
+      "years_active": 15,
+      "forums": 7
+    },
+    {
+      "posts": 640,
+      "years_active": 7,
+      "forums": 7
+    },
+    {
+      "posts": 587,
+      "years_active": 5,
+      "forums": 5
+    }
+  ]
+}
