@@ -7,7 +7,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const PUBLIC = path.resolve(__dirname, "../../public")
 
 const CACHE = path.resolve(__dirname, ".cache")
-const ANALYSIS_DB = path.join(PUBLIC, "analysis.db")
+const DATA_DIR = path.resolve(__dirname, "../../data")
+const ANALYSIS_DB = path.join(DATA_DIR, "analysis.db")
 const RESEARCH_DB = path.join(CACHE, "research.db")
 const OUTPUT_DB = path.join(PUBLIC, "data.db")
 
@@ -16,7 +17,7 @@ export function mergeDatabases(): void {
 
   // Start from research.db as base (it has the research tables)
   if (!fs.existsSync(RESEARCH_DB)) {
-    throw new Error("research.db not found — run pipeline first")
+    throw new Error(`research.db not found at ${RESEARCH_DB} — run 'npm run pipeline' first`)
   }
 
   // Copy research.db to data.db
