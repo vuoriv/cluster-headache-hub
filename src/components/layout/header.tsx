@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom"
-import { useTranslation } from "react-i18next"
 import { Brain, Sun, Moon, FlaskConical, BookOpen, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -13,7 +12,6 @@ const NAV_ITEMS = [
 
 export function Header() {
   const { theme, setTheme } = useTheme()
-  const { t } = useTranslation()
 
   const toggleTheme = () => {
     const isDark =
@@ -23,54 +21,45 @@ export function Header() {
   }
 
   return (
-    <header className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-[oklch(0.25_0.10_260)]" />
+    <header className="bg-gradient-to-r from-primary via-primary to-[oklch(0.25_0.10_260)]">
+      <div className="mx-auto flex max-w-6xl items-center gap-1 px-4 sm:px-6">
+        <Link
+          to="/"
+          className="mr-3 flex items-center gap-2 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:text-primary-foreground/80"
+        >
+          <Brain className="size-4" aria-hidden="true" />
+          <span className="hidden sm:inline">Home</span>
+        </Link>
 
-      <div className="relative">
-        {/* Top bar */}
-        <div className="flex items-center justify-between px-6 pt-5">
-          <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
-            <Link
-              to="/"
-              className="flex items-center gap-2 text-sm font-medium text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+        <nav className="flex flex-1 items-center gap-0.5">
+          {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
+            <NavLink
+              key={to}
+              to={to}
+              className={({ isActive }) =>
+                cn(
+                  "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition-colors",
+                  isActive
+                    ? "bg-primary-foreground/15 text-primary-foreground"
+                    : "text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground",
+                )
+              }
             >
-              <Brain className="size-5 opacity-70" aria-hidden="true" />
-              {t("header.siteName")}
-            </Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="size-8 text-primary-foreground/60 hover:bg-primary-foreground/10 hover:text-primary-foreground"
-              onClick={toggleTheme}
-              aria-label="Toggle dark mode"
-            >
-              {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
-            </Button>
-          </div>
-        </div>
-
-        {/* Navigation */}
-        <nav className="mt-4 border-t border-primary-foreground/8 px-6">
-          <div className="mx-auto flex max-w-6xl gap-1">
-            {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
-              <NavLink
-                key={to}
-                to={to}
-                className={({ isActive }) =>
-                  cn(
-                    "flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-medium transition-colors",
-                    isActive
-                      ? "border-primary-foreground text-primary-foreground"
-                      : "border-transparent text-primary-foreground/50 hover:text-primary-foreground/75",
-                  )
-                }
-              >
-                <Icon className="size-4" />
-                {label}
-              </NavLink>
-            ))}
-          </div>
+              <Icon className="size-3.5" />
+              {label}
+            </NavLink>
+          ))}
         </nav>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          className="size-8 text-primary-foreground/60 hover:bg-primary-foreground/10 hover:text-primary-foreground"
+          onClick={toggleTheme}
+          aria-label="Toggle dark mode"
+        >
+          {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+        </Button>
       </div>
     </header>
   )
