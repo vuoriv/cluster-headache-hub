@@ -10,26 +10,19 @@
   },
   "protocol": {
     "dosing": [
-      "10 mg at bedtime",
-      "9-25 mg at bedtime (recommended CH range)",
-      "5 mg at bedtime",
-      "15 mg at bedtime",
-      "18 mg (during cycle, lowered to 3 mg out of cycle)",
-      "9 mg daily"
+      "Most commonly reported dose is 10 mg at bedtime, with a typical range of 9-25 mg during active cycles.",
+      "Some users take lower maintenance doses of 3-5 mg outside of cycle periods.",
+      "Higher doses up to 18 mg are used during severe cycles and tapered down during remission."
     ],
     "preparations": [
-      "Standard oral tablet/capsule taken at bedtime",
-      "Part of D3 Anti-Inflammatory Regimen (Batch protocol) as cofactor",
-      "Part of Antihistamine Full Monty supplement stack",
-      "Taken 30 minutes before sleep",
-      "Gradual weaning protocol (10 mg -> 5 mg -> 2.5 mg -> stop)"
+      "Standard oral tablets or capsules taken approximately 30 minutes before sleep.",
+      "Often used as a cofactor within the Vitamin D3 Anti-Inflammatory Regimen (Batch protocol).",
+      "When discontinuing, a gradual weaning protocol is recommended: 10 mg to 5 mg to 2.5 mg to stop."
     ],
     "schedule": [
-      "Nightly at bedtime to prevent nocturnal attacks",
-      "As cofactor within D3 Anti-Inflammatory Regimen",
-      "Higher doses during active cycle, lower during remission",
-      "Part of Antihistamine Full Monty (alongside Turmeric, Quercetin, Resveratrol, Omega-3, Selenium, Vitamin C)",
-      "Taken year-round as preventive (not just during cycles)"
+      "Taken nightly at bedtime to prevent nocturnal attacks.",
+      "Higher doses during active cycles, reduced to a lower maintenance dose during remission.",
+      "Many users take it year-round as a preventive rather than only during active cycles."
     ]
   },
   "outcomes": {
@@ -39,98 +32,40 @@
     "sampleSize": 432
   },
   "timeline": [
-    {
-      "year": 2009,
-      "mentions": 12
-    },
-    {
-      "year": 2010,
-      "mentions": 57
-    },
-    {
-      "year": 2011,
-      "mentions": 65
-    },
-    {
-      "year": 2012,
-      "mentions": 84
-    },
-    {
-      "year": 2013,
-      "mentions": 69
-    },
-    {
-      "year": 2014,
-      "mentions": 44
-    },
-    {
-      "year": 2015,
-      "mentions": 63
-    },
-    {
-      "year": 2016,
-      "mentions": 50
-    },
-    {
-      "year": 2017,
-      "mentions": 72
-    },
-    {
-      "year": 2018,
-      "mentions": 51
-    },
-    {
-      "year": 2019,
-      "mentions": 46
-    },
-    {
-      "year": 2020,
-      "mentions": 25
-    },
-    {
-      "year": 2021,
-      "mentions": 25
-    },
-    {
-      "year": 2022,
-      "mentions": 62
-    },
-    {
-      "year": 2023,
-      "mentions": 21
-    },
-    {
-      "year": 2024,
-      "mentions": 5
-    },
-    {
-      "year": 2025,
-      "mentions": 9
-    },
-    {
-      "year": 2026,
-      "mentions": 1
-    }
+    { "year": 2009, "mentions": 12 },
+    { "year": 2010, "mentions": 57 },
+    { "year": 2011, "mentions": 65 },
+    { "year": 2012, "mentions": 84 },
+    { "year": 2013, "mentions": 69 },
+    { "year": 2014, "mentions": 44 },
+    { "year": 2015, "mentions": 63 },
+    { "year": 2016, "mentions": 50 },
+    { "year": 2017, "mentions": 72 },
+    { "year": 2018, "mentions": 51 },
+    { "year": 2019, "mentions": 46 },
+    { "year": 2020, "mentions": 25 },
+    { "year": 2021, "mentions": 25 },
+    { "year": 2022, "mentions": 62 },
+    { "year": 2023, "mentions": 21 },
+    { "year": 2024, "mentions": 5 },
+    { "year": 2025, "mentions": 9 },
+    { "year": 2026, "mentions": 1 }
   ],
   "sideEffects": [
-    "Improved sleep quality / easier to fall asleep",
-    "No noticeable side effects reported",
-    "No effect / did not help with CH attacks",
-    "Reduced nocturnal attack frequency but did not eliminate attacks",
+    "Improved sleep quality",
     "Vivid or unusual dreams",
-    "Concern about interaction with psilocybin/LSD busting (melatonin modulates 5-HT2A receptors)",
-    "Grogginess / drowsiness"
+    "Grogginess or morning drowsiness",
+    "Possible interaction with psilocybin/LSD busting via 5-HT2A receptor modulation",
+    "Reduced attack frequency without full elimination"
   ],
   "contraindications": [],
   "coTreatments": [
-    "Vitamin D3 Regimen (Batch protocol)",
-    "Oxygen (high-flow O2, 15-25 LPM)",
-    "Psilocybin mushrooms (busting)",
+    "Vitamin D3 Regimen",
+    "Oxygen",
+    "Psilocybin mushrooms",
     "Verapamil",
-    "Triptans (sumatriptan / Imitrex)",
-    "Energy drinks / caffeine (Red Bull, Monster, coffee)",
-    "LSA seeds (RC seeds / HBWR)",
-    "LSD (Vitamin L)"
+    "Triptans",
+    "Energy drinks"
   ],
   "sampleSize": 50
 }

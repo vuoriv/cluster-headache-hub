@@ -10,26 +10,18 @@
   },
   "protocol": {
     "dosing": [
-      "60mg starting dose (taper)",
-      "50mg/day",
-      "40mg/day",
-      "100mg starting dose (taper)",
-      "70-80mg starting dose (taper)",
-      "25mg starting dose (taper)"
+      "Most commonly prescribed as a tapering course starting at 60mg/day, though starting doses range from 40mg to 100mg depending on severity",
+      "Used as a short-term bridge to break a cycle or buy time while slower preventives like verapamil take effect",
+      "Repeated courses become less effective over time, and many patients report the attacks return as soon as the taper ends"
     ],
     "preparations": [
-      "Oral prednisone tablets",
-      "Oral prednisolone tablets",
-      "Steroid dose pack (Medrol or similar)",
-      "Cortisone infusion (considered but not used)",
-      "Prednisolone acetate eye drops"
+      "Oral prednisone or prednisolone tablets are the standard form",
+      "Pre-packaged steroid dose packs (Medrol) are convenient but may not provide a high enough starting dose for cluster headache"
     ],
     "schedule": [
-      "Taper over 10-14 days (start high, reduce stepwise)",
-      "13-day taper: 60mg 2d, 50mg 3d, 40mg 3d, 30mg 2d, 20mg 2d, 10mg 1d",
-      "7-day taper: 60mg/day 7d then step down 10mg every 2 days",
-      "19-day taper: 25mg 3d, 20mg 4d, 15mg 4d, 10mg 4d, 5mg 4d",
-      "3-week taper: 100mg/day reducing to 0"
+      "Typical taper runs 10-14 days: start at the full dose for 2-3 days, then reduce by 10mg every 2-3 days",
+      "Attacks frequently break through during the lower end of the taper, especially below 30mg",
+      "Should be used sparingly; frequent steroid courses carry serious long-term health risks"
     ]
   },
   "outcomes": {
@@ -39,100 +31,42 @@
     "sampleSize": 805
   },
   "timeline": [
-    {
-      "year": 2009,
-      "mentions": 5
-    },
-    {
-      "year": 2010,
-      "mentions": 83
-    },
-    {
-      "year": 2011,
-      "mentions": 74
-    },
-    {
-      "year": 2012,
-      "mentions": 59
-    },
-    {
-      "year": 2013,
-      "mentions": 61
-    },
-    {
-      "year": 2014,
-      "mentions": 81
-    },
-    {
-      "year": 2015,
-      "mentions": 55
-    },
-    {
-      "year": 2016,
-      "mentions": 52
-    },
-    {
-      "year": 2017,
-      "mentions": 91
-    },
-    {
-      "year": 2018,
-      "mentions": 77
-    },
-    {
-      "year": 2019,
-      "mentions": 105
-    },
-    {
-      "year": 2020,
-      "mentions": 89
-    },
-    {
-      "year": 2021,
-      "mentions": 117
-    },
-    {
-      "year": 2022,
-      "mentions": 84
-    },
-    {
-      "year": 2023,
-      "mentions": 87
-    },
-    {
-      "year": 2024,
-      "mentions": 72
-    },
-    {
-      "year": 2025,
-      "mentions": 47
-    },
-    {
-      "year": 2026,
-      "mentions": 8
-    }
+    { "year": 2009, "mentions": 5 },
+    { "year": 2010, "mentions": 83 },
+    { "year": 2011, "mentions": 74 },
+    { "year": 2012, "mentions": 59 },
+    { "year": 2013, "mentions": 61 },
+    { "year": 2014, "mentions": 81 },
+    { "year": 2015, "mentions": 55 },
+    { "year": 2016, "mentions": 52 },
+    { "year": 2017, "mentions": 91 },
+    { "year": 2018, "mentions": 77 },
+    { "year": 2019, "mentions": 105 },
+    { "year": 2020, "mentions": 89 },
+    { "year": 2021, "mentions": 117 },
+    { "year": 2022, "mentions": 84 },
+    { "year": 2023, "mentions": 87 },
+    { "year": 2024, "mentions": 72 },
+    { "year": 2025, "mentions": 47 },
+    { "year": 2026, "mentions": 8 }
   ],
   "sideEffects": [
-    "Attacks return after taper ends (rebound/breakthrough)",
-    "Mood changes (aggression, irritability, anger, impatience)",
-    "General feeling awful / zombie-like / raw / gross",
-    "Breakthrough attacks while tapering down (especially below 30mg)",
-    "Decreased effectiveness over time / stops working after repeated use",
-    "Weight gain / bloating (blew up like a balloon)",
-    "Skin breakout / acne",
+    "Attacks return after taper ends",
+    "Mood swings, irritability, and rage",
+    "Breakthrough attacks during taper below 30mg",
+    "Decreased effectiveness with repeated courses",
+    "Weight gain and bloating",
     "Insomnia",
-    "Violent nausea / sickness",
-    "Loss of self-control (rage, smashed property)"
+    "Nausea and general malaise",
+    "Skin breakouts and acne"
   ],
   "contraindications": [],
   "coTreatments": [
     "Verapamil",
-    "Sumatriptan / Imitrex (injections, nasal, pills)",
-    "Oxygen (high-flow)",
-    "Psilocybin mushrooms (busting)",
+    "Triptans",
+    "Oxygen",
+    "Psilocybin mushrooms",
     "Vitamin D3 regimen",
-    "Melatonin",
-    "Inderal (propranolol)",
     "Occipital nerve block"
   ],
   "sampleSize": 50

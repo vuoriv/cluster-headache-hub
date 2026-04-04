@@ -18,12 +18,16 @@ const COLORS = {
 
 export function CbOutcomeChart({ outcomes, treatmentName }: CbOutcomeChartProps) {
   const chartData = useMemo(() => {
-    const other = Math.max(0, 100 - outcomes.effective - outcomes.partial - outcomes.noEffect)
+    const total = outcomes.effective + outcomes.partial + outcomes.noEffect
+    if (total === 0) return []
+    const pct = (n: number) => Math.round((n / total) * 1000) / 10
+    const effPct = pct(outcomes.effective)
+    const partPct = pct(outcomes.partial)
+    const noEffPct = pct(outcomes.noEffect)
     return [
-      { name: "Effective", value: outcomes.effective, fill: COLORS.effective },
-      { name: "Partial", value: outcomes.partial, fill: COLORS.partial },
-      { name: "No Effect", value: outcomes.noEffect, fill: COLORS.noEffect },
-      ...(other > 0 ? [{ name: "Mixed/Other", value: Math.round(other * 10) / 10, fill: COLORS.other }] : []),
+      { name: "Effective", value: effPct, fill: COLORS.effective },
+      { name: "Partial", value: partPct, fill: COLORS.partial },
+      { name: "No Effect", value: noEffPct, fill: COLORS.noEffect },
     ]
   }, [outcomes])
 

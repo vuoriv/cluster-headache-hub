@@ -10,26 +10,19 @@
   },
   "protocol": {
     "dosing": [
-      "RC Seeds: 30-40 seeds",
-      "RC Seeds: 50-60 seeds",
-      "HBWR: 2-4 seeds",
-      "HBWR: 6-8 seeds (or equivalent via extraction)",
-      "RC Seeds: 15-25 seeds (low/starting dose)",
-      "RC Seeds: 100-200 seeds (high dose / preventive)"
+      "Standard Rivea Corymbosa (RC) seed dose is 30-50 seeds, with 15-25 seeds as a starting dose for first-timers",
+      "Hawaiian Baby Woodrose (HBWR) seeds are much stronger at 2-4 seeds for a standard dose, up to 6-8 seeds for experienced users",
+      "Higher RC seed doses of 100-200 seeds are occasionally used for stubborn cycles but are less common"
     ],
     "preparations": [
-      "Crush/grind seeds with mortar and pestle",
-      "Soak crushed seeds in water (1-4 hours)",
-      "Strain and drink liquid only (discard sludge)",
-      "Add lemon juice to soak water (lemon tek)",
-      "Drink everything including seed sludge"
+      "Crush or grind seeds with a mortar and pestle, then soak in water for 1-4 hours before straining and drinking the liquid",
+      "Adding lemon juice to the soak water may improve extraction and reduce nausea",
+      "Some users drink the seed sludge along with the liquid, though straining it out is easier on the stomach"
     ],
     "schedule": [
-      "Dose every 5 days",
-      "Detox from triptans 5+ days before first dose",
-      "2-3 doses to break a cycle",
-      "Maintenance dosing every 2-6 months during remission",
-      "Dose at bedtime / evening"
+      "Dose every 5 days, with a minimum 5-day detox from triptans before the first dose",
+      "Most users need 2-3 doses to break a cycle, typically taken in the evening or at bedtime",
+      "Maintenance dosing every 2-6 months during remission can help prevent new cycles"
     ]
   },
   "outcomes": {
@@ -39,101 +32,41 @@
     "sampleSize": 1754
   },
   "timeline": [
-    {
-      "year": 2009,
-      "mentions": 37
-    },
-    {
-      "year": 2010,
-      "mentions": 797
-    },
-    {
-      "year": 2011,
-      "mentions": 826
-    },
-    {
-      "year": 2012,
-      "mentions": 343
-    },
-    {
-      "year": 2013,
-      "mentions": 204
-    },
-    {
-      "year": 2014,
-      "mentions": 291
-    },
-    {
-      "year": 2015,
-      "mentions": 355
-    },
-    {
-      "year": 2016,
-      "mentions": 158
-    },
-    {
-      "year": 2017,
-      "mentions": 155
-    },
-    {
-      "year": 2018,
-      "mentions": 113
-    },
-    {
-      "year": 2019,
-      "mentions": 129
-    },
-    {
-      "year": 2020,
-      "mentions": 134
-    },
-    {
-      "year": 2021,
-      "mentions": 197
-    },
-    {
-      "year": 2022,
-      "mentions": 164
-    },
-    {
-      "year": 2023,
-      "mentions": 136
-    },
-    {
-      "year": 2024,
-      "mentions": 104
-    },
-    {
-      "year": 2025,
-      "mentions": 84
-    },
-    {
-      "year": 2026,
-      "mentions": 2
-    }
+    { "year": 2009, "mentions": 37 },
+    { "year": 2010, "mentions": 797 },
+    { "year": 2011, "mentions": 826 },
+    { "year": 2012, "mentions": 343 },
+    { "year": 2013, "mentions": 204 },
+    { "year": 2014, "mentions": 291 },
+    { "year": 2015, "mentions": 355 },
+    { "year": 2016, "mentions": 158 },
+    { "year": 2017, "mentions": 155 },
+    { "year": 2018, "mentions": 113 },
+    { "year": 2019, "mentions": 129 },
+    { "year": 2020, "mentions": 134 },
+    { "year": 2021, "mentions": 197 },
+    { "year": 2022, "mentions": 164 },
+    { "year": 2023, "mentions": 136 },
+    { "year": 2024, "mentions": 104 },
+    { "year": 2025, "mentions": 84 },
+    { "year": 2026, "mentions": 2 }
   ],
   "sideEffects": [
-    "Slapback headaches (rebound attacks after dosing)",
-    "Nausea",
-    "Sedation / drowsiness / heavy feeling",
-    "Mild psychoactive effects (slight buzz, relaxed, mellow mood)",
-    "Stomach upset / cramping",
-    "No noticeable side effects",
+    "Slapback headaches 1-2 days after dosing",
+    "Nausea and stomach cramping",
+    "Sedation and heavy body feeling",
+    "Mild psychoactive effects such as relaxed mood and brighter colors",
     "Vomiting",
-    "Vasoconstriction (cold extremities, cold nose)",
-    "Restlessness / body energy",
-    "Mild visual effects (brighter colors, slight distortions)"
+    "Vasoconstriction with cold extremities"
   ],
   "contraindications": [],
   "coTreatments": [
-    "Oxygen (O2)",
+    "Oxygen",
     "Vitamin D3 regimen",
     "Psilocybin mushrooms",
-    "Energy drinks / caffeine (Red Bull, 5-Hour Energy, coffee)",
-    "Triptans (sumatriptan / Imitrex)",
-    "Melatonin",
-    "LSD",
-    "Prednisone"
+    "Energy drinks / caffeine",
+    "Triptans",
+    "Melatonin"
   ],
   "sampleSize": 4229
 }

@@ -10,24 +10,19 @@
   },
   "protocol": {
     "dosing": [
-      "15 LPM",
-      "25 LPM",
-      "High-flow (unspecified LPM)",
-      "Hospital/ER administered (unspecified)"
+      "High-flow oxygen at 15-25 LPM via non-rebreather mask at attack onset",
+      "Many users find 15 LPM sufficient, while others need 25 LPM for stubborn attacks",
+      "Hospital and ER settings may use unspecified higher flow rates"
     ],
     "preparations": [
-      "Non-rebreather mask",
-      "ClusterO2 mask / OptiMask",
-      "Home oxygen tanks (medical supply)",
-      "Welding oxygen tanks",
-      "E-tank (portable)"
+      "A non-rebreather mask is standard, though specialized masks like the ClusterO2 kit or OptiMask improve effectiveness by creating negative sinus pressure",
+      "Home setups typically use medical-grade oxygen tanks from a home medical supplier, or welding oxygen as a more accessible alternative",
+      "Portable E-tanks allow on-the-go use but deplete quickly at high flow rates"
     ],
     "schedule": [
-      "Breathe O2 at onset of attack until pain subsides (10-20 min typical)",
-      "Inhale through mask, remove mask to exhale (creates negative sinus pressure)",
-      "Continue O2 for several minutes after pain stops to prevent rebound",
-      "Combine O2 with energy drink (Red Bull/5-Hour Energy) at onset",
-      "Hyperventilation / forceful deep breathing through mask"
+      "Begin breathing oxygen at the first sign of an attack and continue for 10-20 minutes until pain fully subsides",
+      "Continue oxygen for several minutes after the pain stops to prevent rebound attacks",
+      "Many users combine oxygen with an energy drink at onset for faster relief"
     ]
   },
   "outcomes": {
@@ -37,97 +32,40 @@
     "sampleSize": 4011
   },
   "timeline": [
-    {
-      "year": 2009,
-      "mentions": 34
-    },
-    {
-      "year": 2010,
-      "mentions": 645
-    },
-    {
-      "year": 2011,
-      "mentions": 675
-    },
-    {
-      "year": 2012,
-      "mentions": 570
-    },
-    {
-      "year": 2013,
-      "mentions": 403
-    },
-    {
-      "year": 2014,
-      "mentions": 622
-    },
-    {
-      "year": 2015,
-      "mentions": 665
-    },
-    {
-      "year": 2016,
-      "mentions": 325
-    },
-    {
-      "year": 2017,
-      "mentions": 475
-    },
-    {
-      "year": 2018,
-      "mentions": 367
-    },
-    {
-      "year": 2019,
-      "mentions": 457
-    },
-    {
-      "year": 2020,
-      "mentions": 336
-    },
-    {
-      "year": 2021,
-      "mentions": 362
-    },
-    {
-      "year": 2022,
-      "mentions": 442
-    },
-    {
-      "year": 2023,
-      "mentions": 362
-    },
-    {
-      "year": 2024,
-      "mentions": 263
-    },
-    {
-      "year": 2025,
-      "mentions": 175
-    },
-    {
-      "year": 2026,
-      "mentions": 31
-    }
+    { "year": 2009, "mentions": 34 },
+    { "year": 2010, "mentions": 645 },
+    { "year": 2011, "mentions": 675 },
+    { "year": 2012, "mentions": 570 },
+    { "year": 2013, "mentions": 403 },
+    { "year": 2014, "mentions": 622 },
+    { "year": 2015, "mentions": 665 },
+    { "year": 2016, "mentions": 325 },
+    { "year": 2017, "mentions": 475 },
+    { "year": 2018, "mentions": 367 },
+    { "year": 2019, "mentions": 457 },
+    { "year": 2020, "mentions": 336 },
+    { "year": 2021, "mentions": 362 },
+    { "year": 2022, "mentions": 442 },
+    { "year": 2023, "mentions": 362 },
+    { "year": 2024, "mentions": 263 },
+    { "year": 2025, "mentions": 175 },
+    { "year": 2026, "mentions": 31 }
   ],
   "sideEffects": [
-    "Rebound attack after stopping O2 too soon",
-    "Oxygen becoming less effective over prolonged cycle",
-    "Tank depletion anxiety (running out during attack)",
-    "Cost burden (insurance often won't cover for CH)",
-    "Difficulty obtaining prescription",
-    "Limited mobility / not portable enough",
-    "Ineffective for some attacks (not 100% reliable)"
+    "Rebound attack if oxygen is stopped too soon",
+    "Effectiveness may decrease over a prolonged cycle",
+    "Tank depletion anxiety during attacks",
+    "Difficulty obtaining a prescription from doctors unfamiliar with CH",
+    "Cost burden when insurance won't cover",
+    "Limited portability restricts use outside the home"
   ],
   "contraindications": [],
   "coTreatments": [
-    "Psilocybin mushrooms (busting)",
+    "Psilocybin mushrooms",
     "Vitamin D3 regimen",
-    "Triptans (sumatriptan/rizatriptan)",
-    "Energy drinks / caffeine (Red Bull, 5-Hour Energy, coffee)",
+    "Triptans",
+    "Energy drinks / caffeine",
     "Verapamil",
-    "LSD (Vitamin L)",
-    "Prednisone taper",
     "Melatonin"
   ],
   "sampleSize": 7209

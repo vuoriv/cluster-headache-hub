@@ -10,24 +10,19 @@
   },
   "protocol": {
     "dosing": [
-      "480mg/day",
-      "360mg/day (120mg x3)",
-      "320mg/day",
-      "240mg/day (80mg x3)",
-      "960mg/day (320mg x3)",
-      "160mg/day"
+      "Most patients end up at 240-480mg/day, though some require doses as high as 960mg/day to achieve suppression",
+      "Standard immediate-release tablets are preferred over extended-release formulations",
+      "Many in the community find verapamil insufficient as a sole preventive and combine it with other treatments",
+      "Requires EKG/ECG monitoring before each dose increase and periodically at high doses due to cardiac risks"
     ],
     "preparations": [
-      "Oral tablets, standard/immediate release, divided doses (2-3x daily)",
-      "Titrated upward incrementally over weeks",
-      "Standard release preferred over modified/extended release"
+      "Taken as oral immediate-release tablets divided into 2-3 doses per day",
+      "Standard release is strongly preferred; extended-release versions are less effective for cluster headache"
     ],
     "schedule": [
-      "Start low (80-120mg/day), titrate up by 80mg every 10-14 days until attacks suppressed or max dose reached",
-      "Combined with prednisone taper at cycle onset (prednisone bridges gap while verapamil takes effect)",
-      "Taken for duration of cycle plus 4-6 weeks after cycle ends, then tapered off",
-      "EKG/ECG monitoring before each dose increase and at high doses",
-      "Used as long-term continuous preventive (chronic CH patients)"
+      "Start low at 80-120mg/day and titrate up by 80mg every 10-14 days until attacks are suppressed or maximum tolerated dose is reached",
+      "Often paired with a prednisone taper at cycle onset to bridge the 2-4 weeks verapamil needs to take full effect",
+      "Continue for the full cycle plus 4-6 weeks after attacks stop, then taper off gradually; chronic CH patients may stay on it long-term"
     ]
   },
   "outcomes": {
@@ -37,101 +32,43 @@
     "sampleSize": 1084
   },
   "timeline": [
-    {
-      "year": 2009,
-      "mentions": 10
-    },
-    {
-      "year": 2010,
-      "mentions": 88
-    },
-    {
-      "year": 2011,
-      "mentions": 123
-    },
-    {
-      "year": 2012,
-      "mentions": 76
-    },
-    {
-      "year": 2013,
-      "mentions": 73
-    },
-    {
-      "year": 2014,
-      "mentions": 114
-    },
-    {
-      "year": 2015,
-      "mentions": 122
-    },
-    {
-      "year": 2016,
-      "mentions": 66
-    },
-    {
-      "year": 2017,
-      "mentions": 137
-    },
-    {
-      "year": 2018,
-      "mentions": 161
-    },
-    {
-      "year": 2019,
-      "mentions": 181
-    },
-    {
-      "year": 2020,
-      "mentions": 80
-    },
-    {
-      "year": 2021,
-      "mentions": 61
-    },
-    {
-      "year": 2022,
-      "mentions": 148
-    },
-    {
-      "year": 2023,
-      "mentions": 148
-    },
-    {
-      "year": 2024,
-      "mentions": 46
-    },
-    {
-      "year": 2025,
-      "mentions": 62
-    },
-    {
-      "year": 2026,
-      "mentions": 12
-    }
+    { "year": 2009, "mentions": 10 },
+    { "year": 2010, "mentions": 88 },
+    { "year": 2011, "mentions": 123 },
+    { "year": 2012, "mentions": 76 },
+    { "year": 2013, "mentions": 73 },
+    { "year": 2014, "mentions": 114 },
+    { "year": 2015, "mentions": 122 },
+    { "year": 2016, "mentions": 66 },
+    { "year": 2017, "mentions": 137 },
+    { "year": 2018, "mentions": 161 },
+    { "year": 2019, "mentions": 181 },
+    { "year": 2020, "mentions": 80 },
+    { "year": 2021, "mentions": 61 },
+    { "year": 2022, "mentions": 148 },
+    { "year": 2023, "mentions": 148 },
+    { "year": 2024, "mentions": 46 },
+    { "year": 2025, "mentions": 62 },
+    { "year": 2026, "mentions": 12 }
   ],
   "sideEffects": [
     "Constipation",
-    "Fatigue / tiredness / feeling less lively",
-    "Low blood pressure / hypotension / lightheadedness / dizziness",
-    "Bradycardia (slow heart rate)",
-    "Heart block / AV conduction issues (PR prolongation)",
-    "Inability to elevate heart rate / exercise intolerance",
-    "Leg/ankle swelling (edema)",
-    "Vertigo / dizziness when changing position",
-    "Heart damage requiring potential pacemaker (long-term high dose)",
+    "Fatigue and low energy",
+    "Low blood pressure and dizziness",
+    "Bradycardia and heart conduction issues",
+    "Exercise intolerance",
+    "Leg and ankle swelling",
+    "Risk of heart damage requiring pacemaker at high doses long-term",
     "Nausea"
   ],
   "contraindications": [],
   "coTreatments": [
-    "Oxygen (high-flow, 15-25 LPM)",
-    "Sumatriptan (injectable/nasal)",
-    "Psilocybin mushrooms (busting)",
-    "Prednisone/prednisolone taper",
+    "Oxygen",
+    "Triptans",
+    "Psilocybin mushrooms",
+    "Prednisone",
     "Vitamin D3 regimen",
-    "Melatonin",
-    "Emgality (galcanezumab)",
-    "LSD/LSA (busting)"
+    "Melatonin"
   ],
   "sampleSize": 50
 }

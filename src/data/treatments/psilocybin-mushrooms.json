@@ -10,26 +10,20 @@
   },
   "protocol": {
     "dosing": [
-      "1-1.5g dried",
-      "0.4-0.6g dried (sub-gram / low dose)",
-      "2-3g dried",
-      "4-5g dried (high dose)",
-      "7g dried (heroic dose)",
-      "5-10g fresh truffles"
+      "Most common dose is 1-1.5g dried mushrooms, which provides noticeable psychoactive effects while remaining manageable",
+      "Sub-gram doses of 0.4-0.6g dried are used for a gentler approach with minimal psychoactive effects",
+      "Higher doses of 2-3g dried are used by experienced users seeking stronger cycle-breaking effects",
+      "Fresh truffles are dosed at 5-10g, roughly equivalent to 1-1.5g dried mushrooms"
     ],
     "preparations": [
-      "Dried whole mushrooms eaten directly",
-      "Mushroom tea (ground and brewed)",
-      "Lemon tek (ground mushrooms soaked in lemon juice)",
-      "Capsules (dried, ground to powder, packed in gel caps)",
-      "Smoothie or juice blend (with vitamin C)"
+      "Most commonly eaten as dried whole mushrooms, or brewed into tea by grinding and steeping in hot water for 10-15 minutes",
+      "Lemon tek involves soaking ground mushrooms in lemon juice for 20 minutes before drinking, which may speed onset and reduce nausea",
+      "Can also be packed into gel capsules as dried powder, or blended into a smoothie with fruit juice"
     ],
     "schedule": [
-      "Dose every 5 days until cycle breaks",
-      "Dose every 1-2 weeks until cycle breaks",
-      "2-3 doses over 2-3 weeks to break cycle",
-      "Monthly maintenance dose to prevent cycles",
-      "Single dose at cycle onset as preventive"
+      "Standard busting protocol is one dose every 5 days until the cycle breaks, typically requiring 2-3 doses over 2-3 weeks",
+      "Some users dose every 1-2 weeks instead, especially if slapbacks are severe",
+      "A monthly maintenance dose during remission can help prevent new cycles from starting"
     ]
   },
   "outcomes": {
@@ -39,101 +33,42 @@
     "sampleSize": 5656
   },
   "timeline": [
-    {
-      "year": 2009,
-      "mentions": 52
-    },
-    {
-      "year": 2010,
-      "mentions": 1166
-    },
-    {
-      "year": 2011,
-      "mentions": 1727
-    },
-    {
-      "year": 2012,
-      "mentions": 1396
-    },
-    {
-      "year": 2013,
-      "mentions": 875
-    },
-    {
-      "year": 2014,
-      "mentions": 1248
-    },
-    {
-      "year": 2015,
-      "mentions": 891
-    },
-    {
-      "year": 2016,
-      "mentions": 314
-    },
-    {
-      "year": 2017,
-      "mentions": 596
-    },
-    {
-      "year": 2018,
-      "mentions": 536
-    },
-    {
-      "year": 2019,
-      "mentions": 770
-    },
-    {
-      "year": 2020,
-      "mentions": 612
-    },
-    {
-      "year": 2021,
-      "mentions": 762
-    },
-    {
-      "year": 2022,
-      "mentions": 666
-    },
-    {
-      "year": 2023,
-      "mentions": 681
-    },
-    {
-      "year": 2024,
-      "mentions": 488
-    },
-    {
-      "year": 2025,
-      "mentions": 267
-    },
-    {
-      "year": 2026,
-      "mentions": 46
-    }
+    { "year": 2009, "mentions": 52 },
+    { "year": 2010, "mentions": 1166 },
+    { "year": 2011, "mentions": 1727 },
+    { "year": 2012, "mentions": 1396 },
+    { "year": 2013, "mentions": 875 },
+    { "year": 2014, "mentions": 1248 },
+    { "year": 2015, "mentions": 891 },
+    { "year": 2016, "mentions": 314 },
+    { "year": 2017, "mentions": 596 },
+    { "year": 2018, "mentions": 536 },
+    { "year": 2019, "mentions": 770 },
+    { "year": 2020, "mentions": 612 },
+    { "year": 2021, "mentions": 762 },
+    { "year": 2022, "mentions": 666 },
+    { "year": 2023, "mentions": 681 },
+    { "year": 2024, "mentions": 488 },
+    { "year": 2025, "mentions": 267 },
+    { "year": 2026, "mentions": 46 }
   ],
   "sideEffects": [
-    "Nausea / stomach upset",
-    "Anxiety / panic attack",
+    "Nausea and stomach upset",
     "Slapback headache (temporary worsening 1-2 days after dose)",
-    "Visual disturbances / hallucinations",
-    "Intense drowsiness / sedation",
-    "Euphoria",
-    "Existential dread / fear",
-    "Body load / heaviness",
-    "Emotional release / crying",
-    "Bad taste (especially tea preparation)"
+    "Anxiety or panic during the experience",
+    "Visual disturbances and hallucinations",
+    "Drowsiness and body heaviness",
+    "Emotional intensity and existential dread",
+    "Euphoria and positive mental shift"
   ],
   "contraindications": [],
   "coTreatments": [
-    "Oxygen (high-flow)",
-    "Triptans (sumatriptan, rizatriptan, zolmitriptan)",
+    "Oxygen",
+    "Triptans",
     "Vitamin D3 regimen",
     "Verapamil",
     "Melatonin",
-    "Prednisone / steroids",
-    "Caffeine / energy drinks",
-    "DMT"
+    "Prednisone"
   ],
   "sampleSize": 50
 }
