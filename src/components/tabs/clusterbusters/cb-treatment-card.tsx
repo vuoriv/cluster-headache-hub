@@ -31,7 +31,7 @@ export function CbTreatmentCard({ ranking, category, onNavigate }: CbTreatmentCa
         category === "conventional" && "border-l-[var(--chart-5)]",
         category === "supportive" && "border-l-[var(--chart-2)]",
       )}
-      onClick={() => onNavigate(`treatment/${ranking.slug}`)}
+      onClick={() => onNavigate(ranking.slug)}
     >
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">

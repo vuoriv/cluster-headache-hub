@@ -95,7 +95,7 @@ export function CbRecommendation({ data, onNavigate }: CbRecommendationProps) {
               <div
                 key={r.slug}
                 className="flex cursor-pointer items-center gap-3 rounded-lg border p-3 transition-colors hover:bg-muted/50"
-                onClick={() => onNavigate(`treatment/${r.slug}`)}
+                onClick={() => onNavigate(r.slug)}
               >
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-bold tabular-nums">
                   {i + 1}

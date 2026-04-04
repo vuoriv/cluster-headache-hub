@@ -97,13 +97,17 @@ export default function App() {
           <div className="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:justify-between">
             <div className="flex flex-col gap-1 text-xs text-muted-foreground">
               <p>
-                {t("footer.dataFrom")}{" "}
+                Clinical data from{" "}
                 <a href="https://clinicaltrials.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">ClinicalTrials.gov</a>
-                {" "}{t("footer.and")}{" "}
+                {" "}and{" "}
                 <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">PubMed</a>
-                {" "}{t("footer.viaApis")}
+                {" "}via public APIs.
               </p>
-              <p>{t("footer.communityInfo")}</p>
+              <p>
+                Community analysis from{" "}
+                <a href="https://clusterbusters.org" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">ClusterBusters.org</a>
+                {" "}forum (40K posts, 2009–2026) and patient survey literature.
+              </p>
             </div>
             <div className="flex flex-col items-end gap-1 text-xs text-muted-foreground">
               <p className="font-medium">{t("footer.notMedicalAdvice")}</p>

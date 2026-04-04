@@ -64,7 +64,7 @@ export function CbTreatmentRankings({ rankings, onNavigate }: CbTreatmentRanking
                   dy={4}
                   textAnchor="end"
                   className="cursor-pointer fill-muted-foreground text-xs hover:fill-foreground"
-                  onClick={() => onNavigate(`treatment/${chartData.find(d => d.treatment === payload.value)?.slug}`)}
+                  onClick={() => onNavigate(chartData.find(d => d.treatment === payload.value)?.slug ?? "")}
                 >
                   {payload.value}
                 </text>

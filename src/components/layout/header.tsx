@@ -1,11 +1,9 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Brain, Sun, Moon, Globe } from "lucide-react"
+import { Brain, Sun, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
 import { useTheme } from "@/components/theme-provider"
-import { LANGUAGES } from "@/i18n"
 
 interface HeaderProps {
   trialCount: number | null
@@ -32,16 +30,10 @@ function StatItem({ value, label, loading }: { value: string | number | null; la
 export function Header({ trialCount, recruitingCount, paperCount, psychedelicCount, loading }: HeaderProps) {
   const [loadTime] = useState(() => new Date().toLocaleString())
   const { theme, setTheme } = useTheme()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : theme === "light" ? "dark" : "light")
-  }
-
-  const changeLanguage = (lang: string) => {
-    i18n.changeLanguage(lang)
-    localStorage.setItem("language", lang)
-    document.documentElement.lang = lang
   }
 
   return (
@@ -58,21 +50,7 @@ export function Header({ trialCount, recruitingCount, paperCount, psychedelicCou
             </div>
             <div className="flex items-center gap-2">
               <span className="hidden text-xs text-primary-foreground/40 sm:inline">{loadTime}</span>
-              <Select value={i18n.language} onValueChange={changeLanguage}>
-                <SelectTrigger className="h-8 w-auto gap-1.5 border-0 bg-primary-foreground/10 px-2.5 text-xs text-primary-foreground/70 hover:bg-primary-foreground/15 hover:text-primary-foreground">
-                  <Globe className="size-3.5" />
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {LANGUAGES.map((lang) => (
-                      <SelectItem key={lang.code} value={lang.code}>
-                        {lang.flag} {lang.label}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              {/* Language selector hidden until ClusterBusters content is translated */}
               <Button
                 variant="ghost"
                 size="icon"

@@ -9,9 +9,10 @@ function parseSubRoute(): { page: string; param?: string } {
   const parts = hash.split("/")
   if (parts[0] !== "clusterbusters") return { page: "" }
   if (parts.length === 1) return { page: "" }
-  if (parts[1] === "treatment" && parts[2]) return { page: "treatment", param: parts[2] }
   if (parts[1] === "compare") return { page: "compare" }
   if (parts[1] === "methodology") return { page: "methodology" }
+  // Any other subpath is a treatment slug (e.g., #clusterbusters/psilocybin-mushrooms)
+  if (parts[1]) return { page: "treatment", param: parts[1] }
   return { page: "" }
 }
 
@@ -26,8 +27,7 @@ export function ClusterBustersTab() {
 
   const onNavigate = useCallback((path: string) => {
     const fullHash = path ? `clusterbusters/${path}` : "clusterbusters"
-    window.history.pushState(null, "", `#${fullHash}`)
-    window.dispatchEvent(new HashChangeEvent("hashchange"))
+    window.location.hash = fullHash
   }, [])
 
   switch (route.page) {
