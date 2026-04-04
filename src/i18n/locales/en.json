@@ -9,7 +9,7 @@
       "papers": "Papers",
       "psychedelicTrials": "Psychedelic Trials"
     },
-    "dataRefreshed": "Data refreshed on load"
+    "dataRefreshed": "Data updated periodically via pipeline"
   },
   "tabs": {
     "overview": "Overview",
@@ -64,7 +64,7 @@
   },
   "trials": {
     "title": "Active Clinical Trials",
-    "subtitle": "All cluster headache trials currently recruiting, active, or starting soon — fetched live from ClinicalTrials.gov",
+    "subtitle": "All cluster headache trials currently recruiting, active, or starting soon — from ClinicalTrials.gov",
     "search": "Search trials…",
     "allStatuses": "All Statuses",
     "recruiting": "Recruiting",
@@ -93,7 +93,7 @@
   },
   "research": {
     "title": "Latest Research Papers",
-    "subtitle": "Recent cluster headache publications, fetched live from PubMed ({{count}}+ total, sorted by date)",
+    "subtitle": "Cluster headache papers from PubMed, categorized and scored for relevance",
     "search": "Search by title, journal, authors…",
     "allYears": "All Years",
     "perPage": "per page",
