@@ -1,0 +1,100 @@
+{
+  "slug": "energy-drinks-caffeine",
+  "name": "Energy Drinks / Caffeine",
+  "category": "acute",
+  "stats": {
+    "mentions": 1823,
+    "positiveRate": 77.2,
+    "peakYear": 2015,
+    "score": 0.519
+  },
+  "protocol": {
+    "dosing": [],
+    "preparations": [],
+    "schedule": []
+  },
+  "outcomes": {
+    "effective": 77.2,
+    "partial": 3.1,
+    "noEffect": 11.5,
+    "sampleSize": 1126
+  },
+  "timeline": [
+    {
+      "year": 2009,
+      "mentions": 15
+    },
+    {
+      "year": 2010,
+      "mentions": 138
+    },
+    {
+      "year": 2011,
+      "mentions": 137
+    },
+    {
+      "year": 2012,
+      "mentions": 175
+    },
+    {
+      "year": 2013,
+      "mentions": 134
+    },
+    {
+      "year": 2014,
+      "mentions": 168
+    },
+    {
+      "year": 2015,
+      "mentions": 185
+    },
+    {
+      "year": 2016,
+      "mentions": 85
+    },
+    {
+      "year": 2017,
+      "mentions": 147
+    },
+    {
+      "year": 2018,
+      "mentions": 81
+    },
+    {
+      "year": 2019,
+      "mentions": 93
+    },
+    {
+      "year": 2020,
+      "mentions": 88
+    },
+    {
+      "year": 2021,
+      "mentions": 96
+    },
+    {
+      "year": 2022,
+      "mentions": 118
+    },
+    {
+      "year": 2023,
+      "mentions": 80
+    },
+    {
+      "year": 2024,
+      "mentions": 56
+    },
+    {
+      "year": 2025,
+      "mentions": 25
+    },
+    {
+      "year": 2026,
+      "mentions": 2
+    }
+  ],
+  "sideEffects": [],
+  "contraindications": [],
+  "coTreatments": [],
+  "sampleSize": 1126
+}

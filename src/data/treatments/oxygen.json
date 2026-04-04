@@ -1,0 +1,100 @@
+{
+  "slug": "oxygen",
+  "name": "Oxygen",
+  "category": "acute",
+  "stats": {
+    "mentions": 7209,
+    "positiveRate": 75.7,
+    "peakYear": 2011,
+    "score": 0.674
+  },
+  "protocol": {
+    "dosing": [],
+    "preparations": [],
+    "schedule": []
+  },
+  "outcomes": {
+    "effective": 75.7,
+    "partial": 3.6,
+    "noEffect": 12.2,
+    "sampleSize": 4011
+  },
+  "timeline": [
+    {
+      "year": 2009,
+      "mentions": 34
+    },
+    {
+      "year": 2010,
+      "mentions": 645
+    },
+    {
+      "year": 2011,
+      "mentions": 675
+    },
+    {
+      "year": 2012,
+      "mentions": 570
+    },
+    {
+      "year": 2013,
+      "mentions": 403
+    },
+    {
+      "year": 2014,
+      "mentions": 622
+    },
+    {
+      "year": 2015,
+      "mentions": 665
+    },
+    {
+      "year": 2016,
+      "mentions": 325
+    },
+    {
+      "year": 2017,
+      "mentions": 475
+    },
+    {
+      "year": 2018,
+      "mentions": 367
+    },
+    {
+      "year": 2019,
+      "mentions": 457
+    },
+    {
+      "year": 2020,
+      "mentions": 336
+    },
+    {
+      "year": 2021,
+      "mentions": 362
+    },
+    {
+      "year": 2022,
+      "mentions": 442
+    },
+    {
+      "year": 2023,
+      "mentions": 362
+    },
+    {
+      "year": 2024,
+      "mentions": 263
+    },
+    {
+      "year": 2025,
+      "mentions": 175
+    },
+    {
+      "year": 2026,
+      "mentions": 31
+    }
+  ],
+  "sideEffects": [],
+  "contraindications": [],
+  "coTreatments": [],
+  "sampleSize": 4011
+}

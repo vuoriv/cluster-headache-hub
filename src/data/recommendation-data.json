@@ -1,0 +1,160 @@
+{
+  "filters": {
+    "chTypes": [
+      "episodic",
+      "chronic"
+    ],
+    "cycleStatus": [
+      "in-cycle",
+      "remission",
+      "new-patient"
+    ],
+    "treatments": [
+      {
+        "slug": "psilocybin-mushrooms",
+        "name": "Psilocybin / Mushrooms"
+      },
+      {
+        "slug": "oxygen",
+        "name": "Oxygen"
+      },
+      {
+        "slug": "rc-seeds-lsa",
+        "name": "RC Seeds / LSA"
+      },
+      {
+        "slug": "vitamin-d3",
+        "name": "Vitamin D3 Regimen"
+      },
+      {
+        "slug": "lsd",
+        "name": "LSD"
+      },
+      {
+        "slug": "triptans",
+        "name": "Triptans"
+      },
+      {
+        "slug": "energy-drinks-caffeine",
+        "name": "Energy Drinks / Caffeine"
+      },
+      {
+        "slug": "prednisone-steroids",
+        "name": "Prednisone / Steroids"
+      },
+      {
+        "slug": "verapamil",
+        "name": "Verapamil"
+      },
+      {
+        "slug": "bol-148",
+        "name": "BOL-148"
+      },
+      {
+        "slug": "melatonin",
+        "name": "Melatonin"
+      },
+      {
+        "slug": "lithium",
+        "name": "Lithium"
+      },
+      {
+        "slug": "ketamine",
+        "name": "Ketamine"
+      }
+    ]
+  },
+  "rankings": [
+    {
+      "slug": "psilocybin-mushrooms",
+      "name": "Psilocybin / Mushrooms",
+      "category": "psychedelic",
+      "positiveRate": 78.0,
+      "score": 0.868
+    },
+    {
+      "slug": "oxygen",
+      "name": "Oxygen",
+      "category": "acute",
+      "positiveRate": 75.7,
+      "score": 0.674
+    },
+    {
+      "slug": "rc-seeds-lsa",
+      "name": "RC Seeds / LSA",
+      "category": "psychedelic",
+      "positiveRate": 74.1,
+      "score": 0.574
+    },
+    {
+      "slug": "vitamin-d3",
+      "name": "Vitamin D3 Regimen",
+      "category": "supportive",
+      "positiveRate": 76.7,
+      "score": 0.531
+    },
+    {
+      "slug": "lsd",
+      "name": "LSD",
+      "category": "psychedelic",
+      "positiveRate": 75.2,
+      "score": 0.528
+    },
+    {
+      "slug": "triptans",
+      "name": "Triptans",
+      "category": "acute",
+      "positiveRate": 70.2,
+      "score": 0.526
+    },
+    {
+      "slug": "energy-drinks-caffeine",
+      "name": "Energy Drinks / Caffeine",
+      "category": "acute",
+      "positiveRate": 77.2,
+      "score": 0.519
+    },
+    {
+      "slug": "prednisone-steroids",
+      "name": "Prednisone / Steroids",
+      "category": "conventional",
+      "positiveRate": 75.9,
+      "score": 0.494
+    },
+    {
+      "slug": "verapamil",
+      "name": "Verapamil",
+      "category": "conventional",
+      "positiveRate": 73.3,
+      "score": 0.492
+    },
+    {
+      "slug": "bol-148",
+      "name": "BOL-148",
+      "category": "psychedelic",
+      "positiveRate": 79.4,
+      "score": 0.483
+    },
+    {
+      "slug": "melatonin",
+      "name": "Melatonin",
+      "category": "supportive",
+      "positiveRate": 71.8,
+      "score": 0.454
+    },
+    {
+      "slug": "lithium",
+      "name": "Lithium",
+      "category": "conventional",
+      "positiveRate": 72.2,
+      "score": 0.444
+    },
+    {
+      "slug": "ketamine",
+      "name": "Ketamine",
+      "category": "psychedelic",
+      "positiveRate": 70.7,
+      "score": 0.434
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "slug": "rc-seeds-lsa",
+  "name": "RC Seeds / LSA",
+  "category": "psychedelic",
+  "stats": {
+    "mentions": 4229,
+    "positiveRate": 74.1,
+    "peakYear": 2011,
+    "score": 0.574
+  },
+  "protocol": {
+    "dosing": [],
+    "preparations": [],
+    "schedule": []
+  },
+  "outcomes": {
+    "effective": 74.1,
+    "partial": 6.3,
+    "noEffect": 12.1,
+    "sampleSize": 1754
+  },
+  "timeline": [
+    {
+      "year": 2009,
+      "mentions": 37
+    },
+    {
+      "year": 2010,
+      "mentions": 797
+    },
+    {
+      "year": 2011,
+      "mentions": 826
+    },
+    {
+      "year": 2012,
+      "mentions": 343
+    },
+    {
+      "year": 2013,
+      "mentions": 204
+    },
+    {
+      "year": 2014,
+      "mentions": 291
+    },
+    {
+      "year": 2015,
+      "mentions": 355
+    },
+    {
+      "year": 2016,
+      "mentions": 158
+    },
+    {
+      "year": 2017,
+      "mentions": 155
+    },
+    {
+      "year": 2018,
+      "mentions": 113
+    },
+    {
+      "year": 2019,
+      "mentions": 129
+    },
+    {
+      "year": 2020,
+      "mentions": 134
+    },
+    {
+      "year": 2021,
+      "mentions": 197
+    },
+    {
+      "year": 2022,
+      "mentions": 164
+    },
+    {
+      "year": 2023,
+      "mentions": 136
+    },
+    {
+      "year": 2024,
+      "mentions": 104
+    },
+    {
+      "year": 2025,
+      "mentions": 84
+    },
+    {
+      "year": 2026,
+      "mentions": 2
+    }
+  ],
+  "sideEffects": [],
+  "contraindications": [],
+  "coTreatments": [],
+  "sampleSize": 1754
+}

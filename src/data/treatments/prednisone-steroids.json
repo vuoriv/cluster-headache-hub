@@ -1,0 +1,100 @@
+{
+  "slug": "prednisone-steroids",
+  "name": "Prednisone / Steroids",
+  "category": "conventional",
+  "stats": {
+    "mentions": 1247,
+    "positiveRate": 75.9,
+    "peakYear": 2021,
+    "score": 0.494
+  },
+  "protocol": {
+    "dosing": [],
+    "preparations": [],
+    "schedule": []
+  },
+  "outcomes": {
+    "effective": 75.9,
+    "partial": 3.0,
+    "noEffect": 12.8,
+    "sampleSize": 805
+  },
+  "timeline": [
+    {
+      "year": 2009,
+      "mentions": 5
+    },
+    {
+      "year": 2010,
+      "mentions": 83
+    },
+    {
+      "year": 2011,
+      "mentions": 74
+    },
+    {
+      "year": 2012,
+      "mentions": 59
+    },
+    {
+      "year": 2013,
+      "mentions": 61
+    },
+    {
+      "year": 2014,
+      "mentions": 81
+    },
+    {
+      "year": 2015,
+      "mentions": 55
+    },
+    {
+      "year": 2016,
+      "mentions": 52
+    },
+    {
+      "year": 2017,
+      "mentions": 91
+    },
+    {
+      "year": 2018,
+      "mentions": 77
+    },
+    {
+      "year": 2019,
+      "mentions": 105
+    },
+    {
+      "year": 2020,
+      "mentions": 89
+    },
+    {
+      "year": 2021,
+      "mentions": 117
+    },
+    {
+      "year": 2022,
+      "mentions": 84
+    },
+    {
+      "year": 2023,
+      "mentions": 87
+    },
+    {
+      "year": 2024,
+      "mentions": 72
+    },
+    {
+      "year": 2025,
+      "mentions": 47
+    },
+    {
+      "year": 2026,
+      "mentions": 8
+    }
+  ],
+  "sideEffects": [],
+  "contraindications": [],
+  "coTreatments": [],
+  "sampleSize": 805
+}

@@ -1,0 +1,96 @@
+{
+  "slug": "bol-148",
+  "name": "BOL-148",
+  "category": "psychedelic",
+  "stats": {
+    "mentions": 223,
+    "positiveRate": 79.4,
+    "peakYear": 2013,
+    "score": 0.483
+  },
+  "protocol": {
+    "dosing": [],
+    "preparations": [],
+    "schedule": []
+  },
+  "outcomes": {
+    "effective": 79.4,
+    "partial": 10.3,
+    "noEffect": 5.9,
+    "sampleSize": 68
+  },
+  "timeline": [
+    {
+      "year": 2009,
+      "mentions": 4
+    },
+    {
+      "year": 2010,
+      "mentions": 6
+    },
+    {
+      "year": 2011,
+      "mentions": 33
+    },
+    {
+      "year": 2012,
+      "mentions": 25
+    },
+    {
+      "year": 2013,
+      "mentions": 69
+    },
+    {
+      "year": 2014,
+      "mentions": 22
+    },
+    {
+      "year": 2015,
+      "mentions": 4
+    },
+    {
+      "year": 2016,
+      "mentions": 4
+    },
+    {
+      "year": 2017,
+      "mentions": 4
+    },
+    {
+      "year": 2018,
+      "mentions": 2
+    },
+    {
+      "year": 2019,
+      "mentions": 3
+    },
+    {
+      "year": 2020,
+      "mentions": 5
+    },
+    {
+      "year": 2021,
+      "mentions": 7
+    },
+    {
+      "year": 2022,
+      "mentions": 6
+    },
+    {
+      "year": 2023,
+      "mentions": 26
+    },
+    {
+      "year": 2025,
+      "mentions": 1
+    },
+    {
+      "year": 2026,
+      "mentions": 2
+    }
+  ],
+  "sideEffects": [],
+  "contraindications": [],
+  "coTreatments": [],
+  "sampleSize": 68
+}
