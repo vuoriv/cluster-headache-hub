@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react"
+import { ForumDbProvider } from "@/lib/forum-db"
 import { CbLanding } from "./clusterbusters/cb-landing"
 import { CbTreatmentDetail } from "./clusterbusters/cb-treatment-detail"
 import { CbCompare } from "./clusterbusters/cb-compare"
@@ -30,14 +31,18 @@ export function ClusterBustersTab() {
     window.location.hash = fullHash
   }, [])
 
-  switch (route.page) {
-    case "treatment":
-      return <CbTreatmentDetail slug={route.param!} onNavigate={onNavigate} />
-    case "compare":
-      return <CbCompare onNavigate={onNavigate} />
-    case "methodology":
-      return <CbMethodology onNavigate={onNavigate} />
-    default:
-      return <CbLanding onNavigate={onNavigate} />
-  }
+  const content = (() => {
+    switch (route.page) {
+      case "treatment":
+        return <CbTreatmentDetail slug={route.param!} onNavigate={onNavigate} />
+      case "compare":
+        return <CbCompare onNavigate={onNavigate} />
+      case "methodology":
+        return <CbMethodology onNavigate={onNavigate} />
+      default:
+        return <CbLanding onNavigate={onNavigate} />
+    }
+  })()
+
+  return <ForumDbProvider>{content}</ForumDbProvider>
 }

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Skeleton } from "@/components/ui/skeleton"
 import { Area, AreaChart, XAxis, YAxis, CartesianGrid } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart"
 import {
@@ -13,8 +13,8 @@ import {
 } from "@/components/ui/breadcrumb"
 import { CbOutcomeChart } from "./cb-outcome-chart"
 import { CbDisclaimer } from "./cb-disclaimer"
-import type { TreatmentProfile } from "@/lib/clusterbusters-types"
 import { TREATMENT_COLORS } from "@/lib/clusterbusters-types"
+import { useForumDb } from "@/lib/forum-db"
 import { ArrowLeft } from "lucide-react"
 
 interface CbTreatmentDetailProps {
@@ -30,25 +30,28 @@ const CATEGORY_BADGES: Record<string, { text: string; variant: "purple" | "info"
 }
 
 export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) {
-  const [profile, setProfile] = useState<TreatmentProfile | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    setLoading(true)
-    import(`../../../data/treatments/${slug}.json`)
-      .then((mod) => {
-        setProfile(mod.default as TreatmentProfile)
-        setLoading(false)
-      })
-      .catch(() => {
-        setProfile(null)
-        setLoading(false)
-      })
-  }, [slug])
+  const { loading, error, getTreatmentProfile } = useForumDb()
 
   if (loading) {
-    return <div className="py-12 text-center text-muted-foreground">Loading treatment data...</div>
+    return (
+      <div className="flex flex-col gap-6">
+        <Skeleton className="h-6 w-48" />
+        <Skeleton className="h-8 w-64" />
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Skeleton key={i} className="h-24 w-full rounded-lg" />
+          ))}
+        </div>
+        <Skeleton className="h-64 w-full" />
+      </div>
+    )
   }
+
+  if (error) {
+    return <div className="py-12 text-center text-destructive">Failed to load data: {error}</div>
+  }
+
+  const profile = getTreatmentProfile(slug)
 
   if (!profile) {
     return (

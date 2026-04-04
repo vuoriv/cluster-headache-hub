@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -11,20 +12,34 @@ import {
 } from "@/components/ui/breadcrumb"
 import { CbRadarChart } from "./cb-radar-chart"
 import { cn } from "@/lib/utils"
-import type { TreatmentRanking, OutcomesMap } from "@/lib/clusterbusters-types"
+import { useForumDb } from "@/lib/forum-db"
 import { GitCompareArrows } from "lucide-react"
-
-import treatmentRankings from "@/data/treatment-rankings.json"
-import outcomesData from "@/data/outcomes.json"
 
 interface CbCompareProps {
   onNavigate: (path: string) => void
 }
 
 export function CbCompare({ onNavigate }: CbCompareProps) {
-  const rankings = treatmentRankings as TreatmentRanking[]
-  const outcomes = outcomesData as OutcomesMap
+  const { loading, error, getTreatmentRankings, getOutcomes } = useForumDb()
   const [selected, setSelected] = useState<string[]>([])
+
+  if (loading) {
+    return (
+      <div className="flex flex-col gap-6">
+        <Skeleton className="h-6 w-48" />
+        <Skeleton className="h-8 w-64" />
+        <Skeleton className="h-32 w-full rounded-lg" />
+        <Skeleton className="h-64 w-full rounded-lg" />
+      </div>
+    )
+  }
+
+  if (error) {
+    return <div className="py-12 text-center text-destructive">Failed to load data: {error}</div>
+  }
+
+  const rankings = getTreatmentRankings()
+  const outcomes = getOutcomes()
 
   const toggleTreatment = (slug: string) => {
     setSelected((prev) => {

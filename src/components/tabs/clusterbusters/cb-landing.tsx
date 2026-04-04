@@ -1,16 +1,12 @@
 import { Separator } from "@/components/ui/separator"
+import { Skeleton } from "@/components/ui/skeleton"
 import { CbDisclaimer } from "./cb-disclaimer"
 import { CbStatsRow } from "./cb-stats-row"
 import { CbTreatmentRankings } from "./cb-treatment-rankings"
 import { CbTimelineChart } from "./cb-timeline-chart"
 import { CbTreatmentCard } from "./cb-treatment-card"
 import { CbRecommendation } from "./cb-recommendation"
-import type { ForumStats, TreatmentRanking, TimelineData, RecommendationData } from "@/lib/clusterbusters-types"
-
-import forumStats from "@/data/forum-stats.json"
-import treatmentRankings from "@/data/treatment-rankings.json"
-import timeline from "@/data/timeline.json"
-import recommendationData from "@/data/recommendation-data.json"
+import { useForumDb } from "@/lib/forum-db"
 
 interface CbLandingProps {
   onNavigate: (path: string) => void
@@ -33,10 +29,38 @@ const CATEGORY_FOR_SLUG: Record<string, string> = {
 }
 
 export function CbLanding({ onNavigate }: CbLandingProps) {
-  const stats = forumStats as ForumStats
-  const rankings = treatmentRankings as TreatmentRanking[]
-  const timelineData = timeline as TimelineData
-  const recData = recommendationData as RecommendationData
+  const { loading, error, getForumStats, getTreatmentRankings, getTimeline, getRecommendationData } = useForumDb()
+
+  if (loading) {
+    return (
+      <div className="flex flex-col gap-8">
+        <div>
+          <Skeleton className="h-8 w-80" />
+          <Skeleton className="mt-2 h-4 w-96" />
+        </div>
+        <Skeleton className="h-20 w-full" />
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Skeleton key={i} className="h-24 w-full rounded-lg" />
+          ))}
+        </div>
+        <Skeleton className="h-64 w-full" />
+      </div>
+    )
+  }
+
+  if (error) {
+    return <div className="py-12 text-center text-destructive">Failed to load data: {error}</div>
+  }
+
+  const stats = getForumStats()
+  const rankings = getTreatmentRankings()
+  const timelineData = getTimeline()
+  const recData = getRecommendationData()
+
+  if (!stats || !timelineData || !recData) {
+    return <div className="py-12 text-center text-muted-foreground">No data available.</div>
+  }
 
   return (
     <div className="flex flex-col gap-8">
