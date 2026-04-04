@@ -6,14 +6,14 @@ import { CbTreatmentRankings } from "./cb-treatment-rankings"
 import { CbTimelineChart } from "./cb-timeline-chart"
 import { CbTreatmentCard } from "./cb-treatment-card"
 import { CbRecommendation } from "./cb-recommendation"
-import { useAnalysisDb } from "@/lib/analysis-db"
+import { useDataDb } from "@/lib/data-db"
 
 interface CbLandingProps {
   onNavigate: (path: string) => void
 }
 
 export function CbLanding({ onNavigate }: CbLandingProps) {
-  const { loading, error, getForumStats, getTreatmentRankings, getTimeline, getRecommendationData } = useAnalysisDb()
+  const { loading, error, getForumStats, getTreatmentRankings, getTimeline, getRecommendationData } = useDataDb()
 
   if (loading) {
     return (
