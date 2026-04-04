@@ -8,7 +8,7 @@ import sqlite3
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 DATA_DIR = os.path.join(PROJECT_ROOT, "src", "data")
-OUTPUT_DB = os.path.join(PROJECT_ROOT, "public", "analysis.db")
+OUTPUT_DB = os.path.join(PROJECT_ROOT, "data", "analysis.db")
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS forum_stats (
