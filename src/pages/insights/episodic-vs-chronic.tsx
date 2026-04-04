@@ -173,78 +173,55 @@ export function EpisodicVsChronic() {
         </CardContent>
       </Card>
 
-      {/* Side-by-side comparison chart */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Treatment preferences: episodic vs chronic</CardTitle>
-          <CardDescription>
-            Side-by-side comparison of which treatments each group discusses most. Chronic patients
-            lean toward preventives and alternative therapies; episodic patients focus more on acute
-            abortives and seasonal prevention.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={comparisonChartConfig} className="aspect-[3/2] w-full">
-            <BarChart
-              data={comparisonData}
-              layout="vertical"
-              margin={{ top: 8, right: 8, bottom: 8, left: 100 }}
-            >
-              <CartesianGrid horizontal={false} strokeDasharray="3 3" />
-              <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
-              <YAxis
-                type="category"
-                dataKey="treatment"
-                tickLine={false}
-                axisLine={false}
-                tick={{ fontSize: 12 }}
-                width={90}
-              />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Legend />
-              <Bar
-                dataKey="episodic"
-                fill="var(--color-episodic)"
-                radius={[0, 4, 4, 0]}
-                barSize={10}
-              />
-              <Bar
-                dataKey="chronic"
-                fill="var(--color-chronic)"
-                radius={[0, 4, 4, 0]}
-                barSize={10}
-              />
-            </BarChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
+      {/* Treatment comparison + Outcome rates side by side */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">Treatment Preferences</CardTitle>
+            <CardDescription className="text-xs">
+              Chronic patients lean toward preventives and alternatives; episodic focus on acute abortives.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={comparisonChartConfig} className="h-[280px] w-full">
+              <BarChart data={comparisonData} layout="vertical" margin={{ top: 4, right: 8, bottom: 4, left: 80 }}>
+                <CartesianGrid horizontal={false} strokeDasharray="3 3" />
+                <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />
+                <YAxis type="category" dataKey="treatment" tickLine={false} axisLine={false} tick={{ fontSize: 9 }} width={80} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Legend wrapperStyle={{ fontSize: 10 }} />
+                <Bar dataKey="episodic" fill="var(--color-episodic)" radius={[0, 4, 4, 0]} barSize={8} />
+                <Bar dataKey="chronic" fill="var(--color-chronic)" radius={[0, 4, 4, 0]} barSize={8} />
+              </BarChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
 
-      {/* Outcome rates comparison */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Who reports better outcomes?</CardTitle>
-          <CardDescription>
-            Comparing the share of positive vs negative sentiment in treatment discussions across
-            both groups.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-6 sm:grid-cols-2">
-            <OutcomeBlock
-              label="Episodic"
-              positive={data.episodic_positive_rate}
-              negative={data.episodic_negative_rate}
-              color="hsl(260, 60%, 55%)"
-            />
-            <OutcomeBlock
-              label="Chronic"
-              positive={data.chronic_positive_rate}
-              negative={data.chronic_negative_rate}
-              color="hsl(330, 60%, 50%)"
-            />
-          </div>
-        </CardContent>
-      </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">Who Reports Better Outcomes?</CardTitle>
+            <CardDescription className="text-xs">
+              Positive vs negative sentiment in treatment discussions by CH type.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col gap-6">
+              <OutcomeBlock
+                label="Episodic"
+                positive={data.episodic_positive_rate}
+                negative={data.episodic_negative_rate}
+                color="hsl(260, 60%, 55%)"
+              />
+              <OutcomeBlock
+                label="Chronic"
+                positive={data.chronic_positive_rate}
+                negative={data.chronic_negative_rate}
+                color="hsl(330, 60%, 50%)"
+              />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Closing */}
       <Card className="border-purple-200 dark:border-purple-900/50 bg-purple-50/50 dark:bg-purple-950/20">
