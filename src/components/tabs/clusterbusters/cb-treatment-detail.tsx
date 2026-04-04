@@ -198,10 +198,10 @@ export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) 
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-sm">
               <AlertTriangle className="size-3.5 text-amber-500" />
-              Side Effects
+              Reported Effects
             </CardTitle>
             <CardDescription className="text-xs">
-              Reported by community members
+              Both positive and negative experiences reported by community members
             </CardDescription>
           </CardHeader>
           <CardContent>
