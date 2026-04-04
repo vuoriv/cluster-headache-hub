@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react"
-import { ForumDbProvider } from "@/lib/forum-db"
+import { AnalysisDbProvider } from "@/lib/analysis-db"
 import { CbLanding } from "./clusterbusters/cb-landing"
 import { CbTreatmentDetail } from "./clusterbusters/cb-treatment-detail"
 import { CbCompare } from "./clusterbusters/cb-compare"
@@ -44,5 +44,5 @@ export function ClusterBustersTab() {
     }
   })()
 
-  return <ForumDbProvider>{content}</ForumDbProvider>
+  return <AnalysisDbProvider>{content}</AnalysisDbProvider>
 }

@@ -6,7 +6,7 @@ import { CbTreatmentRankings } from "./cb-treatment-rankings"
 import { CbTimelineChart } from "./cb-timeline-chart"
 import { CbTreatmentCard } from "./cb-treatment-card"
 import { CbRecommendation } from "./cb-recommendation"
-import { useForumDb } from "@/lib/forum-db"
+import { useAnalysisDb } from "@/lib/analysis-db"
 
 interface CbLandingProps {
   onNavigate: (path: string) => void
@@ -29,7 +29,7 @@ const CATEGORY_FOR_SLUG: Record<string, string> = {
 }
 
 export function CbLanding({ onNavigate }: CbLandingProps) {
-  const { loading, error, getForumStats, getTreatmentRankings, getTimeline, getRecommendationData } = useForumDb()
+  const { loading, error, getForumStats, getTreatmentRankings, getTimeline, getRecommendationData } = useAnalysisDb()
 
   if (loading) {
     return (

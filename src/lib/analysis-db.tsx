@@ -11,7 +11,7 @@ import type {
   TreatmentProfile,
 } from "./clusterbusters-types"
 
-interface ForumDbContextValue {
+interface AnalysisDbContextValue {
   loading: boolean
   error: string | null
   getForumStats: () => ForumStats | null
@@ -24,9 +24,9 @@ interface ForumDbContextValue {
   getRecommendationData: () => RecommendationData | null
 }
 
-const ForumDbContext = createContext<ForumDbContextValue | null>(null)
+const AnalysisDbContext = createContext<AnalysisDbContextValue | null>(null)
 
-export function ForumDbProvider({ children }: { children: ReactNode }) {
+export function AnalysisDbProvider({ children }: { children: ReactNode }) {
   const [db, setDb] = useState<Database | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -195,7 +195,7 @@ export function ForumDbProvider({ children }: { children: ReactNode }) {
     return obj as unknown as RecommendationData
   }, [db])
 
-  const value: ForumDbContextValue = {
+  const value: AnalysisDbContextValue = {
     loading,
     error,
     getForumStats,
@@ -208,14 +208,14 @@ export function ForumDbProvider({ children }: { children: ReactNode }) {
     getRecommendationData,
   }
 
-  return <ForumDbContext.Provider value={value}>{children}</ForumDbContext.Provider>
+  return <AnalysisDbContext.Provider value={value}>{children}</AnalysisDbContext.Provider>
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useForumDb(): ForumDbContextValue {
-  const ctx = useContext(ForumDbContext)
+export function useAnalysisDb(): AnalysisDbContextValue {
+  const ctx = useContext(AnalysisDbContext)
   if (!ctx) {
-    throw new Error("useForumDb must be used within a ForumDbProvider")
+    throw new Error("useAnalysisDb must be used within a AnalysisDbProvider")
   }
   return ctx
 }

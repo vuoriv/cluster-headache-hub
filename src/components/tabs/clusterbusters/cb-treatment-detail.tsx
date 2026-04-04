@@ -14,7 +14,7 @@ import {
 import { CbOutcomeChart } from "./cb-outcome-chart"
 import { CbDisclaimer } from "./cb-disclaimer"
 import { TREATMENT_COLORS } from "@/lib/clusterbusters-types"
-import { useForumDb } from "@/lib/forum-db"
+import { useAnalysisDb } from "@/lib/analysis-db"
 import { ArrowLeft } from "lucide-react"
 
 interface CbTreatmentDetailProps {
@@ -30,7 +30,7 @@ const CATEGORY_BADGES: Record<string, { text: string; variant: "purple" | "info"
 }
 
 export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) {
-  const { loading, error, getTreatmentProfile } = useForumDb()
+  const { loading, error, getTreatmentProfile } = useAnalysisDb()
 
   if (loading) {
     return (

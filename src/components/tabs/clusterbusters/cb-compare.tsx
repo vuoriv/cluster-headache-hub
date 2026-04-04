@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { CbRadarChart } from "./cb-radar-chart"
 import { cn } from "@/lib/utils"
-import { useForumDb } from "@/lib/forum-db"
+import { useAnalysisDb } from "@/lib/analysis-db"
 import { GitCompareArrows } from "lucide-react"
 
 interface CbCompareProps {
@@ -20,7 +20,7 @@ interface CbCompareProps {
 }
 
 export function CbCompare({ onNavigate }: CbCompareProps) {
-  const { loading, error, getTreatmentRankings, getOutcomes } = useForumDb()
+  const { loading, error, getTreatmentRankings, getOutcomes } = useAnalysisDb()
   const [selected, setSelected] = useState<string[]>([])
 
   if (loading) {
