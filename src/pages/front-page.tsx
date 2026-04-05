@@ -81,7 +81,7 @@ export function FrontPage() {
               <StatCard
                 to="/clusterbusters"
                 value={stats.forumPosts.toLocaleString()}
-                label="ClusterBusters Forum"
+                label="Forum Analysis"
                 sublabel={`${stats.forumTopics.toLocaleString()} topics analyzed`}
                 icon={<Users className="size-4" />}
               />
