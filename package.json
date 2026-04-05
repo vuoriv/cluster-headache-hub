@@ -9,9 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
-    "preview": "vite preview",
-    "pipeline": "tsx scripts/pipeline/index.ts",
-    "pipeline:merge": "tsx scripts/pipeline/merge-db.ts"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.2.8",
@@ -35,20 +33,17 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
-    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/sql.js": "^1.4.11",
     "@vitejs/plugin-react": "^5.2.0",
-    "better-sqlite3": "^12.8.0",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^16.5.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "tsx": "^4.21.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.57.1",
     "vite": "^7.3.1"
