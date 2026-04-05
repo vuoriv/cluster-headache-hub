@@ -92,11 +92,11 @@ const CATEGORY_LABELS: Record<string, string> = {
 }
 
 const TIER_LABELS: Record<number, string> = {
-  1: "Tier 1 — Meta-analyses",
-  2: "Tier 2 — RCTs",
-  3: "Tier 3 — Cohort / Trials",
-  4: "Tier 4 — Case Reports",
-  5: "Tier 5 — Basic / Other",
+  1: "Strongest — Reviews of multiple studies",
+  2: "Strong — Clinical trials with patients",
+  3: "Moderate — Observational studies",
+  4: "Weak — Individual case reports",
+  5: "Preliminary — Lab research, editorials",
 }
 
 export function ResearchLandscape() {
@@ -262,7 +262,7 @@ export function ResearchLandscape() {
               <p className="text-2xl font-bold">
                 {paperStats.with_abstracts.toLocaleString()}
               </p>
-              <p className="text-xs text-muted-foreground">With Abstracts</p>
+              <p className="text-xs text-muted-foreground">With Summaries</p>
             </div>
           </CardContent>
         </Card>
@@ -300,11 +300,9 @@ export function ResearchLandscape() {
           <CardHeader>
             <CardTitle className="text-sm">Study Type Distribution</CardTitle>
             <CardDescription className="text-xs">
-              Basic science dominates. Only{" "}
-              <Badge variant="secondary" className="text-xs px-1.5 py-0">
-                {rctCount} RCTs
-              </Badge>{" "}
-              exist — a fraction of total output.
+              What kinds of studies exist? "RCT" (randomized controlled trial) is the gold standard —
+              patients are randomly assigned to treatment or placebo. "Basic science" means lab/imaging
+              research, not patient studies. Only {rctCount} RCTs exist out of {paperStats.total_papers.toLocaleString()} papers.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -339,12 +337,12 @@ export function ResearchLandscape() {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm">
-              Evidence Tier Distribution
+              Evidence Strength
             </CardTitle>
             <CardDescription className="text-xs">
-              Most papers sit at Tier 5. Only{" "}
-              {paperStats.evidence_tier_distribution[0]?.count ?? 0} reach Tier
-              1 (meta-analyses).
+              How reliable is the evidence? Tier 1 = strongest (large reviews combining multiple studies).
+              Tier 2 = clinical trials with real patients. Tier 3 = observational studies.
+              Tier 4-5 = case reports, editorials, lab research. Lower tier = more trustworthy.
             </CardDescription>
           </CardHeader>
           <CardContent>

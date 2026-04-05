@@ -255,7 +255,7 @@ export function EvidenceDashboard() {
             </div>
             <div>
               <p className="text-2xl font-bold">{positivePercent}%</p>
-              <p className="text-xs text-muted-foreground">Positive Results</p>
+              <p className="text-xs text-muted-foreground">Studies Showing Benefit</p>
             </div>
           </CardContent>
         </Card>
@@ -266,7 +266,7 @@ export function EvidenceDashboard() {
             </div>
             <div>
               <p className="text-2xl font-bold">{negativePercent}%</p>
-              <p className="text-xs text-muted-foreground">Negative Results</p>
+              <p className="text-xs text-muted-foreground">Studies Showing No Benefit</p>
             </div>
           </CardContent>
         </Card>
@@ -277,7 +277,7 @@ export function EvidenceDashboard() {
             </div>
             <div>
               <p className="text-2xl font-bold">{rctPositive}</p>
-              <p className="text-xs text-muted-foreground">Total RCTs</p>
+              <p className="text-xs text-muted-foreground">Clinical Trials (RCTs)</p>
             </div>
           </CardContent>
         </Card>
@@ -302,11 +302,11 @@ export function EvidenceDashboard() {
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle className="text-sm">Result Distribution</CardTitle>
+            <CardTitle className="text-sm">Study Outcomes</CardTitle>
             <CardDescription className="text-xs">
-              Across all papers with classifiable outcomes. "Inconclusive" is
-              the most common result — most basic science does not test a
-              treatment.
+              Did the treatment work? "Positive" = the treatment showed clear benefit.
+              "Negative" = it didn't work. "Mixed" = some benefit but not convincing.
+              "Inconclusive" = the study wasn't testing a treatment (lab research, reviews).
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -343,18 +343,13 @@ export function EvidenceDashboard() {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm">
-              Average Evidence Quality by Category
+              Evidence Strength by Treatment
             </CardTitle>
             <CardDescription className="text-xs">
-              Lower tier = stronger evidence.{" "}
-              <Badge variant="secondary" className="text-xs px-1.5 py-0">
-                Vitamin D
-              </Badge>{" "}
-              and{" "}
-              <Badge variant="secondary" className="text-xs px-1.5 py-0">
-                Psychedelic
-              </Badge>{" "}
-              research has the best average quality.
+              Which treatments have the strongest research backing? Lower score = better evidence.
+              A score near 2 means mostly clinical trials with real patients. Near 4 means mostly
+              case reports and lab studies. Psychedelic and vitamin D research tends to be
+              higher quality because it's newer and uses modern trial designs.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -395,13 +390,12 @@ export function EvidenceDashboard() {
       <Card>
         <CardHeader>
           <CardTitle className="text-lg">
-            Treatment Results by Category
+            Does It Work? Results by Treatment Category
           </CardTitle>
           <p className="text-sm text-muted-foreground">
-            Positive vs negative vs mixed outcomes across treatment categories.
-            CGRP and nerve block therapies show the most consistent positive
-            signal. Psychedelic research reports 27 positive outcomes with zero
-            negative results.
+            For each treatment category, how many studies found it effective (positive),
+            ineffective (negative), or somewhere in between (mixed)?
+            Psychedelic research stands out: 27 positive results with zero negative.
           </p>
         </CardHeader>
         <CardContent>
