@@ -28,7 +28,7 @@ DATA_DB = os.path.join(PROJECT_ROOT, "public", "data.db")
 TRIAL_ANALYSES_PATH = os.path.join(PROJECT_ROOT, "src", "data", "trials", "trial-analyses.json")
 
 DEFAULT_BASE_URL = "https://api.cerebras.ai/v1"
-DEFAULT_MODEL = "qwen-3-235b"
+DEFAULT_MODEL = "qwen-3-235b-a22b-instruct-2507"
 
 TRIAL_PROMPT = """You are analyzing a clinical trial for cluster headache. Based on the information below, provide a structured analysis.
 
