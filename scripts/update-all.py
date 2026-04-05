@@ -118,6 +118,16 @@ def main():
     else:
         print("\n  Skipping forum analysis (no --forum-db provided)")
 
+    # Phase 3.5: LLM analysis of new trials (if API key available)
+    api_key = os.environ.get("CEREBRAS_API_KEY")
+    if api_key:
+        run(
+            [sys.executable, os.path.join(SCRIPT_DIR, "llm-analyze.py")],
+            "Phase 3.5: LLM analysis of new trials (Cerebras/Qwen3)",
+        )
+    else:
+        print("\n  Skipping LLM analysis (no CEREBRAS_API_KEY set)")
+
     # Phase 4: Rebuild analysis.db from all JSON files
     run(
         [sys.executable, os.path.join(SCRIPT_DIR, "build-analysis-db.py")],
