@@ -82,7 +82,7 @@ export function FrontPage() {
                 to="/clusterbusters"
                 value={stats.forumPosts.toLocaleString()}
                 label="Forum Analysis"
-                sublabel={`${stats.forumTopics.toLocaleString()} topics analyzed`}
+                sublabel={`${stats.forumTopics.toLocaleString()} topics`}
                 icon={<Users className="size-4" />}
               />
             </>
@@ -164,8 +164,8 @@ function StatCard({
 }) {
   return (
     <Link to={to} className="group">
-      <Card className="transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
-        <CardContent className="flex flex-col gap-1 py-4">
+      <Card className="h-full transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
+        <CardContent className="flex h-full flex-col gap-1 py-4">
           <div className="flex items-center gap-2 text-muted-foreground">
             {icon}
             <span className="text-[0.65rem] font-medium uppercase tracking-wider">
