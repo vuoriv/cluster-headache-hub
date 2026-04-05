@@ -236,6 +236,22 @@ function GroupCard({ group }: { group: CommunityGroup }) {
             {group.description}
           </p>
 
+          {/* Contact */}
+          {group.contactEmail && (
+            <p className="text-[0.65rem] text-muted-foreground">
+              <span
+                className="font-medium text-primary hover:underline"
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  window.location.href = `mailto:${group.contactEmail}`
+                }}
+              >
+                {group.contactEmail}
+              </span>
+            </p>
+          )}
+
           {/* Footer */}
           <div className="flex items-center justify-between border-t pt-2">
             <div className="flex items-center gap-1.5 text-muted-foreground">

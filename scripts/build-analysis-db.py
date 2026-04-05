@@ -223,16 +223,17 @@ def build_db():
                 language TEXT NOT NULL,
                 description TEXT,
                 members TEXT,
-                tags TEXT
+                tags TEXT,
+                contact_email TEXT
             )
         """)
         cursor.execute("DELETE FROM community_groups")
         groups = json.load(open(groups_file))
         for g in groups:
             cursor.execute(
-                "INSERT INTO community_groups (name, country, region, platform, url, language, description, members, tags) VALUES (?,?,?,?,?,?,?,?,?)",
+                "INSERT INTO community_groups (name, country, region, platform, url, language, description, members, tags, contact_email) VALUES (?,?,?,?,?,?,?,?,?,?)",
                 (g["name"], g["country"], g["region"], g["platform"], g["url"],
-                 g["language"], g["description"], g.get("members"), json.dumps(g.get("tags", []))),
+                 g["language"], g["description"], g.get("members"), json.dumps(g.get("tags", [])), g.get("contact_email")),
             )
         print(f"  community_groups: {len(groups)} rows")
 

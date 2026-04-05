@@ -13,7 +13,8 @@
       "advocacy",
       "research",
       "peer-support"
-    ]
+    ],
+    "contact_email": "info@clusterbusters.org"
   },
   {
     "name": "Cluster Headache Support Group (CHSG)",
@@ -27,7 +28,8 @@
     "tags": [
       "support",
       "discussion"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Cluster Headaches Worldwide Support Group",
@@ -41,7 +43,8 @@
     "tags": [
       "forum",
       "support"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "The Cluster Headache Support Group (Warriors)",
@@ -56,7 +59,8 @@
       "advocacy",
       "education",
       "maps"
-    ]
+    ],
+    "contact_email": "info@clusterheadachewarriors.org"
   },
   {
     "name": "r/ClusterHeads",
@@ -70,7 +74,8 @@
     "tags": [
       "discussion",
       "support"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "r/ClusterHeadaches",
@@ -84,7 +89,8 @@
     "tags": [
       "discussion",
       "support"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "OUCH UK",
@@ -100,7 +106,8 @@
       "helpline",
       "forum",
       "conference"
-    ]
+    ],
+    "contact_email": "info@ouchuk.org"
   },
   {
     "name": "CSG e.V. (Clusterkopfschmerz-Selbsthilfe-Gruppen)",
@@ -115,7 +122,8 @@
       "self-help",
       "regional-groups",
       "advocacy"
-    ]
+    ],
+    "contact_email": "bundesgeschaeftsstelle@clusterkopf.de"
   },
   {
     "name": "AFCAVF (Association Francaise Contre l'Algie Vasculaire de la Face)",
@@ -130,7 +138,8 @@
       "association",
       "awareness",
       "support"
-    ]
+    ],
+    "contact_email": "contacts.afcavf@gmail.com"
   },
   {
     "name": "MyClusters",
@@ -145,7 +154,8 @@
       "directory",
       "international",
       "support"
-    ]
+    ],
+    "contact_email": "info@myclusters.nl"
   },
   {
     "name": "Nederlandse Hoofdpijn Vereniging (NHV)",
@@ -159,7 +169,8 @@
     "tags": [
       "association",
       "information"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "OUCH Belgium",
@@ -174,7 +185,8 @@
       "support",
       "treatment-info",
       "bilingual"
-    ]
+    ],
+    "contact_email": "info@ouch-belgium.be"
   },
   {
     "name": "Cluster Kopfschmerzen Verein Osterreich",
@@ -189,7 +201,8 @@
       "peer-support",
       "doctor-registry",
       "counselling"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "O.U.C.H. Italia / GrappoloAiuto",
@@ -204,7 +217,8 @@
       "forum",
       "treatment-info",
       "regional"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "CRAES (Cefaleas en Racimos y Primarias Espana)",
@@ -219,7 +233,8 @@
       "association",
       "support",
       "awareness"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "ACRA (Asociacion Cefalea en Racimos Ayuda)",
@@ -234,7 +249,8 @@
       "support",
       "spanish-speaking",
       "international"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Migraine Ireland",
@@ -249,7 +265,8 @@
       "charity",
       "headache",
       "support"
-    ]
+    ],
+    "contact_email": "info@migraine.ie"
   },
   {
     "name": "MiGRA Portugal",
@@ -263,7 +280,8 @@
     "tags": [
       "association",
       "headache"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Hodepine Norge",
@@ -278,7 +296,8 @@
       "association",
       "doctor-chat",
       "support"
-    ]
+    ],
+    "contact_email": "post@hodepine.no"
   },
   {
     "name": "European Migraine & Headache Alliance (EMHA)",
@@ -294,7 +313,8 @@
       "advocacy",
       "policy",
       "european"
-    ]
+    ],
+    "contact_email": "info@emhalliance.org"
   },
   {
     "name": "Migraine Canada",
@@ -309,7 +329,8 @@
       "association",
       "headache",
       "specialist-directory"
-    ]
+    ],
+    "contact_email": "info@migrainecanada.org"
   },
   {
     "name": "ABRACES",
@@ -324,7 +345,8 @@
       "association",
       "research",
       "support"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Australia New Zealand Cluster Headache Support",
@@ -338,7 +360,8 @@
     "tags": [
       "support",
       "regional"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Migraine & Headache Australia",
@@ -353,7 +376,8 @@
       "association",
       "specialist-resources",
       "headache"
-    ]
+    ],
+    "contact_email": "info@headacheaustralia.org.au"
   },
   {
     "name": "TACSWeb",
@@ -368,7 +392,8 @@
       "information",
       "TAC",
       "education"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "The Brain Charity \u2014 Cluster Headaches",
@@ -383,7 +408,8 @@
       "charity",
       "practical-support",
       "neurological"
-    ]
+    ],
+    "contact_email": "info@thebraincharity.org.uk"
   },
   {
     "name": "The Migraine Trust \u2014 Cluster Headache",
@@ -398,7 +424,8 @@
       "charity",
       "information",
       "specialist-referral"
-    ]
+    ],
+    "contact_email": "info@migrainetrust.org"
   },
   {
     "name": "Clusterbuds",
@@ -413,7 +440,8 @@
       "chat",
       "support",
       "real-time"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "To Kill The Beast",
@@ -427,7 +455,8 @@
     "tags": [
       "support",
       "discussion"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Beat the Beast",
@@ -442,7 +471,8 @@
       "research",
       "fundraising",
       "support"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Cluster Headaches Australia",
@@ -457,7 +487,8 @@
       "forum",
       "information",
       "community"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "PatientsLikeMe \u2014 Cluster Headaches",
@@ -472,7 +503,8 @@
       "data-sharing",
       "tracking",
       "community"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Suomen Horton-yhdistys ry",
@@ -487,7 +519,8 @@
       "association",
       "advocacy",
       "peer-support"
-    ]
+    ],
+    "contact_email": "toimisto@hortonyhdistys.fi"
   },
   {
     "name": "Klusterhuvudv\u00e4rksf\u00f6reningen (Huvudv\u00e4rksf\u00f6rbundet)",
@@ -502,7 +535,8 @@
       "association",
       "advocacy",
       "headache-federation"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Dansk Horton Hovedpineforening (DHH)",
@@ -517,7 +551,8 @@
       "association",
       "counselling",
       "magazine"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Danmarks Patientforening for Hovedpineramte",
@@ -532,7 +567,8 @@
       "association",
       "headache",
       "advice"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Schweizerische Kopfwehgesellschaft (SKG)",
@@ -547,7 +583,8 @@
       "society",
       "registry",
       "research"
-    ]
+    ],
+    "contact_email": null
   },
   {
     "name": "Cefalea en Racimos \u2014 Grupo de Apoyo (Facebook)",
@@ -562,6 +599,7 @@
       "support",
       "spanish-speaking",
       "latin-america"
-    ]
+    ],
+    "contact_email": null
   }
 ]
