@@ -473,5 +473,35 @@
       "tracking",
       "community"
     ]
+  },
+  {
+    "name": "Suomen Horton-yhdistys ry",
+    "country": "FI",
+    "region": "europe",
+    "platform": "website",
+    "url": "https://www.hortonyhdistys.fi",
+    "language": "fi",
+    "description": "Finnish Cluster Headache Association. Founded 2019. Patient advocacy, peer support 24/7 via Facebook group \"Hortonin syndrooma\", and resources in Finnish.",
+    "members": null,
+    "tags": [
+      "association",
+      "advocacy",
+      "peer-support"
+    ]
+  },
+  {
+    "name": "Klusterhuvudv\u00e4rksf\u00f6reningen (Huvudv\u00e4rksf\u00f6rbundet)",
+    "country": "SE",
+    "region": "europe",
+    "platform": "website",
+    "url": "https://huvudvarksforbundet.se/foreningar/horton/",
+    "language": "sv",
+    "description": "Swedish Cluster Headache Association, part of Huvudv\u00e4rksf\u00f6rbundet (Headache Federation). Patient advocacy and care mapping project.",
+    "members": null,
+    "tags": [
+      "association",
+      "advocacy",
+      "headache-federation"
+    ]
   }
 ]
