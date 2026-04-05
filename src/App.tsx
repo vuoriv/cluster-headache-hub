@@ -53,8 +53,8 @@ export default function App() {
                   </Suspense>
                 }
               />
-            </Route>
               <Route path="/community" element={<CommunityPage />} />
+            </Route>
           </Routes>
         </DataDbProvider>
       </TooltipProvider>
