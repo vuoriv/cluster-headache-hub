@@ -1,44 +1,84 @@
-import { useState, useMemo } from "react"
-import { Search, BookOpen, ChevronDown, ChevronUp, ExternalLink } from "lucide-react"
+import { useState, useMemo, useCallback, useRef, useEffect } from "react"
+import { Link } from "react-router-dom"
+import { Search, BookOpen, ChevronDown, ChevronUp, ExternalLink, ArrowLeft } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useDataDb, type ResearchPaper } from "@/lib/data-db"
 import { CATEGORY_CONFIG } from "@/lib/research-categories"
 import { cn } from "@/lib/utils"
 
-const PAGE_SIZE = 25
+const BATCH_SIZE = 30
 
 export function ResearchSearchPage() {
-  const { loading, error, searchPapers, getCategories, getMeta } = useDataDb()
+  const { loading, error, searchPapers, getCategories, getMeta, getTopAuthors } = useDataDb()
   const stats = useMemo(() => (loading ? null : getMeta()), [loading, getMeta])
+  const topAuthors = useMemo(() => (loading ? [] : getTopAuthors(150)), [loading, getTopAuthors])
 
   const [query, setQuery] = useState("")
   const [category, setCategory] = useState<string>("all")
+  const [author, setAuthor] = useState<string>("all")
   const [yearFrom, setYearFrom] = useState<string>("")
   const [yearTo, setYearTo] = useState<string>("")
-  const [page, setPage] = useState(0)
+  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE)
   const [expandedPmid, setExpandedPmid] = useState<string | null>(null)
+  const sentinelRef = useRef<HTMLDivElement>(null)
 
   const categories = useMemo(() => getCategories(), [getCategories])
 
-  const papers = useMemo(() => {
+  // Fetch a larger batch for infinite scroll
+  const allResults = useMemo(() => {
     if (loading) return []
+    const authorQuery = author !== "all" ? author : undefined
+    const searchQuery = query || authorQuery || undefined
     return searchPapers({
-      query: query || undefined,
+      query: searchQuery,
       category: category === "all" ? undefined : category,
       yearFrom: yearFrom ? parseInt(yearFrom) : undefined,
       yearTo: yearTo ? parseInt(yearTo) : undefined,
-      limit: PAGE_SIZE,
-      offset: page * PAGE_SIZE,
+      limit: 500,
+      offset: 0,
     })
-  }, [loading, searchPapers, query, category, yearFrom, yearTo, page])
+  }, [loading, searchPapers, query, category, author, yearFrom, yearTo])
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") setPage(0)
-  }
+  const papers = useMemo(
+    () => allResults.slice(0, visibleCount),
+    [allResults, visibleCount],
+  )
+  const hasMore = visibleCount < allResults.length
+
+  // Reset visible count when filters change
+  useEffect(() => {
+    setVisibleCount(BATCH_SIZE)
+  }, [query, category, author, yearFrom, yearTo])
+
+  // Infinite scroll via IntersectionObserver
+  const loadMore = useCallback(() => {
+    if (hasMore) {
+      setVisibleCount((prev) => prev + BATCH_SIZE)
+    }
+  }, [hasMore])
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current
+    if (!sentinel) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) loadMore()
+      },
+      { rootMargin: "200px" },
+    )
+    observer.observe(sentinel)
+    return () => observer.disconnect()
+  }, [loadMore])
 
   if (error) {
     return (
@@ -51,33 +91,45 @@ export function ResearchSearchPage() {
 
   return (
     <div className="flex flex-col gap-6">
+      <Link to="/research" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+        <ArrowLeft className="size-3.5" /> Back to Research
+      </Link>
+
       <div>
-        <h2 className="text-2xl font-bold">Latest Research Papers</h2>
+        <h2 className="text-2xl font-bold">All Papers</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          {stats?.paperCount?.toLocaleString() ?? "—"}+ cluster headache papers from{" "}
-          <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">PubMed</a>
-          , categorized and scored for relevance
+          {stats?.paperCount?.toLocaleString() ?? "—"}+ cluster headache papers from PubMed
         </p>
       </div>
 
-      {/* Search */}
+      {/* Search + Author + Year */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
-            placeholder="Search by title, abstract, or researcher name..."
+            placeholder="Search by title, abstract, or author..."
             value={query}
-            onChange={(e) => { setQuery(e.target.value); setPage(0) }}
-            onKeyDown={handleKeyDown}
+            onChange={(e) => setQuery(e.target.value)}
             className="pl-9"
           />
         </div>
+        <Select value={author} onValueChange={setAuthor}>
+          <SelectTrigger className="h-9 w-full text-xs sm:w-[200px]">
+            <SelectValue placeholder="Researcher" />
+          </SelectTrigger>
+          <SelectContent className="max-h-[300px]">
+            <SelectItem value="all">All researchers</SelectItem>
+            {topAuthors.map((a) => (
+              <SelectItem key={a} value={a}>{a}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <div className="flex gap-2">
           <Input
             type="number"
             placeholder="From"
             value={yearFrom}
-            onChange={(e) => { setYearFrom(e.target.value); setPage(0) }}
+            onChange={(e) => setYearFrom(e.target.value)}
             className="h-9 w-[80px] text-xs"
             min="1950"
             max="2030"
@@ -87,7 +139,7 @@ export function ResearchSearchPage() {
             type="number"
             placeholder="To"
             value={yearTo}
-            onChange={(e) => { setYearTo(e.target.value); setPage(0) }}
+            onChange={(e) => setYearTo(e.target.value)}
             className="h-9 w-[80px] text-xs"
             min="1950"
             max="2030"
@@ -98,7 +150,7 @@ export function ResearchSearchPage() {
       {/* Category label filters */}
       <div className="flex flex-wrap gap-1.5">
         <button
-          onClick={() => { setCategory("all"); setPage(0) }}
+          onClick={() => setCategory("all")}
           className={cn(
             "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
             category === "all"
@@ -115,7 +167,7 @@ export function ResearchSearchPage() {
           return (
             <button
               key={cat}
-              onClick={() => { setCategory(active ? "all" : cat); setPage(0) }}
+              onClick={() => setCategory(active ? "all" : cat)}
               className={cn(
                 "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
                 active
@@ -129,12 +181,15 @@ export function ResearchSearchPage() {
         })}
       </div>
 
-      {/* Results hint */}
-      {!loading && !query && category === "all" && !yearFrom && !yearTo && papers.length > 0 && (
-        <p className="text-xs font-medium text-muted-foreground">
-          Showing highest-relevance papers. Use search and filters to narrow results.
-        </p>
-      )}
+      {/* Result count */}
+      <p className="text-xs text-muted-foreground">
+        {allResults.length === 500
+          ? "Showing top 500 results"
+          : `${allResults.length} papers found`}
+        {query || category !== "all" || author !== "all" || yearFrom || yearTo
+          ? " matching your filters"
+          : " — highest relevance first"}
+      </p>
 
       {/* Results */}
       {loading ? (
@@ -143,54 +198,35 @@ export function ResearchSearchPage() {
             <Skeleton key={i} className="h-24 w-full rounded-lg" />
           ))}
         </div>
+      ) : papers.length === 0 ? (
+        <div className="flex flex-col items-center gap-3 py-12 text-center">
+          <BookOpen className="size-10 text-muted-foreground/30" />
+          <p className="text-sm text-muted-foreground">
+            No papers found matching your search
+          </p>
+        </div>
       ) : (
         <>
           <div className="flex flex-col gap-2">
-            {papers.length === 0 ? (
-              <div className="flex flex-col items-center gap-3 py-12 text-center">
-                <BookOpen className="size-10 text-muted-foreground/30" />
-                <p className="text-sm text-muted-foreground">
-                  No papers found matching your search
-                </p>
-              </div>
-            ) : (
-              papers.map((paper) => (
-                <PaperCard
-                  key={paper.pmid}
-                  paper={paper}
-                  expanded={expandedPmid === paper.pmid}
-                  onToggle={() =>
-                    setExpandedPmid(expandedPmid === paper.pmid ? null : paper.pmid)
-                  }
-                  onAuthorClick={(author) => { setQuery(author); setPage(0) }}
-                />
-              ))
-            )}
+            {papers.map((paper) => (
+              <PaperCard
+                key={paper.pmid}
+                paper={paper}
+                expanded={expandedPmid === paper.pmid}
+                onToggle={() =>
+                  setExpandedPmid(expandedPmid === paper.pmid ? null : paper.pmid)
+                }
+                onAuthorClick={(a) => setAuthor(a)}
+              />
+            ))}
           </div>
 
-          {papers.length > 0 && (
-            <div className="flex items-center justify-between">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setPage((p) => Math.max(0, p - 1))}
-                disabled={page === 0}
-              >
-                Previous
-              </Button>
-              <span className="text-xs text-muted-foreground">
-                Page {page + 1}
-              </span>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setPage((p) => p + 1)}
-                disabled={papers.length < PAGE_SIZE}
-              >
-                Next
-              </Button>
-            </div>
-          )}
+          {/* Infinite scroll sentinel */}
+          <div ref={sentinelRef} className="flex justify-center py-4">
+            {hasMore && (
+              <p className="text-xs text-muted-foreground">Loading more...</p>
+            )}
+          </div>
         </>
       )}
     </div>
@@ -210,8 +246,6 @@ function PaperCard({
 }) {
   const catConfig = CATEGORY_CONFIG[paper.category]
   const year = paper.pubDate?.slice(0, 4) || ""
-
-  // Extract first author surname for clickable filter
   const firstAuthor = paper.authors?.split(",")[0]?.trim()
 
   return (

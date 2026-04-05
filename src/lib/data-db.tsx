@@ -101,6 +101,7 @@ interface DataDbContextValue {
 
   // Insights
   getInsight: <T = unknown>(slug: string) => T | null
+  getTopAuthors: (limit?: number) => string[]
 }
 
 const DataDbContext = createContext<DataDbContextValue | null>(null)
@@ -495,6 +496,21 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     return rows[0].values.map((r) => r[0] as string)
   }, [db])
 
+  const getTopAuthors = useCallback(
+    (limit = 100): string[] => {
+      if (!db) return []
+      const rows = db.exec(
+        `SELECT DISTINCT substr(authors, 1, instr(authors || ',', ',') - 1) as first_author, COUNT(*) as cnt
+         FROM papers WHERE authors IS NOT NULL AND authors != ''
+         GROUP BY first_author HAVING cnt >= 3
+         ORDER BY cnt DESC LIMIT ${limit}`,
+      )
+      if (rows.length === 0) return []
+      return rows[0].values.map((r) => r[0] as string).filter(Boolean)
+    },
+    [db],
+  )
+
   const getInsight = useCallback(
     <T = unknown>(slug: string): T | null => {
       if (!db) return null
@@ -530,6 +546,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     getMeta,
     getCategories,
     getInsight,
+    getTopAuthors,
   }
 
   return <DataDbContext.Provider value={value}>{children}</DataDbContext.Provider>

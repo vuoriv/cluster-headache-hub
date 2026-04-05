@@ -1,8 +1,10 @@
 import { useState, useMemo } from "react"
+import { Link } from "react-router-dom"
 import {
   FlaskConical,
   Search,
   ExternalLink,
+  ArrowLeft,
   Users,
   Calendar,
   ChevronDown,
@@ -68,6 +70,10 @@ export function ActiveTrialsPage() {
 
   return (
     <div className="flex flex-col gap-6">
+      <Link to="/research" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+        <ArrowLeft className="size-3.5" /> Back to Research
+      </Link>
+
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h2 className="text-2xl font-bold">Active Clinical Trials</h2>
