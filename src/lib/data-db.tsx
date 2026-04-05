@@ -102,6 +102,21 @@ interface DataDbContextValue {
   // Insights
   getInsight: <T = unknown>(slug: string) => T | null
   getTopAuthors: (limit?: number) => string[]
+
+  // Community
+  getCommunityGroups: () => CommunityGroup[]
+}
+
+export interface CommunityGroup {
+  name: string
+  country: string
+  region: string
+  platform: string
+  url: string
+  language: string
+  description: string
+  members: string | null
+  tags: string[]
 }
 
 const DataDbContext = createContext<DataDbContextValue | null>(null)
@@ -511,6 +526,25 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     [db],
   )
 
+  const getCommunityGroups = useCallback((): CommunityGroup[] => {
+    if (!db) return []
+    const rows = db.exec(
+      "SELECT name, country, region, platform, url, language, description, members, tags FROM community_groups ORDER BY region, country, name",
+    )
+    if (rows.length === 0) return []
+    return rows[0].values.map((r) => ({
+      name: r[0] as string,
+      country: r[1] as string,
+      region: r[2] as string,
+      platform: r[3] as string,
+      url: r[4] as string,
+      language: r[5] as string,
+      description: r[6] as string,
+      members: r[7] as string | null,
+      tags: parseJsonSafe(r[8] as string, []),
+    }))
+  }, [db])
+
   const getInsight = useCallback(
     <T = unknown>(slug: string): T | null => {
       if (!db) return null
@@ -547,6 +581,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     getCategories,
     getInsight,
     getTopAuthors,
+    getCommunityGroups,
   }
 
   return <DataDbContext.Provider value={value}>{children}</DataDbContext.Provider>

@@ -209,6 +209,33 @@ def build_db():
             insight_count += 1
         print(f"  insights: {insight_count} rows")
 
+    # community_groups
+    groups_file = os.path.join(DATA_DIR, "community-groups.json")
+    if os.path.exists(groups_file):
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS community_groups (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                country TEXT NOT NULL,
+                region TEXT NOT NULL,
+                platform TEXT NOT NULL,
+                url TEXT NOT NULL,
+                language TEXT NOT NULL,
+                description TEXT,
+                members TEXT,
+                tags TEXT
+            )
+        """)
+        cursor.execute("DELETE FROM community_groups")
+        groups = json.load(open(groups_file))
+        for g in groups:
+            cursor.execute(
+                "INSERT INTO community_groups (name, country, region, platform, url, language, description, members, tags) VALUES (?,?,?,?,?,?,?,?,?)",
+                (g["name"], g["country"], g["region"], g["platform"], g["url"],
+                 g["language"], g["description"], g.get("members"), json.dumps(g.get("tags", []))),
+            )
+        print(f"  community_groups: {len(groups)} rows")
+
     conn.commit()
     conn.close()
     size_kb = os.path.getsize(OUTPUT_DB) / 1024

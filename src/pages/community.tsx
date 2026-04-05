@@ -11,7 +11,7 @@ import {
   Heart,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import groups from "@/data/community-groups.json"
+import { useDataDb, type CommunityGroup } from "@/lib/data-db"
 
 // Country flag emoji from ISO code
 function flag(code: string): string {
@@ -62,24 +62,14 @@ const REGION_LABELS: Record<string, string> = {
   "south-america": "South America",
 }
 
-interface Group {
-  name: string
-  country: string
-  region: string
-  platform: string
-  url: string
-  language: string
-  description: string
-  members: string | null
-  tags: string[]
-}
-
 export function CommunityPage() {
+  const { loading, getCommunityGroups } = useDataDb()
+  const groups = useMemo(() => (loading ? [] : getCommunityGroups()), [loading, getCommunityGroups])
   const [regionFilter, setRegionFilter] = useState("all")
   const [platformFilter, setPlatformFilter] = useState("all")
 
   const filtered = useMemo(() => {
-    let result = groups as Group[]
+    let result = groups
     if (regionFilter !== "all") {
       result = result.filter((g) => g.region === regionFilter)
     }
@@ -91,7 +81,7 @@ export function CommunityPage() {
 
   // Group by region for display
   const grouped = useMemo(() => {
-    const map = new Map<string, Group[]>()
+    const map = new Map<string, CommunityGroup[]>()
     const order = ["international", "north-america", "europe", "asia-pacific", "south-america"]
     for (const region of order) {
       const items = filtered.filter((g) => g.region === region)
@@ -121,7 +111,7 @@ export function CommunityPage() {
         <Card>
           <CardContent className="flex flex-col items-center gap-1 py-3">
             <span className="text-xl font-bold tabular-nums text-primary">
-              {new Set((groups as Group[]).map((g) => g.country)).size}
+              {new Set(groups.map((g) => g.country)).size}
             </span>
             <span className="text-[0.65rem] font-medium uppercase tracking-wider text-muted-foreground">Countries</span>
           </CardContent>
@@ -129,7 +119,7 @@ export function CommunityPage() {
         <Card>
           <CardContent className="flex flex-col items-center gap-1 py-3">
             <span className="text-xl font-bold tabular-nums text-primary">
-              {new Set((groups as Group[]).map((g) => g.language)).size}
+              {new Set(groups.map((g) => g.language)).size}
             </span>
             <span className="text-[0.65rem] font-medium uppercase tracking-wider text-muted-foreground">Languages</span>
           </CardContent>
@@ -216,7 +206,7 @@ export function CommunityPage() {
   )
 }
 
-function GroupCard({ group }: { group: Group }) {
+function GroupCard({ group }: { group: CommunityGroup }) {
   const platformIcon = PLATFORM_ICONS[group.platform] ?? <Globe className="size-4" />
 
   return (
