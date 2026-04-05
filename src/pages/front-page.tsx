@@ -3,11 +3,11 @@ import { Link } from "react-router-dom"
 import {
   MessageCircle,
   BookOpen,
-  FlaskConical,
   ArrowRight,
   AlertTriangle,
   Users,
   FileText,
+  FlaskConical,
 } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -95,7 +95,7 @@ export function FrontPage() {
         <h3 className="mb-6 text-sm font-semibold uppercase tracking-widest text-muted-foreground">
           Explore
         </h3>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2">
           <SectionCard
             to="/clusterbusters"
             icon={<MessageCircle className="size-5" />}
@@ -108,19 +108,10 @@ export function FrontPage() {
           <SectionCard
             to="/research"
             icon={<BookOpen className="size-5" />}
-            title="Research Search"
-            description="Peer-reviewed papers from PubMed, categorized by treatment type and scored for patient relevance."
-            stat={stats ? `${stats.papers.toLocaleString()} papers` : undefined}
+            title="Research"
+            description="4,400+ papers from PubMed, 100+ clinical trials, deep evidence analysis, and active trial tracking."
+            stat={stats ? `${stats.papers.toLocaleString()} papers + ${stats.activeTrials} trials` : undefined}
             accent="blue"
-            loading={loading}
-          />
-          <SectionCard
-            to="/trials"
-            icon={<FlaskConical className="size-5" />}
-            title="Active Trials"
-            description="Currently active clinical trials with recruitment status, study phase, and intervention details."
-            stat={stats ? `${stats.activeTrials} active` : undefined}
-            accent="green"
             loading={loading}
           />
         </div>

@@ -4,8 +4,11 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { DataDbProvider } from "@/lib/data-db"
 import { Layout } from "@/components/layout/layout"
 import { FrontPage } from "@/pages/front-page"
+import { ResearchIndex } from "@/pages/research/index"
 import { ResearchSearchPage } from "@/pages/research-search"
 import { ActiveTrialsPage } from "@/pages/active-trials"
+import { ResearchLandscape } from "@/pages/research/landscape"
+import { EvidenceDashboard } from "@/pages/research/evidence"
 
 const ClusterBustersPage = lazy(() => import("@/pages/clusterbusters"))
 
@@ -45,8 +48,11 @@ export default function App() {
                   </Suspense>
                 }
               />
-              <Route path="/research" element={<ResearchSearchPage />} />
-              <Route path="/trials" element={<ActiveTrialsPage />} />
+              <Route path="/research" element={<ResearchIndex />} />
+              <Route path="/research/papers" element={<ResearchSearchPage />} />
+              <Route path="/research/trials" element={<ActiveTrialsPage />} />
+              <Route path="/research/insights/landscape" element={<ResearchLandscape />} />
+              <Route path="/research/insights/evidence" element={<EvidenceDashboard />} />
             </Route>
           </Routes>
         </DataDbProvider>
