@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom"
-import { Brain, Sun, Moon, BookOpen, MessageCircle } from "lucide-react"
+import { Brain, Sun, Moon, BookOpen, MessageCircle, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { useTheme } from "@/components/theme-provider"
@@ -7,6 +7,7 @@ import { useTheme } from "@/components/theme-provider"
 const NAV_ITEMS = [
   { to: "/clusterbusters", label: "ClusterBusters", shortLabel: "CB", icon: MessageCircle },
   { to: "/research", label: "Research", shortLabel: "Research", icon: BookOpen },
+  { to: "/community", label: "Community", shortLabel: "Groups", icon: Users },
 ] as const
 
 export function Header() {

@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { DataDbProvider } from "@/lib/data-db"
 import { Layout } from "@/components/layout/layout"
 import { FrontPage } from "@/pages/front-page"
+import { CommunityPage } from "@/pages/community"
 
 const ClusterBustersPage = lazy(() => import("@/pages/clusterbusters"))
 const ResearchPage = lazy(() => import("@/pages/research-page"))
@@ -53,6 +54,7 @@ export default function App() {
                 }
               />
             </Route>
+              <Route path="/community" element={<CommunityPage />} />
           </Routes>
         </DataDbProvider>
       </TooltipProvider>
