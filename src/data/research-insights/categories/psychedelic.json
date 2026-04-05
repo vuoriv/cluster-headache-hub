@@ -2,10 +2,10 @@
   "category": "psychedelic",
   "name": "Psychedelic Treatments",
   "description": "Psilocybin, LSD, BOL-148, and other psychedelic compounds for cluster headache. The community's most-discussed treatment category, now backed by Phase 2 clinical trials.",
-  "total_papers": 57,
+  "total_papers": 58,
   "total_trials": 6,
   "active_trials": 3,
-  "with_abstracts": 48,
+  "with_abstracts": 51,
   "study_type_distribution": [
     {
       "type": "other",
@@ -16,11 +16,11 @@
       "count": 9
     },
     {
-      "type": "basic-science",
-      "count": 8
+      "type": "clinical-trial",
+      "count": 7
     },
     {
-      "type": "clinical-trial",
+      "type": "basic-science",
       "count": 7
     },
     {
@@ -28,20 +28,20 @@
       "count": 6
     },
     {
+      "type": "guideline",
+      "count": 5
+    },
+    {
       "type": "systematic-review",
       "count": 4
     },
     {
-      "type": "guideline",
-      "count": 4
+      "type": "review",
+      "count": 3
     },
     {
       "type": "meta-analysis",
       "count": 3
-    },
-    {
-      "type": "review",
-      "count": 2
     },
     {
       "type": "case-report",
@@ -55,19 +55,19 @@
   "result_distribution": [
     {
       "result": "positive",
-      "count": 26
+      "count": 27
     },
     {
       "result": "inconclusive",
-      "count": 17
+      "count": 18
     },
     {
       "result": "unknown",
-      "count": 9
+      "count": 7
     },
     {
       "result": "mixed",
-      "count": 5
+      "count": 6
     }
   ],
   "papers_per_year": {
@@ -88,10 +88,10 @@
     "2022": 10,
     "2023": 5,
     "2024": 7,
-    "2025": 4,
+    "2025": 5,
     "2026": 3
   },
-  "avg_sample_size": 530,
+  "avg_sample_size": 493,
   "max_sample_size": 3251,
   "top_papers": [
     {

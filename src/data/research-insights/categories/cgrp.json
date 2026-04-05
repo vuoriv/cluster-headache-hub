@@ -2,18 +2,18 @@
   "category": "cgrp",
   "name": "CGRP Therapies",
   "description": "Calcitonin gene-related peptide (CGRP) monoclonal antibodies and gepants. Galcanezumab is the only approved anti-CGRP for episodic CH.",
-  "total_papers": 224,
+  "total_papers": 227,
   "total_trials": 14,
   "active_trials": 1,
-  "with_abstracts": 209,
+  "with_abstracts": 215,
   "study_type_distribution": [
     {
       "type": "basic-science",
-      "count": 70
+      "count": 71
     },
     {
       "type": "rct",
-      "count": 35
+      "count": 37
     },
     {
       "type": "other",
@@ -25,15 +25,15 @@
     },
     {
       "type": "review",
-      "count": 20
+      "count": 21
+    },
+    {
+      "type": "observational",
+      "count": 9
     },
     {
       "type": "meta-analysis",
       "count": 9
-    },
-    {
-      "type": "observational",
-      "count": 8
     },
     {
       "type": "case-report",
@@ -45,11 +45,11 @@
     },
     {
       "type": "guideline",
-      "count": 3
+      "count": 2
     },
     {
       "type": "case-series",
-      "count": 3
+      "count": 2
     },
     {
       "type": "editorial",
@@ -59,11 +59,11 @@
   "result_distribution": [
     {
       "result": "positive",
-      "count": 98
+      "count": 103
     },
     {
       "result": "inconclusive",
-      "count": 78
+      "count": 80
     },
     {
       "result": "mixed",
@@ -71,11 +71,11 @@
     },
     {
       "result": "unknown",
-      "count": 15
+      "count": 12
     },
     {
       "result": "negative",
-      "count": 8
+      "count": 7
     }
   ],
   "papers_per_year": {
@@ -114,13 +114,24 @@
     "2021": 17,
     "2022": 18,
     "2023": 8,
-    "2024": 13,
+    "2024": 16,
     "2025": 22,
     "2026": 4
   },
-  "avg_sample_size": 285,
-  "max_sample_size": 3889,
+  "avg_sample_size": 419,
+  "max_sample_size": 5153,
   "top_papers": [
+    {
+      "pmid": "39761027",
+      "title": "Cardiovascular Safety of Anti-CGRP Monoclonal Antibodies in Older Adults or Adults With Disability With Migraine.",
+      "authors": "Yang S, Orlova Y, Park H et al.",
+      "year": "2025",
+      "journal": "JAMA neurology",
+      "study_type": "rct",
+      "result": "inconclusive",
+      "sample_size": 5153,
+      "evidence_tier": 1
+    },
     {
       "pmid": "32046655",
       "title": "Different doses of galcanezumab versus placebo in patients with migraine and cluster headache: a meta-analysis of randomized controlled trials.",
@@ -141,6 +152,17 @@
       "study_type": "meta-analysis",
       "result": "mixed",
       "sample_size": 832,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "39686845",
+      "title": "Efficacy and safety of galcanezumab for cluster headache preventive treatment: a systematic review and meta-analysis.",
+      "authors": "Barbosa da Silva M, Baroni Coelho de Oliveira Ferreira D, Mendieta CD et al.",
+      "year": "2025",
+      "journal": "Neurological research",
+      "study_type": "meta-analysis",
+      "result": "positive",
+      "sample_size": 504,
       "evidence_tier": 1
     },
     {
@@ -206,28 +228,6 @@
       "journal": "BMC neurology",
       "study_type": "meta-analysis",
       "result": "positive",
-      "sample_size": null,
-      "evidence_tier": 1
-    },
-    {
-      "pmid": "40971112",
-      "title": "Neurotransmitter Imbalance in Cluster Headache: A Systematic Review of Mechanisms and Therapeutic Targets.",
-      "authors": "Pellesi L, Mohammad A, Wang W et al.",
-      "year": "2025",
-      "journal": "Pain and therapy",
-      "study_type": "systematic-review",
-      "result": "positive",
-      "sample_size": null,
-      "evidence_tier": 1
-    },
-    {
-      "pmid": "37515405",
-      "title": "European Academy of Neurology guidelines on the treatment of cluster headache.",
-      "authors": "May A, Evers S, Goadsby PJ et al.",
-      "year": "2023",
-      "journal": "European journal of neurology",
-      "study_type": "systematic-review",
-      "result": "mixed",
       "sample_size": null,
       "evidence_tier": 1
     }

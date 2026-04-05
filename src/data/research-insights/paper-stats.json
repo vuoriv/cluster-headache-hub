@@ -1,26 +1,26 @@
 {
-  "total_papers": 4403,
-  "with_abstracts": 3267,
+  "total_papers": 4303,
+  "with_abstracts": 3277,
   "study_type_distribution": [
     {
       "type": "other",
-      "count": 1660
+      "count": 1568
     },
     {
       "type": "basic-science",
-      "count": 1337
+      "count": 1324
     },
     {
       "type": "case-report",
-      "count": 254
+      "count": 252
     },
     {
       "type": "observational",
-      "count": 244
+      "count": 250
     },
     {
       "type": "rct",
-      "count": 225
+      "count": 224
     },
     {
       "type": "review",
@@ -28,11 +28,11 @@
     },
     {
       "type": "clinical-trial",
-      "count": 155
+      "count": 158
     },
     {
       "type": "case-series",
-      "count": 98
+      "count": 96
     },
     {
       "type": "guideline",
@@ -40,7 +40,7 @@
     },
     {
       "type": "meta-analysis",
-      "count": 74
+      "count": 75
     },
     {
       "type": "systematic-review",
@@ -54,37 +54,37 @@
   "result_distribution": [
     {
       "result": "inconclusive",
-      "count": 1932
+      "count": 1930
     },
     {
       "result": "unknown",
-      "count": 1136
+      "count": 1026
     },
     {
       "result": "positive",
-      "count": 998
+      "count": 1010
     },
     {
       "result": "mixed",
-      "count": 212
+      "count": 213
     },
     {
       "result": "negative",
-      "count": 125
+      "count": 124
     }
   ],
   "evidence_tier_distribution": [
     {
       "tier": 1,
-      "count": 147
+      "count": 150
     },
     {
       "tier": 2,
-      "count": 387
+      "count": 394
     },
     {
       "tier": 3,
-      "count": 536
+      "count": 539
     },
     {
       "tier": 4,
@@ -92,38 +92,13 @@
     },
     {
       "tier": 5,
-      "count": 2515
+      "count": 2402
     }
   ],
   "papers_per_year": {
     "1946": 1,
-    "1947": 5,
-    "1948": 2,
-    "1949": 3,
-    "1950": 3,
-    "1951": 1,
-    "1952": 1,
-    "1953": 4,
-    "1954": 2,
-    "1955": 5,
-    "1956": 3,
-    "1957": 3,
-    "1958": 4,
-    "1959": 2,
-    "1960": 5,
-    "1961": 6,
-    "1962": 3,
-    "1963": 3,
-    "1964": 3,
-    "1965": 3,
-    "1966": 1,
-    "1968": 1,
-    "1969": 3,
-    "1970": 9,
-    "1971": 6,
-    "1972": 4,
-    "1974": 8,
-    "1975": 12,
+    "1947": 2,
+    "1975": 3,
     "1976": 17,
     "1977": 16,
     "1978": 37,
@@ -180,11 +155,11 @@
     "cgrp": [
       {
         "result": "positive",
-        "count": 98
+        "count": 103
       },
       {
         "result": "inconclusive",
-        "count": 78
+        "count": 80
       },
       {
         "result": "mixed",
@@ -192,25 +167,25 @@
       },
       {
         "result": "unknown",
-        "count": 15
+        "count": 12
       },
       {
         "result": "negative",
-        "count": 8
+        "count": 7
       }
     ],
     "observational": [
       {
         "result": "inconclusive",
-        "count": 339
+        "count": 343
       },
       {
         "result": "positive",
-        "count": 68
+        "count": 67
       },
       {
         "result": "negative",
-        "count": 28
+        "count": 27
       },
       {
         "result": "mixed",
@@ -218,21 +193,21 @@
       },
       {
         "result": "unknown",
-        "count": 14
+        "count": 12
       }
     ],
     "non-pharma": [
       {
         "result": "inconclusive",
-        "count": 149
+        "count": 151
       },
       {
         "result": "positive",
-        "count": 38
+        "count": 40
       },
       {
         "result": "unknown",
-        "count": 16
+        "count": 15
       },
       {
         "result": "mixed",
@@ -246,7 +221,7 @@
     "nerve-block": [
       {
         "result": "positive",
-        "count": 223
+        "count": 224
       },
       {
         "result": "inconclusive",
@@ -254,11 +229,11 @@
       },
       {
         "result": "unknown",
-        "count": 52
+        "count": 44
       },
       {
         "result": "mixed",
-        "count": 29
+        "count": 31
       },
       {
         "result": "negative",
@@ -267,12 +242,12 @@
     ],
     "other": [
       {
-        "result": "unknown",
-        "count": 860
+        "result": "inconclusive",
+        "count": 793
       },
       {
-        "result": "inconclusive",
-        "count": 804
+        "result": "unknown",
+        "count": 774
       },
       {
         "result": "positive",
@@ -280,11 +255,11 @@
       },
       {
         "result": "mixed",
-        "count": 51
+        "count": 50
       },
       {
         "result": "negative",
-        "count": 34
+        "count": 35
       }
     ],
     "pharmacology": [
@@ -294,11 +269,11 @@
       },
       {
         "result": "positive",
-        "count": 117
+        "count": 119
       },
       {
         "result": "unknown",
-        "count": 84
+        "count": 81
       },
       {
         "result": "mixed",
@@ -312,19 +287,19 @@
     "psychedelic": [
       {
         "result": "positive",
-        "count": 26
+        "count": 27
       },
       {
         "result": "inconclusive",
-        "count": 17
+        "count": 18
       },
       {
         "result": "unknown",
-        "count": 9
+        "count": 7
       },
       {
         "result": "mixed",
-        "count": 5
+        "count": 6
       }
     ],
     "oxygen": [
@@ -334,15 +309,15 @@
       },
       {
         "result": "inconclusive",
-        "count": 95
+        "count": 93
       },
       {
         "result": "unknown",
-        "count": 39
+        "count": 38
       },
       {
         "result": "mixed",
-        "count": 22
+        "count": 21
       },
       {
         "result": "negative",
@@ -352,15 +327,15 @@
     "neuromodulation": [
       {
         "result": "inconclusive",
-        "count": 149
+        "count": 151
       },
       {
         "result": "positive",
-        "count": 108
+        "count": 110
       },
       {
         "result": "unknown",
-        "count": 46
+        "count": 42
       },
       {
         "result": "mixed",
@@ -398,11 +373,11 @@
     "cgrp": [
       {
         "type": "basic-science",
-        "count": 70
+        "count": 71
       },
       {
         "type": "rct",
-        "count": 35
+        "count": 37
       },
       {
         "type": "other",
@@ -414,15 +389,15 @@
       },
       {
         "type": "review",
-        "count": 20
+        "count": 21
+      },
+      {
+        "type": "observational",
+        "count": 9
       },
       {
         "type": "meta-analysis",
         "count": 9
-      },
-      {
-        "type": "observational",
-        "count": 8
       },
       {
         "type": "case-report",
@@ -433,50 +408,50 @@
         "count": 5
       },
       {
+        "type": "editorial",
+        "count": 2
+      },
+      {
         "type": "guideline",
-        "count": 3
+        "count": 2
       },
       {
         "type": "case-series",
-        "count": 3
-      },
-      {
-        "type": "editorial",
         "count": 2
       }
     ],
     "observational": [
       {
         "type": "basic-science",
-        "count": 177
+        "count": 178
       },
       {
         "type": "other",
-        "count": 106
+        "count": 102
       },
       {
         "type": "observational",
-        "count": 99
+        "count": 101
       },
       {
         "type": "review",
         "count": 20
       },
       {
-        "type": "case-series",
+        "type": "meta-analysis",
         "count": 14
       },
       {
-        "type": "meta-analysis",
-        "count": 12
+        "type": "case-series",
+        "count": 13
+      },
+      {
+        "type": "clinical-trial",
+        "count": 10
       },
       {
         "type": "case-report",
         "count": 10
-      },
-      {
-        "type": "clinical-trial",
-        "count": 9
       },
       {
         "type": "guideline",
@@ -488,7 +463,7 @@
       },
       {
         "type": "rct",
-        "count": 4
+        "count": 3
       }
     ],
     "non-pharma": [
@@ -498,19 +473,19 @@
       },
       {
         "type": "other",
-        "count": 53
+        "count": 51
       },
       {
         "type": "observational",
-        "count": 25
+        "count": 27
       },
       {
         "type": "review",
-        "count": 17
+        "count": 18
       },
       {
         "type": "case-report",
-        "count": 9
+        "count": 11
       },
       {
         "type": "case-series",
@@ -540,15 +515,15 @@
     "nerve-block": [
       {
         "type": "basic-science",
-        "count": 171
+        "count": 170
       },
       {
         "type": "other",
-        "count": 111
+        "count": 104
       },
       {
         "type": "rct",
-        "count": 46
+        "count": 45
       },
       {
         "type": "case-report",
@@ -560,11 +535,11 @@
       },
       {
         "type": "observational",
-        "count": 30
+        "count": 31
       },
       {
         "type": "review",
-        "count": 21
+        "count": 22
       },
       {
         "type": "case-series",
@@ -572,11 +547,11 @@
       },
       {
         "type": "guideline",
-        "count": 10
+        "count": 11
       },
       {
         "type": "systematic-review",
-        "count": 9
+        "count": 10
       },
       {
         "type": "meta-analysis",
@@ -586,27 +561,27 @@
     "other": [
       {
         "type": "other",
-        "count": 1033
+        "count": 959
       },
       {
         "type": "basic-science",
-        "count": 501
+        "count": 491
       },
       {
         "type": "case-report",
-        "count": 130
+        "count": 126
       },
       {
         "type": "review",
-        "count": 72
+        "count": 69
       },
       {
         "type": "rct",
-        "count": 50
+        "count": 49
       },
       {
         "type": "observational",
-        "count": 46
+        "count": 43
       },
       {
         "type": "guideline",
@@ -622,7 +597,7 @@
       },
       {
         "type": "meta-analysis",
-        "count": 15
+        "count": 14
       },
       {
         "type": "editorial",
@@ -630,17 +605,17 @@
       },
       {
         "type": "systematic-review",
-        "count": 8
+        "count": 7
       }
     ],
     "pharmacology": [
       {
         "type": "other",
-        "count": 138
+        "count": 136
       },
       {
         "type": "basic-science",
-        "count": 103
+        "count": 102
       },
       {
         "type": "case-report",
@@ -656,7 +631,7 @@
       },
       {
         "type": "observational",
-        "count": 12
+        "count": 14
       },
       {
         "type": "review",
@@ -689,11 +664,11 @@
         "count": 9
       },
       {
-        "type": "basic-science",
-        "count": 8
+        "type": "clinical-trial",
+        "count": 7
       },
       {
-        "type": "clinical-trial",
+        "type": "basic-science",
         "count": 7
       },
       {
@@ -701,20 +676,20 @@
         "count": 6
       },
       {
+        "type": "guideline",
+        "count": 5
+      },
+      {
         "type": "systematic-review",
         "count": 4
       },
       {
-        "type": "guideline",
-        "count": 4
+        "type": "review",
+        "count": 3
       },
       {
         "type": "meta-analysis",
         "count": 3
-      },
-      {
-        "type": "review",
-        "count": 2
       },
       {
         "type": "case-report",
@@ -728,11 +703,11 @@
     "oxygen": [
       {
         "type": "other",
-        "count": 86
+        "count": 84
       },
       {
         "type": "basic-science",
-        "count": 85
+        "count": 83
       },
       {
         "type": "rct",
@@ -740,7 +715,7 @@
       },
       {
         "type": "clinical-trial",
-        "count": 15
+        "count": 16
       },
       {
         "type": "case-report",
@@ -748,19 +723,19 @@
       },
       {
         "type": "guideline",
-        "count": 12
+        "count": 11
       },
       {
         "type": "systematic-review",
         "count": 9
       },
       {
-        "type": "review",
-        "count": 8
+        "type": "observational",
+        "count": 7
       },
       {
-        "type": "observational",
-        "count": 6
+        "type": "review",
+        "count": 7
       },
       {
         "type": "meta-analysis",
@@ -782,7 +757,7 @@
       },
       {
         "type": "other",
-        "count": 88
+        "count": 87
       },
       {
         "type": "review",
@@ -794,7 +769,7 @@
       },
       {
         "type": "clinical-trial",
-        "count": 14
+        "count": 15
       },
       {
         "type": "observational",
@@ -837,15 +812,15 @@
     ]
   },
   "category_avg_evidence": {
-    "cgrp": 3.38,
-    "observational": 3.81,
-    "non-pharma": 3.92,
-    "nerve-block": 3.82,
-    "other": 4.53,
-    "pharmacology": 4.31,
-    "psychedelic": 2.93,
-    "oxygen": 4.0,
-    "neuromodulation": 4.0,
+    "cgrp": 3.37,
+    "observational": 3.77,
+    "non-pharma": 3.89,
+    "nerve-block": 3.79,
+    "other": 4.52,
+    "pharmacology": 4.3,
+    "psychedelic": 2.9,
+    "oxygen": 3.97,
+    "neuromodulation": 3.99,
     "vitamin-d": 2.5
   },
   "research_volume_by_category": {
@@ -885,13 +860,11 @@
       "2021": 17,
       "2022": 18,
       "2023": 8,
-      "2024": 13,
+      "2024": 16,
       "2025": 22,
       "2026": 4
     },
     "observational": {
-      "1958": 1,
-      "1975": 2,
       "1976": 2,
       "1977": 2,
       "1979": 1,
@@ -912,7 +885,7 @@
       "1997": 10,
       "1998": 1,
       "1999": 9,
-      "2000": 10,
+      "2000": 5,
       "2001": 1,
       "2002": 9,
       "2003": 10,
@@ -936,12 +909,11 @@
       "2021": 20,
       "2022": 17,
       "2023": 14,
-      "2024": 21,
-      "2025": 23,
-      "2026": 6
+      "2024": 23,
+      "2025": 27,
+      "2026": 8
     },
     "non-pharma": {
-      "1960": 1,
       "1977": 2,
       "1980": 3,
       "1981": 3,
@@ -987,13 +959,11 @@
       "2021": 10,
       "2022": 8,
       "2023": 4,
-      "2024": 6,
-      "2025": 12,
+      "2024": 8,
+      "2025": 14,
       "2026": 5
     },
     "nerve-block": {
-      "1950": 1,
-      "1970": 1,
       "1977": 2,
       "1978": 3,
       "1980": 1,
@@ -1015,8 +985,8 @@
       "1996": 5,
       "1997": 9,
       "1998": 3,
-      "1999": 4,
-      "2000": 5,
+      "1999": 3,
+      "2000": 3,
       "2001": 7,
       "2002": 5,
       "2003": 8,
@@ -1046,33 +1016,8 @@
     },
     "other": {
       "1946": 1,
-      "1947": 5,
-      "1948": 2,
-      "1949": 3,
-      "1950": 2,
-      "1951": 1,
-      "1952": 1,
-      "1953": 4,
-      "1954": 2,
-      "1955": 5,
-      "1956": 3,
-      "1957": 3,
-      "1958": 3,
-      "1959": 2,
-      "1960": 4,
-      "1961": 6,
-      "1962": 3,
-      "1963": 3,
-      "1964": 3,
-      "1965": 3,
-      "1966": 1,
-      "1968": 1,
-      "1969": 3,
-      "1970": 8,
-      "1971": 6,
-      "1972": 4,
-      "1974": 7,
-      "1975": 10,
+      "1947": 2,
+      "1975": 3,
       "1976": 13,
       "1977": 8,
       "1978": 25,
@@ -1096,8 +1041,8 @@
       "1996": 36,
       "1997": 29,
       "1998": 48,
-      "1999": 50,
-      "2000": 30,
+      "1999": 52,
+      "2000": 46,
       "2001": 47,
       "2002": 38,
       "2003": 39,
@@ -1121,12 +1066,11 @@
       "2021": 29,
       "2022": 41,
       "2023": 33,
-      "2024": 39,
-      "2025": 38,
-      "2026": 15
+      "2024": 27,
+      "2025": 30,
+      "2026": 13
     },
     "pharmacology": {
-      "1974": 1,
       "1976": 1,
       "1977": 2,
       "1978": 6,
@@ -1151,7 +1095,7 @@
       "1997": 3,
       "1998": 6,
       "1999": 4,
-      "2000": 7,
+      "2000": 5,
       "2001": 9,
       "2002": 15,
       "2003": 13,
@@ -1175,7 +1119,7 @@
       "2021": 8,
       "2022": 7,
       "2023": 7,
-      "2024": 7,
+      "2024": 9,
       "2025": 4,
       "2026": 1
     },
@@ -1197,7 +1141,7 @@
       "2022": 10,
       "2023": 5,
       "2024": 7,
-      "2025": 4,
+      "2025": 5,
       "2026": 3
     },
     "oxygen": {
@@ -1221,8 +1165,8 @@
       "1996": 4,
       "1997": 2,
       "1998": 2,
-      "1999": 4,
-      "2000": 8,
+      "1999": 3,
+      "2000": 2,
       "2001": 6,
       "2002": 4,
       "2003": 5,
@@ -1246,8 +1190,8 @@
       "2021": 5,
       "2022": 4,
       "2023": 8,
-      "2024": 5,
-      "2025": 4,
+      "2024": 6,
+      "2025": 6,
       "2026": 1
     },
     "neuromodulation": {
@@ -1269,7 +1213,7 @@
       "1997": 6,
       "1998": 4,
       "1999": 3,
-      "2000": 2,
+      "2000": 1,
       "2001": 5,
       "2002": 1,
       "2003": 13,
@@ -1293,8 +1237,8 @@
       "2021": 11,
       "2022": 8,
       "2023": 12,
-      "2024": 4,
-      "2025": 10
+      "2024": 6,
+      "2025": 9
     },
     "vitamin-d": {
       "2018": 1,

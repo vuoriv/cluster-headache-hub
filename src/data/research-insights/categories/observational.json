@@ -5,39 +5,39 @@
   "total_papers": 464,
   "total_trials": 10,
   "active_trials": 2,
-  "with_abstracts": 450,
+  "with_abstracts": 452,
   "study_type_distribution": [
     {
       "type": "basic-science",
-      "count": 177
+      "count": 178
     },
     {
       "type": "other",
-      "count": 106
+      "count": 102
     },
     {
       "type": "observational",
-      "count": 99
+      "count": 101
     },
     {
       "type": "review",
       "count": 20
     },
     {
-      "type": "case-series",
+      "type": "meta-analysis",
       "count": 14
     },
     {
-      "type": "meta-analysis",
-      "count": 12
+      "type": "case-series",
+      "count": 13
+    },
+    {
+      "type": "clinical-trial",
+      "count": 10
     },
     {
       "type": "case-report",
       "count": 10
-    },
-    {
-      "type": "clinical-trial",
-      "count": 9
     },
     {
       "type": "guideline",
@@ -49,21 +49,21 @@
     },
     {
       "type": "rct",
-      "count": 4
+      "count": 3
     }
   ],
   "result_distribution": [
     {
       "result": "inconclusive",
-      "count": 339
+      "count": 343
     },
     {
       "result": "positive",
-      "count": 68
+      "count": 67
     },
     {
       "result": "negative",
-      "count": 28
+      "count": 27
     },
     {
       "result": "mixed",
@@ -71,12 +71,10 @@
     },
     {
       "result": "unknown",
-      "count": 14
+      "count": 12
     }
   ],
   "papers_per_year": {
-    "1958": 1,
-    "1975": 2,
     "1976": 2,
     "1977": 2,
     "1979": 1,
@@ -97,7 +95,7 @@
     "1997": 10,
     "1998": 1,
     "1999": 9,
-    "2000": 10,
+    "2000": 5,
     "2001": 1,
     "2002": 9,
     "2003": 10,
@@ -121,11 +119,11 @@
     "2021": 20,
     "2022": 17,
     "2023": 14,
-    "2024": 21,
-    "2025": 23,
-    "2026": 6
+    "2024": 23,
+    "2025": 27,
+    "2026": 8
   },
-  "avg_sample_size": 608,
+  "avg_sample_size": 614,
   "max_sample_size": 34180,
   "top_papers": [
     {
@@ -148,6 +146,17 @@
       "study_type": "meta-analysis",
       "result": "inconclusive",
       "sample_size": 4661,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "39511500",
+      "title": "German language adaptation of the Cluster Headache Quality of Life Scale (CH-QoL).",
+      "authors": "Kuhn H, Petzke T, Schreiber MC et al.",
+      "year": "2024",
+      "journal": "BMC neurology",
+      "study_type": "clinical-trial",
+      "result": "inconclusive",
+      "sample_size": 2009,
       "evidence_tier": 1
     },
     {
@@ -217,25 +226,14 @@
       "evidence_tier": 1
     },
     {
-      "pmid": "41102620",
-      "title": "Primary stabbing headache in a tertiary headache centre.",
-      "authors": "Braca S, Gimson A, Goadsby PJ",
-      "year": "2025",
-      "journal": "The journal of headache and pain",
-      "study_type": "systematic-review",
+      "pmid": "39999811",
+      "title": "Prevalence of Migraine and Other Types of Primary Headache in China: A Systematic Review and Meta-Analysis.",
+      "authors": "Zhang Y, Li C, Chen N et al.",
+      "year": "2026",
+      "journal": "Neuroepidemiology",
+      "study_type": "meta-analysis",
       "result": "inconclusive",
-      "sample_size": 68,
-      "evidence_tier": 1
-    },
-    {
-      "pmid": "33880678",
-      "title": "Primary headache research output and association with socioeconomic factors in Southeast Asia: a bibliometric analysis.",
-      "authors": "Dela Vega MPD, Yu JRT, Espiritu AI et al.",
-      "year": "2021",
-      "journal": "Neurological sciences : official journal of the Italian Neurological Society and of the Italian Society of Clinical Neurophysiology",
-      "study_type": "systematic-review",
-      "result": "inconclusive",
-      "sample_size": 43,
+      "sample_size": 170,
       "evidence_tier": 1
     }
   ],

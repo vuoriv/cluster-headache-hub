@@ -5,7 +5,7 @@
   "total_papers": 348,
   "total_trials": 11,
   "active_trials": 2,
-  "with_abstracts": 302,
+  "with_abstracts": 306,
   "study_type_distribution": [
     {
       "type": "basic-science",
@@ -13,7 +13,7 @@
     },
     {
       "type": "other",
-      "count": 88
+      "count": 87
     },
     {
       "type": "review",
@@ -25,7 +25,7 @@
     },
     {
       "type": "clinical-trial",
-      "count": 14
+      "count": 15
     },
     {
       "type": "observational",
@@ -55,15 +55,15 @@
   "result_distribution": [
     {
       "result": "inconclusive",
-      "count": 149
+      "count": 151
     },
     {
       "result": "positive",
-      "count": 108
+      "count": 110
     },
     {
       "result": "unknown",
-      "count": 46
+      "count": 42
     },
     {
       "result": "mixed",
@@ -93,7 +93,7 @@
     "1997": 6,
     "1998": 4,
     "1999": 3,
-    "2000": 2,
+    "2000": 1,
     "2001": 5,
     "2002": 1,
     "2003": 13,
@@ -117,10 +117,10 @@
     "2021": 11,
     "2022": 8,
     "2023": 12,
-    "2024": 4,
-    "2025": 10
+    "2024": 6,
+    "2025": 9
   },
-  "avg_sample_size": 137,
+  "avg_sample_size": 144,
   "max_sample_size": 4074,
   "top_papers": [
     {
@@ -154,6 +154,17 @@
       "study_type": "meta-analysis",
       "result": "mixed",
       "sample_size": 983,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "39753127",
+      "title": "Effectiveness of non-invasive vagus nerve stimulation vs heart rate variability biofeedback interventions for chronic pain conditions: A systematic review.",
+      "authors": "Pellow K, Harrison J, Tucker P et al.",
+      "year": "2025",
+      "journal": "Scandinavian journal of pain",
+      "study_type": "systematic-review",
+      "result": "positive",
+      "sample_size": 763,
       "evidence_tier": 1
     },
     {
@@ -219,17 +230,6 @@
       "journal": "BMC neurology",
       "study_type": "meta-analysis",
       "result": "positive",
-      "sample_size": null,
-      "evidence_tier": 1
-    },
-    {
-      "pmid": "40496978",
-      "title": "Noninvasive Vagus Nerve Stimulation for Cluster Headache and Migraine: A Health Technology Assessment.",
-      "authors": "Ontario Health",
-      "year": "2025",
-      "journal": "Ontario health technology assessment series",
-      "study_type": "systematic-review",
-      "result": "mixed",
       "sample_size": null,
       "evidence_tier": 1
     }

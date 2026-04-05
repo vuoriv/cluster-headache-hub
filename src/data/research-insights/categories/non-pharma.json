@@ -2,10 +2,10 @@
   "category": "non-pharma",
   "name": "Non-Pharmacological Approaches",
   "description": "Light therapy, behavioral approaches, acupuncture, exercise, yoga. Alternative and complementary treatments.",
-  "total_papers": 214,
+  "total_papers": 217,
   "total_trials": 5,
   "active_trials": 3,
-  "with_abstracts": 198,
+  "with_abstracts": 202,
   "study_type_distribution": [
     {
       "type": "basic-science",
@@ -13,19 +13,19 @@
     },
     {
       "type": "other",
-      "count": 53
+      "count": 51
     },
     {
       "type": "observational",
-      "count": 25
+      "count": 27
     },
     {
       "type": "review",
-      "count": 17
+      "count": 18
     },
     {
       "type": "case-report",
-      "count": 9
+      "count": 11
     },
     {
       "type": "case-series",
@@ -55,15 +55,15 @@
   "result_distribution": [
     {
       "result": "inconclusive",
-      "count": 149
+      "count": 151
     },
     {
       "result": "positive",
-      "count": 38
+      "count": 40
     },
     {
       "result": "unknown",
-      "count": 16
+      "count": 15
     },
     {
       "result": "mixed",
@@ -75,7 +75,6 @@
     }
   ],
   "papers_per_year": {
-    "1960": 1,
     "1977": 2,
     "1980": 3,
     "1981": 3,
@@ -121,11 +120,11 @@
     "2021": 10,
     "2022": 8,
     "2023": 4,
-    "2024": 6,
-    "2025": 12,
+    "2024": 8,
+    "2025": 14,
     "2026": 5
   },
-  "avg_sample_size": 189,
+  "avg_sample_size": 196,
   "max_sample_size": 1155,
   "top_papers": [
     {

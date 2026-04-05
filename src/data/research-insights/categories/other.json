@@ -2,34 +2,34 @@
   "category": "other",
   "name": "Other Research",
   "description": "Cross-cutting research: genetics, neuroimaging, pathophysiology, diagnostic criteria, and general headache medicine.",
-  "total_papers": 1964,
+  "total_papers": 1867,
   "total_trials": 27,
   "active_trials": 2,
-  "with_abstracts": 1104,
+  "with_abstracts": 1093,
   "study_type_distribution": [
     {
       "type": "other",
-      "count": 1033
+      "count": 959
     },
     {
       "type": "basic-science",
-      "count": 501
+      "count": 491
     },
     {
       "type": "case-report",
-      "count": 130
+      "count": 126
     },
     {
       "type": "review",
-      "count": 72
+      "count": 69
     },
     {
       "type": "rct",
-      "count": 50
+      "count": 49
     },
     {
       "type": "observational",
-      "count": 46
+      "count": 43
     },
     {
       "type": "guideline",
@@ -45,7 +45,7 @@
     },
     {
       "type": "meta-analysis",
-      "count": 15
+      "count": 14
     },
     {
       "type": "editorial",
@@ -53,17 +53,17 @@
     },
     {
       "type": "systematic-review",
-      "count": 8
+      "count": 7
     }
   ],
   "result_distribution": [
     {
-      "result": "unknown",
-      "count": 860
+      "result": "inconclusive",
+      "count": 793
     },
     {
-      "result": "inconclusive",
-      "count": 804
+      "result": "unknown",
+      "count": 774
     },
     {
       "result": "positive",
@@ -71,42 +71,17 @@
     },
     {
       "result": "mixed",
-      "count": 51
+      "count": 50
     },
     {
       "result": "negative",
-      "count": 34
+      "count": 35
     }
   ],
   "papers_per_year": {
     "1946": 1,
-    "1947": 5,
-    "1948": 2,
-    "1949": 3,
-    "1950": 2,
-    "1951": 1,
-    "1952": 1,
-    "1953": 4,
-    "1954": 2,
-    "1955": 5,
-    "1956": 3,
-    "1957": 3,
-    "1958": 3,
-    "1959": 2,
-    "1960": 4,
-    "1961": 6,
-    "1962": 3,
-    "1963": 3,
-    "1964": 3,
-    "1965": 3,
-    "1966": 1,
-    "1968": 1,
-    "1969": 3,
-    "1970": 8,
-    "1971": 6,
-    "1972": 4,
-    "1974": 7,
-    "1975": 10,
+    "1947": 2,
+    "1975": 3,
     "1976": 13,
     "1977": 8,
     "1978": 25,
@@ -130,8 +105,8 @@
     "1996": 36,
     "1997": 29,
     "1998": 48,
-    "1999": 50,
-    "2000": 30,
+    "1999": 52,
+    "2000": 46,
     "2001": 47,
     "2002": 38,
     "2003": 39,
@@ -155,11 +130,11 @@
     "2021": 29,
     "2022": 41,
     "2023": 33,
-    "2024": 39,
-    "2025": 38,
-    "2026": 15
+    "2024": 27,
+    "2025": 30,
+    "2026": 13
   },
-  "avg_sample_size": 293,
+  "avg_sample_size": 291,
   "max_sample_size": 8654,
   "top_papers": [
     {

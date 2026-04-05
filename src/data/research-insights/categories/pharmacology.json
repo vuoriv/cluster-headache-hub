@@ -2,18 +2,18 @@
   "category": "pharmacology",
   "name": "Pharmacological Treatments",
   "description": "Traditional pharmaceutical treatments: verapamil, lithium, prednisone, melatonin, triptans. The established medical toolkit.",
-  "total_papers": 361,
+  "total_papers": 360,
   "total_trials": 8,
   "active_trials": 4,
-  "with_abstracts": 277,
+  "with_abstracts": 279,
   "study_type_distribution": [
     {
       "type": "other",
-      "count": 138
+      "count": 136
     },
     {
       "type": "basic-science",
-      "count": 103
+      "count": 102
     },
     {
       "type": "case-report",
@@ -29,7 +29,7 @@
     },
     {
       "type": "observational",
-      "count": 12
+      "count": 14
     },
     {
       "type": "review",
@@ -59,11 +59,11 @@
     },
     {
       "result": "positive",
-      "count": 117
+      "count": 119
     },
     {
       "result": "unknown",
-      "count": 84
+      "count": 81
     },
     {
       "result": "mixed",
@@ -75,7 +75,6 @@
     }
   ],
   "papers_per_year": {
-    "1974": 1,
     "1976": 1,
     "1977": 2,
     "1978": 6,
@@ -100,7 +99,7 @@
     "1997": 3,
     "1998": 6,
     "1999": 4,
-    "2000": 7,
+    "2000": 5,
     "2001": 9,
     "2002": 15,
     "2003": 13,
@@ -124,11 +123,11 @@
     "2021": 8,
     "2022": 7,
     "2023": 7,
-    "2024": 7,
+    "2024": 9,
     "2025": 4,
     "2026": 1
   },
-  "avg_sample_size": 168,
+  "avg_sample_size": 155,
   "max_sample_size": 6074,
   "top_papers": [
     {
