@@ -503,5 +503,65 @@
       "advocacy",
       "headache-federation"
     ]
+  },
+  {
+    "name": "Dansk Horton Hovedpineforening (DHH)",
+    "country": "DK",
+    "region": "europe",
+    "platform": "website",
+    "url": "https://www.netpatient.dk/dansk-horton-hovedpineforening-dhh",
+    "language": "da",
+    "description": "Danish Horton Headache Association. Patient counselling, Horton mask, headache passport, psychological help, magazine HortonNyt quarterly. Annual membership 300 DKK.",
+    "members": null,
+    "tags": [
+      "association",
+      "counselling",
+      "magazine"
+    ]
+  },
+  {
+    "name": "Danmarks Patientforening for Hovedpineramte",
+    "country": "DK",
+    "region": "europe",
+    "platform": "website",
+    "url": "https://www.jegharhovedpine.dk",
+    "language": "da",
+    "description": "Danish Patient Association for Headache Sufferers. Covers cluster headache, migraine, and other headache types. Advice and guidance for patients.",
+    "members": null,
+    "tags": [
+      "association",
+      "headache",
+      "advice"
+    ]
+  },
+  {
+    "name": "Schweizerische Kopfwehgesellschaft (SKG)",
+    "country": "CH",
+    "region": "europe",
+    "platform": "website",
+    "url": "https://www.headache.ch",
+    "language": "de",
+    "description": "Swiss Headache Society. Founded 1995. Covers cluster headache with STAHR registry tracking CH patients across Switzerland. Based in Basel.",
+    "members": null,
+    "tags": [
+      "society",
+      "registry",
+      "research"
+    ]
+  },
+  {
+    "name": "Cefalea en Racimos \u2014 Grupo de Apoyo (Facebook)",
+    "country": "INT",
+    "region": "south-america",
+    "platform": "facebook",
+    "url": "https://www.facebook.com/groups/204007405374/",
+    "language": "es",
+    "description": "Spanish-language Facebook support group for cluster headache patients across Latin America and Spain.",
+    "members": null,
+    "tags": [
+      "support",
+      "spanish-speaking",
+      "latin-america"
+    ]
   }
 ]
