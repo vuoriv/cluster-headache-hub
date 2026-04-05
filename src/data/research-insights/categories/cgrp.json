@@ -2,16 +2,236 @@
   "category": "cgrp",
   "name": "CGRP Therapies",
   "description": "Calcitonin gene-related peptide (CGRP) monoclonal antibodies and gepants. Galcanezumab is the only approved anti-CGRP for episodic CH.",
-  "total_papers": 0,
+  "total_papers": 224,
   "total_trials": 14,
   "active_trials": 1,
-  "with_abstracts": 0,
-  "study_type_distribution": [],
-  "result_distribution": [],
-  "papers_per_year": {},
-  "avg_sample_size": null,
-  "max_sample_size": null,
-  "top_papers": [],
+  "with_abstracts": 209,
+  "study_type_distribution": [
+    {
+      "type": "basic-science",
+      "count": 70
+    },
+    {
+      "type": "rct",
+      "count": 35
+    },
+    {
+      "type": "other",
+      "count": 34
+    },
+    {
+      "type": "clinical-trial",
+      "count": 27
+    },
+    {
+      "type": "review",
+      "count": 20
+    },
+    {
+      "type": "meta-analysis",
+      "count": 9
+    },
+    {
+      "type": "observational",
+      "count": 8
+    },
+    {
+      "type": "case-report",
+      "count": 8
+    },
+    {
+      "type": "systematic-review",
+      "count": 5
+    },
+    {
+      "type": "guideline",
+      "count": 3
+    },
+    {
+      "type": "case-series",
+      "count": 3
+    },
+    {
+      "type": "editorial",
+      "count": 2
+    }
+  ],
+  "result_distribution": [
+    {
+      "result": "positive",
+      "count": 98
+    },
+    {
+      "result": "inconclusive",
+      "count": 78
+    },
+    {
+      "result": "mixed",
+      "count": 25
+    },
+    {
+      "result": "unknown",
+      "count": 15
+    },
+    {
+      "result": "negative",
+      "count": 8
+    }
+  ],
+  "papers_per_year": {
+    "1988": 1,
+    "1990": 2,
+    "1991": 2,
+    "1992": 3,
+    "1993": 2,
+    "1994": 5,
+    "1995": 2,
+    "1996": 1,
+    "1997": 1,
+    "1998": 1,
+    "1999": 1,
+    "2000": 2,
+    "2001": 8,
+    "2002": 3,
+    "2003": 1,
+    "2004": 4,
+    "2005": 6,
+    "2006": 1,
+    "2007": 1,
+    "2008": 1,
+    "2009": 2,
+    "2010": 1,
+    "2011": 3,
+    "2012": 3,
+    "2013": 3,
+    "2014": 1,
+    "2015": 6,
+    "2016": 4,
+    "2017": 9,
+    "2018": 17,
+    "2019": 16,
+    "2020": 29,
+    "2021": 17,
+    "2022": 18,
+    "2023": 8,
+    "2024": 13,
+    "2025": 22,
+    "2026": 4
+  },
+  "avg_sample_size": 285,
+  "max_sample_size": 3889,
+  "top_papers": [
+    {
+      "pmid": "32046655",
+      "title": "Different doses of galcanezumab versus placebo in patients with migraine and cluster headache: a meta-analysis of randomized controlled trials.",
+      "authors": "Yang Y, Wang Z, Gao B et al.",
+      "year": "2020",
+      "journal": "The journal of headache and pain",
+      "study_type": "meta-analysis",
+      "result": "mixed",
+      "sample_size": 3889,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "38111226",
+      "title": "Biomarkers in cluster headache: A systematic review.",
+      "authors": "S\u00f8borg MK, Jensen RH, Barloese M et al.",
+      "year": "2024",
+      "journal": "Headache",
+      "study_type": "meta-analysis",
+      "result": "mixed",
+      "sample_size": 832,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "32050782",
+      "title": "Phase 3 randomized, placebo-controlled study of galcanezumab in patients with chronic cluster headache: Results from 3-month double-blind treatment.",
+      "authors": "Dodick DW, Goadsby PJ, Lucas C et al.",
+      "year": "2020",
+      "journal": "Cephalalgia : an international journal of headache",
+      "study_type": "rct",
+      "result": "positive",
+      "sample_size": 237,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "34806783",
+      "title": "Tolerability and safety of galcanezumab in patients with chronic cluster headache with up to 15\u00a0months of galcanezumab treatment.",
+      "authors": "L\u00e1inez MJA, Schoenen J, Stroud C et al.",
+      "year": "2022",
+      "journal": "Headache",
+      "study_type": "rct",
+      "result": "positive",
+      "sample_size": 233,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "40388178",
+      "title": "Efficacy and Safety of Eptinezumab in Episodic Cluster Headache: A Randomized Clinical Trial.",
+      "authors": "Jensen RH, Tassorelli C, Tepper SJ et al.",
+      "year": "2025",
+      "journal": "JAMA neurology",
+      "study_type": "rct",
+      "result": "mixed",
+      "sample_size": 231,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "38162453",
+      "title": "Baseline demographics and disease characteristics of patients with episodic or chronic cluster headache: data from two phase 3 randomized clinical trials in Europe and North America.",
+      "authors": "Jensen RH, Tassorelli C, Myers Oakes TM et al.",
+      "year": "2023",
+      "journal": "Frontiers in neurology",
+      "study_type": "rct",
+      "result": "inconclusive",
+      "sample_size": 106,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "36321947",
+      "title": "Efficacy and safety of galcanezumab as a treatment of refractory episodic and chronic cluster headache: Case series and narrative review.",
+      "authors": "Membrilla JA, Torres-Ferrus M, Alpuente A et al.",
+      "year": "2022",
+      "journal": "Headache",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": 6,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "41715033",
+      "title": "Safety and efficacy of calcitonin gene-related peptide antagonists for cluster headache: a systematic review and meta-analysis.",
+      "authors": "Khanfar R, Radwan E, Hattab S",
+      "year": "2026",
+      "journal": "BMC neurology",
+      "study_type": "meta-analysis",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "40971112",
+      "title": "Neurotransmitter Imbalance in Cluster Headache: A Systematic Review of Mechanisms and Therapeutic Targets.",
+      "authors": "Pellesi L, Mohammad A, Wang W et al.",
+      "year": "2025",
+      "journal": "Pain and therapy",
+      "study_type": "systematic-review",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "37515405",
+      "title": "European Academy of Neurology guidelines on the treatment of cluster headache.",
+      "authors": "May A, Evers S, Goadsby PJ et al.",
+      "year": "2023",
+      "journal": "European journal of neurology",
+      "study_type": "systematic-review",
+      "result": "mixed",
+      "sample_size": null,
+      "evidence_tier": 1
+    }
+  ],
   "all_trials": [
     {
       "nct_id": "NCT02797951",

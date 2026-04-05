@@ -2,16 +2,246 @@
   "category": "pharmacology",
   "name": "Pharmacological Treatments",
   "description": "Traditional pharmaceutical treatments: verapamil, lithium, prednisone, melatonin, triptans. The established medical toolkit.",
-  "total_papers": 0,
+  "total_papers": 361,
   "total_trials": 8,
   "active_trials": 4,
-  "with_abstracts": 0,
-  "study_type_distribution": [],
-  "result_distribution": [],
-  "papers_per_year": {},
-  "avg_sample_size": null,
-  "max_sample_size": null,
-  "top_papers": [],
+  "with_abstracts": 277,
+  "study_type_distribution": [
+    {
+      "type": "other",
+      "count": 138
+    },
+    {
+      "type": "basic-science",
+      "count": 103
+    },
+    {
+      "type": "case-report",
+      "count": 34
+    },
+    {
+      "type": "rct",
+      "count": 24
+    },
+    {
+      "type": "clinical-trial",
+      "count": 17
+    },
+    {
+      "type": "observational",
+      "count": 12
+    },
+    {
+      "type": "review",
+      "count": 11
+    },
+    {
+      "type": "case-series",
+      "count": 10
+    },
+    {
+      "type": "meta-analysis",
+      "count": 5
+    },
+    {
+      "type": "systematic-review",
+      "count": 4
+    },
+    {
+      "type": "guideline",
+      "count": 3
+    }
+  ],
+  "result_distribution": [
+    {
+      "result": "inconclusive",
+      "count": 123
+    },
+    {
+      "result": "positive",
+      "count": 117
+    },
+    {
+      "result": "unknown",
+      "count": 84
+    },
+    {
+      "result": "mixed",
+      "count": 27
+    },
+    {
+      "result": "negative",
+      "count": 10
+    }
+  ],
+  "papers_per_year": {
+    "1974": 1,
+    "1976": 1,
+    "1977": 2,
+    "1978": 6,
+    "1979": 7,
+    "1980": 9,
+    "1981": 5,
+    "1982": 6,
+    "1983": 10,
+    "1984": 10,
+    "1985": 8,
+    "1986": 6,
+    "1987": 5,
+    "1988": 4,
+    "1989": 7,
+    "1990": 3,
+    "1991": 6,
+    "1992": 4,
+    "1993": 6,
+    "1994": 6,
+    "1995": 6,
+    "1996": 4,
+    "1997": 3,
+    "1998": 6,
+    "1999": 4,
+    "2000": 7,
+    "2001": 9,
+    "2002": 15,
+    "2003": 13,
+    "2004": 13,
+    "2005": 14,
+    "2006": 15,
+    "2007": 11,
+    "2008": 8,
+    "2009": 6,
+    "2010": 6,
+    "2011": 9,
+    "2012": 7,
+    "2013": 10,
+    "2014": 4,
+    "2015": 10,
+    "2016": 11,
+    "2017": 5,
+    "2018": 7,
+    "2019": 5,
+    "2020": 7,
+    "2021": 8,
+    "2022": 7,
+    "2023": 7,
+    "2024": 7,
+    "2025": 4,
+    "2026": 1
+  },
+  "avg_sample_size": 168,
+  "max_sample_size": 6074,
+  "top_papers": [
+    {
+      "pmid": "38922887",
+      "title": "The location of pain in cluster headache: Data from the International Cluster Headache Questionnaire.",
+      "authors": "Schor LI, Pearson SM, de Castro Sousa B et al.",
+      "year": "2024",
+      "journal": "Headache",
+      "study_type": "meta-analysis",
+      "result": "positive",
+      "sample_size": 6074,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "29799148",
+      "title": "Melatonin for preventing primary headache: A systematic review.",
+      "authors": "Leite Pacheco R, de Oliveira Cruz Latorraca C, Adriano Leal Freitas da Costa A et al.",
+      "year": "2018",
+      "journal": "International journal of clinical practice",
+      "study_type": "systematic-review",
+      "result": "mixed",
+      "sample_size": 351,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "33433020",
+      "title": "Management of primary headaches during pregnancy, postpartum, and breastfeeding: A systematic review.",
+      "authors": "Saldanha IJ, Cao W, Bhuma MR et al.",
+      "year": "2021",
+      "journal": "Headache",
+      "study_type": "systematic-review",
+      "result": "positive",
+      "sample_size": 185,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "33245858",
+      "title": "Safety and efficacy of prednisone versus placebo in short-term prevention of episodic cluster headache: a multicentre, double-blind, randomised controlled trial.",
+      "authors": "Obermann M, N\u00e4gel S, Ose C et al.",
+      "year": "2021",
+      "journal": "The Lancet. Neurology",
+      "study_type": "rct",
+      "result": "positive",
+      "sample_size": 118,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "37100680",
+      "title": "Greater occipital nerve block in the treatment of headaches. Review of evidence.",
+      "authors": "Castillo-\u00c1lvarez F, Hernando de la B\u00e1rcena I, Marzo-Sola ME",
+      "year": "2023",
+      "journal": "Medicina clinica",
+      "study_type": "meta-analysis",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "36990725",
+      "title": "Circadian Features of Cluster Headache and Migraine: A Systematic Review, Meta-analysis, and Genetic Analysis.",
+      "authors": "Benkli B, Kim SY, Koike N et al.",
+      "year": "2023",
+      "journal": "Neurology",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "36948579",
+      "title": "Effectiveness and safety profile of greater occipital nerve blockade in cluster headache: a systematic review.",
+      "authors": "Gordon A, Roe T, Villar-Mart\u00ednez MD et al.",
+      "year": "2023",
+      "journal": "Journal of neurology, neurosurgery, and psychiatry",
+      "study_type": "systematic-review",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "32836064",
+      "title": "Subacute Cavernous Sinus Thrombosis following a Dental Procedure: Case Report and Review of the Literature.",
+      "authors": "Battistin U, Hallak YO, Hallak F et al.",
+      "year": "2020",
+      "journal": "Clinical neurology and neurosurgery",
+      "study_type": "meta-analysis",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "32677039",
+      "title": "Meta-analysis of melatonin levels in cluster headache-Review of clinical implications.",
+      "authors": "Liampas I, Siokas V, Brotis A et al.",
+      "year": "2020",
+      "journal": "Acta neurologica Scandinavica",
+      "study_type": "meta-analysis",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "20487039",
+      "title": "Peripheral nerve blocks and trigger point injections in headache management - a systematic review and suggestions for future research.",
+      "authors": "Ashkenazi A, Blumenfeld A, Napchan U et al.",
+      "year": "2010",
+      "journal": "Headache",
+      "study_type": "systematic-review",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    }
+  ],
   "all_trials": [
     {
       "nct_id": "NCT05324748",

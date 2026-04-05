@@ -2,16 +2,209 @@
   "category": "psychedelic",
   "name": "Psychedelic Treatments",
   "description": "Psilocybin, LSD, BOL-148, and other psychedelic compounds for cluster headache. The community's most-discussed treatment category, now backed by Phase 2 clinical trials.",
-  "total_papers": 0,
+  "total_papers": 57,
   "total_trials": 6,
   "active_trials": 3,
-  "with_abstracts": 0,
-  "study_type_distribution": [],
-  "result_distribution": [],
-  "papers_per_year": {},
-  "avg_sample_size": null,
-  "max_sample_size": null,
-  "top_papers": [],
+  "with_abstracts": 48,
+  "study_type_distribution": [
+    {
+      "type": "other",
+      "count": 11
+    },
+    {
+      "type": "rct",
+      "count": 9
+    },
+    {
+      "type": "basic-science",
+      "count": 8
+    },
+    {
+      "type": "clinical-trial",
+      "count": 7
+    },
+    {
+      "type": "observational",
+      "count": 6
+    },
+    {
+      "type": "systematic-review",
+      "count": 4
+    },
+    {
+      "type": "guideline",
+      "count": 4
+    },
+    {
+      "type": "meta-analysis",
+      "count": 3
+    },
+    {
+      "type": "review",
+      "count": 2
+    },
+    {
+      "type": "case-report",
+      "count": 2
+    },
+    {
+      "type": "case-series",
+      "count": 1
+    }
+  ],
+  "result_distribution": [
+    {
+      "result": "positive",
+      "count": 26
+    },
+    {
+      "result": "inconclusive",
+      "count": 17
+    },
+    {
+      "result": "unknown",
+      "count": 9
+    },
+    {
+      "result": "mixed",
+      "count": 5
+    }
+  ],
+  "papers_per_year": {
+    "1976": 1,
+    "2006": 2,
+    "2007": 1,
+    "2008": 2,
+    "2010": 1,
+    "2011": 2,
+    "2012": 1,
+    "2015": 2,
+    "2016": 3,
+    "2017": 3,
+    "2018": 2,
+    "2019": 2,
+    "2020": 3,
+    "2021": 3,
+    "2022": 10,
+    "2023": 5,
+    "2024": 7,
+    "2025": 4,
+    "2026": 3
+  },
+  "avg_sample_size": 530,
+  "max_sample_size": 3251,
+  "top_papers": [
+    {
+      "pmid": "37383673",
+      "title": "A systematic review of the efficacy of ketamine for craniofacial pain.",
+      "authors": "Hoydonckx Y, McKechnie T, Peer M et al.",
+      "year": "2023",
+      "journal": "Canadian journal of pain = Revue canadienne de la douleur",
+      "study_type": "systematic-review",
+      "result": "mixed",
+      "sample_size": 670,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "41562498",
+      "title": "Patient perspectives on research gaps in cluster headache.",
+      "authors": "Haghdoost F, Bahceci D, Delcourt C et al.",
+      "year": "2026",
+      "journal": "Headache",
+      "study_type": "clinical-trial",
+      "result": "mixed",
+      "sample_size": 202,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "34515824",
+      "title": "Safety pharmacology of acute LSD administration in healthy subjects.",
+      "authors": "Holze F, Caluori TV, Vizeli P et al.",
+      "year": "2022",
+      "journal": "Psychopharmacology",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": 83,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "38722484",
+      "title": "Ketamine as Treatment for Cluster Headache: A Systematic Review of Literature and a Case Series.",
+      "authors": "Neumann J, Bornemann-Cimenti H, Rumpold-Seitlinger G et al.",
+      "year": "2024",
+      "journal": "Pain and therapy",
+      "study_type": "systematic-review",
+      "result": "positive",
+      "sample_size": 68,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "41674667",
+      "title": "Self-medication with psychedelics: a scoping review and narrative synthesis of review-level evidence.",
+      "authors": "Shiju S, Tirumala R, Marseille E",
+      "year": "2026",
+      "journal": "Exploratory research in clinical and social pharmacy",
+      "study_type": "systematic-review",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "38496341",
+      "title": "Scoping Review: The Role of Psychedelics in the Management of Chronic Pain.",
+      "authors": "Robinson CL, Fonseca ACG, Diejomaoh EM et al.",
+      "year": "2024",
+      "journal": "Journal of pain research",
+      "study_type": "meta-analysis",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "36310189",
+      "title": "Preventive treatment of refractory chronic cluster headache: systematic review and meta-analysis.",
+      "authors": "Membrilla JA, Roa J, D\u00edaz-de-Ter\u00e1n J",
+      "year": "2023",
+      "journal": "Journal of neurology",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "35759175",
+      "title": "Self-Reported Efficacy of Treatments in Cluster Headache: a Systematic Review of Survey Studies.",
+      "authors": "Rusanen SS, De S, Schindler EAD et al.",
+      "year": "2022",
+      "journal": "Current pain and headache reports",
+      "study_type": "systematic-review",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "40071875",
+      "title": "Lifetime classic psychedelic use and headaches: A cross-sectional study.",
+      "authors": "Bjurenfalk Z, Cosmo A, Simonsson O et al.",
+      "year": "2025",
+      "journal": "Journal of psychopharmacology (Oxford, England)",
+      "study_type": "observational",
+      "result": "inconclusive",
+      "sample_size": 2009,
+      "evidence_tier": 2
+    },
+    {
+      "pmid": "34806165",
+      "title": "Intranasal ketamine for acute cluster headache attacks-Results from a proof-of-concept open-label trial.",
+      "authors": "Petersen AS, Pedersen AS, Barloese MCJ et al.",
+      "year": "2022",
+      "journal": "Headache",
+      "study_type": "clinical-trial",
+      "result": "positive",
+      "sample_size": 23,
+      "evidence_tier": 2
+    }
+  ],
   "all_trials": [
     {
       "nct_id": "NCT02981173",
