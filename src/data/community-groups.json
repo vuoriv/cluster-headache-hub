@@ -8,7 +8,12 @@
     "language": "en",
     "description": "The largest CH advocacy group. Forums, research funding (Yale psilocybin trials), annual conference, ClusterBuddies peer support, and virtual support groups.",
     "members": "10,000+",
-    "tags": ["forum", "advocacy", "research", "peer-support"]
+    "tags": [
+      "forum",
+      "advocacy",
+      "research",
+      "peer-support"
+    ]
   },
   {
     "name": "Cluster Headache Support Group (CHSG)",
@@ -19,7 +24,10 @@
     "language": "en",
     "description": "One of the largest Facebook groups for CH patients and caregivers. Active daily discussions on treatments, oxygen access, and coping.",
     "members": "10,000+",
-    "tags": ["support", "discussion"]
+    "tags": [
+      "support",
+      "discussion"
+    ]
   },
   {
     "name": "Cluster Headaches Worldwide Support Group",
@@ -30,7 +38,10 @@
     "language": "en",
     "description": "Online community exclusively for cluster headache sufferers. Message board and resource library.",
     "members": null,
-    "tags": ["forum", "support"]
+    "tags": [
+      "forum",
+      "support"
+    ]
   },
   {
     "name": "The Cluster Headache Support Group (Warriors)",
@@ -41,7 +52,11 @@
     "language": "en",
     "description": "Patient-directed support, education, research, and advocacy. Worldwide patient maps to find local connections.",
     "members": null,
-    "tags": ["advocacy", "education", "maps"]
+    "tags": [
+      "advocacy",
+      "education",
+      "maps"
+    ]
   },
   {
     "name": "r/ClusterHeads",
@@ -52,7 +67,10 @@
     "language": "en",
     "description": "Reddit community for CH sufferers. Treatment discussions, support, and shared experiences.",
     "members": "2,100+",
-    "tags": ["discussion", "support"]
+    "tags": [
+      "discussion",
+      "support"
+    ]
   },
   {
     "name": "r/ClusterHeadaches",
@@ -63,7 +81,10 @@
     "language": "en",
     "description": "Second Reddit community for cluster headache discussion and mutual support.",
     "members": "574+",
-    "tags": ["discussion", "support"]
+    "tags": [
+      "discussion",
+      "support"
+    ]
   },
   {
     "name": "OUCH UK",
@@ -74,7 +95,12 @@
     "language": "en",
     "description": "UK's dedicated CH charity. Helpline, forum, annual conference, ER info cards, and downloadable information packs.",
     "members": "3,000+",
-    "tags": ["charity", "helpline", "forum", "conference"]
+    "tags": [
+      "charity",
+      "helpline",
+      "forum",
+      "conference"
+    ]
   },
   {
     "name": "CSG e.V. (Clusterkopfschmerz-Selbsthilfe-Gruppen)",
@@ -85,7 +111,11 @@
     "language": "de",
     "description": "German federal association of CH self-help groups. 50+ regional groups serving 2,000-3,000 patients annually. Information materials in multiple European languages.",
     "members": "3,000+",
-    "tags": ["self-help", "regional-groups", "advocacy"]
+    "tags": [
+      "self-help",
+      "regional-groups",
+      "advocacy"
+    ]
   },
   {
     "name": "AFCAVF (Association Francaise Contre l'Algie Vasculaire de la Face)",
@@ -96,7 +126,11 @@
     "language": "fr",
     "description": "France's dedicated CH patient association. Founded 2005, all-volunteer non-profit. Awareness campaigns and patient support.",
     "members": null,
-    "tags": ["association", "awareness", "support"]
+    "tags": [
+      "association",
+      "awareness",
+      "support"
+    ]
   },
   {
     "name": "MyClusters",
@@ -107,7 +141,11 @@
     "language": "nl",
     "description": "Dutch CH platform maintaining a worldwide directory of patient groups. Contact info@myclusters.nl to add groups.",
     "members": null,
-    "tags": ["directory", "international", "support"]
+    "tags": [
+      "directory",
+      "international",
+      "support"
+    ]
   },
   {
     "name": "Nederlandse Hoofdpijn Vereniging (NHV)",
@@ -118,7 +156,10 @@
     "language": "nl",
     "description": "Dutch Headache Association with dedicated cluster headache patient information and support section.",
     "members": null,
-    "tags": ["association", "information"]
+    "tags": [
+      "association",
+      "information"
+    ]
   },
   {
     "name": "OUCH Belgium",
@@ -129,7 +170,11 @@
     "language": "fr",
     "description": "Belgian CH organisation. Bilingual (FR/EN). Treatment guidance, oxygen equipment information, and patient testimonials.",
     "members": null,
-    "tags": ["support", "treatment-info", "bilingual"]
+    "tags": [
+      "support",
+      "treatment-info",
+      "bilingual"
+    ]
   },
   {
     "name": "Cluster Kopfschmerzen Verein Osterreich",
@@ -140,7 +185,11 @@
     "language": "de",
     "description": "Austrian CH patient organisation. Peer support meetings, doctor registry, and psychosocial counselling.",
     "members": null,
-    "tags": ["peer-support", "doctor-registry", "counselling"]
+    "tags": [
+      "peer-support",
+      "doctor-registry",
+      "counselling"
+    ]
   },
   {
     "name": "O.U.C.H. Italia / GrappoloAiuto",
@@ -151,7 +200,11 @@
     "language": "it",
     "description": "Italian CH patient organization. Forum, treatment information, and regional support directories.",
     "members": null,
-    "tags": ["forum", "treatment-info", "regional"]
+    "tags": [
+      "forum",
+      "treatment-info",
+      "regional"
+    ]
   },
   {
     "name": "CRAES (Cefaleas en Racimos y Primarias Espana)",
@@ -162,7 +215,11 @@
     "language": "es",
     "description": "Spanish association for cluster headache and primary headaches. Patient support and awareness.",
     "members": null,
-    "tags": ["association", "support", "awareness"]
+    "tags": [
+      "association",
+      "support",
+      "awareness"
+    ]
   },
   {
     "name": "ACRA (Asociacion Cefalea en Racimos Ayuda)",
@@ -173,7 +230,11 @@
     "language": "es",
     "description": "Spanish-language CH support group on Facebook. Includes patients from Spain, Argentina, Mexico, Uruguay, Colombia, Peru, and Costa Rica.",
     "members": null,
-    "tags": ["support", "spanish-speaking", "international"]
+    "tags": [
+      "support",
+      "spanish-speaking",
+      "international"
+    ]
   },
   {
     "name": "Migraine Ireland",
@@ -184,7 +245,11 @@
     "language": "en",
     "description": "Irish headache charity covering cluster headache alongside migraine. No dedicated Irish CH group exists; Irish patients often connect through OUCH UK.",
     "members": null,
-    "tags": ["charity", "headache", "support"]
+    "tags": [
+      "charity",
+      "headache",
+      "support"
+    ]
   },
   {
     "name": "MiGRA Portugal",
@@ -195,7 +260,10 @@
     "language": "pt",
     "description": "Portuguese headache patient organisation covering cluster headache and migraine.",
     "members": null,
-    "tags": ["association", "headache"]
+    "tags": [
+      "association",
+      "headache"
+    ]
   },
   {
     "name": "Hodepine Norge",
@@ -206,7 +274,11 @@
     "language": "no",
     "description": "Norwegian headache patient organisation. Includes 'Chat with doctor' service and CH-specific resources.",
     "members": null,
-    "tags": ["association", "doctor-chat", "support"]
+    "tags": [
+      "association",
+      "doctor-chat",
+      "support"
+    ]
   },
   {
     "name": "European Migraine & Headache Alliance (EMHA)",
@@ -217,7 +289,12 @@
     "language": "en",
     "description": "Umbrella organisation with 36 European patient associations for migraine, CH, and trigeminal neuralgia. Policy advocacy at EU level.",
     "members": "36 member orgs",
-    "tags": ["umbrella", "advocacy", "policy", "european"]
+    "tags": [
+      "umbrella",
+      "advocacy",
+      "policy",
+      "european"
+    ]
   },
   {
     "name": "Migraine Canada",
@@ -228,7 +305,11 @@
     "language": "en",
     "description": "Canadian headache organisation with cluster headache resources and specialist directory.",
     "members": null,
-    "tags": ["association", "headache", "specialist-directory"]
+    "tags": [
+      "association",
+      "headache",
+      "specialist-directory"
+    ]
   },
   {
     "name": "ABRACES",
@@ -239,7 +320,11 @@
     "language": "pt",
     "description": "Brazilian CH and migraine patient association. Led by neurologist Dr. Mario Peres. Patient support and awareness.",
     "members": null,
-    "tags": ["association", "research", "support"]
+    "tags": [
+      "association",
+      "research",
+      "support"
+    ]
   },
   {
     "name": "Australia New Zealand Cluster Headache Support",
@@ -250,7 +335,10 @@
     "language": "en",
     "description": "Facebook support group for CH patients in Australia and New Zealand.",
     "members": null,
-    "tags": ["support", "regional"]
+    "tags": [
+      "support",
+      "regional"
+    ]
   },
   {
     "name": "Migraine & Headache Australia",
@@ -261,7 +349,11 @@
     "language": "en",
     "description": "National Australian organisation (Brain Foundation division) with dedicated cluster headache page and specialist resources.",
     "members": null,
-    "tags": ["association", "specialist-resources", "headache"]
+    "tags": [
+      "association",
+      "specialist-resources",
+      "headache"
+    ]
   },
   {
     "name": "TACSWeb",
@@ -272,10 +364,14 @@
     "language": "en",
     "description": "Patient information platform for trigeminal autonomic cephalalgias including CH, paroxysmal hemicrania, and SUNCT/SUNA.",
     "members": null,
-    "tags": ["information", "TAC", "education"]
+    "tags": [
+      "information",
+      "TAC",
+      "education"
+    ]
   },
   {
-    "name": "The Brain Charity — Cluster Headaches",
+    "name": "The Brain Charity \u2014 Cluster Headaches",
     "country": "GB",
     "region": "europe",
     "platform": "website",
@@ -283,10 +379,14 @@
     "language": "en",
     "description": "UK charity providing practical support, information, and social activities for people with neurological conditions including CH.",
     "members": null,
-    "tags": ["charity", "practical-support", "neurological"]
+    "tags": [
+      "charity",
+      "practical-support",
+      "neurological"
+    ]
   },
   {
-    "name": "The Migraine Trust — Cluster Headache",
+    "name": "The Migraine Trust \u2014 Cluster Headache",
     "country": "GB",
     "region": "europe",
     "platform": "website",
@@ -294,6 +394,84 @@
     "language": "en",
     "description": "UK charity with cluster headache information, treatment guidance, and links to specialist services.",
     "members": null,
-    "tags": ["charity", "information", "specialist-referral"]
+    "tags": [
+      "charity",
+      "information",
+      "specialist-referral"
+    ]
+  },
+  {
+    "name": "Clusterbuds",
+    "country": "INT",
+    "region": "international",
+    "platform": "discord",
+    "url": "https://discord.gg/clusterbuds",
+    "language": "en",
+    "description": "Discord server for cluster headache patients. Real-time chat and voice support.",
+    "members": null,
+    "tags": [
+      "chat",
+      "support",
+      "real-time"
+    ]
+  },
+  {
+    "name": "To Kill The Beast",
+    "country": "INT",
+    "region": "international",
+    "platform": "facebook",
+    "url": "https://www.facebook.com/clustergroup",
+    "language": "en",
+    "description": "International Facebook-based CH support group.",
+    "members": null,
+    "tags": [
+      "support",
+      "discussion"
+    ]
+  },
+  {
+    "name": "Beat the Beast",
+    "country": "NL",
+    "region": "europe",
+    "platform": "website",
+    "url": "https://beatthebeast.nl",
+    "language": "nl",
+    "description": "Dutch CH research fundraiser and patient organisation.",
+    "members": null,
+    "tags": [
+      "research",
+      "fundraising",
+      "support"
+    ]
+  },
+  {
+    "name": "Cluster Headaches Australia",
+    "country": "AU",
+    "region": "asia-pacific",
+    "platform": "website",
+    "url": "https://www.clusterheadaches.com.au",
+    "language": "en",
+    "description": "Patient-run Australian information and community site with forums for CH sufferers.",
+    "members": null,
+    "tags": [
+      "forum",
+      "information",
+      "community"
+    ]
+  },
+  {
+    "name": "PatientsLikeMe \u2014 Cluster Headaches",
+    "country": "INT",
+    "region": "international",
+    "platform": "website",
+    "url": "https://www.patientslikeme.com/conditions/397-cluster-headaches",
+    "language": "en",
+    "description": "Health data-sharing platform where CH patients track symptoms, treatments, and connect with others.",
+    "members": null,
+    "tags": [
+      "data-sharing",
+      "tracking",
+      "community"
+    ]
   }
 ]
