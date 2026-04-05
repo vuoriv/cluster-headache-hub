@@ -1,10 +1,12 @@
 import { useState, useMemo } from "react"
 import { Link } from "react-router-dom"
+import trialAnalyses from "@/data/trials/trial-analyses.json"
 import {
   FlaskConical,
   Search,
   ExternalLink,
   ArrowLeft,
+  Lightbulb,
   Users,
   Calendar,
   ChevronDown,
@@ -19,14 +21,18 @@ import { CATEGORY_CONFIG, STATUS_CONFIG, phaseLabel } from "@/lib/research-categ
 import { cn } from "@/lib/utils"
 
 export function ActiveTrialsPage() {
-  const { loading, error, getActiveTrials, searchTrials } = useDataDb()
+  const { loading, error, searchTrials } = useDataDb()
 
   const [query, setQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState<string>("all")
   const [categoryFilter, setCategoryFilter] = useState<string>("all")
   const [expandedNct, setExpandedNct] = useState<string | null>(null)
 
-  const allTrials = useMemo(() => (loading ? [] : getActiveTrials()), [loading, getActiveTrials])
+  const allTrials = useMemo(() => {
+    if (loading) return []
+    // Get all trials, not just active
+    return searchTrials({})
+  }, [loading, searchTrials])
 
   // Get categories that actually exist in active trials
   const activeCategories = useMemo(() => {
@@ -43,19 +49,17 @@ export function ActiveTrialsPage() {
       query: query || undefined,
       status: statusFilter === "all" ? undefined : statusFilter,
       category: categoryFilter === "all" ? undefined : categoryFilter,
-    }).filter((t) =>
-      statusFilter === "all"
-        ? ["RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING"].includes(t.status)
-        : true,
-    )
+    })
   }, [loading, allTrials, searchTrials, query, statusFilter, categoryFilter])
 
   const stats = useMemo(() => {
     if (loading) return null
+    const active = allTrials.filter((t) => ["RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING"].includes(t.status))
     return {
       total: allTrials.length,
+      active: active.length,
+      completed: allTrials.filter((t) => t.status === "COMPLETED").length,
       recruiting: allTrials.filter((t) => t.status === "RECRUITING").length,
-      psychedelic: allTrials.filter((t) => t.category === "psychedelic").length,
     }
   }, [loading, allTrials])
 
@@ -76,17 +80,18 @@ export function ActiveTrialsPage() {
 
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-bold">Active Clinical Trials</h2>
+          <h2 className="text-2xl font-bold">Clinical Trials</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            All cluster headache trials currently recruiting, active, or starting soon — from{" "}
+            All 106 cluster headache trials from{" "}
             <a href="https://clinicaltrials.gov" target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/70 hover:underline">ClinicalTrials.gov</a>
+            {" "}— with deep analysis of what was tested and what happened
           </p>
         </div>
         {stats && (
           <div className="flex gap-3">
-            <StatBadge value={stats.total} label="Active" />
-            <StatBadge value={stats.recruiting} label="Recruiting" />
-            <StatBadge value={stats.psychedelic} label="Psychedelic" />
+            <StatBadge value={stats.total} label="Total" />
+            <StatBadge value={stats.active} label="Active" />
+            <StatBadge value={stats.completed} label="Completed" />
           </div>
         )}
       </div>
@@ -105,7 +110,7 @@ export function ActiveTrialsPage() {
       {/* Status label filters */}
       <div className="flex flex-wrap gap-1.5">
         <span className="mr-1 flex items-center text-[0.65rem] font-medium uppercase tracking-wider text-muted-foreground">Status</span>
-        {(["all", "RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING"] as const).map((status) => {
+        {(["all", "RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING", "COMPLETED", "TERMINATED"] as const).map((status) => {
           const active = statusFilter === status
           const label = status === "all" ? "All" : STATUS_CONFIG[status]?.label ?? status
           return (
@@ -274,10 +279,17 @@ function TrialCard({
 
       {expanded && (
         <CardContent className="pt-0">
+          <TrialAnalysis nctId={trial.nctId} />
+
           {trial.summary && (
-            <p className="mb-3 text-xs leading-relaxed text-muted-foreground">
-              {trial.summary}
-            </p>
+            <details className="mb-3">
+              <summary className="cursor-pointer text-xs font-medium text-muted-foreground hover:text-foreground">
+                Full study description
+              </summary>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                {trial.summary}
+              </p>
+            </details>
           )}
 
           <div className="mb-3 grid gap-2 text-xs sm:grid-cols-2">
@@ -318,5 +330,65 @@ function TrialCard({
         </CardContent>
       )}
     </Card>
+  )
+}
+
+interface TrialAnalysisData {
+  nct_id: string
+  what_tested: string
+  key_result: string
+  verdict: string
+  patient_relevance: string
+  dose_tested: string | null
+  sample_size: number | null
+}
+
+const VERDICT_BADGES: Record<string, { label: string; variant: "success" | "destructive" | "warning" | "info" | "secondary" | "outline" }> = {
+  success: { label: "Succeeded", variant: "success" },
+  failure: { label: "Failed", variant: "destructive" },
+  mixed: { label: "Mixed Results", variant: "warning" },
+  ongoing: { label: "Ongoing", variant: "info" },
+  terminated: { label: "Terminated", variant: "secondary" },
+  unknown: { label: "No Results Posted", variant: "outline" },
+}
+
+function TrialAnalysis({ nctId }: { nctId: string }) {
+  const analysis = (trialAnalyses as TrialAnalysisData[]).find((a) => a.nct_id === nctId)
+  if (!analysis) return null
+
+  const badge = VERDICT_BADGES[analysis.verdict]
+
+  return (
+    <div className="mb-4 rounded-lg border bg-muted/30 p-3">
+      <div className="mb-2 flex items-start gap-2">
+        <Lightbulb className="mt-0.5 size-3.5 shrink-0 text-amber-500" />
+        <div className="flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-semibold">Analysis</span>
+            {badge && <Badge variant={badge.variant} className="text-[0.6rem]">{badge.label}</Badge>}
+            {analysis.dose_tested && (
+              <Badge variant="outline" className="text-[0.6rem]">{analysis.dose_tested}</Badge>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2 pl-5.5">
+        <p className="text-xs leading-relaxed">
+          <span className="font-medium">What was tested: </span>
+          <span className="text-muted-foreground">{analysis.what_tested}</span>
+        </p>
+        {analysis.key_result && (
+          <p className="text-xs leading-relaxed">
+            <span className="font-medium">Result: </span>
+            <span className="text-muted-foreground">{analysis.key_result}</span>
+          </p>
+        )}
+        <p className="text-xs leading-relaxed">
+          <span className="font-medium">For patients: </span>
+          <span className="text-muted-foreground">{analysis.patient_relevance}</span>
+        </p>
+      </div>
+    </div>
   )
 }

@@ -1,0 +1,956 @@
+[
+  {
+    "nct_id": "NCT02981173",
+    "what_tested": "Oral psilocybin (low and high dose) given in 3 sessions spaced 5 days apart, to see if it reduces cluster headache frequency and intensity.",
+    "key_result": "Study completed in 2022 with 25 participants but no results have been posted yet. This was one of the first rigorous academic studies of psilocybin for CH.",
+    "verdict": "unknown",
+    "patient_relevance": "Yale's landmark psilocybin study completed but awaits publication -- results could shape future psychedelic treatment options for CH.",
+    "dose_tested": "Low dose and high dose oral psilocybin (exact mg not specified), 3 sessions 5 days apart",
+    "sample_size": 25
+  },
+  {
+    "nct_id": "NCT05477459",
+    "what_tested": "Microdose LSD (25 micrograms) given every 3 days for 3 weeks to treat chronic cluster headache, compared to placebo.",
+    "key_result": "Currently recruiting 65 participants, expected to complete in 2027.",
+    "verdict": "ongoing",
+    "patient_relevance": "If successful, this could establish microdose LSD as a legitimate treatment for chronic CH -- a disease with very few good prevention options.",
+    "dose_tested": "25 micrograms LSD every 3 days for 3 weeks",
+    "sample_size": 65
+  },
+  {
+    "nct_id": "NCT05511155",
+    "what_tested": "Comparing high-flow and medium-flow oxygen therapy versus placebo for primary headache disorders in the emergency department.",
+    "key_result": "Completed in 2022 with 132 participants but no results posted. Study focused on general primary headaches, not exclusively cluster headache.",
+    "verdict": "unknown",
+    "patient_relevance": "This may provide evidence on whether different oxygen flow rates matter for headache relief in the ER, though it was not CH-specific.",
+    "dose_tested": "High-flow vs medium-flow oxygen therapy",
+    "sample_size": 132
+  },
+  {
+    "nct_id": "NCT04280055",
+    "what_tested": "Low-dose psilocybin given in 3 weekly sessions as a preventive treatment for chronic cluster headache, with brain imaging (fMRI) before and after.",
+    "key_result": "Terminated after enrolling only 10 of planned participants, likely due to COVID-19 pandemic (started Jan 2020, ended Nov 2020).",
+    "verdict": "terminated",
+    "patient_relevance": "This Danish study was stopped early, probably due to COVID -- it does not tell us whether psilocybin works for chronic CH.",
+    "dose_tested": "Low dose psilocybin, 3 sessions one week apart",
+    "sample_size": 10
+  },
+  {
+    "nct_id": "NCT04179266",
+    "what_tested": "Intranasal ketamine spray (15mg per dose, up to 75mg total) as an acute rescue treatment for chronic cluster headache attacks.",
+    "key_result": "Completed with 23 participants but no results posted. Based on the protocol, treatment was given during active attacks when pain exceeded 6/10.",
+    "verdict": "unknown",
+    "patient_relevance": "A nasal ketamine spray could be a fast-acting rescue option for CH attacks, but we are still waiting for results from this small study.",
+    "dose_tested": "15mg ketamine intranasal per dose, up to 5 doses (75mg total) over 24 minutes",
+    "sample_size": 23
+  },
+  {
+    "nct_id": "NCT03781128",
+    "what_tested": "Oral LSD (100 micrograms) given 3 times over 3 weeks versus placebo in a crossover design, to prevent cluster headache attacks.",
+    "key_result": "Still recruiting 30 participants as of 2025, expected completion December 2025.",
+    "verdict": "ongoing",
+    "patient_relevance": "This Basel study tests a full psychoactive dose of LSD for CH prevention -- if it works, it could validate what many patients have reported anecdotally.",
+    "dose_tested": "100 micrograms oral LSD, 3 doses over 3 weeks",
+    "sample_size": 30
+  },
+  {
+    "nct_id": "NCT01589588",
+    "what_tested": "Comparing three different oxygen delivery systems for acute treatment of cluster headache attacks.",
+    "key_result": "Completed with 57 participants but no results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "The type of oxygen mask or delivery system you use may matter for how well oxygen works -- this study could help answer that, but results are not yet available.",
+    "dose_tested": "Three different oxygen delivery systems (specifics not detailed)",
+    "sample_size": 57
+  },
+  {
+    "nct_id": "NCT03397563",
+    "what_tested": "Whether CPAP (continuous positive airway pressure, the machine used for sleep apnea) can prevent nocturnal cluster headache attacks.",
+    "key_result": "Completed with 30 participants but no results posted. The idea was based on reports linking sleep apnea to cluster headache.",
+    "verdict": "unknown",
+    "patient_relevance": "If CPAP reduces nighttime CH attacks, it would be an affordable and widely available treatment -- but we are still waiting for results.",
+    "dose_tested": "Automatic CPAP machine during sleep",
+    "sample_size": 30
+  },
+  {
+    "nct_id": "NCT04814381",
+    "what_tested": "A single IV infusion of ketamine combined with magnesium to reduce attacks in drug-resistant chronic cluster headache.",
+    "key_result": "Still recruiting 90 participants, expected completion September 2026. Earlier pilot data in 17 patients showed daily attacks dropped from 4.3 to 1.3 (p<0.001).",
+    "verdict": "ongoing",
+    "patient_relevance": "Promising pilot data suggests ketamine+magnesium IV could dramatically reduce attacks in treatment-resistant chronic CH -- this larger trial will tell us if it is real.",
+    "dose_tested": "Single IV infusion of ketamine-magnesium combination",
+    "sample_size": 90
+  },
+  {
+    "nct_id": "NCT01298921",
+    "what_tested": "Whether a demand-valve oxygen delivery system (which adjusts flow to breathing rate) works better than standard continuous-flow oxygen for aborting CH attacks.",
+    "key_result": "Terminated after enrolling only 4 patients. Results section exists but contains no actual data. Zero adverse events reported.",
+    "verdict": "terminated",
+    "patient_relevance": "This study was too small to draw conclusions -- we still do not know if demand-valve oxygen is better than a standard non-rebreather mask.",
+    "dose_tested": "Demand valve oxygen vs continuous high-flow oxygen via non-rebreather mask",
+    "sample_size": 4
+  },
+  {
+    "nct_id": "NCT04570475",
+    "what_tested": "High-dose Vitamin D3 plus a multivitamin versus placebo for preventing cluster headache attacks.",
+    "key_result": "Terminated after enrolling 27 of the planned participants. No results posted. The study ran from 2021 to 2024.",
+    "verdict": "terminated",
+    "patient_relevance": "Despite strong community interest in Vitamin D for CH, this rigorous trial was terminated early -- we still lack solid evidence on whether high-dose D3 prevents attacks.",
+    "dose_tested": "High-dose Vitamin D3 + multivitamin (specific dose not stated)",
+    "sample_size": 27
+  },
+  {
+    "nct_id": "NCT03944876",
+    "what_tested": "Botulinum toxin A (Botox) injected precisely into the sphenopalatine ganglion (SPG) using CT-guided navigation, to reduce attack frequency in treatment-resistant chronic CH.",
+    "key_result": "Still recruiting 112 participants, expected completion September 2025. Earlier phase 1/2 data suggested the approach was safe and beneficial.",
+    "verdict": "ongoing",
+    "patient_relevance": "If Botox injected at the SPG reduces chronic CH attacks, it could offer months of relief from a single injection for patients who have failed medications.",
+    "dose_tested": "Botulinum toxin A single injection to sphenopalatine ganglion",
+    "sample_size": 112
+  },
+  {
+    "nct_id": "NCT02797951",
+    "what_tested": "Long-term safety of galcanezumab (Emgality) 300mg monthly injection in people who completed the earlier episodic or chronic CH trials.",
+    "key_result": "119 of 165 participants experienced treatment-related adverse events, and 17 had serious adverse events. 2 participants reported suicidal ideation. No new safety signals beyond what was already known.",
+    "verdict": "mixed",
+    "patient_relevance": "Galcanezumab appears reasonably safe for long-term use in CH patients, though side effects are common -- this was a safety study, not designed to prove it works.",
+    "dose_tested": "300mg galcanezumab subcutaneous monthly",
+    "sample_size": 165
+  },
+  {
+    "nct_id": "NCT06503328",
+    "what_tested": "Investigating whether specific microRNAs (small genetic molecules) in blood cells differ between CH patients in active phase, remission, and healthy controls, along with measuring CGRP levels.",
+    "key_result": "Still recruiting 100 participants, expected completion December 2024.",
+    "verdict": "ongoing",
+    "patient_relevance": "This is basic research that could lead to a blood test for CH or help identify new drug targets -- no direct treatment implications yet.",
+    "dose_tested": null,
+    "sample_size": 100
+  },
+  {
+    "nct_id": "NCT02397473",
+    "what_tested": "Galcanezumab (Emgality) 300mg monthly injection versus placebo for preventing episodic cluster headache attacks.",
+    "key_result": "Galcanezumab reduced weekly attacks by 8.69 compared to 5.22 for placebo (difference of ~3.5 fewer attacks per week). This was a statistically significant result that led to some clinical use.",
+    "verdict": "success",
+    "patient_relevance": "This is the study that made galcanezumab the first CGRP antibody to show benefit in episodic CH -- about 3-4 fewer attacks per week than placebo.",
+    "dose_tested": "300mg galcanezumab subcutaneous monthly",
+    "sample_size": 109
+  },
+  {
+    "nct_id": "NCT02438826",
+    "what_tested": "Galcanezumab (Emgality) 300mg monthly injection versus placebo for preventing chronic cluster headache attacks.",
+    "key_result": "Galcanezumab reduced weekly attacks by 5.38 versus 4.59 for placebo -- a difference of less than 1 attack per week, which was not statistically significant.",
+    "verdict": "failure",
+    "patient_relevance": "Galcanezumab did NOT work for chronic CH -- the small improvement over placebo was not meaningful, which is disappointing since chronic patients need it most.",
+    "dose_tested": "300mg galcanezumab subcutaneous monthly",
+    "sample_size": 240
+  },
+  {
+    "nct_id": "NCT05064397",
+    "what_tested": "Long-term (1 year) safety of eptinezumab IV infusion in chronic cluster headache patients.",
+    "key_result": "106 of 131 participants experienced adverse events, and 12 had serious adverse events. This was a safety extension study showing the drug was tolerable long-term.",
+    "verdict": "mixed",
+    "patient_relevance": "Eptinezumab appears safe enough for long-term use in chronic CH, but this study was not designed to prove effectiveness.",
+    "dose_tested": "Eptinezumab IV infusion (dose not specified in summary)",
+    "sample_size": 131
+  },
+  {
+    "nct_id": "NCT04688775",
+    "what_tested": "Eptinezumab (Vyepti) IV infusion versus placebo for preventing episodic cluster headache attacks.",
+    "key_result": "Eptinezumab reduced weekly attacks by 4.0 versus 4.6 for placebo over weeks 1-2. The drug performed WORSE than placebo, meaning it completely failed its primary endpoint.",
+    "verdict": "failure",
+    "patient_relevance": "Eptinezumab does not work for episodic CH -- placebo actually did better, which is a clear negative result.",
+    "dose_tested": "Eptinezumab IV infusion",
+    "sample_size": 231
+  },
+  {
+    "nct_id": "NCT05264714",
+    "what_tested": "Rimegepant (Nurtec), a CGRP receptor blocker pill, as a preventive treatment for cluster headache.",
+    "key_result": "Completed with 20 participants but no results posted yet.",
+    "verdict": "unknown",
+    "patient_relevance": "If an oral CGRP blocker works for CH prevention, it would be much more convenient than injections or infusions -- results are awaited.",
+    "dose_tested": "Rimegepant (dose not specified)",
+    "sample_size": 20
+  },
+  {
+    "nct_id": "NCT04970355",
+    "what_tested": "Erenumab (Aimovig), a CGRP receptor antibody, as a treatment for chronic cluster headache.",
+    "key_result": "Completed with 101 participants but no results posted yet.",
+    "verdict": "unknown",
+    "patient_relevance": "Another CGRP antibody being tested specifically for chronic CH -- results could expand treatment options if positive, given galcanezumab failed for chronic CH.",
+    "dose_tested": "Erenumab (dose not specified)",
+    "sample_size": 101
+  },
+  {
+    "nct_id": "NCT04930887",
+    "what_tested": "Endoscopic injection of long-acting bupivacaine (Exparel) near the sphenopalatine ganglion for craniofacial pain including cluster headache.",
+    "key_result": "Still recruiting 15 participants, expected completion June 2025.",
+    "verdict": "ongoing",
+    "patient_relevance": "A long-acting nerve block that could provide up to 72 hours of pain relief from a single injection -- early-stage and small but interesting.",
+    "dose_tested": "Exparel (long-acting bupivacaine) endoscopic injection to lateral nasal wall",
+    "sample_size": 15
+  },
+  {
+    "nct_id": "NCT03107052",
+    "what_tested": "Long-term safety and efficacy of fremanezumab (Ajovy) at various doses for preventing cluster headache (extension study of earlier trials).",
+    "key_result": "Safety-focused study: adverse events occurred in most participants across all dose groups. No efficacy endpoints were primary. The parent trials were terminated, making this extension study less meaningful.",
+    "verdict": "failure",
+    "patient_relevance": "Fremanezumab's entire CH program was discontinued -- this drug is not coming to market for cluster headache.",
+    "dose_tested": "Fremanezumab 225mg monthly, 675/225mg monthly, or 675mg quarterly",
+    "sample_size": 275
+  },
+  {
+    "nct_id": "NCT02945046",
+    "what_tested": "Fremanezumab (Ajovy) at two dose levels versus placebo for preventing episodic cluster headache attacks.",
+    "key_result": "The higher dose (900/225/225mg) reduced weekly attacks by 7.6 vs 5.7 for placebo, but the lower dose (675mg) showed essentially no difference from placebo (5.8 vs 5.7). Study was terminated.",
+    "verdict": "failure",
+    "patient_relevance": "Fremanezumab failed for episodic CH -- the small signal in one dose group was not enough to continue development.",
+    "dose_tested": "Fremanezumab 675mg single dose or 900/225/225mg monthly",
+    "sample_size": 169
+  },
+  {
+    "nct_id": "NCT02964338",
+    "what_tested": "Fremanezumab (Ajovy) at two dose levels versus placebo for preventing chronic cluster headache attacks.",
+    "key_result": "Placebo reduced monthly attacks by 12.2, which was actually better than the lower fremanezumab dose (8.7). The higher dose (900/225/225mg) reduced attacks by 15.5 but the massive placebo response made results uninterpretable. Study terminated.",
+    "verdict": "failure",
+    "patient_relevance": "Fremanezumab failed for chronic CH too -- the huge placebo response (12 fewer monthly attacks) wiped out any signal from the drug.",
+    "dose_tested": "Fremanezumab 675/225/225mg or 900/225/225mg monthly",
+    "sample_size": 259
+  },
+  {
+    "nct_id": "NCT01151631",
+    "what_tested": "Occipital nerve stimulation (ONS) via implanted electrodes at the back of the head, comparing high (100%) vs low (30%) stimulation intensity for treatment-resistant chronic cluster headache.",
+    "key_result": "Completed with 130 participants but no results posted. This was the largest randomized controlled trial of ONS for chronic CH.",
+    "verdict": "unknown",
+    "patient_relevance": "ONS is already used clinically for refractory CH in some countries -- this major trial should clarify how effective it really is, but results are not yet public.",
+    "dose_tested": "Occipital nerve stimulation at 100% vs 30% intensity",
+    "sample_size": 130
+  },
+  {
+    "nct_id": "NCT05324748",
+    "what_tested": "Repeated greater occipital nerve (GON) steroid injections versus placebo as a preventive treatment for chronic cluster headache.",
+    "key_result": "Still recruiting 50 participants, expected completion December 2025.",
+    "verdict": "ongoing",
+    "patient_relevance": "GON injections are already used by many headache specialists -- this trial will finally tell us if repeated injections provide lasting benefit for chronic CH.",
+    "dose_tested": "Repeated GON injections (steroid, specific agent not detailed)",
+    "sample_size": 50
+  },
+  {
+    "nct_id": "NCT05093582",
+    "what_tested": "Whether opening ATP-sensitive potassium channels (using levcromakalim) triggers cluster headache attacks, to understand the underlying disease mechanism.",
+    "key_result": "Completed with 41 participants but no results posted. This was a provocation study, not a treatment trial.",
+    "verdict": "unknown",
+    "patient_relevance": "This is basic science research -- if potassium channels trigger CH attacks, drugs that block them could become future treatments.",
+    "dose_tested": "Levcromakalim (potassium channel opener, provocation study)",
+    "sample_size": 41
+  },
+  {
+    "nct_id": "NCT02466334",
+    "what_tested": "Whether IV infusion of CGRP (the protein targeted by new migraine drugs) can trigger cluster headache attacks in patients during active and remission phases.",
+    "key_result": "Completed with 37 participants but no results posted. This provocation study tested the role of CGRP in triggering CH.",
+    "verdict": "unknown",
+    "patient_relevance": "Understanding whether CGRP directly causes CH attacks helps explain why some CGRP drugs work and others do not -- foundational research.",
+    "dose_tested": "IV CGRP infusion (provocation study)",
+    "sample_size": 37
+  },
+  {
+    "nct_id": "NCT06787677",
+    "what_tested": "Pulsed radiofrequency (PRF) targeting the sphenopalatine ganglion (SPG) as a minimally invasive treatment for chronic cluster headache.",
+    "key_result": "Recruiting 108 participants, expected completion December 2029.",
+    "verdict": "ongoing",
+    "patient_relevance": "SPG pulsed radiofrequency is a minimally invasive procedure that avoids permanent nerve damage -- this large trial could establish it as a standard option for chronic CH.",
+    "dose_tested": "Pulsed radiofrequency to sphenopalatine ganglion",
+    "sample_size": 108
+  },
+  {
+    "nct_id": "NCT02462395",
+    "what_tested": "Transcranial direct current stimulation (tDCS) -- a gentle electrical brain stimulation applied to the forehead -- as a preventive treatment for chronic cluster headache.",
+    "key_result": "Completed with 32 participants but no results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "tDCS is non-invasive and could be done at home if effective -- but without published results we cannot know if it helps CH.",
+    "dose_tested": "Anodal transcranial direct current stimulation",
+    "sample_size": 32
+  },
+  {
+    "nct_id": "NCT06277063",
+    "what_tested": "Non-invasive vagus nerve stimulation (nVNS) for acute treatment of primary headache in children and adolescents aged 7-20.",
+    "key_result": "Recruiting 15 participants, expected completion August 2026. This is primarily a migraine study in young patients, not specifically CH.",
+    "verdict": "ongoing",
+    "patient_relevance": "Mostly relevant to pediatric migraine, but could provide some data on vagus nerve stimulation in young headache patients generally.",
+    "dose_tested": "Non-invasive vagus nerve stimulation via ear-mounted device",
+    "sample_size": 15
+  },
+  {
+    "nct_id": "NCT06882278",
+    "what_tested": "Pulsed radiofrequency combined with platelet-rich plasma (PRP) injected at the sphenopalatine ganglion for episodic cluster headache.",
+    "key_result": "Not yet recruiting, expected to enroll 242 participants starting May 2025.",
+    "verdict": "ongoing",
+    "patient_relevance": "Combining two minimally invasive techniques could potentially extend pain relief duration -- a novel approach worth watching.",
+    "dose_tested": "Pulsed radiofrequency + platelet-rich plasma at SPG",
+    "sample_size": 242
+  },
+  {
+    "nct_id": "NCT03066635",
+    "what_tested": "Safety of Botox injected into the otic ganglion (a different nerve cluster than the usual SPG target) in chronic cluster headache patients.",
+    "key_result": "Completed with 10 participants. This was a phase 1/2 safety pilot testing 12.5 and 25 IU botulinum toxin. No results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "Early safety study exploring a new injection target for CH -- too small to tell if it works, but establishes whether the approach is safe.",
+    "dose_tested": "12.5 IU and 25 IU botulinum toxin A to otic ganglion",
+    "sample_size": 10
+  },
+  {
+    "nct_id": "NCT02019017",
+    "what_tested": "Safety of Botox injected into the sphenopalatine ganglion (SPG) using CT-guided navigation for treatment-resistant cluster headache.",
+    "key_result": "Completed with 10 participants. This was a phase 1/2 safety and feasibility study testing 25 IU and 50 IU doses. No results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "This Norwegian pilot established the safety of SPG Botox injection for CH, paving the way for the larger phase 3 trial (NCT03944876).",
+    "dose_tested": "25 IU and 50 IU botulinum toxin A to sphenopalatine ganglion",
+    "sample_size": 10
+  },
+  {
+    "nct_id": "NCT00205894",
+    "what_tested": "A tiny implantable nerve stimulator (bion microstimulator) placed near the greater occipital nerve to treat chronic headaches including cluster headache.",
+    "key_result": "Completed with 20 participants but no results posted. This was one of the earliest occipital nerve stimulation studies for headache.",
+    "verdict": "unknown",
+    "patient_relevance": "An early study of implantable nerve stimulation for chronic headache -- the technology has evolved significantly since this 2004-2006 trial.",
+    "dose_tested": "Bion microstimulator implanted at greater occipital nerve",
+    "sample_size": 20
+  },
+  {
+    "nct_id": "NCT05868044",
+    "what_tested": "The PRIMUS system combining supraorbital nerve stimulation (SONS) and occipital nerve stimulation (ONS) for chronic cluster headache -- a first-in-human study.",
+    "key_result": "Active but no longer recruiting, with 5 participants. Expected completion April 2024.",
+    "verdict": "ongoing",
+    "patient_relevance": "A novel dual-site stimulation system that may work better than stimulating just one nerve -- very early stage with only 5 patients.",
+    "dose_tested": "PRIMUS combined SONS + ONS neurostimulation system",
+    "sample_size": 5
+  },
+  {
+    "nct_id": "NCT03511846",
+    "what_tested": "Using capsaicin (hot pepper extract) and ice water to study pain biomarkers in headache patients, and testing whether oxygen reduces capsaicin-induced eye watering to understand how oxygen therapy works.",
+    "key_result": "Enrolling by invitation, with 371 participants. Expected completion May 2028. This is a mechanism/biomarker study.",
+    "verdict": "ongoing",
+    "patient_relevance": "This research could explain WHY oxygen works for CH -- understanding the mechanism could lead to better treatments.",
+    "dose_tested": null,
+    "sample_size": 371
+  },
+  {
+    "nct_id": "NCT06950281",
+    "what_tested": "Low sodium oxybate (Xywav), a sleep medication, taken twice nightly to prevent nocturnal cluster headache attacks in chronic CH.",
+    "key_result": "Not yet recruiting, expected to start January 2026 with 52 participants.",
+    "verdict": "ongoing",
+    "patient_relevance": "Many CH attacks happen at night -- a medication that both improves sleep and prevents nocturnal attacks could be very valuable for CH patients.",
+    "dose_tested": "Low sodium oxybate (Xywav) twice nightly",
+    "sample_size": 52
+  },
+  {
+    "nct_id": "NCT01958125",
+    "what_tested": "GammaCore (non-invasive vagus nerve stimulator) applied to the neck versus sham device for aborting acute cluster headache attacks.",
+    "key_result": "GammaCore showed 67 pain-free attacks out of 495 treated (13.5%) versus 46 out of 400 for sham (11.5%). The difference was modest and this trial had mixed results across episodic and chronic subtypes.",
+    "verdict": "mixed",
+    "patient_relevance": "GammaCore showed a small benefit for acute CH attacks overall, but the advantage over sham was not dramatic -- it works better for episodic than chronic CH.",
+    "dose_tested": "GammaCore non-invasive vagus nerve stimulation device",
+    "sample_size": 102
+  },
+  {
+    "nct_id": "NCT01255813",
+    "what_tested": "An implanted neurostimulator to electrically stimulate the sphenopalatine ganglion (SPG) for acute treatment of cluster headache attacks.",
+    "key_result": "Completed with 43 participants. The Pathway CH-1 study showed SPG stimulation provided pain relief in 67% of attacks and complete pain freedom in 34% within 15 minutes.",
+    "verdict": "success",
+    "patient_relevance": "SPG stimulation was highly effective for aborting CH attacks -- this led to the Pulsante device being available in Europe, though the company later closed.",
+    "dose_tested": "SPG neurostimulation via implanted ATI device",
+    "sample_size": 43
+  },
+  {
+    "nct_id": "NCT06540651",
+    "what_tested": "Light therapy (bright light delivered via consumer device) as a preventive treatment for chronic cluster headache, based on CH being a circadian rhythm disorder.",
+    "key_result": "Recruiting 48 participants, expected completion February 2027.",
+    "verdict": "ongoing",
+    "patient_relevance": "If light therapy helps reset the circadian rhythm disruption in CH, it would be a simple, side-effect-free addition to treatment -- especially for patients with seasonal patterns.",
+    "dose_tested": "Light therapy via consumer device",
+    "sample_size": 48
+  },
+  {
+    "nct_id": "NCT01792817",
+    "what_tested": "GammaCore (non-invasive vagus nerve stimulator) versus sham for acute treatment of cluster headache -- the pivotal regulatory trial.",
+    "key_result": "16 of 44 GammaCore patients (36%) were responders versus 14 of 57 sham patients (25%). In the episodic CH subgroup, response rate was significantly higher with GammaCore (48% vs 6%). Chronic CH showed no significant difference.",
+    "verdict": "mixed",
+    "patient_relevance": "GammaCore works for aborting episodic CH attacks but NOT for chronic CH -- it is now FDA-cleared based partly on this data, but benefit is limited to episodic patients.",
+    "dose_tested": "GammaCore non-invasive vagus nerve stimulation",
+    "sample_size": 150
+  },
+  {
+    "nct_id": "NCT01677026",
+    "what_tested": "Post-market registry collecting real-world data on the ATI SPG neurostimulation system implant for cluster headache.",
+    "key_result": "Completed with 150 participants. No formal results posted, but this registry supported the commercial use of the Pulsante device in Europe.",
+    "verdict": "unknown",
+    "patient_relevance": "Real-world data collection on the SPG stimulator -- the device showed promise but the company (Autonomic Technologies) eventually closed down.",
+    "dose_tested": "ATI Neurostimulation System (SPG stimulator)",
+    "sample_size": 150
+  },
+  {
+    "nct_id": "NCT07370142",
+    "what_tested": "Retrospective evaluation of sphenopalatine ganglion pulsed radiofrequency treatment outcomes for chronic headaches and facial pain, tracking pain scores over 6 months.",
+    "key_result": "Completed with 55 participants but no results posted yet. Data collected at 1 week, 1 month, 3 months, and 6 months.",
+    "verdict": "unknown",
+    "patient_relevance": "Real-world outcomes data on SPG radiofrequency could help patients decide whether this minimally invasive procedure is worth trying.",
+    "dose_tested": "Fluoroscopy-guided SPG pulsed radiofrequency",
+    "sample_size": 55
+  },
+  {
+    "nct_id": "NCT07113470",
+    "what_tested": "The PRIMUS system combining trigeminal and occipital nerve stimulation for preventing chronic cluster headache in patients who failed verapamil.",
+    "key_result": "Recruiting 10 participants at two centers in the Netherlands, expected completion April 2027.",
+    "verdict": "ongoing",
+    "patient_relevance": "A next-generation neurostimulation device for CH patients who cannot tolerate verapamil -- still very early stage.",
+    "dose_tested": "PRIMUS combined trigeminal + occipital nerve stimulation",
+    "sample_size": 10
+  },
+  {
+    "nct_id": "NCT03567590",
+    "what_tested": "Sphenopalatine ganglion pulsed radiofrequency for treating cluster headache -- effectiveness and safety.",
+    "key_result": "Completed with 80 participants but no results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "A reasonably large study of SPG radiofrequency for CH from a major Chinese center -- results would be valuable but have not been published.",
+    "dose_tested": "Sphenopalatine ganglion pulsed radiofrequency",
+    "sample_size": 80
+  },
+  {
+    "nct_id": "NCT06917144",
+    "what_tested": "Repetitive transcranial magnetic stimulation (rTMS) versus sham stimulation for refractory chronic cluster headache -- 10 sessions over 2 weeks in a crossover design.",
+    "key_result": "Completed with 8 participants but no results posted. Very small pilot study.",
+    "verdict": "unknown",
+    "patient_relevance": "TMS is non-invasive and already used for depression -- if it works for refractory CH, it could help the hardest-to-treat patients, but this was very small.",
+    "dose_tested": "rTMS for 10 minutes, 10 consecutive working days",
+    "sample_size": 8
+  },
+  {
+    "nct_id": "NCT06022848",
+    "what_tested": "Whether occipital nerve stimulator (ONS) implantation changes pain processing and biomarkers in chronic migraine and cluster headache patients.",
+    "key_result": "Completed with 6 participants. This was a mechanistic study comparing pain perception before and after ONS implantation.",
+    "verdict": "unknown",
+    "patient_relevance": "Understanding how ONS changes pain processing could help predict which patients will respond -- basic science, not a treatment trial.",
+    "dose_tested": "Occipital nerve stimulator (implanted)",
+    "sample_size": 6
+  },
+  {
+    "nct_id": "NCT02031822",
+    "what_tested": "Comparing two ultrasound-guided techniques for greater occipital nerve (GON) blocks -- a proximal approach at the C2 vertebra versus a distal approach at the base of the skull.",
+    "key_result": "Completed with 40 participants but no results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "How your doctor performs a GON block may affect how well it works -- this study compared two common injection sites.",
+    "dose_tested": "GON block with local anesthetic and steroid, two different injection sites",
+    "sample_size": 40
+  },
+  {
+    "nct_id": "NCT02510729",
+    "what_tested": "Whether low-frequency electrical stimulation of the sphenopalatine ganglion (SPG) can trigger cluster-like attacks by activating parasympathetic nerves.",
+    "key_result": "Completed with 21 participants but no results posted. This was a provocation study to understand CH mechanisms.",
+    "verdict": "unknown",
+    "patient_relevance": "Basic science study to understand how the SPG contributes to CH attacks -- helps explain why SPG-targeted treatments work.",
+    "dose_tested": "Low-frequency SPG stimulation (provocation study)",
+    "sample_size": 21
+  },
+  {
+    "nct_id": "NCT00662935",
+    "what_tested": "Deep brain stimulation (DBS) with electrodes implanted in the posterior hypothalamus for treatment-resistant chronic cluster headache, in a crossover design with stimulation on vs off.",
+    "key_result": "Completed with 12 participants but no results posted. Efficacy defined as 50% or more reduction in weekly attacks.",
+    "verdict": "unknown",
+    "patient_relevance": "DBS is an extreme last-resort treatment requiring brain surgery -- it is only for patients who have failed everything else, and results from this controlled study would be very informative.",
+    "dose_tested": "Deep brain stimulation of posterior-inferior hypothalamus",
+    "sample_size": 12
+  },
+  {
+    "nct_id": "NCT00329836",
+    "what_tested": "Whether cluster headache patients experience cutaneous allodynia (pain from normally non-painful touch) during and between attacks.",
+    "key_result": "20 out of 41 CH patients showed allodynia (about 49%), demonstrating that nearly half of CH patients have abnormal pain sensitivity on the skin.",
+    "verdict": "success",
+    "patient_relevance": "Nearly half of CH patients have skin sensitivity (allodynia) -- this suggests central sensitization occurs in CH, similar to migraine, which could affect treatment choices.",
+    "dose_tested": null,
+    "sample_size": 41
+  },
+  {
+    "nct_id": "NCT02782533",
+    "what_tested": "Deep brain stimulation of the third ventricle area for both chronic cluster headache and obesity -- exploring shared hypothalamic pathways.",
+    "key_result": "Completed with 13 participants but no results posted. Study ran for over 10 years.",
+    "verdict": "unknown",
+    "patient_relevance": "An unusual study targeting a different brain area than typical DBS for CH -- results could reveal connections between CH and metabolic regulation.",
+    "dose_tested": "Deep brain stimulation of the third ventricle",
+    "sample_size": 13
+  },
+  {
+    "nct_id": "NCT01616511",
+    "what_tested": "Long-term follow-up of patients from the Pathway CH-1 trial who had SPG neurostimulators implanted for cluster headache.",
+    "key_result": "Completed with 33 participants. This tracked the safety and effectiveness of SPG stimulation over years of use.",
+    "verdict": "unknown",
+    "patient_relevance": "Long-term data on SPG stimulation is critical for patients considering an implant -- suggests the device continues to work over time.",
+    "dose_tested": "ATI SPG Neurostimulation System (long-term follow-up)",
+    "sample_size": 33
+  },
+  {
+    "nct_id": "NCT01359631",
+    "what_tested": "How SPG stimulation at different frequencies affects blood flow in the brain -- high frequency was expected to block parasympathetic activity, low frequency to activate it.",
+    "key_result": "Completed with 7 participants. This was a mechanistic study measuring blood vessel responses to different stimulation patterns.",
+    "verdict": "unknown",
+    "patient_relevance": "Understanding how SPG stimulation changes blood flow helps explain why it can both abort attacks and prevent them -- important basic science.",
+    "dose_tested": "SPG stimulation at various frequencies (1-200 Hz)",
+    "sample_size": 7
+  },
+  {
+    "nct_id": "NCT07292090",
+    "what_tested": "Web-based or face-to-face yoga-based movement program as a complementary treatment for migraine and/or cluster headache, focusing on sleep quality and mental health.",
+    "key_result": "Recruiting 40 participants, expected completion May 2026. This is a pilot feasibility study, not primarily CH-specific.",
+    "verdict": "ongoing",
+    "patient_relevance": "Yoga may help with sleep and wellbeing for CH patients, but this is a feasibility study focused mainly on migraine -- do not expect breakthrough CH results.",
+    "dose_tested": "Web-based or in-person yoga program",
+    "sample_size": 40
+  },
+  {
+    "nct_id": "NCT00804895",
+    "what_tested": "Cortivazol (a corticosteroid) injected at the greater occipital nerve as an add-on to verapamil for preventing cluster headache attacks.",
+    "key_result": "Completed with 43 participants but no results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "Steroid injections at the greater occipital nerve are widely used for CH -- this study tested whether they add benefit to verapamil.",
+    "dose_tested": "Cortivazol injection at greater occipital nerve + oral verapamil",
+    "sample_size": 43
+  },
+  {
+    "nct_id": "NCT05023460",
+    "what_tested": "A three-phase study testing TENS (transcutaneous electrical nerve stimulation), then randomizing to either burst occipital nerve stimulation or sham, then open-label conventional ONS for chronic cluster headache.",
+    "key_result": "Completed with 38 participants but no results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "This study tested both non-invasive (TENS) and implanted (ONS) nerve stimulation for chronic CH -- results could help decide between these options.",
+    "dose_tested": "TENS then burst ONS vs sham ONS then tonic ONS",
+    "sample_size": 38
+  },
+  {
+    "nct_id": "NCT07348783",
+    "what_tested": "Randomized controlled trial of web-based or face-to-face yoga for migraine and/or cluster headache versus conventional treatment.",
+    "key_result": "Not yet recruiting, expected to start March 2026 with 80 participants. This is the full RCT following the pilot study.",
+    "verdict": "ongoing",
+    "patient_relevance": "If yoga significantly improves quality of life for CH patients, it could be a low-risk complementary approach -- but this is mainly a migraine study.",
+    "dose_tested": "Web-based or face-to-face yoga program",
+    "sample_size": 80
+  },
+  {
+    "nct_id": "NCT04353505",
+    "what_tested": "Intra-arterial delivery of dexamethasone and ketorolac into the arteries feeding the sphenopalatine ganglion for refractory headaches including cluster headache.",
+    "key_result": "Withdrawn before enrolling any participants. The study never got off the ground.",
+    "verdict": "terminated",
+    "patient_relevance": "This novel approach of delivering medication directly to the SPG through blood vessels was never tested -- the concept remains unproven.",
+    "dose_tested": "Intra-arterial dexamethasone + ketorolac to SPG arteries",
+    "sample_size": 0
+  },
+  {
+    "nct_id": "NCT01395264",
+    "what_tested": "Whether eye-tracking measurements (saccadometry) show differences in brain function between migraine, cluster headache, and healthy people.",
+    "key_result": "Terminated after enrolling 42 participants. This was a diagnostic/mechanism study, not a treatment trial.",
+    "verdict": "terminated",
+    "patient_relevance": "An attempt to find brain function differences in CH using eye-tracking -- terminated before completion, so no useful conclusions.",
+    "dose_tested": null,
+    "sample_size": 42
+  },
+  {
+    "nct_id": "NCT06124534",
+    "what_tested": "A novel bilateral occipital nerve field stimulation device (BliStim) for preventing chronic cluster headaches -- first-in-human safety study.",
+    "key_result": "Suspended with 10 participants enrolled. Reasons for suspension not stated.",
+    "verdict": "terminated",
+    "patient_relevance": "A new type of nerve stimulation device for CH, but the study was suspended -- unclear if it will resume.",
+    "dose_tested": "BliStim bilateral occipital nerve field stimulation",
+    "sample_size": 10
+  },
+  {
+    "nct_id": "NCT00458770",
+    "what_tested": "Brain imaging (PET scan) study to precisely locate hypothalamic activation during spontaneous cluster headache attacks.",
+    "key_result": "Terminated after enrolling only 1 participant. Capturing a spontaneous attack during a brain scan is extremely difficult.",
+    "verdict": "terminated",
+    "patient_relevance": "The hypothalamus is believed to be the \"generator\" of CH -- but imaging attacks in real-time proved nearly impossible in this study.",
+    "dose_tested": null,
+    "sample_size": 1
+  },
+  {
+    "nct_id": "NCT04406259",
+    "what_tested": "Monitoring the cardiac side effects (specifically heart block) of high-dose verapamil, the standard first-line preventive for cluster headache.",
+    "key_result": "Active but no longer recruiting, with 60 participants. Expected completion September 2025.",
+    "verdict": "ongoing",
+    "patient_relevance": "Verapamil can cause dangerous heart rhythm problems at the high doses needed for CH -- this study quantifies that risk and could lead to better monitoring guidelines.",
+    "dose_tested": "Verapamil at CH treatment doses (higher than cardiology doses)",
+    "sample_size": 60
+  },
+  {
+    "nct_id": "NCT02209155",
+    "what_tested": "R-verapamil (the right-handed version of the molecule, which may have fewer heart side effects) for preventing episodic cluster headache.",
+    "key_result": "Terminated after enrolling only 1 participant out of planned enrollment. The study effectively failed to recruit.",
+    "verdict": "terminated",
+    "patient_relevance": "A safer version of verapamil would be very welcome for CH patients, but this trial never got enough participants to test the idea.",
+    "dose_tested": "R-verapamil (specific dose not stated)",
+    "sample_size": 1
+  },
+  {
+    "nct_id": "NCT04014634",
+    "what_tested": "Greater occipital nerve (GON) steroid injection as a FIRST-LINE preventive treatment for episodic cluster headache, potentially replacing the need for verapamil.",
+    "key_result": "Completed with 70 participants but no results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "If GON injection works as well as verapamil for starting a new cluster period, patients could avoid weeks of pill-taking and cardiac monitoring -- results eagerly awaited.",
+    "dose_tested": "GON steroid injection as first-line prophylaxis",
+    "sample_size": 70
+  },
+  {
+    "nct_id": "NCT03010189",
+    "what_tested": "Using actigraphy (wrist activity monitors) and heart rate variability to study the relationship between sleep, autonomic nervous system function, and cluster headache attacks.",
+    "key_result": "Completed with 20 participants but no results posted. This was an observational study comparing bout and remission phases.",
+    "verdict": "unknown",
+    "patient_relevance": "Understanding the sleep-autonomic-headache connection could lead to better timing of preventive medications or sleep-based interventions.",
+    "dose_tested": null,
+    "sample_size": 20
+  },
+  {
+    "nct_id": "NCT04939922",
+    "what_tested": "A massive long-term registry collecting clinical data, biomarkers, imaging, genetics, and treatment outcomes for headache and vertigo patients in China.",
+    "key_result": "Recruiting, with 10,000 participants enrolled. Runs until 2050.",
+    "verdict": "ongoing",
+    "patient_relevance": "This huge database may eventually reveal patterns about CH that smaller studies miss, but it is a data collection effort, not testing a treatment.",
+    "dose_tested": null,
+    "sample_size": 10000
+  },
+  {
+    "nct_id": "NCT06138171",
+    "what_tested": "Studying psychological factors (personality traits, defense mechanisms, trauma history) in women with chronic migraine, fibromyalgia, and vulvodynia.",
+    "key_result": "Completed with 1,006 participants. This was not a cluster headache study.",
+    "verdict": "unknown",
+    "patient_relevance": "Not directly relevant to CH -- this studied psychological factors in other chronic pain conditions.",
+    "dose_tested": null,
+    "sample_size": 1006
+  },
+  {
+    "nct_id": "NCT02910323",
+    "what_tested": "A long-term observational research network collecting data on cluster headache and trigeminal neuralgia patients at the Will Erwin Headache Research Center.",
+    "key_result": "Recruiting, with 1,500 participants. Runs until 2035.",
+    "verdict": "ongoing",
+    "patient_relevance": "This US-based research network is building the largest CH patient database -- it supports multiple sub-studies and could accelerate treatment discoveries.",
+    "dose_tested": null,
+    "sample_size": 1500
+  },
+  {
+    "nct_id": "NCT00203190",
+    "what_tested": "Topiramate (Topamax), an anti-seizure medication, rapidly titrated to try to shorten cluster periods and prevent attacks.",
+    "key_result": "Terminated with 60 participants enrolled but no results posted.",
+    "verdict": "terminated",
+    "patient_relevance": "Topiramate is sometimes used off-label for CH, but this controlled trial was terminated without providing clear evidence either way.",
+    "dose_tested": "Topiramate (Topamax), rapid titration",
+    "sample_size": 60
+  },
+  {
+    "nct_id": "NCT06011811",
+    "what_tested": "A large online survey asking CH patients about treatment effectiveness and their views on various treatments.",
+    "key_result": "Completed with 2,487 participants -- one of the largest CH surveys ever conducted.",
+    "verdict": "unknown",
+    "patient_relevance": "Patient-reported data on what actually works in real life -- this survey captures the CH community's experience with treatments, complementing clinical trial data.",
+    "dose_tested": null,
+    "sample_size": 2487
+  },
+  {
+    "nct_id": "NCT05153876",
+    "what_tested": "Using natural language processing (AI) to analyze how headache patients describe their condition in writing, to potentially improve diagnosis.",
+    "key_result": "Completed with 1,150 participants.",
+    "verdict": "unknown",
+    "patient_relevance": "AI analysis of patient descriptions could someday help diagnose CH faster -- the average CH patient waits years for a correct diagnosis.",
+    "dose_tested": null,
+    "sample_size": 1150
+  },
+  {
+    "nct_id": "NCT01447641",
+    "what_tested": "Detailed study of sleep patterns and circadian (24-hour body clock) rhythms in episodic cluster headache patients, comparing in-bout versus out-of-bout phases.",
+    "key_result": "Completed with 8 participants. Very small but detailed physiological study.",
+    "verdict": "unknown",
+    "patient_relevance": "CH attacks follow circadian patterns -- understanding the sleep and body-clock changes could lead to chronotherapy (timing-based treatment) approaches.",
+    "dose_tested": null,
+    "sample_size": 8
+  },
+  {
+    "nct_id": "NCT03244735",
+    "what_tested": "Modified Atkins ketogenic diet (very low carbohydrate) as a treatment for chronic cluster headache, based on its success in epilepsy and preliminary migraine data.",
+    "key_result": "Completed with 18 participants. No formal results posted, but published research from this group showed encouraging reductions in attack frequency.",
+    "verdict": "unknown",
+    "patient_relevance": "The ketogenic diet is something patients can try on their own -- early signals suggest it may help some CH patients, possibly through anti-inflammatory effects.",
+    "dose_tested": "Modified Atkins ketogenic diet (carbohydrate restriction)",
+    "sample_size": 18
+  },
+  {
+    "nct_id": "NCT05536635",
+    "what_tested": "Whether breathing techniques can reduce migraine attack frequency and severity when added to standard medication.",
+    "key_result": "Completed with 86 participants. This was a migraine study, not a cluster headache study.",
+    "verdict": "unknown",
+    "patient_relevance": "Not directly relevant to CH -- breathing techniques were tested for migraine only.",
+    "dose_tested": "Breathing techniques as add-on to migraine medication",
+    "sample_size": 86
+  },
+  {
+    "nct_id": "NCT04949204",
+    "what_tested": "Using wearable sensors and machine learning to detect stress, behavior changes, and predict headache attacks in migraine and cluster headache patients.",
+    "key_result": "Completed with 19 participants. Pilot study for wearable-based headache prediction.",
+    "verdict": "unknown",
+    "patient_relevance": "If a smartwatch could predict an incoming CH attack, patients could treat preemptively -- this pilot explored whether that is technically feasible.",
+    "dose_tested": null,
+    "sample_size": 19
+  },
+  {
+    "nct_id": "NCT00069082",
+    "what_tested": "Intranasal civamide (zucapsaicin), a capsaicin-related compound, as a preventive nasal spray for episodic cluster headache.",
+    "key_result": "Completed with only 2 participants out of planned enrollment. Effectively failed to recruit.",
+    "verdict": "terminated",
+    "patient_relevance": "A capsaicin-like nasal spray could theoretically desensitize the trigeminal nerve, but this study was far too small to tell us anything.",
+    "dose_tested": "Intranasal civamide (zucapsaicin) nasal solution",
+    "sample_size": 2
+  },
+  {
+    "nct_id": "NCT04066023",
+    "what_tested": "A zolmitriptan microneedle skin patch (C213) applied during acute cluster headache attacks versus placebo, at 1.9mg and 3.8mg doses.",
+    "key_result": "Pain relief at 15 minutes: placebo 3 patients, C213 1.9mg 5 patients, C213 3.8mg 5 patients. Sustained pain relief was similarly close across groups. With only 42 total participants and small numbers per group, no clear separation from placebo.",
+    "verdict": "failure",
+    "patient_relevance": "A needle-free triptan skin patch would be convenient, but this small study did not show a clear advantage over placebo for aborting CH attacks.",
+    "dose_tested": "Zolmitriptan 1.9mg and 3.8mg microneedle patch (C213)",
+    "sample_size": 42
+  },
+  {
+    "nct_id": "NCT00356603",
+    "what_tested": "Self-injection of sumatriptan 3mg (half the standard Western dose) for aborting migraine and cluster headache attacks in Japan.",
+    "key_result": "93.9% of cluster headache patients achieved headache relief at 30 minutes post-injection. This was a non-comparative study confirming self-injection feasibility in Japan.",
+    "verdict": "success",
+    "patient_relevance": "Sumatriptan injection remains one of the most effective acute CH treatments -- even at the lower 3mg dose used in Japan, it works in over 90% of attacks.",
+    "dose_tested": "Sumatriptan 3mg self-injection kit",
+    "sample_size": 75
+  },
+  {
+    "nct_id": "NCT00033839",
+    "what_tested": "Intranasal civamide (zucapsaicin) nasal solution versus placebo for treating episodic cluster headache over 49 days.",
+    "key_result": "Completed with 60 participants but no results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "The larger of two civamide studies for CH -- capsaicin-based nasal sprays remain an unproven but theoretically interesting approach.",
+    "dose_tested": "Intranasal civamide (zucapsaicin)",
+    "sample_size": 60
+  },
+  {
+    "nct_id": "NCT06200480",
+    "what_tested": "A nurse-led telephone follow-up program for headache patients starting preventive treatment, compared to standard GP follow-up.",
+    "key_result": "Recruiting 400 participants, expected completion December 2026.",
+    "verdict": "ongoing",
+    "patient_relevance": "Better follow-up could improve how well patients stick with their CH preventive medications -- not a drug trial but could improve care quality.",
+    "dose_tested": null,
+    "sample_size": 400
+  },
+  {
+    "nct_id": "NCT05978258",
+    "what_tested": "A survey studying barriers to clinical trial participation among cluster headache patients, particularly in underrepresented demographic groups.",
+    "key_result": "Not yet recruiting, planned for 500 participants.",
+    "verdict": "ongoing",
+    "patient_relevance": "CH trials often struggle to recruit enough patients -- understanding barriers could make future trials faster and more inclusive.",
+    "dose_tested": null,
+    "sample_size": 500
+  },
+  {
+    "nct_id": "NCT02392273",
+    "what_tested": "Ausanil (an intranasal product) for primary headache disorders including cluster headache -- an observational safety and tolerability registry.",
+    "key_result": "Terminated with 20 participants. No results posted.",
+    "verdict": "terminated",
+    "patient_relevance": "Ausanil was a commercial nasal product marketed for headache relief -- this registry was terminated and the treatment has not gained traction.",
+    "dose_tested": "Ausanil intranasal product",
+    "sample_size": 20
+  },
+  {
+    "nct_id": "NCT06583395",
+    "what_tested": "Studying molecular, physiological, and emotional effects of intensive meditation in a large group including both healthy people and chronic pain patients.",
+    "key_result": "Enrolling by invitation with 3,000 participants. Not specific to CH.",
+    "verdict": "ongoing",
+    "patient_relevance": "Meditation may have general benefits for chronic pain sufferers, but this is not a CH-specific study.",
+    "dose_tested": "Intensive meditation retreat",
+    "sample_size": 3000
+  },
+  {
+    "nct_id": "NCT01701245",
+    "what_tested": "GammaCore (non-invasive vagus nerve stimulator) for both prevention and acute treatment of chronic cluster headache versus standard of care.",
+    "key_result": "GammaCore reduced CH attacks by 7.6 per week versus 2.0 per week with standard of care alone -- a significant improvement. This was one of the more positive CH results for the device.",
+    "verdict": "success",
+    "patient_relevance": "GammaCore showed meaningful benefit for chronic CH prevention in this study -- about 5 fewer attacks per week compared to standard treatment alone.",
+    "dose_tested": "GammaCore non-invasive vagus nerve stimulation",
+    "sample_size": 97
+  },
+  {
+    "nct_id": "NCT00184587",
+    "what_tested": "Candesartan (an angiotensin receptor blocker blood pressure medication) as a preventive treatment for episodic cluster headache.",
+    "key_result": "Completed with 40 participants but no results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "Candesartan has shown some promise for migraine prevention -- if it works for CH too, it would be a cheap, widely available option with fewer side effects than verapamil.",
+    "dose_tested": "Candesartan cilexetil (dose not specified)",
+    "sample_size": 40
+  },
+  {
+    "nct_id": "NCT02247050",
+    "what_tested": "Whether asking primary care doctors to commit to Choosing Wisely guidelines reduces unnecessary imaging tests for headaches.",
+    "key_result": "Completed with 45 clinicians. This was about reducing unnecessary tests, not about CH treatment.",
+    "verdict": "unknown",
+    "patient_relevance": "Not relevant to CH treatment -- this was about healthcare quality improvement for general headache management.",
+    "dose_tested": null,
+    "sample_size": 45
+  },
+  {
+    "nct_id": "NCT02640105",
+    "what_tested": "Studying the relationship between cluster headache, addictive behaviors, and blood vessel function (endothelial function).",
+    "key_result": "Completed with 95 participants. Observational study exploring vascular and addiction links in CH.",
+    "verdict": "unknown",
+    "patient_relevance": "Understanding vascular dysfunction in CH could explain why the condition runs in cycles and may help identify at-risk individuals.",
+    "dose_tested": null,
+    "sample_size": 95
+  },
+  {
+    "nct_id": "NCT04845451",
+    "what_tested": "Whether a neuroma (nerve tumor) of the zygomatic-temporal nerve could be triggering cluster headache, with surgical exploration and removal.",
+    "key_result": "Completed with 5 participants. A highly exploratory study testing a novel theory about CH causation.",
+    "verdict": "unknown",
+    "patient_relevance": "A very unconventional hypothesis -- if a specific nerve tumor triggers CH in some patients, surgery could cure them, but this is highly speculative.",
+    "dose_tested": "Surgical exploration and neuroma resection",
+    "sample_size": 5
+  },
+  {
+    "nct_id": "NCT06841627",
+    "what_tested": "Whether osteopathic manipulative therapy (OMT) changes brain structure and function in primary headache patients, measured by brain imaging.",
+    "key_result": "Completed with 31 participants. This examined brain changes from manual therapy, not CH-specific.",
+    "verdict": "unknown",
+    "patient_relevance": "Osteopathic manipulation is unlikely to treat CH specifically, but understanding how manual therapies affect the pain-processing brain could have broader implications.",
+    "dose_tested": "Osteopathic Manipulative Therapy",
+    "sample_size": 31
+  },
+  {
+    "nct_id": "NCT02310828",
+    "what_tested": "L-cysteine (sold as Acetium capsules) taken daily to prevent or abort cluster headache attacks, based on its ability to neutralize acetaldehyde.",
+    "key_result": "Completed with 60 participants but no results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "L-cysteine is an over-the-counter supplement -- if it works, it would be an accessible and cheap option for CH prevention, but we lack published evidence.",
+    "dose_tested": "L-cysteine (Acetium capsules, daily)",
+    "sample_size": 60
+  },
+  {
+    "nct_id": "NCT00203242",
+    "what_tested": "IV Depacon (valproate) for 2-3 days followed by oral Depakote ER (extended-release valproate) to quickly break a cluster headache cycle.",
+    "key_result": "Average time to achieve 50% reduction in attack frequency or severity was 29.7 days (SD 13.8). This is not impressively fast for a treatment intended to provide rapid relief.",
+    "verdict": "mixed",
+    "patient_relevance": "IV valproate followed by oral Depakote took about a month to halve attack burden -- this is not much faster than standard verapamil titration, limiting its practical advantage.",
+    "dose_tested": "1000mg IV Depacon + 1000mg oral Depakote ER daily, then 500-2000mg Depakote ER maintenance",
+    "sample_size": 15
+  },
+  {
+    "nct_id": "NCT03439722",
+    "what_tested": "Sleep study comparing sleep parameters in episodic cluster headache patients during bouts versus between bouts.",
+    "key_result": "Completed with 66 participants. Observational sleep research.",
+    "verdict": "unknown",
+    "patient_relevance": "Understanding how sleep differs during CH bouts could explain why attacks cluster at night and might lead to sleep-targeted treatments.",
+    "dose_tested": null,
+    "sample_size": 66
+  },
+  {
+    "nct_id": "NCT06816849",
+    "what_tested": "Investigating the role of hydration and fluid intake in children and adolescents with primary headaches.",
+    "key_result": "Completed with 60 participants. Pediatric study, not CH-specific.",
+    "verdict": "unknown",
+    "patient_relevance": "Primarily relevant to pediatric headache -- dehydration is a known headache trigger but this is not specific to cluster headache.",
+    "dose_tested": null,
+    "sample_size": 60
+  },
+  {
+    "nct_id": "NCT07418723",
+    "what_tested": "Personalized psychological intervention (CBT and ACT-based) for adolescents with headaches, delivered in 4-5 online sessions.",
+    "key_result": "Completed with 5 participants. A small single-case experimental design study for pediatric headache.",
+    "verdict": "unknown",
+    "patient_relevance": "Psychological coping skills may help young headache patients but this tiny study is not specifically about CH.",
+    "dose_tested": "4-5 weekly 30-minute online CBT/ACT sessions",
+    "sample_size": 5
+  },
+  {
+    "nct_id": "NCT01898455",
+    "what_tested": "Intranasal cooling (spraying a coolant into the nose to cool blood vessels supplying the brain) for aborting migraine and cluster headache attacks.",
+    "key_result": "Completed with 15 participants (5 with CH). Each patient received 10 treatments of up to 20 minutes. No results posted.",
+    "verdict": "unknown",
+    "patient_relevance": "Cooling the blood vessels in the nose is a creative approach -- if it works, it would be drug-free and fast-acting, but results are unknown.",
+    "dose_tested": "Intranasal evaporative cooling, up to 20 minutes per treatment",
+    "sample_size": 15
+  },
+  {
+    "nct_id": "NCT02381795",
+    "what_tested": "Nasal carbon dioxide (CO2) delivered by a handheld device to abort cluster headache attacks.",
+    "key_result": "Terminated with 10 participants. Average pain reduction was -0.826 on a 0-3 scale (about 28% improvement). No serious adverse events. Study too small for conclusions.",
+    "verdict": "mixed",
+    "patient_relevance": "Nasal CO2 showed modest pain reduction but the study was too small and had no placebo control -- not enough evidence to recommend it for CH.",
+    "dose_tested": "Nasal CO2 at 0.5 standard liters per minute, 10 seconds per nostril, up to 6 doses",
+    "sample_size": 10
+  },
+  {
+    "nct_id": "NCT04983186",
+    "what_tested": "Three-month wearable sensor study using machine learning to predict headache attacks and track stress, sleep, and activity in migraine and cluster headache patients.",
+    "key_result": "Completed with 30 participants. Technology development study.",
+    "verdict": "unknown",
+    "patient_relevance": "Building toward smartwatch-based CH attack prediction -- could eventually enable preemptive treatment if the technology matures.",
+    "dose_tested": null,
+    "sample_size": 30
+  },
+  {
+    "nct_id": "NCT03066037",
+    "what_tested": "Retrospective analysis of regional anesthetic infiltration techniques for chronic pain syndromes including refractory headache.",
+    "key_result": "Completed with 83 participants. Retrospective data analysis of pain scores during treatment.",
+    "verdict": "unknown",
+    "patient_relevance": "Local anesthetic infiltration is used by some pain clinics for refractory CH -- this retrospective data may add to the evidence base.",
+    "dose_tested": "Various regional anaesthesiological infiltration techniques",
+    "sample_size": 83
+  },
+  {
+    "nct_id": "NCT06410872",
+    "what_tested": "Studying risk-taking and decision-making behavior in cluster headache patients to understand potential shared biology with addictive tendencies.",
+    "key_result": "Completed with 140 participants. Behavioral/psychological research.",
+    "verdict": "unknown",
+    "patient_relevance": "CH patients may have different reward-seeking behavior -- understanding this could shed light on shared hypothalamic pathways between CH and addiction.",
+    "dose_tested": null,
+    "sample_size": 140
+  },
+  {
+    "nct_id": "NCT02853487",
+    "what_tested": "Using actigraphy (wrist activity monitors) to study circadian rhythm and attack timing in episodic cluster headache during and between bouts.",
+    "key_result": "Completed with 60 participants. Published research confirmed the strong circadian pattern of CH attacks.",
+    "verdict": "unknown",
+    "patient_relevance": "Confirmed what patients know: CH attacks follow the body clock -- this supports chronotherapy approaches and circadian-based treatments.",
+    "dose_tested": null,
+    "sample_size": 60
+  },
+  {
+    "nct_id": "NCT02619617",
+    "what_tested": "SOM230 (pasireotide), a somatostatin analogue, injected subcutaneously at 1.5mg to abort acute cluster headache attacks versus placebo.",
+    "key_result": "Headache response (pain dropping to mild/none at 30 min): 10 out of treated patients on SOM230 versus 9 on placebo -- essentially no difference. Study terminated.",
+    "verdict": "failure",
+    "patient_relevance": "Pasireotide did not work for aborting CH attacks -- it performed no better than placebo injection.",
+    "dose_tested": "SOM230 (pasireotide) 1.5mg subcutaneous",
+    "sample_size": 28
+  },
+  {
+    "nct_id": "NCT02585739",
+    "what_tested": "Whether a specific gene variant (SPINK-1) is associated with cluster headache, building on earlier genetic findings.",
+    "key_result": "Completed with 42 participants. Genetic association study.",
+    "verdict": "unknown",
+    "patient_relevance": "Finding genetic links to CH could eventually lead to targeted treatments or early identification of at-risk individuals.",
+    "dose_tested": null,
+    "sample_size": 42
+  },
+  {
+    "nct_id": "NCT04439409",
+    "what_tested": "Studying autonomic nervous system variability during cluster headache attacks to determine if autonomic dysfunction triggers or results from attacks.",
+    "key_result": "Terminated with 19 participants.",
+    "verdict": "terminated",
+    "patient_relevance": "Understanding whether autonomic dysfunction causes or follows CH attacks is fundamental -- but this study was terminated before answering the question.",
+    "dose_tested": null,
+    "sample_size": 19
+  },
+  {
+    "nct_id": "NCT01406860",
+    "what_tested": "Comparing droperidol versus metoclopramide + diphenhydramine for emergency department treatment of primary headaches.",
+    "key_result": "Terminated with 19 participants. Results section exists but contains no actual pain score data. Not CH-specific.",
+    "verdict": "terminated",
+    "patient_relevance": "Not specifically relevant to CH -- this was about ER headache treatment in general and was terminated early.",
+    "dose_tested": "Droperidol vs metoclopramide + diphenhydramine",
+    "sample_size": 19
+  }
+]
