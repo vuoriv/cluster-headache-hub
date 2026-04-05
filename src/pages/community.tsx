@@ -77,7 +77,7 @@ export function CommunityPage() {
       result = result.filter((g) => g.platform === platformFilter)
     }
     return result
-  }, [regionFilter, platformFilter])
+  }, [groups, regionFilter, platformFilter])
 
   // Group by region for display
   const grouped = useMemo(() => {
