@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update": "python3 scripts/update-all.py",
+    "update:analyze": "python3 scripts/update-all.py --skip-fetch"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.2.8",
