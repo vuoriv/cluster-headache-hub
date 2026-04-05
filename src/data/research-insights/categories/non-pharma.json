@@ -239,7 +239,7 @@
       "evidence_tier": 1
     }
   ],
-  "active_trial_list": [
+  "all_trials": [
     {
       "nct_id": "NCT06540651",
       "title": "Efficacy of Light Therapy in Treatment of Chronic Cluster Headache",
@@ -248,7 +248,12 @@
         "NA"
       ],
       "sponsor": "Assistance Publique Hopitaux De Marseille",
-      "enrollment": 48
+      "enrollment": 48,
+      "what_tested": "Light therapy (bright light delivered via consumer device) as a preventive treatment for chronic cluster headache, based on CH being a circadian rhythm disorder.",
+      "key_result": "Recruiting 48 participants, expected completion February 2027.",
+      "verdict": "ongoing",
+      "patient_relevance": "If light therapy helps reset the circadian rhythm disruption in CH, it would be a simple, side-effect-free addition to treatment -- especially for patients with seasonal patterns.",
+      "dose_tested": "Light therapy via consumer device"
     },
     {
       "nct_id": "NCT07292090",
@@ -258,7 +263,12 @@
         "NA"
       ],
       "sponsor": "Karolinska Institutet",
-      "enrollment": 40
+      "enrollment": 40,
+      "what_tested": "Web-based or face-to-face yoga-based movement program as a complementary treatment for migraine and/or cluster headache, focusing on sleep quality and mental health.",
+      "key_result": "Recruiting 40 participants, expected completion May 2026. This is a pilot feasibility study, not primarily CH-specific.",
+      "verdict": "ongoing",
+      "patient_relevance": "Yoga may help with sleep and wellbeing for CH patients, but this is a feasibility study focused mainly on migraine -- do not expect breakthrough CH results.",
+      "dose_tested": "Web-based or in-person yoga program"
     },
     {
       "nct_id": "NCT07348783",
@@ -268,7 +278,41 @@
         "NA"
       ],
       "sponsor": "Karolinska Institutet",
-      "enrollment": 80
+      "enrollment": 80,
+      "what_tested": "Randomized controlled trial of web-based or face-to-face yoga for migraine and/or cluster headache versus conventional treatment.",
+      "key_result": "Not yet recruiting, expected to start March 2026 with 80 participants. This is the full RCT following the pilot study.",
+      "verdict": "ongoing",
+      "patient_relevance": "If yoga significantly improves quality of life for CH patients, it could be a low-risk complementary approach -- but this is mainly a migraine study.",
+      "dose_tested": "Web-based or face-to-face yoga program"
+    },
+    {
+      "nct_id": "NCT03010189",
+      "title": "Actigraphy and Nocturnal Heartrate Variability in Cluster Headache Patients",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Nordlandssykehuset HF",
+      "enrollment": 20,
+      "what_tested": "Using actigraphy (wrist activity monitors) and heart rate variability to study the relationship between sleep, autonomic nervous system function, and cluster headache attacks.",
+      "key_result": "Completed with 20 participants but no results posted. This was an observational study comparing bout and remission phases.",
+      "verdict": "unknown",
+      "patient_relevance": "Understanding the sleep-autonomic-headache connection could lead to better timing of preventive medications or sleep-based interventions.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT06138171",
+      "title": "Personality, Defences, Central Sensitization, and Trauma in Women With Chronic Migraine, Fibromyalgia, and Vulvodynia",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "University of Roma La Sapienza",
+      "enrollment": 1006,
+      "what_tested": "Studying psychological factors (personality traits, defense mechanisms, trauma history) in women with chronic migraine, fibromyalgia, and vulvodynia.",
+      "key_result": "Completed with 1,006 participants. This was not a cluster headache study.",
+      "verdict": "unknown",
+      "patient_relevance": "Not directly relevant to CH -- this studied psychological factors in other chronic pain conditions.",
+      "dose_tested": null
     }
-  ]
+  ],
+  "active_trial_count": 3
 }

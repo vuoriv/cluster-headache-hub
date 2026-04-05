@@ -234,7 +234,23 @@
       "evidence_tier": 1
     }
   ],
-  "active_trial_list": [
+  "all_trials": [
+    {
+      "nct_id": "NCT02462395",
+      "title": "Anodal Transcranial Direct Stimulation (tDCS) for the Treatment of Chronic Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "sponsor": "University of Liege",
+      "enrollment": 32,
+      "what_tested": "Transcranial direct current stimulation (tDCS) -- a gentle electrical brain stimulation applied to the forehead -- as a preventive treatment for chronic cluster headache.",
+      "key_result": "Completed with 32 participants but no results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "tDCS is non-invasive and could be done at home if effective -- but without published results we cannot know if it helps CH.",
+      "dose_tested": "Anodal transcranial direct current stimulation"
+    },
     {
       "nct_id": "NCT06277063",
       "title": "nVNS for the Prevention and Treatment of Primary Headache",
@@ -243,7 +259,12 @@
         "NA"
       ],
       "sponsor": "Nanfang Hospital, Southern Medical University",
-      "enrollment": 15
+      "enrollment": 15,
+      "what_tested": "Non-invasive vagus nerve stimulation (nVNS) for acute treatment of primary headache in children and adolescents aged 7-20.",
+      "key_result": "Recruiting 15 participants, expected completion August 2026. This is primarily a migraine study in young patients, not specifically CH.",
+      "verdict": "ongoing",
+      "patient_relevance": "Mostly relevant to pediatric migraine, but could provide some data on vagus nerve stimulation in young headache patients generally.",
+      "dose_tested": "Non-invasive vagus nerve stimulation via ear-mounted device"
     },
     {
       "nct_id": "NCT05868044",
@@ -253,7 +274,129 @@
         "NA"
       ],
       "sponsor": "Salvia BioElectronics",
-      "enrollment": 5
+      "enrollment": 5,
+      "what_tested": "The PRIMUS system combining supraorbital nerve stimulation (SONS) and occipital nerve stimulation (ONS) for chronic cluster headache -- a first-in-human study.",
+      "key_result": "Active but no longer recruiting, with 5 participants. Expected completion April 2024.",
+      "verdict": "ongoing",
+      "patient_relevance": "A novel dual-site stimulation system that may work better than stimulating just one nerve -- very early stage with only 5 patients.",
+      "dose_tested": "PRIMUS combined SONS + ONS neurostimulation system"
+    },
+    {
+      "nct_id": "NCT01958125",
+      "title": "A Randomized Multicentre Study for the Acute Relief of Episodic and Chronic Cluster Headache.",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "ElectroCore INC",
+      "enrollment": 102,
+      "what_tested": "GammaCore (non-invasive vagus nerve stimulator) applied to the neck versus sham device for aborting acute cluster headache attacks.",
+      "key_result": "GammaCore showed 67 pain-free attacks out of 495 treated (13.5%) versus 46 out of 400 for sham (11.5%). The difference was modest and this trial had mixed results across episodic and chronic subtypes.",
+      "verdict": "mixed",
+      "patient_relevance": "GammaCore showed a small benefit for acute CH attacks overall, but the advantage over sham was not dramatic -- it works better for episodic than chronic CH.",
+      "dose_tested": "GammaCore non-invasive vagus nerve stimulation device"
+    },
+    {
+      "nct_id": "NCT01792817",
+      "title": "Non-invasive Neurostimulation of the Vagus Nerve for the Treatment of Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "ElectroCore INC",
+      "enrollment": 150,
+      "what_tested": "GammaCore (non-invasive vagus nerve stimulator) versus sham for acute treatment of cluster headache -- the pivotal regulatory trial.",
+      "key_result": "16 of 44 GammaCore patients (36%) were responders versus 14 of 57 sham patients (25%). In the episodic CH subgroup, response rate was significantly higher with GammaCore (48% vs 6%). Chronic CH showed no significant difference.",
+      "verdict": "mixed",
+      "patient_relevance": "GammaCore works for aborting episodic CH attacks but NOT for chronic CH -- it is now FDA-cleared based partly on this data, but benefit is limited to episodic patients.",
+      "dose_tested": "GammaCore non-invasive vagus nerve stimulation"
+    },
+    {
+      "nct_id": "NCT06917144",
+      "title": "Refractory Chronic Cluster Headache: Exploring the Potential of Repetitive Transcranial Magnetic Stimulation",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Hospital Universitario La Paz",
+      "enrollment": 8,
+      "what_tested": "Repetitive transcranial magnetic stimulation (rTMS) versus sham stimulation for refractory chronic cluster headache -- 10 sessions over 2 weeks in a crossover design.",
+      "key_result": "Completed with 8 participants but no results posted. Very small pilot study.",
+      "verdict": "unknown",
+      "patient_relevance": "TMS is non-invasive and already used for depression -- if it works for refractory CH, it could help the hardest-to-treat patients, but this was very small.",
+      "dose_tested": "rTMS for 10 minutes, 10 consecutive working days"
+    },
+    {
+      "nct_id": "NCT00662935",
+      "title": "Evaluation of Efficacity and Safety of Deep Brain Stimulation (DBS) in Chronic and Treatment-Resistant Cluster Headache(CH)",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Centre Hospitalier Universitaire de Nice",
+      "enrollment": 12,
+      "what_tested": "Deep brain stimulation (DBS) with electrodes implanted in the posterior hypothalamus for treatment-resistant chronic cluster headache, in a crossover design with stimulation on vs off.",
+      "key_result": "Completed with 12 participants but no results posted. Efficacy defined as 50% or more reduction in weekly attacks.",
+      "verdict": "unknown",
+      "patient_relevance": "DBS is an extreme last-resort treatment requiring brain surgery -- it is only for patients who have failed everything else, and results from this controlled study would be very informative.",
+      "dose_tested": "Deep brain stimulation of posterior-inferior hypothalamus"
+    },
+    {
+      "nct_id": "NCT00329836",
+      "title": "A Research Study to Examine Cutaneous Allodynia and Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "Thomas Jefferson University",
+      "enrollment": 41,
+      "what_tested": "Whether cluster headache patients experience cutaneous allodynia (pain from normally non-painful touch) during and between attacks.",
+      "key_result": "20 out of 41 CH patients showed allodynia (about 49%), demonstrating that nearly half of CH patients have abnormal pain sensitivity on the skin.",
+      "verdict": "success",
+      "patient_relevance": "Nearly half of CH patients have skin sensitivity (allodynia) -- this suggests central sensitization occurs in CH, similar to migraine, which could affect treatment choices.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT02782533",
+      "title": "DBS of the Third Ventricle for Cluster Headache and Obesity",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "University Hospital, Grenoble",
+      "enrollment": 13,
+      "what_tested": "Deep brain stimulation of the third ventricle area for both chronic cluster headache and obesity -- exploring shared hypothalamic pathways.",
+      "key_result": "Completed with 13 participants but no results posted. Study ran for over 10 years.",
+      "verdict": "unknown",
+      "patient_relevance": "An unusual study targeting a different brain area than typical DBS for CH -- results could reveal connections between CH and metabolic regulation.",
+      "dose_tested": "Deep brain stimulation of the third ventricle"
+    },
+    {
+      "nct_id": "NCT01395264",
+      "title": "Saccadometry in Primary Headache Syndromes",
+      "status": "TERMINATED",
+      "phase": [],
+      "sponsor": "Tim Young",
+      "enrollment": 42,
+      "what_tested": "Whether eye-tracking measurements (saccadometry) show differences in brain function between migraine, cluster headache, and healthy people.",
+      "key_result": "Terminated after enrolling 42 participants. This was a diagnostic/mechanism study, not a treatment trial.",
+      "verdict": "terminated",
+      "patient_relevance": "An attempt to find brain function differences in CH using eye-tracking -- terminated before completion, so no useful conclusions.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT00458770",
+      "title": "Study of Hypothalamic Metabolism in Spontaneous Cluster Headache Attacks",
+      "status": "TERMINATED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Assistance Publique Hopitaux De Marseille",
+      "enrollment": 1,
+      "what_tested": "Brain imaging (PET scan) study to precisely locate hypothalamic activation during spontaneous cluster headache attacks.",
+      "key_result": "Terminated after enrolling only 1 participant. Capturing a spontaneous attack during a brain scan is extremely difficult.",
+      "verdict": "terminated",
+      "patient_relevance": "The hypothalamus is believed to be the \"generator\" of CH -- but imaging attacks in real-time proved nearly impossible in this study.",
+      "dose_tested": null
     }
-  ]
+  ],
+  "active_trial_count": 2
 }

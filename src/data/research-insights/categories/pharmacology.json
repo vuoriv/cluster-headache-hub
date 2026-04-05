@@ -242,7 +242,7 @@
       "evidence_tier": 1
     }
   ],
-  "active_trial_list": [
+  "all_trials": [
     {
       "nct_id": "NCT05324748",
       "title": "Repeated GON Injections in CCH",
@@ -251,7 +251,12 @@
         "PHASE3"
       ],
       "sponsor": "Leiden University Medical Center",
-      "enrollment": 50
+      "enrollment": 50,
+      "what_tested": "Repeated greater occipital nerve (GON) steroid injections versus placebo as a preventive treatment for chronic cluster headache.",
+      "key_result": "Still recruiting 50 participants, expected completion December 2025.",
+      "verdict": "ongoing",
+      "patient_relevance": "GON injections are already used by many headache specialists -- this trial will finally tell us if repeated injections provide lasting benefit for chronic CH.",
+      "dose_tested": "Repeated GON injections (steroid, specific agent not detailed)"
     },
     {
       "nct_id": "NCT06950281",
@@ -261,7 +266,12 @@
         "PHASE2"
       ],
       "sponsor": "Leiden University Medical Center",
-      "enrollment": 52
+      "enrollment": 52,
+      "what_tested": "Low sodium oxybate (Xywav), a sleep medication, taken twice nightly to prevent nocturnal cluster headache attacks in chronic CH.",
+      "key_result": "Not yet recruiting, expected to start January 2026 with 52 participants.",
+      "verdict": "ongoing",
+      "patient_relevance": "Many CH attacks happen at night -- a medication that both improves sleep and prevents nocturnal attacks could be very valuable for CH patients.",
+      "dose_tested": "Low sodium oxybate (Xywav) twice nightly"
     },
     {
       "nct_id": "NCT07113470",
@@ -271,7 +281,28 @@
         "NA"
       ],
       "sponsor": "Salvia BioElectronics",
-      "enrollment": 10
+      "enrollment": 10,
+      "what_tested": "The PRIMUS system combining trigeminal and occipital nerve stimulation for preventing chronic cluster headache in patients who failed verapamil.",
+      "key_result": "Recruiting 10 participants at two centers in the Netherlands, expected completion April 2027.",
+      "verdict": "ongoing",
+      "patient_relevance": "A next-generation neurostimulation device for CH patients who cannot tolerate verapamil -- still very early stage.",
+      "dose_tested": "PRIMUS combined trigeminal + occipital nerve stimulation"
+    },
+    {
+      "nct_id": "NCT00804895",
+      "title": "Cluster Headache Cortivazol Injection (CHCI)",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "sponsor": "Assistance Publique - H\u00f4pitaux de Paris",
+      "enrollment": 43,
+      "what_tested": "Cortivazol (a corticosteroid) injected at the greater occipital nerve as an add-on to verapamil for preventing cluster headache attacks.",
+      "key_result": "Completed with 43 participants but no results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "Steroid injections at the greater occipital nerve are widely used for CH -- this study tested whether they add benefit to verapamil.",
+      "dose_tested": "Cortivazol injection at greater occipital nerve + oral verapamil"
     },
     {
       "nct_id": "NCT04406259",
@@ -281,7 +312,58 @@
         "PHASE4"
       ],
       "sponsor": "Centre Hospitalier Universitaire de Nice",
-      "enrollment": 60
+      "enrollment": 60,
+      "what_tested": "Monitoring the cardiac side effects (specifically heart block) of high-dose verapamil, the standard first-line preventive for cluster headache.",
+      "key_result": "Active but no longer recruiting, with 60 participants. Expected completion September 2025.",
+      "verdict": "ongoing",
+      "patient_relevance": "Verapamil can cause dangerous heart rhythm problems at the high doses needed for CH -- this study quantifies that risk and could lead to better monitoring guidelines.",
+      "dose_tested": "Verapamil at CH treatment doses (higher than cardiology doses)"
+    },
+    {
+      "nct_id": "NCT02209155",
+      "title": "R-Verapamil for the Prophylaxis of Episodic Cluster Headache",
+      "status": "TERMINATED",
+      "phase": [
+        "PHASE2"
+      ],
+      "sponsor": "Center Laboratories, Inc.",
+      "enrollment": 1,
+      "what_tested": "R-verapamil (the right-handed version of the molecule, which may have fewer heart side effects) for preventing episodic cluster headache.",
+      "key_result": "Terminated after enrolling only 1 participant out of planned enrollment. The study effectively failed to recruit.",
+      "verdict": "terminated",
+      "patient_relevance": "A safer version of verapamil would be very welcome for CH patients, but this trial never got enough participants to test the idea.",
+      "dose_tested": "R-verapamil (specific dose not stated)"
+    },
+    {
+      "nct_id": "NCT04014634",
+      "title": "GON-injection for a Sooner and Better Treatment of Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE4"
+      ],
+      "sponsor": "Leiden University Medical Center",
+      "enrollment": 70,
+      "what_tested": "Greater occipital nerve (GON) steroid injection as a FIRST-LINE preventive treatment for episodic cluster headache, potentially replacing the need for verapamil.",
+      "key_result": "Completed with 70 participants but no results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "If GON injection works as well as verapamil for starting a new cluster period, patients could avoid weeks of pill-taking and cardiac monitoring -- results eagerly awaited.",
+      "dose_tested": "GON steroid injection as first-line prophylaxis"
+    },
+    {
+      "nct_id": "NCT00203190",
+      "title": "A Double-Blind, Placebo-Controlled Study Examining the Use of Topiramate in the Treatment of Cluster Headache",
+      "status": "TERMINATED",
+      "phase": [
+        "PHASE4"
+      ],
+      "sponsor": "Thomas Jefferson University",
+      "enrollment": 60,
+      "what_tested": "Topiramate (Topamax), an anti-seizure medication, rapidly titrated to try to shorten cluster periods and prevent attacks.",
+      "key_result": "Terminated with 60 participants enrolled but no results posted.",
+      "verdict": "terminated",
+      "patient_relevance": "Topiramate is sometimes used off-label for CH, but this controlled trial was terminated without providing clear evidence either way.",
+      "dose_tested": "Topiramate (Topamax), rapid titration"
     }
-  ]
+  ],
+  "active_trial_count": 4
 }

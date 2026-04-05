@@ -29,10 +29,13 @@ interface CategoryData {
     journal: string; study_type: string; result: string
     sample_size: number | null; evidence_tier: number
   }>
-  active_trial_list: Array<{
+  all_trials: Array<{
     nct_id: string; title: string; status: string
     phase: string[]; sponsor: string; enrollment: number | null
+    what_tested?: string; key_result?: string; verdict?: string
+    patient_relevance?: string; dose_tested?: string | null
   }>
+  active_trial_count: number
 }
 
 function getCategoryData(slug: string): CategoryData | null {
@@ -72,6 +75,15 @@ const RESULT_COLORS: Record<string, string> = {
   mixed: "var(--chart-3)",
   inconclusive: "var(--chart-9)",
   unknown: "var(--muted-foreground)",
+}
+
+const VERDICT_CONFIG: Record<string, { label: string; variant: "success" | "destructive" | "warning" | "info" | "secondary" | "outline" }> = {
+  success: { label: "Succeeded", variant: "success" },
+  failure: { label: "Failed", variant: "destructive" },
+  mixed: { label: "Mixed", variant: "warning" },
+  ongoing: { label: "Ongoing", variant: "info" },
+  terminated: { label: "Terminated", variant: "secondary" },
+  unknown: { label: "No Results", variant: "outline" },
 }
 
 const chartConfig: ChartConfig = {
@@ -258,36 +270,63 @@ export function CategoryPage() {
         </div>
       )}
 
-      {/* Active Trials */}
-      {data.active_trial_list.length > 0 && (
+      {/* All Trials with Analysis */}
+      {data.all_trials.length > 0 && (
         <>
           <Separator />
           <div>
-            <h3 className="mb-4 text-lg font-semibold">Active Clinical Trials</h3>
+            <h3 className="mb-2 text-lg font-semibold">Clinical Trials</h3>
             <p className="mb-4 text-xs text-muted-foreground">
-              Currently recruiting or active trials in this category.
+              {data.all_trials.length} trials in this category — what was tested, what happened, and what's coming.
             </p>
-            <div className="flex flex-col gap-2">
-              {data.active_trial_list.map((t) => {
+            <div className="flex flex-col gap-3">
+              {data.all_trials.map((t) => {
                 const statCfg = STATUS_CONFIG[t.status]
+                const verdictCfg = VERDICT_CONFIG[t.verdict ?? "unknown"]
                 return (
                   <Card key={t.nct_id} className="hover:shadow-sm transition-all">
-                    <CardContent className="py-3">
-                      <h4 className="text-sm font-medium leading-snug">{t.title}</h4>
-                      <p className="mt-1 text-xs text-muted-foreground">{t.sponsor}</p>
-                      <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                        {statCfg && <Badge variant={statCfg.variant} className="text-[0.6rem]">{statCfg.label}</Badge>}
-                        <Badge variant="outline" className="text-[0.6rem]">{phaseLabel(t.phase)}</Badge>
-                        {t.enrollment && <span className="text-[0.6rem] text-muted-foreground">n={t.enrollment}</span>}
+                    <CardContent className="py-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <h4 className="text-sm font-semibold leading-snug">{t.title}</h4>
                         <a
                           href={`https://clinicaltrials.gov/study/${t.nct_id}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="ml-auto text-[0.6rem] text-primary hover:underline"
+                          className="shrink-0 text-muted-foreground hover:text-primary"
                         >
-                          View trial
+                          <ExternalLink className="size-3.5" />
                         </a>
                       </div>
+                      <p className="mt-1 text-xs text-muted-foreground">{t.sponsor}</p>
+
+                      <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                        {statCfg && <Badge variant={statCfg.variant} className="text-[0.6rem]">{statCfg.label}</Badge>}
+                        {verdictCfg && <Badge variant={verdictCfg.variant} className="text-[0.6rem]">{verdictCfg.label}</Badge>}
+                        <Badge variant="outline" className="text-[0.6rem]">{phaseLabel(t.phase)}</Badge>
+                        {t.enrollment && <span className="text-[0.6rem] text-muted-foreground">n={t.enrollment}</span>}
+                        {t.dose_tested && <Badge variant="outline" className="text-[0.6rem]">{t.dose_tested}</Badge>}
+                      </div>
+
+                      {t.what_tested && (
+                        <div className="mt-3 rounded-md bg-muted/40 p-3">
+                          <p className="text-xs leading-relaxed">
+                            <span className="font-medium">What was tested: </span>
+                            <span className="text-muted-foreground">{t.what_tested}</span>
+                          </p>
+                          {t.key_result && (
+                            <p className="mt-1.5 text-xs leading-relaxed">
+                              <span className="font-medium">Result: </span>
+                              <span className="text-muted-foreground">{t.key_result}</span>
+                            </p>
+                          )}
+                          {t.patient_relevance && (
+                            <p className="mt-1.5 text-xs leading-relaxed">
+                              <span className="font-medium">For patients: </span>
+                              <span className="text-muted-foreground">{t.patient_relevance}</span>
+                            </p>
+                          )}
+                        </div>
+                      )}
                     </CardContent>
                   </Card>
                 )

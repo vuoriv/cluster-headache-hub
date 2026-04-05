@@ -239,14 +239,19 @@
       "evidence_tier": 1
     }
   ],
-  "active_trial_list": [
+  "all_trials": [
     {
       "nct_id": "NCT04939922",
       "title": "China Headache and Vertigo Registry Study",
       "status": "RECRUITING",
       "phase": [],
       "sponsor": "Second Affiliated Hospital, School of Medicine, Zhejiang University",
-      "enrollment": 10000
+      "enrollment": 10000,
+      "what_tested": "A massive long-term registry collecting clinical data, biomarkers, imaging, genetics, and treatment outcomes for headache and vertigo patients in China.",
+      "key_result": "Recruiting, with 10,000 participants enrolled. Runs until 2050.",
+      "verdict": "ongoing",
+      "patient_relevance": "This huge database may eventually reveal patterns about CH that smaller studies miss, but it is a data collection effort, not testing a treatment.",
+      "dose_tested": null
     },
     {
       "nct_id": "NCT02910323",
@@ -254,7 +259,121 @@
       "status": "RECRUITING",
       "phase": [],
       "sponsor": "The University of Texas Health Science Center, Houston",
-      "enrollment": 1500
+      "enrollment": 1500,
+      "what_tested": "A long-term observational research network collecting data on cluster headache and trigeminal neuralgia patients at the Will Erwin Headache Research Center.",
+      "key_result": "Recruiting, with 1,500 participants. Runs until 2035.",
+      "verdict": "ongoing",
+      "patient_relevance": "This US-based research network is building the largest CH patient database -- it supports multiple sub-studies and could accelerate treatment discoveries.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT06011811",
+      "title": "Cluster Headache Treatment Survey",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "The University of Texas Health Science Center, Houston",
+      "enrollment": 2487,
+      "what_tested": "A large online survey asking CH patients about treatment effectiveness and their views on various treatments.",
+      "key_result": "Completed with 2,487 participants -- one of the largest CH surveys ever conducted.",
+      "verdict": "unknown",
+      "patient_relevance": "Patient-reported data on what actually works in real life -- this survey captures the CH community's experience with treatments, complementing clinical trial data.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT05153876",
+      "title": "An Open Internet-based Survey and Natural Language Processing Project Analysing Written Monologues by Headache Patients",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "University Hospital, Ghent",
+      "enrollment": 1150,
+      "what_tested": "Using natural language processing (AI) to analyze how headache patients describe their condition in writing, to potentially improve diagnosis.",
+      "key_result": "Completed with 1,150 participants.",
+      "verdict": "unknown",
+      "patient_relevance": "AI analysis of patient descriptions could someday help diagnose CH faster -- the average CH patient waits years for a correct diagnosis.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT01447641",
+      "title": "Sleep, Circadian Rhythms and Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "University of Surrey",
+      "enrollment": 8,
+      "what_tested": "Detailed study of sleep patterns and circadian (24-hour body clock) rhythms in episodic cluster headache patients, comparing in-bout versus out-of-bout phases.",
+      "key_result": "Completed with 8 participants. Very small but detailed physiological study.",
+      "verdict": "unknown",
+      "patient_relevance": "CH attacks follow circadian patterns -- understanding the sleep and body-clock changes could lead to chronotherapy (timing-based treatment) approaches.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT03244735",
+      "title": "Efficacy of Modified Atkins Ketogenic Diet in Chronic Cluster Headache: a Prospective Case Series",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "University of Roma La Sapienza",
+      "enrollment": 18,
+      "what_tested": "Modified Atkins ketogenic diet (very low carbohydrate) as a treatment for chronic cluster headache, based on its success in epilepsy and preliminary migraine data.",
+      "key_result": "Completed with 18 participants. No formal results posted, but published research from this group showed encouraging reductions in attack frequency.",
+      "verdict": "unknown",
+      "patient_relevance": "The ketogenic diet is something patients can try on their own -- early signals suggest it may help some CH patients, possibly through anti-inflammatory effects.",
+      "dose_tested": "Modified Atkins ketogenic diet (carbohydrate restriction)"
+    },
+    {
+      "nct_id": "NCT05536635",
+      "title": "Effect of Breathing Techniques on Migraine Attacks and Severity",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Dokuz Eylul University",
+      "enrollment": 86,
+      "what_tested": "Whether breathing techniques can reduce migraine attack frequency and severity when added to standard medication.",
+      "key_result": "Completed with 86 participants. This was a migraine study, not a cluster headache study.",
+      "verdict": "unknown",
+      "patient_relevance": "Not directly relevant to CH -- breathing techniques were tested for migraine only.",
+      "dose_tested": "Breathing techniques as add-on to migraine medication"
+    },
+    {
+      "nct_id": "NCT04949204",
+      "title": "Context-awareness, Physiological Monitoring, and Machine Learning in Migraine and Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "University Hospital, Ghent",
+      "enrollment": 19,
+      "what_tested": "Using wearable sensors and machine learning to detect stress, behavior changes, and predict headache attacks in migraine and cluster headache patients.",
+      "key_result": "Completed with 19 participants. Pilot study for wearable-based headache prediction.",
+      "verdict": "unknown",
+      "patient_relevance": "If a smartwatch could predict an incoming CH attack, patients could treat preemptively -- this pilot explored whether that is technically feasible.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT02392273",
+      "title": "A Prospective Observational Registry of Primary Headache Patients Treated With Ausanil",
+      "status": "TERMINATED",
+      "phase": [],
+      "sponsor": "VR1 Corporation",
+      "enrollment": 20,
+      "what_tested": "Ausanil (an intranasal product) for primary headache disorders including cluster headache -- an observational safety and tolerability registry.",
+      "key_result": "Terminated with 20 participants. No results posted.",
+      "verdict": "terminated",
+      "patient_relevance": "Ausanil was a commercial nasal product marketed for headache relief -- this registry was terminated and the treatment has not gained traction.",
+      "dose_tested": "Ausanil intranasal product"
+    },
+    {
+      "nct_id": "NCT06583395",
+      "title": "Quest to Analyze One Thousand Humans Meditating",
+      "status": "ENROLLING_BY_INVITATION",
+      "phase": [],
+      "sponsor": "Tobias Moeller-Bertram",
+      "enrollment": 3000,
+      "what_tested": "Studying molecular, physiological, and emotional effects of intensive meditation in a large group including both healthy people and chronic pain patients.",
+      "key_result": "Enrolling by invitation with 3,000 participants. Not specific to CH.",
+      "verdict": "ongoing",
+      "patient_relevance": "Meditation may have general benefits for chronic pain sufferers, but this is not a CH-specific study.",
+      "dose_tested": "Intensive meditation retreat"
     }
-  ]
+  ],
+  "active_trial_count": 2
 }

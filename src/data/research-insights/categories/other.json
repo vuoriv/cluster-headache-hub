@@ -273,7 +273,68 @@
       "evidence_tier": 1
     }
   ],
-  "active_trial_list": [
+  "all_trials": [
+    {
+      "nct_id": "NCT00069082",
+      "title": "Intranasal Civamide for Episodic Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "Winston Laboratories",
+      "enrollment": 2,
+      "what_tested": "Intranasal civamide (zucapsaicin), a capsaicin-related compound, as a preventive nasal spray for episodic cluster headache.",
+      "key_result": "Completed with only 2 participants out of planned enrollment. Effectively failed to recruit.",
+      "verdict": "terminated",
+      "patient_relevance": "A capsaicin-like nasal spray could theoretically desensitize the trigeminal nerve, but this study was far too small to tell us anything.",
+      "dose_tested": "Intranasal civamide (zucapsaicin) nasal solution"
+    },
+    {
+      "nct_id": "NCT04066023",
+      "title": "Double-Blind Comparison of the Efficacy and Safety of C213 to Placebo for the Acute Treatment of Cluster Headaches",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "sponsor": "Zosano Pharma Corporation",
+      "enrollment": 42,
+      "what_tested": "A zolmitriptan microneedle skin patch (C213) applied during acute cluster headache attacks versus placebo, at 1.9mg and 3.8mg doses.",
+      "key_result": "Pain relief at 15 minutes: placebo 3 patients, C213 1.9mg 5 patients, C213 3.8mg 5 patients. Sustained pain relief was similarly close across groups. With only 42 total participants and small numbers per group, no clear separation from placebo.",
+      "verdict": "failure",
+      "patient_relevance": "A needle-free triptan skin patch would be convenient, but this small study did not show a clear advantage over placebo for aborting CH attacks.",
+      "dose_tested": "Zolmitriptan 1.9mg and 3.8mg microneedle patch (C213)"
+    },
+    {
+      "nct_id": "NCT00356603",
+      "title": "Study Of Sumatriptan Succinate Injection Kit In Patients With Migraine or Cluster Headache In Japan",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "GlaxoSmithKline",
+      "enrollment": 75,
+      "what_tested": "Self-injection of sumatriptan 3mg (half the standard Western dose) for aborting migraine and cluster headache attacks in Japan.",
+      "key_result": "93.9% of cluster headache patients achieved headache relief at 30 minutes post-injection. This was a non-comparative study confirming self-injection feasibility in Japan.",
+      "verdict": "success",
+      "patient_relevance": "Sumatriptan injection remains one of the most effective acute CH treatments -- even at the lower 3mg dose used in Japan, it works in over 90% of attacks.",
+      "dose_tested": "Sumatriptan 3mg self-injection kit"
+    },
+    {
+      "nct_id": "NCT00033839",
+      "title": "A Phase III Study of Civamide Nasal Solution (Zucapsaicin) for the Treatment of Episodic Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "Winston Laboratories",
+      "enrollment": 60,
+      "what_tested": "Intranasal civamide (zucapsaicin) nasal solution versus placebo for treating episodic cluster headache over 49 days.",
+      "key_result": "Completed with 60 participants but no results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "The larger of two civamide studies for CH -- capsaicin-based nasal sprays remain an unproven but theoretically interesting approach.",
+      "dose_tested": "Intranasal civamide (zucapsaicin)"
+    },
     {
       "nct_id": "NCT06200480",
       "title": "Nurse Intervention Trial",
@@ -282,7 +343,12 @@
         "NA"
       ],
       "sponsor": "Norwegian University of Science and Technology",
-      "enrollment": 400
+      "enrollment": 400,
+      "what_tested": "A nurse-led telephone follow-up program for headache patients starting preventive treatment, compared to standard GP follow-up.",
+      "key_result": "Recruiting 400 participants, expected completion December 2026.",
+      "verdict": "ongoing",
+      "patient_relevance": "Better follow-up could improve how well patients stick with their CH preventive medications -- not a drug trial but could improve care quality.",
+      "dose_tested": null
     },
     {
       "nct_id": "NCT05978258",
@@ -290,7 +356,314 @@
       "status": "NOT_YET_RECRUITING",
       "phase": [],
       "sponsor": "Power Life Sciences Inc.",
-      "enrollment": 500
+      "enrollment": 500,
+      "what_tested": "A survey studying barriers to clinical trial participation among cluster headache patients, particularly in underrepresented demographic groups.",
+      "key_result": "Not yet recruiting, planned for 500 participants.",
+      "verdict": "ongoing",
+      "patient_relevance": "CH trials often struggle to recruit enough patients -- understanding barriers could make future trials faster and more inclusive.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT01701245",
+      "title": "Prevention and Acute Treatment of Chronic Cluster Headache Compared to Standard of Care",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE2"
+      ],
+      "sponsor": "ElectroCore INC",
+      "enrollment": 97,
+      "what_tested": "GammaCore (non-invasive vagus nerve stimulator) for both prevention and acute treatment of chronic cluster headache versus standard of care.",
+      "key_result": "GammaCore reduced CH attacks by 7.6 per week versus 2.0 per week with standard of care alone -- a significant improvement. This was one of the more positive CH results for the device.",
+      "verdict": "success",
+      "patient_relevance": "GammaCore showed meaningful benefit for chronic CH prevention in this study -- about 5 fewer attacks per week compared to standard treatment alone.",
+      "dose_tested": "GammaCore non-invasive vagus nerve stimulation"
+    },
+    {
+      "nct_id": "NCT00184587",
+      "title": "Prophylactic Treatment of Episodic Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE2"
+      ],
+      "sponsor": "Norwegian University of Science and Technology",
+      "enrollment": 40,
+      "what_tested": "Candesartan (an angiotensin receptor blocker blood pressure medication) as a preventive treatment for episodic cluster headache.",
+      "key_result": "Completed with 40 participants but no results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "Candesartan has shown some promise for migraine prevention -- if it works for CH too, it would be a cheap, widely available option with fewer side effects than verapamil.",
+      "dose_tested": "Candesartan cilexetil (dose not specified)"
+    },
+    {
+      "nct_id": "NCT02247050",
+      "title": "Primary Care Clinician Commitments to Choosing Wisely\u00ae",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "University of Michigan",
+      "enrollment": 45,
+      "what_tested": "Whether asking primary care doctors to commit to Choosing Wisely guidelines reduces unnecessary imaging tests for headaches.",
+      "key_result": "Completed with 45 clinicians. This was about reducing unnecessary tests, not about CH treatment.",
+      "verdict": "unknown",
+      "patient_relevance": "Not relevant to CH treatment -- this was about healthcare quality improvement for general headache management.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT02640105",
+      "title": "Cluster Headache, Addictions and Vascular Function",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "University Hospital, Bordeaux",
+      "enrollment": 95,
+      "what_tested": "Studying the relationship between cluster headache, addictive behaviors, and blood vessel function (endothelial function).",
+      "key_result": "Completed with 95 participants. Observational study exploring vascular and addiction links in CH.",
+      "verdict": "unknown",
+      "patient_relevance": "Understanding vascular dysfunction in CH could explain why the condition runs in cycles and may help identify at-risk individuals.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT04845451",
+      "title": "The Presence and Role of Zygomatic-temporal Neuroma Triggering Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "FARO T. OWIESY, M.D",
+      "enrollment": 5,
+      "what_tested": "Whether a neuroma (nerve tumor) of the zygomatic-temporal nerve could be triggering cluster headache, with surgical exploration and removal.",
+      "key_result": "Completed with 5 participants. A highly exploratory study testing a novel theory about CH causation.",
+      "verdict": "unknown",
+      "patient_relevance": "A very unconventional hypothesis -- if a specific nerve tumor triggers CH in some patients, surgery could cure them, but this is highly speculative.",
+      "dose_tested": "Surgical exploration and neuroma resection"
+    },
+    {
+      "nct_id": "NCT06841627",
+      "title": "Osteopathic Manual Therapy (OMT) and Brain Structure and Function in Primary Headache Patients: A Pilot Study",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Edward Via Virginia College of Osteopathic Medicine",
+      "enrollment": 31,
+      "what_tested": "Whether osteopathic manipulative therapy (OMT) changes brain structure and function in primary headache patients, measured by brain imaging.",
+      "key_result": "Completed with 31 participants. This examined brain changes from manual therapy, not CH-specific.",
+      "verdict": "unknown",
+      "patient_relevance": "Osteopathic manipulation is unlikely to treat CH specifically, but understanding how manual therapies affect the pain-processing brain could have broader implications.",
+      "dose_tested": "Osteopathic Manipulative Therapy"
+    },
+    {
+      "nct_id": "NCT02310828",
+      "title": "The Efficacy of L-cysteine in Prevention of Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Biohit Oyj",
+      "enrollment": 60,
+      "what_tested": "L-cysteine (sold as Acetium capsules) taken daily to prevent or abort cluster headache attacks, based on its ability to neutralize acetaldehyde.",
+      "key_result": "Completed with 60 participants but no results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "L-cysteine is an over-the-counter supplement -- if it works, it would be an accessible and cheap option for CH prevention, but we lack published evidence.",
+      "dose_tested": "L-cysteine (Acetium capsules, daily)"
+    },
+    {
+      "nct_id": "NCT00203242",
+      "title": "An Open Label Study Using Consecutive Intravenous Depacon With Oral Depakote ER for the Treatment of Cluster Headaches.",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Thomas Jefferson University",
+      "enrollment": 15,
+      "what_tested": "IV Depacon (valproate) for 2-3 days followed by oral Depakote ER (extended-release valproate) to quickly break a cluster headache cycle.",
+      "key_result": "Average time to achieve 50% reduction in attack frequency or severity was 29.7 days (SD 13.8). This is not impressively fast for a treatment intended to provide rapid relief.",
+      "verdict": "mixed",
+      "patient_relevance": "IV valproate followed by oral Depakote took about a month to halve attack burden -- this is not much faster than standard verapamil titration, limiting its practical advantage.",
+      "dose_tested": "1000mg IV Depacon + 1000mg oral Depakote ER daily, then 500-2000mg Depakote ER maintenance"
+    },
+    {
+      "nct_id": "NCT03439722",
+      "title": "Sleep in Cluster Headache: Sleep Parameters in- and Outside a Cluster Bout",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "Danish Headache Center",
+      "enrollment": 66,
+      "what_tested": "Sleep study comparing sleep parameters in episodic cluster headache patients during bouts versus between bouts.",
+      "key_result": "Completed with 66 participants. Observational sleep research.",
+      "verdict": "unknown",
+      "patient_relevance": "Understanding how sleep differs during CH bouts could explain why attacks cluster at night and might lead to sleep-targeted treatments.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT06816849",
+      "title": "Hydration in Children and Adolescents With Primary Headaches",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "University Medical Centre Ljubljana",
+      "enrollment": 60,
+      "what_tested": "Investigating the role of hydration and fluid intake in children and adolescents with primary headaches.",
+      "key_result": "Completed with 60 participants. Pediatric study, not CH-specific.",
+      "verdict": "unknown",
+      "patient_relevance": "Primarily relevant to pediatric headache -- dehydration is a known headache trigger but this is not specific to cluster headache.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT07418723",
+      "title": "Personalised Process-based Psychological Interventions for Paediatric Headaches",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Royal Holloway University",
+      "enrollment": 5,
+      "what_tested": "Personalized psychological intervention (CBT and ACT-based) for adolescents with headaches, delivered in 4-5 online sessions.",
+      "key_result": "Completed with 5 participants. A small single-case experimental design study for pediatric headache.",
+      "verdict": "unknown",
+      "patient_relevance": "Psychological coping skills may help young headache patients but this tiny study is not specifically about CH.",
+      "dose_tested": "4-5 weekly 30-minute online CBT/ACT sessions"
+    },
+    {
+      "nct_id": "NCT01898455",
+      "title": "Intranasal Cooling for Cluster Headache and Migraine",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Cumbria Partnership NHS Foundation Trust",
+      "enrollment": 15,
+      "what_tested": "Intranasal cooling (spraying a coolant into the nose to cool blood vessels supplying the brain) for aborting migraine and cluster headache attacks.",
+      "key_result": "Completed with 15 participants (5 with CH). Each patient received 10 treatments of up to 20 minutes. No results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "Cooling the blood vessels in the nose is a creative approach -- if it works, it would be drug-free and fast-acting, but results are unknown.",
+      "dose_tested": "Intranasal evaporative cooling, up to 20 minutes per treatment"
+    },
+    {
+      "nct_id": "NCT02381795",
+      "title": "Pilot Study Evaluating the Use of Nasal Carbon Dioxide for the Treatment of Cluster Headache",
+      "status": "TERMINATED",
+      "phase": [
+        "PHASE2"
+      ],
+      "sponsor": "Cady, Roger, M.D.",
+      "enrollment": 10,
+      "what_tested": "Nasal carbon dioxide (CO2) delivered by a handheld device to abort cluster headache attacks.",
+      "key_result": "Terminated with 10 participants. Average pain reduction was -0.826 on a 0-3 scale (about 28% improvement). No serious adverse events. Study too small for conclusions.",
+      "verdict": "mixed",
+      "patient_relevance": "Nasal CO2 showed modest pain reduction but the study was too small and had no placebo control -- not enough evidence to recommend it for CH.",
+      "dose_tested": "Nasal CO2 at 0.5 standard liters per minute, 10 seconds per nostril, up to 6 doses"
+    },
+    {
+      "nct_id": "NCT04983186",
+      "title": "mBrain-21 : a Three-month Study on Context-awareness, Physiological Monitoring, and Machine Learning in Migraine and Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "University Hospital, Ghent",
+      "enrollment": 30,
+      "what_tested": "Three-month wearable sensor study using machine learning to predict headache attacks and track stress, sleep, and activity in migraine and cluster headache patients.",
+      "key_result": "Completed with 30 participants. Technology development study.",
+      "verdict": "unknown",
+      "patient_relevance": "Building toward smartwatch-based CH attack prediction -- could eventually enable preemptive treatment if the technology matures.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT03066037",
+      "title": "Regional-anaesthesiological Infiltration Techniques for the Management of Chronic Pain: a Retrospective Study",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "Charite University, Berlin, Germany",
+      "enrollment": 83,
+      "what_tested": "Retrospective analysis of regional anesthetic infiltration techniques for chronic pain syndromes including refractory headache.",
+      "key_result": "Completed with 83 participants. Retrospective data analysis of pain scores during treatment.",
+      "verdict": "unknown",
+      "patient_relevance": "Local anesthetic infiltration is used by some pain clinics for refractory CH -- this retrospective data may add to the evidence base.",
+      "dose_tested": "Various regional anaesthesiological infiltration techniques"
+    },
+    {
+      "nct_id": "NCT06410872",
+      "title": "Risk Taking and Decision-making in Cluster Headache Patients",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "Leiden University Medical Center",
+      "enrollment": 140,
+      "what_tested": "Studying risk-taking and decision-making behavior in cluster headache patients to understand potential shared biology with addictive tendencies.",
+      "key_result": "Completed with 140 participants. Behavioral/psychological research.",
+      "verdict": "unknown",
+      "patient_relevance": "CH patients may have different reward-seeking behavior -- understanding this could shed light on shared hypothalamic pathways between CH and addiction.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT02853487",
+      "title": "Circadian Rhythm and Attack-timing in Episodic Cluster Headache Patients in- and Outside of Bout: an Actigraphic Study",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "Danish Headache Center",
+      "enrollment": 60,
+      "what_tested": "Using actigraphy (wrist activity monitors) to study circadian rhythm and attack timing in episodic cluster headache during and between bouts.",
+      "key_result": "Completed with 60 participants. Published research confirmed the strong circadian pattern of CH attacks.",
+      "verdict": "unknown",
+      "patient_relevance": "Confirmed what patients know: CH attacks follow the body clock -- this supports chronotherapy approaches and circadian-based treatments.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT02619617",
+      "title": "Safety and Efficacy Study of SOM230 s.c. in Cluster Headache",
+      "status": "TERMINATED",
+      "phase": [
+        "PHASE2"
+      ],
+      "sponsor": "Novartis Pharmaceuticals",
+      "enrollment": 28,
+      "what_tested": "SOM230 (pasireotide), a somatostatin analogue, injected subcutaneously at 1.5mg to abort acute cluster headache attacks versus placebo.",
+      "key_result": "Headache response (pain dropping to mild/none at 30 min): 10 out of treated patients on SOM230 versus 9 on placebo -- essentially no difference. Study terminated.",
+      "verdict": "failure",
+      "patient_relevance": "Pasireotide did not work for aborting CH attacks -- it performed no better than placebo injection.",
+      "dose_tested": "SOM230 (pasireotide) 1.5mg subcutaneous"
+    },
+    {
+      "nct_id": "NCT02585739",
+      "title": "Cluster Headache and SPINK-1 Gene",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Assistance Publique Hopitaux De Marseille",
+      "enrollment": 42,
+      "what_tested": "Whether a specific gene variant (SPINK-1) is associated with cluster headache, building on earlier genetic findings.",
+      "key_result": "Completed with 42 participants. Genetic association study.",
+      "verdict": "unknown",
+      "patient_relevance": "Finding genetic links to CH could eventually lead to targeted treatments or early identification of at-risk individuals.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT04439409",
+      "title": "Variability of the Autonomic Nervous System (ANS) During Cluster Headache (CH).",
+      "status": "TERMINATED",
+      "phase": [],
+      "sponsor": "Centre Hospitalier Universitaire de Saint Etienne",
+      "enrollment": 19,
+      "what_tested": "Studying autonomic nervous system variability during cluster headache attacks to determine if autonomic dysfunction triggers or results from attacks.",
+      "key_result": "Terminated with 19 participants.",
+      "verdict": "terminated",
+      "patient_relevance": "Understanding whether autonomic dysfunction causes or follows CH attacks is fundamental -- but this study was terminated before answering the question.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT01406860",
+      "title": "Droperidol Versus Metoclopramide + Diphenhydramine for the Treatment of Primary Headaches",
+      "status": "TERMINATED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "University of Iowa",
+      "enrollment": 19,
+      "what_tested": "Comparing droperidol versus metoclopramide + diphenhydramine for emergency department treatment of primary headaches.",
+      "key_result": "Terminated with 19 participants. Results section exists but contains no actual pain score data. Not CH-specific.",
+      "verdict": "terminated",
+      "patient_relevance": "Not specifically relevant to CH -- this was about ER headache treatment in general and was terminated early.",
+      "dose_tested": "Droperidol vs metoclopramide + diphenhydramine"
     }
-  ]
+  ],
+  "active_trial_count": 2
 }

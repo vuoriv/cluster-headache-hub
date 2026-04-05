@@ -242,5 +242,65 @@
       "evidence_tier": 1
     }
   ],
-  "active_trial_list": []
+  "all_trials": [
+    {
+      "nct_id": "NCT05511155",
+      "title": "Oxygen Therapy for Headache",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "Aksaray University Training and Research Hospital",
+      "enrollment": 132,
+      "what_tested": "Comparing high-flow and medium-flow oxygen therapy versus placebo for primary headache disorders in the emergency department.",
+      "key_result": "Completed in 2022 with 132 participants but no results posted. Study focused on general primary headaches, not exclusively cluster headache.",
+      "verdict": "unknown",
+      "patient_relevance": "This may provide evidence on whether different oxygen flow rates matter for headache relief in the ER, though it was not CH-specific.",
+      "dose_tested": "High-flow vs medium-flow oxygen therapy"
+    },
+    {
+      "nct_id": "NCT01589588",
+      "title": "Administration of Oxygen to Cluster Headache Patients",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Mads Barl\u00f8se",
+      "enrollment": 57,
+      "what_tested": "Comparing three different oxygen delivery systems for acute treatment of cluster headache attacks.",
+      "key_result": "Completed with 57 participants but no results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "The type of oxygen mask or delivery system you use may matter for how well oxygen works -- this study could help answer that, but results are not yet available.",
+      "dose_tested": "Three different oxygen delivery systems (specifics not detailed)"
+    },
+    {
+      "nct_id": "NCT03397563",
+      "title": "Continuous Positive Airway Pressure as a Potential New Treatment for Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "St. Olavs Hospital",
+      "enrollment": 30,
+      "what_tested": "Whether CPAP (continuous positive airway pressure, the machine used for sleep apnea) can prevent nocturnal cluster headache attacks.",
+      "key_result": "Completed with 30 participants but no results posted. The idea was based on reports linking sleep apnea to cluster headache.",
+      "verdict": "unknown",
+      "patient_relevance": "If CPAP reduces nighttime CH attacks, it would be an affordable and widely available treatment -- but we are still waiting for results.",
+      "dose_tested": "Automatic CPAP machine during sleep"
+    },
+    {
+      "nct_id": "NCT01298921",
+      "title": "A Pilot Study of Demand Valve Oxygen Inhalation Therapy for Cluster Headache",
+      "status": "TERMINATED",
+      "phase": [
+        "PHASE1"
+      ],
+      "sponsor": "Geisinger Clinic",
+      "enrollment": 4,
+      "what_tested": "Whether a demand-valve oxygen delivery system (which adjusts flow to breathing rate) works better than standard continuous-flow oxygen for aborting CH attacks.",
+      "key_result": "Terminated after enrolling only 4 patients. Results section exists but contains no actual data. Zero adverse events reported.",
+      "verdict": "terminated",
+      "patient_relevance": "This study was too small to draw conclusions -- we still do not know if demand-valve oxygen is better than a standard non-rebreather mask.",
+      "dose_tested": "Demand valve oxygen vs continuous high-flow oxygen via non-rebreather mask"
+    }
+  ],
+  "active_trial_count": 0
 }

@@ -118,5 +118,22 @@
       "evidence_tier": 4
     }
   ],
-  "active_trial_list": []
+  "all_trials": [
+    {
+      "nct_id": "NCT04570475",
+      "title": "High Dose Vitamin D Plus Multivitamin in the Prevention of Cluster Headache",
+      "status": "TERMINATED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "The University of Texas Health Science Center, Houston",
+      "enrollment": 27,
+      "what_tested": "High-dose Vitamin D3 plus a multivitamin versus placebo for preventing cluster headache attacks.",
+      "key_result": "Terminated after enrolling 27 of the planned participants. No results posted. The study ran from 2021 to 2024.",
+      "verdict": "terminated",
+      "patient_relevance": "Despite strong community interest in Vitamin D for CH, this rigorous trial was terminated early -- we still lack solid evidence on whether high-dose D3 prevents attacks.",
+      "dose_tested": "High-dose Vitamin D3 + multivitamin (specific dose not stated)"
+    }
+  ],
+  "active_trial_count": 0
 }

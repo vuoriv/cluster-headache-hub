@@ -205,7 +205,22 @@
       "evidence_tier": 2
     }
   ],
-  "active_trial_list": [
+  "all_trials": [
+    {
+      "nct_id": "NCT02981173",
+      "title": "Psilocybin for the Treatment of Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE1"
+      ],
+      "sponsor": "Yale University",
+      "enrollment": 25,
+      "what_tested": "Oral psilocybin (low and high dose) given in 3 sessions spaced 5 days apart, to see if it reduces cluster headache frequency and intensity.",
+      "key_result": "Study completed in 2022 with 25 participants but no results have been posted yet. This was one of the first rigorous academic studies of psilocybin for CH.",
+      "verdict": "unknown",
+      "patient_relevance": "Yale's landmark psilocybin study completed but awaits publication -- results could shape future psychedelic treatment options for CH.",
+      "dose_tested": "Low dose and high dose oral psilocybin (exact mg not specified), 3 sessions 5 days apart"
+    },
     {
       "nct_id": "NCT05477459",
       "title": "LSD to Improve Cluster Headache Impact Trial",
@@ -214,7 +229,44 @@
         "PHASE2"
       ],
       "sponsor": "Radboud University Medical Center",
-      "enrollment": 65
+      "enrollment": 65,
+      "what_tested": "Microdose LSD (25 micrograms) given every 3 days for 3 weeks to treat chronic cluster headache, compared to placebo.",
+      "key_result": "Currently recruiting 65 participants, expected to complete in 2027.",
+      "verdict": "ongoing",
+      "patient_relevance": "If successful, this could establish microdose LSD as a legitimate treatment for chronic CH -- a disease with very few good prevention options.",
+      "dose_tested": "25 micrograms LSD every 3 days for 3 weeks"
+    },
+    {
+      "nct_id": "NCT04280055",
+      "title": "Prophylactic Effects of Psilocybin on Chronic Cluster Headache",
+      "status": "TERMINATED",
+      "phase": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "sponsor": "Gitte Moos Knudsen",
+      "enrollment": 10,
+      "what_tested": "Low-dose psilocybin given in 3 weekly sessions as a preventive treatment for chronic cluster headache, with brain imaging (fMRI) before and after.",
+      "key_result": "Terminated after enrolling only 10 of planned participants, likely due to COVID-19 pandemic (started Jan 2020, ended Nov 2020).",
+      "verdict": "terminated",
+      "patient_relevance": "This Danish study was stopped early, probably due to COVID -- it does not tell us whether psilocybin works for chronic CH.",
+      "dose_tested": "Low dose psilocybin, 3 sessions one week apart"
+    },
+    {
+      "nct_id": "NCT04179266",
+      "title": "Effect of Ketamine Intranasal Spray in Treatment of Chronic Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "sponsor": "CCH Pharmaceuticals",
+      "enrollment": 23,
+      "what_tested": "Intranasal ketamine spray (15mg per dose, up to 75mg total) as an acute rescue treatment for chronic cluster headache attacks.",
+      "key_result": "Completed with 23 participants but no results posted. Based on the protocol, treatment was given during active attacks when pain exceeded 6/10.",
+      "verdict": "unknown",
+      "patient_relevance": "A nasal ketamine spray could be a fast-acting rescue option for CH attacks, but we are still waiting for results from this small study.",
+      "dose_tested": "15mg ketamine intranasal per dose, up to 5 doses (75mg total) over 24 minutes"
     },
     {
       "nct_id": "NCT03781128",
@@ -224,7 +276,12 @@
         "PHASE2"
       ],
       "sponsor": "University Hospital, Basel, Switzerland",
-      "enrollment": 30
+      "enrollment": 30,
+      "what_tested": "Oral LSD (100 micrograms) given 3 times over 3 weeks versus placebo in a crossover design, to prevent cluster headache attacks.",
+      "key_result": "Still recruiting 30 participants as of 2025, expected completion December 2025.",
+      "verdict": "ongoing",
+      "patient_relevance": "This Basel study tests a full psychoactive dose of LSD for CH prevention -- if it works, it could validate what many patients have reported anecdotally.",
+      "dose_tested": "100 micrograms oral LSD, 3 doses over 3 weeks"
     },
     {
       "nct_id": "NCT04814381",
@@ -234,7 +291,13 @@
         "PHASE4"
       ],
       "sponsor": "University Hospital, Clermont-Ferrand",
-      "enrollment": 90
+      "enrollment": 90,
+      "what_tested": "A single IV infusion of ketamine combined with magnesium to reduce attacks in drug-resistant chronic cluster headache.",
+      "key_result": "Still recruiting 90 participants, expected completion September 2026. Earlier pilot data in 17 patients showed daily attacks dropped from 4.3 to 1.3 (p<0.001).",
+      "verdict": "ongoing",
+      "patient_relevance": "Promising pilot data suggests ketamine+magnesium IV could dramatically reduce attacks in treatment-resistant chronic CH -- this larger trial will tell us if it is real.",
+      "dose_tested": "Single IV infusion of ketamine-magnesium combination"
     }
-  ]
+  ],
+  "active_trial_count": 3
 }

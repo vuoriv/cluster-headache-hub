@@ -241,7 +241,7 @@
       "evidence_tier": 1
     }
   ],
-  "active_trial_list": [
+  "all_trials": [
     {
       "nct_id": "NCT03944876",
       "title": "Botulinum Toxin Type A Blockade of the Sphenopalatine Ganglion in Treatment-refractory Chronic Cluster Headache",
@@ -250,7 +250,12 @@
         "PHASE3"
       ],
       "sponsor": "Norwegian University of Science and Technology",
-      "enrollment": 112
+      "enrollment": 112,
+      "what_tested": "Botulinum toxin A (Botox) injected precisely into the sphenopalatine ganglion (SPG) using CT-guided navigation, to reduce attack frequency in treatment-resistant chronic CH.",
+      "key_result": "Still recruiting 112 participants, expected completion September 2025. Earlier phase 1/2 data suggested the approach was safe and beneficial.",
+      "verdict": "ongoing",
+      "patient_relevance": "If Botox injected at the SPG reduces chronic CH attacks, it could offer months of relief from a single injection for patients who have failed medications.",
+      "dose_tested": "Botulinum toxin A single injection to sphenopalatine ganglion"
     },
     {
       "nct_id": "NCT04930887",
@@ -260,7 +265,27 @@
         "PHASE2"
       ],
       "sponsor": "Stanford University",
-      "enrollment": 15
+      "enrollment": 15,
+      "what_tested": "Endoscopic injection of long-acting bupivacaine (Exparel) near the sphenopalatine ganglion for craniofacial pain including cluster headache.",
+      "key_result": "Still recruiting 15 participants, expected completion June 2025.",
+      "verdict": "ongoing",
+      "patient_relevance": "A long-acting nerve block that could provide up to 72 hours of pain relief from a single injection -- early-stage and small but interesting.",
+      "dose_tested": "Exparel (long-acting bupivacaine) endoscopic injection to lateral nasal wall"
+    },
+    {
+      "nct_id": "NCT01151631",
+      "title": "Occipital Nerve Stimulation in Medically Intractable Chronic Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "Leiden University Medical Center",
+      "enrollment": 130,
+      "what_tested": "Occipital nerve stimulation (ONS) via implanted electrodes at the back of the head, comparing high (100%) vs low (30%) stimulation intensity for treatment-resistant chronic cluster headache.",
+      "key_result": "Completed with 130 participants but no results posted. This was the largest randomized controlled trial of ONS for chronic CH.",
+      "verdict": "unknown",
+      "patient_relevance": "ONS is already used clinically for refractory CH in some countries -- this major trial should clarify how effective it really is, but results are not yet public.",
+      "dose_tested": "Occipital nerve stimulation at 100% vs 30% intensity"
     },
     {
       "nct_id": "NCT06787677",
@@ -270,7 +295,12 @@
         "NA"
       ],
       "sponsor": "Beijing Tiantan Hospital",
-      "enrollment": 108
+      "enrollment": 108,
+      "what_tested": "Pulsed radiofrequency (PRF) targeting the sphenopalatine ganglion (SPG) as a minimally invasive treatment for chronic cluster headache.",
+      "key_result": "Recruiting 108 participants, expected completion December 2029.",
+      "verdict": "ongoing",
+      "patient_relevance": "SPG pulsed radiofrequency is a minimally invasive procedure that avoids permanent nerve damage -- this large trial could establish it as a standard option for chronic CH.",
+      "dose_tested": "Pulsed radiofrequency to sphenopalatine ganglion"
     },
     {
       "nct_id": "NCT06882278",
@@ -278,7 +308,235 @@
       "status": "NOT_YET_RECRUITING",
       "phase": [],
       "sponsor": "Beijing Tiantan Hospital",
-      "enrollment": 242
+      "enrollment": 242,
+      "what_tested": "Pulsed radiofrequency combined with platelet-rich plasma (PRP) injected at the sphenopalatine ganglion for episodic cluster headache.",
+      "key_result": "Not yet recruiting, expected to enroll 242 participants starting May 2025.",
+      "verdict": "ongoing",
+      "patient_relevance": "Combining two minimally invasive techniques could potentially extend pain relief duration -- a novel approach worth watching.",
+      "dose_tested": "Pulsed radiofrequency + platelet-rich plasma at SPG"
+    },
+    {
+      "nct_id": "NCT03066635",
+      "title": "Botulinum Toxin Type A Block of the Otic Ganglion in Chronic Cluster Headache: Safety Issues",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "sponsor": "Norwegian University of Science and Technology",
+      "enrollment": 10,
+      "what_tested": "Safety of Botox injected into the otic ganglion (a different nerve cluster than the usual SPG target) in chronic cluster headache patients.",
+      "key_result": "Completed with 10 participants. This was a phase 1/2 safety pilot testing 12.5 and 25 IU botulinum toxin. No results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "Early safety study exploring a new injection target for CH -- too small to tell if it works, but establishes whether the approach is safe.",
+      "dose_tested": "12.5 IU and 25 IU botulinum toxin A to otic ganglion"
+    },
+    {
+      "nct_id": "NCT02019017",
+      "title": "Botox Injection in Treatment of Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "sponsor": "Norwegian University of Science and Technology",
+      "enrollment": 10,
+      "what_tested": "Safety of Botox injected into the sphenopalatine ganglion (SPG) using CT-guided navigation for treatment-resistant cluster headache.",
+      "key_result": "Completed with 10 participants. This was a phase 1/2 safety and feasibility study testing 25 IU and 50 IU doses. No results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "This Norwegian pilot established the safety of SPG Botox injection for CH, paving the way for the larger phase 3 trial (NCT03944876).",
+      "dose_tested": "25 IU and 50 IU botulinum toxin A to sphenopalatine ganglion"
+    },
+    {
+      "nct_id": "NCT00205894",
+      "title": "Occipital Nerve Stimulation to Treat Chronic Headaches",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "sponsor": "Boston Scientific Corporation",
+      "enrollment": 20,
+      "what_tested": "A tiny implantable nerve stimulator (bion microstimulator) placed near the greater occipital nerve to treat chronic headaches including cluster headache.",
+      "key_result": "Completed with 20 participants but no results posted. This was one of the earliest occipital nerve stimulation studies for headache.",
+      "verdict": "unknown",
+      "patient_relevance": "An early study of implantable nerve stimulation for chronic headache -- the technology has evolved significantly since this 2004-2006 trial.",
+      "dose_tested": "Bion microstimulator implanted at greater occipital nerve"
+    },
+    {
+      "nct_id": "NCT01255813",
+      "title": "Sphenopalatine Ganglion Stimulation for the Acute Treatment of Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Autonomic Technologies, Inc.",
+      "enrollment": 43,
+      "what_tested": "An implanted neurostimulator to electrically stimulate the sphenopalatine ganglion (SPG) for acute treatment of cluster headache attacks.",
+      "key_result": "Completed with 43 participants. The Pathway CH-1 study showed SPG stimulation provided pain relief in 67% of attacks and complete pain freedom in 34% within 15 minutes.",
+      "verdict": "success",
+      "patient_relevance": "SPG stimulation was highly effective for aborting CH attacks -- this led to the Pulsante device being available in Europe, though the company later closed.",
+      "dose_tested": "SPG neurostimulation via implanted ATI device"
+    },
+    {
+      "nct_id": "NCT01677026",
+      "title": "Data Collection on the ATI Neurostimulation System: SPG Stimulation for Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "Autonomic Technologies, Inc.",
+      "enrollment": 150,
+      "what_tested": "Post-market registry collecting real-world data on the ATI SPG neurostimulation system implant for cluster headache.",
+      "key_result": "Completed with 150 participants. No formal results posted, but this registry supported the commercial use of the Pulsante device in Europe.",
+      "verdict": "unknown",
+      "patient_relevance": "Real-world data collection on the SPG stimulator -- the device showed promise but the company (Autonomic Technologies) eventually closed down.",
+      "dose_tested": "ATI Neurostimulation System (SPG stimulator)"
+    },
+    {
+      "nct_id": "NCT07370142",
+      "title": "Sphenopalatine Ganglion Pulsed Radiofrequency Treatment Outcomes",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Ankara City Hospital Bilkent",
+      "enrollment": 55,
+      "what_tested": "Retrospective evaluation of sphenopalatine ganglion pulsed radiofrequency treatment outcomes for chronic headaches and facial pain, tracking pain scores over 6 months.",
+      "key_result": "Completed with 55 participants but no results posted yet. Data collected at 1 week, 1 month, 3 months, and 6 months.",
+      "verdict": "unknown",
+      "patient_relevance": "Real-world outcomes data on SPG radiofrequency could help patients decide whether this minimally invasive procedure is worth trying.",
+      "dose_tested": "Fluoroscopy-guided SPG pulsed radiofrequency"
+    },
+    {
+      "nct_id": "NCT03567590",
+      "title": "The Efficacy and Safety of Sphenopalatine Ganglion Pulsed Radiofrequency Treatment for Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Beijing Tiantan Hospital",
+      "enrollment": 80,
+      "what_tested": "Sphenopalatine ganglion pulsed radiofrequency for treating cluster headache -- effectiveness and safety.",
+      "key_result": "Completed with 80 participants but no results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "A reasonably large study of SPG radiofrequency for CH from a major Chinese center -- results would be valuable but have not been published.",
+      "dose_tested": "Sphenopalatine ganglion pulsed radiofrequency"
+    },
+    {
+      "nct_id": "NCT06022848",
+      "title": "Quantitative Sensory Testing and Occipital Nerve Stimulator",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Barts & The London NHS Trust",
+      "enrollment": 6,
+      "what_tested": "Whether occipital nerve stimulator (ONS) implantation changes pain processing and biomarkers in chronic migraine and cluster headache patients.",
+      "key_result": "Completed with 6 participants. This was a mechanistic study comparing pain perception before and after ONS implantation.",
+      "verdict": "unknown",
+      "patient_relevance": "Understanding how ONS changes pain processing could help predict which patients will respond -- basic science, not a treatment trial.",
+      "dose_tested": "Occipital nerve stimulator (implanted)"
+    },
+    {
+      "nct_id": "NCT02031822",
+      "title": "Two US-guided Techniques for Greater Occipital Nerve Blocks",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "University Health Network, Toronto",
+      "enrollment": 40,
+      "what_tested": "Comparing two ultrasound-guided techniques for greater occipital nerve (GON) blocks -- a proximal approach at the C2 vertebra versus a distal approach at the base of the skull.",
+      "key_result": "Completed with 40 participants but no results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "How your doctor performs a GON block may affect how well it works -- this study compared two common injection sites.",
+      "dose_tested": "GON block with local anesthetic and steroid, two different injection sites"
+    },
+    {
+      "nct_id": "NCT02510729",
+      "title": "SPG Neurostimulation in Cluster Patients",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Danish Headache Center",
+      "enrollment": 21,
+      "what_tested": "Whether low-frequency electrical stimulation of the sphenopalatine ganglion (SPG) can trigger cluster-like attacks by activating parasympathetic nerves.",
+      "key_result": "Completed with 21 participants but no results posted. This was a provocation study to understand CH mechanisms.",
+      "verdict": "unknown",
+      "patient_relevance": "Basic science study to understand how the SPG contributes to CH attacks -- helps explain why SPG-targeted treatments work.",
+      "dose_tested": "Low-frequency SPG stimulation (provocation study)"
+    },
+    {
+      "nct_id": "NCT01616511",
+      "title": "Pathway CH-1 Long-Term Follow-Up",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "Autonomic Technologies, Inc.",
+      "enrollment": 33,
+      "what_tested": "Long-term follow-up of patients from the Pathway CH-1 trial who had SPG neurostimulators implanted for cluster headache.",
+      "key_result": "Completed with 33 participants. This tracked the safety and effectiveness of SPG stimulation over years of use.",
+      "verdict": "unknown",
+      "patient_relevance": "Long-term data on SPG stimulation is critical for patients considering an implant -- suggests the device continues to work over time.",
+      "dose_tested": "ATI SPG Neurostimulation System (long-term follow-up)"
+    },
+    {
+      "nct_id": "NCT01359631",
+      "title": "Cephalic Vascular Recording Upon SPG Stimulation",
+      "status": "COMPLETED",
+      "phase": [],
+      "sponsor": "Autonomic Technologies, Inc.",
+      "enrollment": 7,
+      "what_tested": "How SPG stimulation at different frequencies affects blood flow in the brain -- high frequency was expected to block parasympathetic activity, low frequency to activate it.",
+      "key_result": "Completed with 7 participants. This was a mechanistic study measuring blood vessel responses to different stimulation patterns.",
+      "verdict": "unknown",
+      "patient_relevance": "Understanding how SPG stimulation changes blood flow helps explain why it can both abort attacks and prevent them -- important basic science.",
+      "dose_tested": "SPG stimulation at various frequencies (1-200 Hz)"
+    },
+    {
+      "nct_id": "NCT05023460",
+      "title": "Treatment of Chronic Cluster Headache with TENS and ONS",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "University of Aarhus",
+      "enrollment": 38,
+      "what_tested": "A three-phase study testing TENS (transcutaneous electrical nerve stimulation), then randomizing to either burst occipital nerve stimulation or sham, then open-label conventional ONS for chronic cluster headache.",
+      "key_result": "Completed with 38 participants but no results posted.",
+      "verdict": "unknown",
+      "patient_relevance": "This study tested both non-invasive (TENS) and implanted (ONS) nerve stimulation for chronic CH -- results could help decide between these options.",
+      "dose_tested": "TENS then burst ONS vs sham ONS then tonic ONS"
+    },
+    {
+      "nct_id": "NCT04353505",
+      "title": "Intra-arterial Sphenopalatine Ganglion Block for Patients With Refractory Headache",
+      "status": "WITHDRAWN",
+      "phase": [
+        "PHASE1"
+      ],
+      "sponsor": "Weill Medical College of Cornell University",
+      "enrollment": 0,
+      "what_tested": "Intra-arterial delivery of dexamethasone and ketorolac into the arteries feeding the sphenopalatine ganglion for refractory headaches including cluster headache.",
+      "key_result": "Withdrawn before enrolling any participants. The study never got off the ground.",
+      "verdict": "terminated",
+      "patient_relevance": "This novel approach of delivering medication directly to the SPG through blood vessels was never tested -- the concept remains unproven.",
+      "dose_tested": "Intra-arterial dexamethasone + ketorolac to SPG arteries"
+    },
+    {
+      "nct_id": "NCT06124534",
+      "title": "Bilateral Occipital Nerve Field Stimulation for the Treatment of dtCCH",
+      "status": "SUSPENDED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Man and Science, SA",
+      "enrollment": 10,
+      "what_tested": "A novel bilateral occipital nerve field stimulation device (BliStim) for preventing chronic cluster headaches -- first-in-human safety study.",
+      "key_result": "Suspended with 10 participants enrolled. Reasons for suspension not stated.",
+      "verdict": "terminated",
+      "patient_relevance": "A new type of nerve stimulation device for CH, but the study was suspended -- unclear if it will resume.",
+      "dose_tested": "BliStim bilateral occipital nerve field stimulation"
     }
-  ]
+  ],
+  "active_trial_count": 4
 }

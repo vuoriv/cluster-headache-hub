@@ -96,18 +96,33 @@ def main():
                 "evidence_tier": p["evidence_tier"],
             })
 
-        # Active trials
-        active_trials = []
+        # All trials with analyses
+        analyses_path = os.path.join(PROJECT_ROOT, "src", "data", "trials", "trial-analyses.json")
+        analyses_map = {}
+        if os.path.exists(analyses_path):
+            analyses_list = json.load(open(analyses_path))
+            analyses_map = {a["nct_id"]: a for a in analyses_list}
+
+        all_trial_list = []
         for t in trials:
-            if t["status"] in ("RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING"):
-                active_trials.append({
-                    "nct_id": t["nct_id"],
-                    "title": t["title"],
-                    "status": t["status"],
-                    "phase": json.loads(t["phase"]) if t["phase"] else [],
-                    "sponsor": t["sponsor"],
-                    "enrollment": t["enrollment"],
-                })
+            trial_data = {
+                "nct_id": t["nct_id"],
+                "title": t["title"],
+                "status": t["status"],
+                "phase": json.loads(t["phase"]) if t["phase"] else [],
+                "sponsor": t["sponsor"],
+                "enrollment": t["enrollment"],
+            }
+            analysis = analyses_map.get(t["nct_id"])
+            if analysis:
+                trial_data["what_tested"] = analysis.get("what_tested", "")
+                trial_data["key_result"] = analysis.get("key_result", "")
+                trial_data["verdict"] = analysis.get("verdict", "unknown")
+                trial_data["patient_relevance"] = analysis.get("patient_relevance", "")
+                trial_data["dose_tested"] = analysis.get("dose_tested")
+            all_trial_list.append(trial_data)
+
+        active_trials = [t for t in all_trial_list if t["status"] in ("RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING")]
 
         data = {
             "category": category,
@@ -123,7 +138,8 @@ def main():
             "avg_sample_size": round(sum(sample_sizes) / len(sample_sizes)) if sample_sizes else None,
             "max_sample_size": max(sample_sizes) if sample_sizes else None,
             "top_papers": top_papers,
-            "active_trial_list": active_trials,
+            "all_trials": all_trial_list,
+            "active_trial_count": len(active_trials),
         }
 
         with open(os.path.join(OUTPUT_DIR, f"{category}.json"), "w") as f:

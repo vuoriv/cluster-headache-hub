@@ -232,14 +232,215 @@
       "evidence_tier": 1
     }
   ],
-  "active_trial_list": [
+  "all_trials": [
+    {
+      "nct_id": "NCT02797951",
+      "title": "A Study of LY2951742 (Galcanezumab) in Participants With Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "Eli Lilly and Company",
+      "enrollment": 165,
+      "what_tested": "Long-term safety of galcanezumab (Emgality) 300mg monthly injection in people who completed the earlier episodic or chronic CH trials.",
+      "key_result": "119 of 165 participants experienced treatment-related adverse events, and 17 had serious adverse events. 2 participants reported suicidal ideation. No new safety signals beyond what was already known.",
+      "verdict": "mixed",
+      "patient_relevance": "Galcanezumab appears reasonably safe for long-term use in CH patients, though side effects are common -- this was a safety study, not designed to prove it works.",
+      "dose_tested": "300mg galcanezumab subcutaneous monthly"
+    },
     {
       "nct_id": "NCT06503328",
       "title": "Role of Specific microRNAs in Cluster Headache",
       "status": "RECRUITING",
       "phase": [],
       "sponsor": "IRCCS National Neurological Institute \"C. Mondino\" Foundation",
-      "enrollment": 100
+      "enrollment": 100,
+      "what_tested": "Investigating whether specific microRNAs (small genetic molecules) in blood cells differ between CH patients in active phase, remission, and healthy controls, along with measuring CGRP levels.",
+      "key_result": "Still recruiting 100 participants, expected completion December 2024.",
+      "verdict": "ongoing",
+      "patient_relevance": "This is basic research that could lead to a blood test for CH or help identify new drug targets -- no direct treatment implications yet.",
+      "dose_tested": null
+    },
+    {
+      "nct_id": "NCT02397473",
+      "title": "A Study Of Galcanezumab In Participants With Episodic Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "Eli Lilly and Company",
+      "enrollment": 109,
+      "what_tested": "Galcanezumab (Emgality) 300mg monthly injection versus placebo for preventing episodic cluster headache attacks.",
+      "key_result": "Galcanezumab reduced weekly attacks by 8.69 compared to 5.22 for placebo (difference of ~3.5 fewer attacks per week). This was a statistically significant result that led to some clinical use.",
+      "verdict": "success",
+      "patient_relevance": "This is the study that made galcanezumab the first CGRP antibody to show benefit in episodic CH -- about 3-4 fewer attacks per week than placebo.",
+      "dose_tested": "300mg galcanezumab subcutaneous monthly"
+    },
+    {
+      "nct_id": "NCT02438826",
+      "title": "A Study of Galcanezumab in Participants With Chronic Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "Eli Lilly and Company",
+      "enrollment": 240,
+      "what_tested": "Galcanezumab (Emgality) 300mg monthly injection versus placebo for preventing chronic cluster headache attacks.",
+      "key_result": "Galcanezumab reduced weekly attacks by 5.38 versus 4.59 for placebo -- a difference of less than 1 attack per week, which was not statistically significant.",
+      "verdict": "failure",
+      "patient_relevance": "Galcanezumab did NOT work for chronic CH -- the small improvement over placebo was not meaningful, which is disappointing since chronic patients need it most.",
+      "dose_tested": "300mg galcanezumab subcutaneous monthly"
+    },
+    {
+      "nct_id": "NCT05064397",
+      "title": "A 1-year Trial to Inform About Long-term Exposure to Eptinezumab in Participants With Chronic Cluster Headache (cCH)",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "H. Lundbeck A/S",
+      "enrollment": 131,
+      "what_tested": "Long-term (1 year) safety of eptinezumab IV infusion in chronic cluster headache patients.",
+      "key_result": "106 of 131 participants experienced adverse events, and 12 had serious adverse events. This was a safety extension study showing the drug was tolerable long-term.",
+      "verdict": "mixed",
+      "patient_relevance": "Eptinezumab appears safe enough for long-term use in chronic CH, but this study was not designed to prove effectiveness.",
+      "dose_tested": "Eptinezumab IV infusion (dose not specified in summary)"
+    },
+    {
+      "nct_id": "NCT04688775",
+      "title": "Eptinezumab in Participants With Episodic Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "H. Lundbeck A/S",
+      "enrollment": 231,
+      "what_tested": "Eptinezumab (Vyepti) IV infusion versus placebo for preventing episodic cluster headache attacks.",
+      "key_result": "Eptinezumab reduced weekly attacks by 4.0 versus 4.6 for placebo over weeks 1-2. The drug performed WORSE than placebo, meaning it completely failed its primary endpoint.",
+      "verdict": "failure",
+      "patient_relevance": "Eptinezumab does not work for episodic CH -- placebo actually did better, which is a clear negative result.",
+      "dose_tested": "Eptinezumab IV infusion"
+    },
+    {
+      "nct_id": "NCT05264714",
+      "title": "Cluster Headache Treatment With Rimegepant",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE2"
+      ],
+      "sponsor": "Mayo Clinic",
+      "enrollment": 20,
+      "what_tested": "Rimegepant (Nurtec), a CGRP receptor blocker pill, as a preventive treatment for cluster headache.",
+      "key_result": "Completed with 20 participants but no results posted yet.",
+      "verdict": "unknown",
+      "patient_relevance": "If an oral CGRP blocker works for CH prevention, it would be much more convenient than injections or infusions -- results are awaited.",
+      "dose_tested": "Rimegepant (dose not specified)"
+    },
+    {
+      "nct_id": "NCT04970355",
+      "title": "Efficacy of Erenumab in Chronic Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "PHASE2"
+      ],
+      "sponsor": "Charite University, Berlin, Germany",
+      "enrollment": 101,
+      "what_tested": "Erenumab (Aimovig), a CGRP receptor antibody, as a treatment for chronic cluster headache.",
+      "key_result": "Completed with 101 participants but no results posted yet.",
+      "verdict": "unknown",
+      "patient_relevance": "Another CGRP antibody being tested specifically for chronic CH -- results could expand treatment options if positive, given galcanezumab failed for chronic CH.",
+      "dose_tested": "Erenumab (dose not specified)"
+    },
+    {
+      "nct_id": "NCT03107052",
+      "title": "A Study to Explore the Long-Term Safety and Efficacy of Fremanezumab (TEV-48125) for the Prevention of Cluster Headache",
+      "status": "TERMINATED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
+      "enrollment": 275,
+      "what_tested": "Long-term safety and efficacy of fremanezumab (Ajovy) at various doses for preventing cluster headache (extension study of earlier trials).",
+      "key_result": "Safety-focused study: adverse events occurred in most participants across all dose groups. No efficacy endpoints were primary. The parent trials were terminated, making this extension study less meaningful.",
+      "verdict": "failure",
+      "patient_relevance": "Fremanezumab's entire CH program was discontinued -- this drug is not coming to market for cluster headache.",
+      "dose_tested": "Fremanezumab 225mg monthly, 675/225mg monthly, or 675mg quarterly"
+    },
+    {
+      "nct_id": "NCT02945046",
+      "title": "A Study to Evaluate the Efficacy and Safety of TEV-48125 (Fremanezumab) for the Prevention of Episodic Cluster Headache (ECH)",
+      "status": "TERMINATED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
+      "enrollment": 169,
+      "what_tested": "Fremanezumab (Ajovy) at two dose levels versus placebo for preventing episodic cluster headache attacks.",
+      "key_result": "The higher dose (900/225/225mg) reduced weekly attacks by 7.6 vs 5.7 for placebo, but the lower dose (675mg) showed essentially no difference from placebo (5.8 vs 5.7). Study was terminated.",
+      "verdict": "failure",
+      "patient_relevance": "Fremanezumab failed for episodic CH -- the small signal in one dose group was not enough to continue development.",
+      "dose_tested": "Fremanezumab 675mg single dose or 900/225/225mg monthly"
+    },
+    {
+      "nct_id": "NCT02964338",
+      "title": "A Study Comparing the Efficacy and Safety of Fremanezumab (TEV-48125) for the Prevention of Chronic Cluster Headache (CCH)",
+      "status": "TERMINATED",
+      "phase": [
+        "PHASE3"
+      ],
+      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
+      "enrollment": 259,
+      "what_tested": "Fremanezumab (Ajovy) at two dose levels versus placebo for preventing chronic cluster headache attacks.",
+      "key_result": "Placebo reduced monthly attacks by 12.2, which was actually better than the lower fremanezumab dose (8.7). The higher dose (900/225/225mg) reduced attacks by 15.5 but the massive placebo response made results uninterpretable. Study terminated.",
+      "verdict": "failure",
+      "patient_relevance": "Fremanezumab failed for chronic CH too -- the huge placebo response (12 fewer monthly attacks) wiped out any signal from the drug.",
+      "dose_tested": "Fremanezumab 675/225/225mg or 900/225/225mg monthly"
+    },
+    {
+      "nct_id": "NCT05093582",
+      "title": "The Effects of Levcromakalim in Patients With Cluster Headache",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Danish Headache Center",
+      "enrollment": 41,
+      "what_tested": "Whether opening ATP-sensitive potassium channels (using levcromakalim) triggers cluster headache attacks, to understand the underlying disease mechanism.",
+      "key_result": "Completed with 41 participants but no results posted. This was a provocation study, not a treatment trial.",
+      "verdict": "unknown",
+      "patient_relevance": "This is basic science research -- if potassium channels trigger CH attacks, drugs that block them could become future treatments.",
+      "dose_tested": "Levcromakalim (potassium channel opener, provocation study)"
+    },
+    {
+      "nct_id": "NCT02466334",
+      "title": "CGRP's Cluster Headache Inducing Abilities in Cluster Headache Patients",
+      "status": "COMPLETED",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Danish Headache Center",
+      "enrollment": 37,
+      "what_tested": "Whether IV infusion of CGRP (the protein targeted by new migraine drugs) can trigger cluster headache attacks in patients during active and remission phases.",
+      "key_result": "Completed with 37 participants but no results posted. This provocation study tested the role of CGRP in triggering CH.",
+      "verdict": "unknown",
+      "patient_relevance": "Understanding whether CGRP directly causes CH attacks helps explain why some CGRP drugs work and others do not -- foundational research.",
+      "dose_tested": "IV CGRP infusion (provocation study)"
+    },
+    {
+      "nct_id": "NCT03511846",
+      "title": "Pain Biomarker Study",
+      "status": "ENROLLING_BY_INVITATION",
+      "phase": [
+        "PHASE1"
+      ],
+      "sponsor": "The University of Texas Health Science Center, Houston",
+      "enrollment": 371,
+      "what_tested": "Using capsaicin (hot pepper extract) and ice water to study pain biomarkers in headache patients, and testing whether oxygen reduces capsaicin-induced eye watering to understand how oxygen therapy works.",
+      "key_result": "Enrolling by invitation, with 371 participants. Expected completion May 2028. This is a mechanism/biomarker study.",
+      "verdict": "ongoing",
+      "patient_relevance": "This research could explain WHY oxygen works for CH -- understanding the mechanism could lead to better treatments.",
+      "dose_tested": null
     }
-  ]
+  ],
+  "active_trial_count": 1
 }
