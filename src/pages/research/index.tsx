@@ -1,6 +1,7 @@
 import { useMemo } from "react"
 import { Link } from "react-router-dom"
 import { Card, CardContent } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useDataDb } from "@/lib/data-db"
 import {
@@ -11,7 +12,26 @@ import {
   ArrowRight,
   FileText,
   Users,
+  Pill,
+  Syringe,
+  Zap,
+  Wind,
+  Sun,
+  Brain,
+  Sparkles,
+  ClipboardList,
 } from "lucide-react"
+
+const CATEGORIES = [
+  { slug: "psychedelic", name: "Psychedelic Treatments", papers: 58, description: "Psilocybin, LSD, BOL-148. Community's top-rated treatments, now in Phase 2 trials.", icon: Sparkles, accent: "text-purple-500 bg-purple-50 dark:bg-purple-950/40 dark:text-purple-400" },
+  { slug: "cgrp", name: "CGRP Therapies", papers: 227, description: "Galcanezumab, erenumab, gepants. The newest class of approved CH treatments.", icon: Brain, accent: "text-cyan-500 bg-cyan-50 dark:bg-cyan-950/40 dark:text-cyan-400" },
+  { slug: "oxygen", name: "Oxygen Therapy", papers: 274, description: "High-flow O2 — the #1 abortive. 78% efficacy, zero side effects.", icon: Wind, accent: "text-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 dark:text-emerald-400" },
+  { slug: "pharmacology", name: "Pharmacological Treatments", papers: 364, description: "Verapamil, lithium, prednisone, melatonin, triptans. The medical toolkit.", icon: Pill, accent: "text-blue-500 bg-blue-50 dark:bg-blue-950/40 dark:text-blue-400" },
+  { slug: "nerve-block", name: "Nerve Blocks & Injections", papers: 501, description: "Occipital nerve blocks, SPG blocks, botulinum toxin. Procedural treatments.", icon: Syringe, accent: "text-amber-500 bg-amber-50 dark:bg-amber-950/40 dark:text-amber-400" },
+  { slug: "neuromodulation", name: "Neuromodulation", papers: 350, description: "Vagus nerve stimulation, occipital stimulation, deep brain stimulation.", icon: Zap, accent: "text-rose-500 bg-rose-50 dark:bg-rose-950/40 dark:text-rose-400" },
+  { slug: "non-pharma", name: "Non-Pharma Approaches", papers: 220, description: "Light therapy, exercise, acupuncture, behavioral approaches.", icon: Sun, accent: "text-orange-500 bg-orange-50 dark:bg-orange-950/40 dark:text-orange-400" },
+  { slug: "observational", name: "Observational Studies", papers: 478, description: "Epidemiology, patient registries, surveys. Understanding CH patterns.", icon: ClipboardList, accent: "text-slate-500 bg-slate-50 dark:bg-slate-950/40 dark:text-slate-400" },
+] as const
 
 const SUB_PAGES = [
   {
@@ -109,15 +129,32 @@ export function ResearchIndex() {
         ))}
       </div>
 
-      {/* Data source note */}
-      <Card className="border-l-4 border-l-primary/30">
-        <CardContent className="py-4">
-          <p className="text-xs leading-relaxed text-muted-foreground">
-            Paper data from PubMed using expanded search: MeSH terms + title/abstract + "trigeminal autonomic cephalalgia".
-            Trial data from ClinicalTrials.gov API. Data refreshed periodically via pipeline.
-          </p>
-        </CardContent>
-      </Card>
+      {/* Browse by Category */}
+      <Separator />
+      <div>
+        <h3 className="mb-4 text-lg font-semibold">Browse by Category</h3>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {CATEGORIES.map(({ slug, name, papers, description, icon: Icon, accent }) => (
+            <Link key={slug} to={`category/${slug}`} className="group">
+              <Card className="h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5">
+                <CardContent className="flex h-full flex-col gap-3 pt-5">
+                  <div className={`flex size-10 items-center justify-center rounded-lg ${accent}`}>
+                    <Icon className="size-5" />
+                  </div>
+                  <h4 className="text-base font-semibold">{name}</h4>
+                  <p className="flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
+                  <div className="flex items-center justify-between border-t pt-3">
+                    <span className="text-xs font-medium text-muted-foreground">{papers} papers</span>
+                    <span className="flex items-center gap-1 text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                      Explore <ArrowRight className="size-3" />
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

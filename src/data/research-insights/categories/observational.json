@@ -1,0 +1,260 @@
+{
+  "category": "observational",
+  "name": "Observational & Epidemiological Studies",
+  "description": "Epidemiological studies, patient registries, natural history studies, and surveys describing CH patterns in populations.",
+  "total_papers": 478,
+  "total_trials": 10,
+  "active_trials": 2,
+  "with_abstracts": 465,
+  "study_type_distribution": [
+    {
+      "type": "basic-science",
+      "count": 181
+    },
+    {
+      "type": "other",
+      "count": 107
+    },
+    {
+      "type": "observational",
+      "count": 102
+    },
+    {
+      "type": "review",
+      "count": 21
+    },
+    {
+      "type": "case-series",
+      "count": 15
+    },
+    {
+      "type": "meta-analysis",
+      "count": 14
+    },
+    {
+      "type": "clinical-trial",
+      "count": 11
+    },
+    {
+      "type": "case-report",
+      "count": 10
+    },
+    {
+      "type": "guideline",
+      "count": 8
+    },
+    {
+      "type": "systematic-review",
+      "count": 5
+    },
+    {
+      "type": "rct",
+      "count": 4
+    }
+  ],
+  "result_distribution": [
+    {
+      "result": "inconclusive",
+      "count": 353
+    },
+    {
+      "result": "positive",
+      "count": 69
+    },
+    {
+      "result": "negative",
+      "count": 28
+    },
+    {
+      "result": "mixed",
+      "count": 15
+    },
+    {
+      "result": "unknown",
+      "count": 13
+    }
+  ],
+  "papers_per_year": {
+    "1958": 1,
+    "1975": 2,
+    "1976": 2,
+    "1977": 2,
+    "1979": 1,
+    "1980": 2,
+    "1981": 4,
+    "1982": 3,
+    "1984": 4,
+    "1987": 4,
+    "1988": 3,
+    "1989": 8,
+    "1990": 7,
+    "1991": 10,
+    "1992": 4,
+    "1993": 6,
+    "1994": 9,
+    "1995": 14,
+    "1996": 5,
+    "1997": 10,
+    "1998": 1,
+    "1999": 9,
+    "2000": 10,
+    "2001": 1,
+    "2002": 9,
+    "2003": 10,
+    "2004": 9,
+    "2005": 15,
+    "2006": 9,
+    "2007": 9,
+    "2008": 11,
+    "2009": 13,
+    "2010": 15,
+    "2011": 9,
+    "2012": 7,
+    "2013": 9,
+    "2014": 12,
+    "2015": 13,
+    "2016": 16,
+    "2017": 17,
+    "2018": 26,
+    "2019": 16,
+    "2020": 22,
+    "2021": 20,
+    "2022": 17,
+    "2023": 14,
+    "2024": 23,
+    "2025": 27,
+    "2026": 8
+  },
+  "avg_sample_size": 599,
+  "max_sample_size": 34180,
+  "top_papers": [
+    {
+      "pmid": "41345548",
+      "title": "Cluster headache suicidality: a systematic review with a meta-analysis.",
+      "authors": "Van Obberghen EK, Fabre R, Lanteri-Minet M",
+      "year": "2025",
+      "journal": "The journal of headache and pain",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": 34180,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "30306398",
+      "title": "Systematic literature review on the delays in the diagnosis and misdiagnosis of cluster headache.",
+      "authors": "Buture A, Ahmed F, Dikomitis L et al.",
+      "year": "2019",
+      "journal": "Neurological sciences : official journal of the Italian Neurological Society and of the Italian Society of Clinical Neurophysiology",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": 4661,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "39511500",
+      "title": "German language adaptation of the Cluster Headache Quality of Life Scale (CH-QoL).",
+      "authors": "Kuhn H, Petzke T, Schreiber MC et al.",
+      "year": "2024",
+      "journal": "BMC neurology",
+      "study_type": "clinical-trial",
+      "result": "inconclusive",
+      "sample_size": 2009,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "33343621",
+      "title": "No Association Between G1246A Polymorphism in HCRTR2 Gene and Risk of Cluster Headache: Evidence From an Updated Meta-Analysis of Observational Studies.",
+      "authors": "Yang J, Yu SY, Yang J et al.",
+      "year": "2020",
+      "journal": "Frontiers in genetics",
+      "study_type": "meta-analysis",
+      "result": "negative",
+      "sample_size": 964,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "38205903",
+      "title": "Epidemiology and clinical features of paroxysmal hemicrania: A\u00a0systematic review and meta-analysis.",
+      "authors": "Henningsen MJ, Larsen JG, Karlsson WK et al.",
+      "year": "2024",
+      "journal": "Headache",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": 838,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "30156448",
+      "title": "Health Care Utilization and Direct Costs Among Patients Diagnosed with Cluster Headache in U.S. Health Care Claims Data.",
+      "authors": "Choong CK, Ford JH, Nyhuis AW et al.",
+      "year": "2018",
+      "journal": "Journal of managed care & specialty pharmacy",
+      "study_type": "rct",
+      "result": "inconclusive",
+      "sample_size": 761,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "37217887",
+      "title": "Verification of a clinical decision support system for the diagnosis of headache disorders based on patient-computer interactions: a multi-center study.",
+      "authors": "Han X, Wan D, Zhang S et al.",
+      "year": "2023",
+      "journal": "The journal of headache and pain",
+      "study_type": "guideline",
+      "result": "inconclusive",
+      "sample_size": 653,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "32484060",
+      "title": "Determination of psychosocial factors in cluster headache - construction and psychometric properties of the Cluster Headache Scales (CHS).",
+      "authors": "Klan T, Br\u00e4scher AK, Vales A et al.",
+      "year": "2020",
+      "journal": "Cephalalgia : an international journal of headache",
+      "study_type": "clinical-trial",
+      "result": "inconclusive",
+      "sample_size": 342,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "37612595",
+      "title": "Relationship between alcohol and primary headaches: a systematic review and meta-analysis.",
+      "authors": "B\u0142aszczyk B, Straburzy\u0144ski M, Wi\u0119ckiewicz M et al.",
+      "year": "2023",
+      "journal": "The journal of headache and pain",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": 173,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "39999811",
+      "title": "Prevalence of Migraine and Other Types of Primary Headache in China: A Systematic Review and Meta-Analysis.",
+      "authors": "Zhang Y, Li C, Chen N et al.",
+      "year": "2026",
+      "journal": "Neuroepidemiology",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": 170,
+      "evidence_tier": 1
+    }
+  ],
+  "active_trial_list": [
+    {
+      "nct_id": "NCT04939922",
+      "title": "China Headache and Vertigo Registry Study",
+      "status": "RECRUITING",
+      "phase": [],
+      "sponsor": "Second Affiliated Hospital, School of Medicine, Zhejiang University",
+      "enrollment": 10000
+    },
+    {
+      "nct_id": "NCT02910323",
+      "title": "The Will Erwin Headache Research Center - Cluster Headache Study",
+      "status": "RECRUITING",
+      "phase": [],
+      "sponsor": "The University of Texas Health Science Center, Houston",
+      "enrollment": 1500
+    }
+  ]
+}

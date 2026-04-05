@@ -1,0 +1,274 @@
+{
+  "category": "non-pharma",
+  "name": "Non-Pharmacological Approaches",
+  "description": "Light therapy, behavioral approaches, acupuncture, exercise, yoga. Alternative and complementary treatments.",
+  "total_papers": 220,
+  "total_trials": 5,
+  "active_trials": 3,
+  "with_abstracts": 205,
+  "study_type_distribution": [
+    {
+      "type": "basic-science",
+      "count": 75
+    },
+    {
+      "type": "other",
+      "count": 54
+    },
+    {
+      "type": "observational",
+      "count": 27
+    },
+    {
+      "type": "review",
+      "count": 18
+    },
+    {
+      "type": "case-report",
+      "count": 11
+    },
+    {
+      "type": "case-series",
+      "count": 8
+    },
+    {
+      "type": "guideline",
+      "count": 7
+    },
+    {
+      "type": "systematic-review",
+      "count": 6
+    },
+    {
+      "type": "rct",
+      "count": 6
+    },
+    {
+      "type": "meta-analysis",
+      "count": 5
+    },
+    {
+      "type": "clinical-trial",
+      "count": 3
+    }
+  ],
+  "result_distribution": [
+    {
+      "result": "inconclusive",
+      "count": 154
+    },
+    {
+      "result": "positive",
+      "count": 40
+    },
+    {
+      "result": "unknown",
+      "count": 15
+    },
+    {
+      "result": "mixed",
+      "count": 8
+    },
+    {
+      "result": "negative",
+      "count": 3
+    }
+  ],
+  "papers_per_year": {
+    "1960": 1,
+    "1977": 2,
+    "1980": 3,
+    "1981": 3,
+    "1982": 1,
+    "1983": 5,
+    "1984": 4,
+    "1985": 2,
+    "1986": 1,
+    "1987": 1,
+    "1988": 1,
+    "1989": 2,
+    "1990": 2,
+    "1991": 1,
+    "1992": 2,
+    "1993": 3,
+    "1994": 2,
+    "1995": 4,
+    "1996": 3,
+    "1997": 6,
+    "1998": 5,
+    "1999": 4,
+    "2000": 2,
+    "2001": 7,
+    "2002": 2,
+    "2003": 7,
+    "2004": 4,
+    "2005": 3,
+    "2006": 3,
+    "2007": 3,
+    "2008": 3,
+    "2009": 6,
+    "2010": 6,
+    "2011": 6,
+    "2012": 8,
+    "2013": 11,
+    "2014": 3,
+    "2015": 7,
+    "2016": 2,
+    "2017": 6,
+    "2018": 9,
+    "2019": 10,
+    "2020": 5,
+    "2021": 10,
+    "2022": 8,
+    "2023": 4,
+    "2024": 8,
+    "2025": 14,
+    "2026": 5
+  },
+  "avg_sample_size": 196,
+  "max_sample_size": 1155,
+  "top_papers": [
+    {
+      "pmid": "30007828",
+      "title": "Acupuncture for migraine without aura: a systematic review and meta-analysis.",
+      "authors": "Xu J, Zhang FQ, Pei J et al.",
+      "year": "2018",
+      "journal": "Journal of integrative medicine",
+      "study_type": "meta-analysis",
+      "result": "positive",
+      "sample_size": 1155,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "41578174",
+      "title": "Sleep macro- and microstructure in migraine and cluster headache: a systematic review of objective assessments.",
+      "authors": "Munday V, Watson E, Wei DY et al.",
+      "year": "2026",
+      "journal": "The journal of headache and pain",
+      "study_type": "systematic-review",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "38780233",
+      "title": "The critical role of neuroimaging in hemicrania continua: A\u00a0systematic review and case series.",
+      "authors": "Yildiz Goksel H, Bilgin S, Digre K et al.",
+      "year": "2024",
+      "journal": "Headache",
+      "study_type": "systematic-review",
+      "result": "inconclusive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "37486023",
+      "title": "Cluster Headache Genomewide Association Study and Meta-Analysis Identifies Eight Loci and Implicates Smoking as Causal Risk Factor.",
+      "authors": "Winsvold BS, Harder AVE, Ran C et al.",
+      "year": "2023",
+      "journal": "Annals of neurology",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "36259538",
+      "title": "Risk of dry eye in headache patients: a systematic review and meta-analysis.",
+      "authors": "Liu S, Dong H, Fang S et al.",
+      "year": "2022",
+      "journal": "Annals of medicine",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "33741810",
+      "title": "Updates on management of headache in women and transgender women.",
+      "authors": "Ailani J",
+      "year": "2021",
+      "journal": "Current opinion in neurology",
+      "study_type": "meta-analysis",
+      "result": "inconclusive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "28542727",
+      "title": "Tics in TACs: A Step into an Avalanche? Systematic Literature Review and Conclusions.",
+      "authors": "W\u00f6ber C",
+      "year": "2017",
+      "journal": "Headache",
+      "study_type": "systematic-review",
+      "result": "inconclusive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "28512119",
+      "title": "Complementary and integrative medicine in the management of headache.",
+      "authors": "Millstine D, Chen CY, Bauer B",
+      "year": "2017",
+      "journal": "BMJ (Clinical research ed.)",
+      "study_type": "systematic-review",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "26069242",
+      "title": "Diet and nutraceutical interventions for headache management: A review of the evidence.",
+      "authors": "Orr SL",
+      "year": "2016",
+      "journal": "Cephalalgia : an international journal of headache",
+      "study_type": "systematic-review",
+      "result": "positive",
+      "sample_size": null,
+      "evidence_tier": 1
+    },
+    {
+      "pmid": "20473702",
+      "title": "Prevalence of headache in Europe: a review for the Eurolight project.",
+      "authors": "Stovner LJ, Andree C",
+      "year": "2010",
+      "journal": "The journal of headache and pain",
+      "study_type": "systematic-review",
+      "result": "inconclusive",
+      "sample_size": null,
+      "evidence_tier": 1
+    }
+  ],
+  "active_trial_list": [
+    {
+      "nct_id": "NCT06540651",
+      "title": "Efficacy of Light Therapy in Treatment of Chronic Cluster Headache",
+      "status": "RECRUITING",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Assistance Publique Hopitaux De Marseille",
+      "enrollment": 48
+    },
+    {
+      "nct_id": "NCT07292090",
+      "title": "Yogabased Movements for Primary Headaches (Migraine and/or Cluster Headache) - YOURHEAD - a Pilot Study",
+      "status": "RECRUITING",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Karolinska Institutet",
+      "enrollment": 40
+    },
+    {
+      "nct_id": "NCT07348783",
+      "title": "Yogabased Movements for Primary Headaches (Migraine and/or Cluster Headache) - YOURHEAD",
+      "status": "NOT_YET_RECRUITING",
+      "phase": [
+        "NA"
+      ],
+      "sponsor": "Karolinska Institutet",
+      "enrollment": 80
+    }
+  ]
+}
