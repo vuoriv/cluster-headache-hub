@@ -48,7 +48,7 @@ export function CbTreatmentRankings({ rankings, onNavigate }: CbTreatmentRanking
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="min-h-[500px] w-full">
+        <ChartContainer config={chartConfig} style={{ height: `${chartData.length * 40 + 40}px` }} className="w-full">
           <BarChart data={chartData} layout="vertical" margin={{ left: 8, right: 16 }}>
             <CartesianGrid horizontal={false} />
             <YAxis
