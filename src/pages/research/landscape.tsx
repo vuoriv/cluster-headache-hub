@@ -15,6 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   ChartContainer,
   ChartTooltip,
@@ -31,7 +32,7 @@ import {
   CartesianGrid,
   Legend,
 } from "recharts"
-import paperStats from "@/data/research-insights/paper-stats.json"
+import { useDataDb } from "@/lib/data-db"
 
 const studyTypeConfig: ChartConfig = {
   count: { label: "Papers", color: "oklch(0.65 0.15 250)" },
@@ -99,36 +100,36 @@ const TIER_LABELS: Record<number, string> = {
 }
 
 export function ResearchLandscape() {
-  const years = Object.keys(paperStats.papers_per_year)
-  const yearRange = `${years[0]}–${years[years.length - 1]}`
-  const rctCount =
-    paperStats.study_type_distribution.find((s) => s.type === "rct")?.count ?? 0
+  const { loading, getResearchStats } = useDataDb()
 
-  const studyTypeData = useMemo(
-    () =>
-      paperStats.study_type_distribution
-        .filter((s) => s.type !== "other")
-        .sort((a, b) => a.count - b.count)
-        .map((s) => ({
-          type: STUDY_TYPE_LABELS[s.type] ?? s.type,
-          count: s.count,
-        })),
-    []
-  )
+  const stats = useMemo(() => {
+    if (loading) return null
+    return getResearchStats()
+  }, [loading, getResearchStats])
 
-  const evidenceTierData = useMemo(
-    () =>
-      paperStats.evidence_tier_distribution.map((t) => ({
-        tier: TIER_LABELS[t.tier] ?? `Tier ${t.tier}`,
-        shortTier: `Tier ${t.tier}`,
-        count: t.count,
-      })),
-    []
-  )
+  const studyTypeData = useMemo(() => {
+    if (!stats) return []
+    return (stats.study_type_distribution as Array<{ type: string; count: number }>)
+      .filter((s) => s.type !== "other")
+      .sort((a, b) => a.count - b.count)
+      .map((s) => ({
+        type: STUDY_TYPE_LABELS[s.type] ?? s.type,
+        count: s.count,
+      }))
+  }, [stats])
+
+  const evidenceTierData = useMemo(() => {
+    if (!stats) return []
+    return (stats.evidence_tier_distribution as Array<{ tier: number; count: number }>).map((t) => ({
+      tier: TIER_LABELS[t.tier] ?? `Tier ${t.tier}`,
+      shortTier: `Tier ${t.tier}`,
+      count: t.count,
+    }))
+  }, [stats])
 
   const papersPerYearData = useMemo(() => {
-    const entries = Object.entries(paperStats.papers_per_year)
-    // Group by 5-year bins for readability
+    if (!stats) return []
+    const entries = Object.entries(stats.papers_per_year as Record<string, number>)
     const binned: Record<string, number> = {}
     for (const [year, count] of entries) {
       const y = parseInt(year)
@@ -143,11 +144,14 @@ export function ResearchLandscape() {
     return Object.entries(binned)
       .map(([year, papers]) => ({ year, papers }))
       .sort((a, b) => a.year.localeCompare(b.year))
-  }, [])
+  }, [stats])
 
   const categoryData = useMemo(() => {
+    if (!stats) return []
     const totals: Record<string, number> = {}
-    for (const [cat, results] of Object.entries(paperStats.category_results)) {
+    for (const [cat, results] of Object.entries(
+      stats.category_results as Record<string, Array<{ result: string; count: number }>>
+    )) {
       totals[cat] = results.reduce((sum, r) => sum + r.count, 0)
     }
     return Object.entries(totals)
@@ -157,7 +161,7 @@ export function ResearchLandscape() {
         category: CATEGORY_LABELS[cat] ?? cat,
         count,
       }))
-  }, [])
+  }, [stats])
 
   const volumeConfig = useMemo(() => {
     const config: ChartConfig = {}
@@ -172,13 +176,12 @@ export function ResearchLandscape() {
   }, [])
 
   const volumeData = useMemo(() => {
+    if (!stats) return []
     const categories = ["psychedelic", "cgrp", "neuromodulation", "oxygen", "nerve-block"]
+    const volumeByCategory = stats.research_volume_by_category as Record<string, Record<string, number>>
     const allYears = new Set<number>()
     for (const cat of categories) {
-      const yearMap =
-        paperStats.research_volume_by_category[
-          cat as keyof typeof paperStats.research_volume_by_category
-        ]
+      const yearMap = volumeByCategory[cat]
       if (yearMap) {
         for (const y of Object.keys(yearMap)) allYears.add(parseInt(y))
       }
@@ -186,7 +189,6 @@ export function ResearchLandscape() {
 
     const sortedYears = Array.from(allYears).sort((a, b) => a - b)
 
-    // 3-year rolling bins for smoother visualization
     const binSize = 3
     const binned: Array<Record<string, string | number>> = []
     for (let i = 0; i < sortedYears.length; i += binSize) {
@@ -197,20 +199,42 @@ export function ResearchLandscape() {
           : `${binYears[0]}–${binYears[binYears.length - 1]}`
       const row: Record<string, string | number> = { year: label }
       for (const cat of categories) {
-        const yearMap =
-          paperStats.research_volume_by_category[
-            cat as keyof typeof paperStats.research_volume_by_category
-          ]
+        const yearMap = volumeByCategory[cat]
         let sum = 0
         for (const y of binYears) {
-          sum += (yearMap as Record<string, number>)?.[String(y)] ?? 0
+          sum += yearMap?.[String(y)] ?? 0
         }
         row[cat] = sum
       }
       binned.push(row)
     }
     return binned
-  }, [])
+  }, [stats])
+
+  if (loading || !stats) {
+    return (
+      <div className="flex flex-col gap-8">
+        <Skeleton className="h-5 w-32" />
+        <div className="flex flex-col gap-3">
+          <Skeleton className="h-9 w-64" />
+          <Skeleton className="h-6 w-full max-w-2xl" />
+        </div>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Skeleton key={i} className="h-[80px] rounded-xl" />
+          ))}
+        </div>
+        <Skeleton className="h-[300px] rounded-xl" />
+      </div>
+    )
+  }
+
+  const years = Object.keys(stats.papers_per_year as Record<string, number>)
+  const yearRange = `${years[0]}–${years[years.length - 1]}`
+  const rctCount =
+    (stats.study_type_distribution as Array<{ type: string; count: number }>).find(
+      (s) => s.type === "rct"
+    )?.count ?? 0
 
   return (
     <div className="flex flex-col gap-8">
@@ -229,7 +253,7 @@ export function ResearchLandscape() {
         </h1>
         <p className="mt-2 text-lg text-muted-foreground leading-relaxed max-w-2xl">
           <span className="font-semibold text-foreground">
-            {paperStats.total_papers.toLocaleString()} papers
+            {(stats.paper_count as number).toLocaleString()} papers
           </span>{" "}
           spanning {yearRange} — here is what cluster headache research looks
           like. From a handful of case reports in the 1940s to over 150 papers
@@ -246,7 +270,7 @@ export function ResearchLandscape() {
             </div>
             <div>
               <p className="text-2xl font-bold">
-                {paperStats.total_papers.toLocaleString()}
+                {(stats.paper_count as number).toLocaleString()}
               </p>
               <p className="text-xs text-muted-foreground">Total Papers</p>
             </div>
@@ -259,7 +283,7 @@ export function ResearchLandscape() {
             </div>
             <div>
               <p className="text-2xl font-bold">
-                {paperStats.with_abstracts.toLocaleString()}
+                {(stats.papers_with_abstracts as number).toLocaleString()}
               </p>
               <p className="text-xs text-muted-foreground">With Summaries</p>
             </div>
@@ -301,7 +325,7 @@ export function ResearchLandscape() {
             <CardDescription className="text-xs">
               What kinds of studies exist? "RCT" (randomized controlled trial) is the gold standard —
               patients are randomly assigned to treatment or placebo. "Basic science" means lab/imaging
-              research, not patient studies. Only {rctCount} RCTs exist out of {paperStats.total_papers.toLocaleString()} papers.
+              research, not patient studies. Only {rctCount} RCTs exist out of {(stats.paper_count as number).toLocaleString()} papers.
             </CardDescription>
           </CardHeader>
           <CardContent>

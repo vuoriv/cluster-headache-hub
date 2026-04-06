@@ -7,42 +7,19 @@ import { Separator } from "@/components/ui/separator"
 import { Bar, BarChart, AreaChart, Area, XAxis, YAxis, CartesianGrid } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart"
 import { CATEGORY_CONFIG, STATUS_CONFIG, phaseLabel } from "@/lib/research-categories"
+import { useDataDb, type CategoryStats } from "@/lib/data-db"
 
-// Import all category data files
-const categoryModules = import.meta.glob("@/data/research-insights/categories/*.json", { eager: true }) as Record<string, { default: CategoryData }>
-
-interface CategoryData {
-  category: string
-  name: string
-  description: string
-  total_papers: number
-  total_trials: number
-  active_trials: number
-  with_abstracts: number
-  study_type_distribution: Array<{ type: string; count: number }>
-  result_distribution: Array<{ result: string; count: number }>
-  papers_per_year: Record<string, number>
-  avg_sample_size: number | null
-  max_sample_size: number | null
-  top_papers: Array<{
-    pmid: string; title: string; authors: string; year: string
-    journal: string; study_type: string; result: string
-    sample_size: number | null; evidence_tier: number
-  }>
-  all_trials: Array<{
-    nct_id: string; title: string; status: string
-    phase: string[]; sponsor: string; enrollment: number | null
-    what_tested?: string; key_result?: string; verdict?: string
-    patient_relevance?: string; dose_tested?: string | null
-  }>
-  active_trial_count: number
-}
-
-function getCategoryData(slug: string): CategoryData | null {
-  const key = Object.keys(categoryModules).find((k) => k.includes(`/${slug}.json`))
-  if (!key) return null
-  const mod = categoryModules[key] as { default: CategoryData } | CategoryData
-  return "default" in mod ? mod.default : (mod as CategoryData)
+const CATEGORY_META: Record<string, { name: string; description: string }> = {
+  cgrp: { name: "CGRP Therapies", description: "Calcitonin gene-related peptide (CGRP) monoclonal antibodies and gepants. Galcanezumab is the only approved anti-CGRP for episodic CH." },
+  "nerve-block": { name: "Nerve Blocks & Injections", description: "Greater occipital nerve blocks, sphenopalatine ganglion blocks, botulinum toxin injections. Procedural interventions for refractory cases." },
+  neuromodulation: { name: "Neuromodulation & Stimulation", description: "Vagus nerve stimulation (gammaCore), occipital nerve stimulation, deep brain stimulation. Device-based therapies." },
+  "non-pharma": { name: "Non-Pharmacological Approaches", description: "Light therapy, behavioral approaches, acupuncture, exercise, yoga. Alternative and complementary treatments." },
+  observational: { name: "Observational & Epidemiological Studies", description: "Epidemiological studies, patient registries, natural history studies, and surveys describing CH patterns in populations." },
+  other: { name: "Other Research", description: "Cross-cutting research: genetics, neuroimaging, pathophysiology, diagnostic criteria, and general headache medicine." },
+  oxygen: { name: "Oxygen Therapy", description: "High-flow oxygen therapy — the community's #1 abortive. Evidence spans from early case reports to modern RCTs confirming 78% efficacy." },
+  pharmacology: { name: "Pharmacological Treatments", description: "Traditional pharmaceutical treatments: verapamil, lithium, prednisone, melatonin, triptans. The established medical toolkit." },
+  psychedelic: { name: "Psychedelic Treatments", description: "Psilocybin, LSD, BOL-148, and other psychedelic compounds for cluster headache. The community's most-discussed treatment category, now backed by Phase 2 clinical trials." },
+  "vitamin-d": { name: "Vitamin D Research", description: "Vitamin D3 regimen (Batch protocol). Emerging research area with strong community anecdotal support but limited clinical trial data so far." },
 }
 
 const STUDY_TYPE_LABELS: Record<string, string> = {
@@ -92,17 +69,37 @@ const chartConfig: ChartConfig = {
 
 export function CategoryPage() {
   const { slug } = useParams<{ slug: string }>()
-  const data = useMemo(() => (slug ? getCategoryData(slug) : null), [slug])
+  const { loading, getCategoryStats, searchPapers, searchTrials, getTrialAnalysis, getPaperAnalysis } = useDataDb()
 
-  if (!slug || !data) {
+  const data = useMemo((): CategoryStats | null => {
+    if (loading || !slug) return null
+    return getCategoryStats(slug)
+  }, [loading, slug, getCategoryStats])
+
+  const topPapers = useMemo(() => {
+    if (loading || !slug) return []
+    return searchPapers({ category: slug, limit: 15 })
+  }, [loading, slug, searchPapers])
+
+  const categoryTrials = useMemo(() => {
+    if (loading || !slug) return []
+    return searchTrials({ category: slug })
+  }, [loading, slug, searchTrials])
+
+  if (!slug || (!loading && !data)) {
     return <Navigate to="/research" replace />
   }
 
+  if (loading || !data) {
+    return null
+  }
+
+  const meta = CATEGORY_META[data.category]
   const catConfig = CATEGORY_CONFIG[data.category]
-  const yearData = Object.entries(data.papers_per_year)
+  const yearData = Object.entries(data.papersPerYear)
     .map(([year, count]) => ({ year, count }))
     .filter((d) => parseInt(d.year) >= 2000)
-  const positiveCount = data.result_distribution.find((r) => r.result === "positive")?.count ?? 0
+  const positiveCount = data.resultDistribution.find((r) => r.result === "positive")?.count ?? 0
 
   return (
     <div className="flex flex-col gap-8">
@@ -113,20 +110,22 @@ export function CategoryPage() {
       {/* Header */}
       <div>
         <div className="flex items-center gap-3">
-          <h2 className="text-2xl font-bold">{data.name}</h2>
+          <h2 className="text-2xl font-bold">{meta?.name ?? catConfig?.label ?? slug}</h2>
           {catConfig && <Badge variant={catConfig.variant}>{catConfig.label}</Badge>}
         </div>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          {data.description}
-        </p>
+        {meta?.description && (
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+            {meta.description}
+          </p>
+        )}
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard icon={<FileText className="size-4" />} value={data.total_papers} label="Papers" />
+        <StatCard icon={<FileText className="size-4" />} value={data.paperCount} label="Papers" />
         <StatCard icon={<TrendingUp className="size-4" />} value={positiveCount} label="Showed Benefit" />
-        <StatCard icon={<FlaskConical className="size-4" />} value={data.active_trials} label="Active Trials" />
-        <StatCard icon={<Users className="size-4" />} value={data.avg_sample_size ?? "—"} label="Avg Sample Size" />
+        <StatCard icon={<FlaskConical className="size-4" />} value={data.activeTrialCount} label="Active Trials" />
+        <StatCard icon={<Users className="size-4" />} value={data.trialCount} label="Trials" />
       </div>
 
       <Separator />
@@ -141,8 +140,8 @@ export function CategoryPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} style={{ height: `${Math.min(data.study_type_distribution.length, 8) * 24 + 24}px` }} className="w-full">
-              <BarChart data={data.study_type_distribution.slice(0, 8)} layout="vertical" margin={{ left: 8 }}>
+            <ChartContainer config={chartConfig} style={{ height: `${Math.min(data.studyTypeDistribution.length, 8) * 24 + 24}px` }} className="w-full">
+              <BarChart data={data.studyTypeDistribution.slice(0, 8)} layout="vertical" margin={{ left: 8 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 10 }} />
                 <YAxis
@@ -168,10 +167,10 @@ export function CategoryPage() {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-3 pt-2">
-              {data.result_distribution
+              {data.resultDistribution
                 .filter((r) => r.result !== "unknown")
                 .map((r) => {
-                  const total = data.result_distribution.reduce((s, x) => s + x.count, 0)
+                  const total = data.resultDistribution.reduce((s, x) => s + x.count, 0)
                   const pct = total > 0 ? Math.round((r.count / total) * 100) : 0
                   return (
                     <div key={r.result} className="flex items-center gap-3">
@@ -217,79 +216,83 @@ export function CategoryPage() {
       <Separator />
 
       {/* Key Studies */}
-      {data.top_papers.length > 0 && (
+      {topPapers.length > 0 && (
         <div>
           <h3 className="mb-4 text-lg font-semibold">Key Studies</h3>
           <p className="mb-4 text-xs text-muted-foreground">
             The most important papers in this category, ranked by evidence strength and sample size.
           </p>
           <div className="flex flex-col gap-2">
-            {data.top_papers.map((p) => (
-              <Card key={p.pmid} className="hover:shadow-sm transition-all">
-                <CardContent className="py-3">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0 flex-1">
-                      <h4 className="text-sm font-medium leading-snug">{p.title}</h4>
-                      <p className="mt-1 text-xs text-muted-foreground">{p.authors}</p>
-                    </div>
-                    <a
-                      href={`https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="shrink-0 text-muted-foreground hover:text-primary"
-                    >
-                      <ExternalLink className="size-3.5" />
-                    </a>
-                  </div>
-                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                    {p.result && (
-                      <Badge
-                        variant={p.result === "positive" ? "success" : p.result === "negative" ? "destructive" : "secondary"}
-                        className="text-[0.6rem]"
+            {topPapers.map((p) => {
+              const analysis = getPaperAnalysis(p.pmid)
+              return (
+                <Card key={p.pmid} className="hover:shadow-sm transition-all">
+                  <CardContent className="py-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0 flex-1">
+                        <h4 className="text-sm font-medium leading-snug">{p.title}</h4>
+                        <p className="mt-1 text-xs text-muted-foreground">{p.authors}</p>
+                      </div>
+                      <a
+                        href={`https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="shrink-0 text-muted-foreground hover:text-primary"
                       >
-                        {RESULT_LABELS[p.result] ?? p.result}
-                      </Badge>
-                    )}
-                    {p.study_type && (
-                      <Badge variant="outline" className="text-[0.6rem]">
-                        {STUDY_TYPE_LABELS[p.study_type] ?? p.study_type}
-                      </Badge>
-                    )}
-                    {p.year && (
-                      <Badge variant="outline" className="text-[0.6rem]">{p.year}</Badge>
-                    )}
-                    {p.sample_size && (
-                      <span className="text-[0.6rem] text-muted-foreground">n={p.sample_size}</span>
-                    )}
-                    <span className="text-[0.6rem] text-muted-foreground">{p.journal}</span>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                        <ExternalLink className="size-3.5" />
+                      </a>
+                    </div>
+                    <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                      {analysis?.outcome && (
+                        <Badge
+                          variant={analysis.outcome === "positive" ? "success" : analysis.outcome === "negative" ? "destructive" : "secondary"}
+                          className="text-[0.6rem]"
+                        >
+                          {RESULT_LABELS[analysis.outcome] ?? analysis.outcome}
+                        </Badge>
+                      )}
+                      {analysis?.studyType && (
+                        <Badge variant="outline" className="text-[0.6rem]">
+                          {STUDY_TYPE_LABELS[analysis.studyType] ?? analysis.studyType}
+                        </Badge>
+                      )}
+                      {p.pubDate && (
+                        <Badge variant="outline" className="text-[0.6rem]">{p.pubDate.slice(0, 4)}</Badge>
+                      )}
+                      {analysis?.sampleSize && (
+                        <span className="text-[0.6rem] text-muted-foreground">n={analysis.sampleSize}</span>
+                      )}
+                      <span className="text-[0.6rem] text-muted-foreground">{p.journal}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         </div>
       )}
 
       {/* All Trials with Analysis */}
-      {data.all_trials.length > 0 && (
+      {categoryTrials.length > 0 && (
         <>
           <Separator />
           <div>
             <h3 className="mb-2 text-lg font-semibold">Clinical Trials</h3>
             <p className="mb-4 text-xs text-muted-foreground">
-              {data.all_trials.length} trials in this category — what was tested, what happened, and what's coming.
+              {categoryTrials.length} trials in this category — what was tested, what happened, and what's coming.
             </p>
             <div className="flex flex-col gap-3">
-              {data.all_trials.map((t) => {
+              {categoryTrials.map((t) => {
+                const analysis = getTrialAnalysis(t.nctId)
                 const statCfg = STATUS_CONFIG[t.status]
-                const verdictCfg = VERDICT_CONFIG[t.verdict ?? "unknown"]
+                const verdictCfg = VERDICT_CONFIG[analysis?.verdict ?? "unknown"]
                 return (
-                  <Card key={t.nct_id} className="hover:shadow-sm transition-all">
+                  <Card key={t.nctId} className="hover:shadow-sm transition-all">
                     <CardContent className="py-4">
                       <div className="flex items-start justify-between gap-3">
                         <h4 className="text-sm font-semibold leading-snug">{t.title}</h4>
                         <a
-                          href={`https://clinicaltrials.gov/study/${t.nct_id}`}
+                          href={`https://clinicaltrials.gov/study/${t.nctId}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="shrink-0 text-muted-foreground hover:text-primary"
@@ -304,25 +307,25 @@ export function CategoryPage() {
                         {verdictCfg && <Badge variant={verdictCfg.variant} className="text-[0.6rem]">{verdictCfg.label}</Badge>}
                         <Badge variant="outline" className="text-[0.6rem]">{phaseLabel(t.phase)}</Badge>
                         {t.enrollment && <span className="text-[0.6rem] text-muted-foreground">n={t.enrollment}</span>}
-                        {t.dose_tested && <Badge variant="outline" className="text-[0.6rem]">{t.dose_tested}</Badge>}
+                        {analysis?.doseTested && <Badge variant="outline" className="text-[0.6rem]">{analysis.doseTested}</Badge>}
                       </div>
 
-                      {t.what_tested && (
+                      {analysis?.whatTested && (
                         <div className="mt-3 rounded-md bg-muted/40 p-3">
                           <p className="text-xs leading-relaxed">
                             <span className="font-medium">What was tested: </span>
-                            <span className="text-muted-foreground">{t.what_tested}</span>
+                            <span className="text-muted-foreground">{analysis.whatTested}</span>
                           </p>
-                          {t.key_result && (
+                          {analysis.keyResult && (
                             <p className="mt-1.5 text-xs leading-relaxed">
                               <span className="font-medium">Result: </span>
-                              <span className="text-muted-foreground">{t.key_result}</span>
+                              <span className="text-muted-foreground">{analysis.keyResult}</span>
                             </p>
                           )}
-                          {t.patient_relevance && (
+                          {analysis.patientRelevance && (
                             <p className="mt-1.5 text-xs leading-relaxed">
                               <span className="font-medium">For patients: </span>
-                              <span className="text-muted-foreground">{t.patient_relevance}</span>
+                              <span className="text-muted-foreground">{analysis.patientRelevance}</span>
                             </p>
                           )}
                         </div>

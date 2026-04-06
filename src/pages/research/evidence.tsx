@@ -15,6 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   ChartContainer,
   ChartTooltip,
@@ -32,8 +33,7 @@ import {
   CartesianGrid,
   Legend,
 } from "recharts"
-import paperStats from "@/data/research-insights/paper-stats.json"
-import trialStats from "@/data/research-insights/trial-stats.json"
+import { useDataDb } from "@/lib/data-db"
 
 const RESULT_COLORS: Record<string, string> = {
   positive: "oklch(0.65 0.18 155)",
@@ -112,12 +112,23 @@ const sponsorConfig: ChartConfig = {
 }
 
 export function EvidenceDashboard() {
+  const { loading, getResearchStats } = useDataDb()
+
+  const stats = useMemo(() => {
+    if (loading) return null
+    return getResearchStats()
+  }, [loading, getResearchStats])
+
+  const resultDistribution = stats?.result_distribution as Array<{ result: string; count: number }> ?? []
+  const studyTypeDistribution = stats?.study_type_distribution as Array<{ type: string; count: number }> ?? []
+const categoryResults = stats?.category_results as Record<string, Array<{ result: string; count: number }>> ?? {}
+  const categoryAvgEvidence = stats?.category_avg_evidence as Record<string, number> ?? {}
+  const trialStatusDistribution = stats?.trial_status_distribution as Array<{ status: string; count: number }> ?? []
+  const trialTopSponsors = stats?.trial_top_sponsors as Array<{ sponsor: string; count: number }> ?? []
+
   const knownResults = useMemo(
-    () =>
-      paperStats.result_distribution.filter(
-        (r) => r.result !== "unknown"
-      ),
-    []
+    () => resultDistribution.filter((r) => r.result !== "unknown"),
+    [resultDistribution]
   )
 
   const totalKnown = useMemo(
@@ -126,34 +137,29 @@ export function EvidenceDashboard() {
   )
 
   const positiveCount =
-    paperStats.result_distribution.find((r) => r.result === "positive")
-      ?.count ?? 0
+    resultDistribution.find((r) => r.result === "positive")?.count ?? 0
   const negativeCount =
-    paperStats.result_distribution.find((r) => r.result === "negative")
-      ?.count ?? 0
-  const positivePercent = Math.round((positiveCount / totalKnown) * 100)
-  const negativePercent = Math.round((negativeCount / totalKnown) * 100)
+    resultDistribution.find((r) => r.result === "negative")?.count ?? 0
+  const positivePercent = totalKnown > 0 ? Math.round((positiveCount / totalKnown) * 100) : 0
+  const negativePercent = totalKnown > 0 ? Math.round((negativeCount / totalKnown) * 100) : 0
 
   const activeTrials = useMemo(
     () =>
-      trialStats.status_distribution
+      trialStatusDistribution
         .filter((s) =>
           ["RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING", "ENROLLING_BY_INVITATION"].includes(
             s.status
           )
         )
         .reduce((sum, s) => sum + s.count, 0),
-    []
+    [trialStatusDistribution]
   )
 
   const rctPositive = useMemo(() => {
-    // Approximate: among papers with known results, positive fraction
-    // This is a simplified view from the available data
     const rctCount =
-      paperStats.study_type_distribution.find((s) => s.type === "rct")
-        ?.count ?? 0
+      studyTypeDistribution.find((s) => s.type === "rct")?.count ?? 0
     return rctCount
-  }, [])
+  }, [studyTypeDistribution])
 
   const resultPieData = useMemo(
     () =>
@@ -169,18 +175,18 @@ export function EvidenceDashboard() {
 
   const evidenceQualityData = useMemo(
     () =>
-      Object.entries(paperStats.category_avg_evidence)
+      Object.entries(categoryAvgEvidence)
         .filter(([cat]) => cat !== "other")
         .sort((a, b) => a[1] - b[1])
         .map(([cat, score]) => ({
           category: CATEGORY_LABELS[cat] ?? cat,
           score: Number(score.toFixed(2)),
         })),
-    []
+    [categoryAvgEvidence]
   )
 
   const categoryResultData = useMemo(() => {
-    const categories = Object.entries(paperStats.category_results)
+    const categories = Object.entries(categoryResults)
       .filter(([cat]) => cat !== "other")
       .map(([cat, results]) => {
         const pos = results.find((r) => r.result === "positive")?.count ?? 0
@@ -196,28 +202,32 @@ export function EvidenceDashboard() {
       })
       .sort((a, b) => b.total - a.total)
     return categories
-  }, [])
+  }, [categoryResults])
 
   const trialStatusData = useMemo(
     () =>
-      trialStats.status_distribution.map((s) => ({
+      trialStatusDistribution.map((s) => ({
         status: STATUS_LABELS[s.status] ?? s.status,
         count: s.count,
         key: s.status,
       })),
-    []
+    [trialStatusDistribution]
   )
 
   const topSponsorsData = useMemo(
     () =>
-      trialStats.top_sponsors.slice(0, 10).map((s) => ({
+      trialTopSponsors.slice(0, 10).map((s) => ({
         sponsor:
           s.sponsor.length > 35 ? s.sponsor.slice(0, 33) + "..." : s.sponsor,
         fullName: s.sponsor,
         count: s.count,
       })),
-    []
+    [trialTopSponsors]
   )
+
+  const totalTrials = stats?.trial_count as number ?? 0
+  const completedCount = trialStatusDistribution.find((s) => s.status === "COMPLETED")?.count ?? 0
+  const recruitingCount = trialStatusDistribution.find((s) => s.status === "RECRUITING")?.count ?? 0
 
   return (
     <div className="flex flex-col gap-8">
@@ -247,52 +257,60 @@ export function EvidenceDashboard() {
 
       {/* Key Stats */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <Card>
-          <CardContent className="flex items-center gap-3 pt-4">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-500 dark:bg-emerald-950/40 dark:text-emerald-400">
-              <CheckCircle2 className="size-5" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">{positivePercent}%</p>
-              <p className="text-xs text-muted-foreground">Studies Showing Benefit</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="flex items-center gap-3 pt-4">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-red-50 text-red-500 dark:bg-red-950/40 dark:text-red-400">
-              <XCircle className="size-5" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">{negativePercent}%</p>
-              <p className="text-xs text-muted-foreground">Studies Showing No Benefit</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="flex items-center gap-3 pt-4">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-blue-50 text-blue-500 dark:bg-blue-950/40 dark:text-blue-400">
-              <FlaskConical className="size-5" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">{rctPositive}</p>
-              <p className="text-xs text-muted-foreground">Clinical Trials (RCTs)</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="flex items-center gap-3 pt-4">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-amber-50 text-amber-500 dark:bg-amber-950/40 dark:text-amber-400">
-              <Activity className="size-5" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">{activeTrials}</p>
-              <p className="text-xs text-muted-foreground">
-                Active Clinical Trials
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+        {loading || !stats ? (
+          Array.from({ length: 4 }).map((_, i) => (
+            <Skeleton key={i} className="h-[80px] rounded-xl" />
+          ))
+        ) : (
+          <>
+            <Card>
+              <CardContent className="flex items-center gap-3 pt-4">
+                <div className="flex size-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-500 dark:bg-emerald-950/40 dark:text-emerald-400">
+                  <CheckCircle2 className="size-5" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">{positivePercent}%</p>
+                  <p className="text-xs text-muted-foreground">Studies Showing Benefit</p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="flex items-center gap-3 pt-4">
+                <div className="flex size-10 items-center justify-center rounded-lg bg-red-50 text-red-500 dark:bg-red-950/40 dark:text-red-400">
+                  <XCircle className="size-5" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">{negativePercent}%</p>
+                  <p className="text-xs text-muted-foreground">Studies Showing No Benefit</p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="flex items-center gap-3 pt-4">
+                <div className="flex size-10 items-center justify-center rounded-lg bg-blue-50 text-blue-500 dark:bg-blue-950/40 dark:text-blue-400">
+                  <FlaskConical className="size-5" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">{rctPositive}</p>
+                  <p className="text-xs text-muted-foreground">Clinical Trials (RCTs)</p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="flex items-center gap-3 pt-4">
+                <div className="flex size-10 items-center justify-center rounded-lg bg-amber-50 text-amber-500 dark:bg-amber-950/40 dark:text-amber-400">
+                  <Activity className="size-5" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">{activeTrials}</p>
+                  <p className="text-xs text-muted-foreground">
+                    Active Clinical Trials
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </>
+        )}
       </div>
 
       <Separator />
@@ -441,7 +459,7 @@ export function EvidenceDashboard() {
       <div>
         <h2 className="text-2xl font-bold tracking-tight">Clinical Trials</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Data from {trialStats.total_trials} registered clinical trials on
+          Data from {totalTrials} registered clinical trials on
           ClinicalTrials.gov.
         </p>
       </div>
@@ -451,9 +469,9 @@ export function EvidenceDashboard() {
           <CardHeader>
             <CardTitle className="text-sm">Trial Status Distribution</CardTitle>
             <CardDescription className="text-xs">
-              {trialStats.status_distribution.find((s) => s.status === "COMPLETED")?.count ?? 0}{" "}
+              {completedCount}{" "}
               completed,{" "}
-              {trialStats.status_distribution.find((s) => s.status === "RECRUITING")?.count ?? 0}{" "}
+              {recruitingCount}{" "}
               currently recruiting.
             </CardDescription>
           </CardHeader>

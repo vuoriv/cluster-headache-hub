@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react"
 import { Link } from "react-router-dom"
-import trialAnalyses from "@/data/trials/trial-analyses.json"
 import {
   FlaskConical,
   Search,
@@ -333,16 +332,6 @@ function TrialCard({
   )
 }
 
-interface TrialAnalysisData {
-  nct_id: string
-  what_tested: string
-  key_result: string
-  verdict: string
-  patient_relevance: string
-  dose_tested: string | null
-  sample_size: number | null
-}
-
 const VERDICT_BADGES: Record<string, { label: string; variant: "success" | "destructive" | "warning" | "info" | "secondary" | "outline" }> = {
   success: { label: "Succeeded", variant: "success" },
   failure: { label: "Failed", variant: "destructive" },
@@ -353,7 +342,8 @@ const VERDICT_BADGES: Record<string, { label: string; variant: "success" | "dest
 }
 
 function TrialAnalysis({ nctId }: { nctId: string }) {
-  const analysis = (trialAnalyses as TrialAnalysisData[]).find((a) => a.nct_id === nctId)
+  const { getTrialAnalysis } = useDataDb()
+  const analysis = getTrialAnalysis(nctId)
   if (!analysis) return null
 
   const badge = VERDICT_BADGES[analysis.verdict]
@@ -366,8 +356,8 @@ function TrialAnalysis({ nctId }: { nctId: string }) {
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-semibold">Analysis</span>
             {badge && <Badge variant={badge.variant} className="text-[0.6rem]">{badge.label}</Badge>}
-            {analysis.dose_tested && (
-              <Badge variant="outline" className="text-[0.6rem]">{analysis.dose_tested}</Badge>
+            {analysis.doseTested && (
+              <Badge variant="outline" className="text-[0.6rem]">{analysis.doseTested}</Badge>
             )}
           </div>
         </div>
@@ -376,17 +366,17 @@ function TrialAnalysis({ nctId }: { nctId: string }) {
       <div className="flex flex-col gap-2 pl-5.5">
         <p className="text-xs leading-relaxed">
           <span className="font-medium">What was tested: </span>
-          <span className="text-muted-foreground">{analysis.what_tested}</span>
+          <span className="text-muted-foreground">{analysis.whatTested}</span>
         </p>
-        {analysis.key_result && (
+        {analysis.keyResult && (
           <p className="text-xs leading-relaxed">
             <span className="font-medium">Result: </span>
-            <span className="text-muted-foreground">{analysis.key_result}</span>
+            <span className="text-muted-foreground">{analysis.keyResult}</span>
           </p>
         )}
         <p className="text-xs leading-relaxed">
           <span className="font-medium">For patients: </span>
-          <span className="text-muted-foreground">{analysis.patient_relevance}</span>
+          <span className="text-muted-foreground">{analysis.patientRelevance}</span>
         </p>
       </div>
     </div>
