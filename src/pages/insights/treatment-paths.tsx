@@ -129,7 +129,7 @@ export function TreatmentPaths() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={barConfig} className="h-[200px] w-full">
+            <ChartContainer config={barConfig} className="aspect-[4/3] w-full">
               <BarChart data={data.toolkit_size_distribution} margin={{ left: 0, right: 0 }}>
                 <CartesianGrid vertical={false} />
                 <XAxis dataKey="size" tickLine={false} axisLine={false} />
@@ -149,11 +149,11 @@ export function TreatmentPaths() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={barConfig} className="h-[200px] w-full">
-              <BarChart data={data.full_toolkit_ranking.slice(0, 8)} layout="vertical" margin={{ left: 80, right: 10 }}>
+            <ChartContainer config={barConfig} style={{ height: `${Math.min(data.full_toolkit_ranking.length, 8) * 32 + 40}px` }} className="w-full">
+              <BarChart data={data.full_toolkit_ranking.slice(0, 8)} layout="vertical" margin={{ left: 8, right: 10 }}>
                 <CartesianGrid horizontal={false} />
                 <XAxis type="number" tickLine={false} axisLine={false} />
-                <YAxis type="category" dataKey="treatment" tickLine={false} axisLine={false} width={80} tick={{ fontSize: 10 }} />
+                <YAxis type="category" dataKey="treatment" tickLine={false} axisLine={false} width={80} tick={{ fontSize: 9 }} />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Bar dataKey="count" fill="var(--chart-2)" radius={[0, 4, 4, 0]} />
               </BarChart>

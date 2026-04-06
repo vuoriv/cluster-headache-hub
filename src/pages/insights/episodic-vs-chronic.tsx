@@ -183,13 +183,13 @@ export function EpisodicVsChronic() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={comparisonChartConfig} className="h-[280px] w-full">
-              <BarChart data={comparisonData} layout="vertical" margin={{ top: 4, right: 8, bottom: 4, left: 80 }}>
+            <ChartContainer config={comparisonChartConfig} style={{ height: `${comparisonData.length * 28 + 60}px` }} className="w-full">
+              <BarChart data={comparisonData} layout="vertical" margin={{ top: 4, right: 8, bottom: 4, left: 8 }}>
                 <CartesianGrid horizontal={false} strokeDasharray="3 3" />
                 <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />
                 <YAxis type="category" dataKey="treatment" tickLine={false} axisLine={false} tick={{ fontSize: 9 }} width={80} />
                 <ChartTooltip content={<ChartTooltipContent />} />
-                <Legend wrapperStyle={{ fontSize: 10 }} />
+                <Legend wrapperStyle={{ fontSize: 10, display: "flex", flexWrap: "wrap", justifyContent: "center" }} />
                 <Bar dataKey="episodic" fill="var(--color-episodic)" radius={[0, 4, 4, 0]} barSize={8} />
                 <Bar dataKey="chronic" fill="var(--color-chronic)" radius={[0, 4, 4, 0]} barSize={8} />
               </BarChart>

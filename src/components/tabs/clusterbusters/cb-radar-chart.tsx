@@ -82,7 +82,7 @@ export function CbRadarChart({ selectedSlugs, rankings, outcomes }: CbRadarChart
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="mx-auto min-h-[350px] max-w-[500px]">
+        <ChartContainer config={chartConfig} className="mx-auto aspect-square w-full max-w-[500px]">
           <RadarChart data={chartData}>
             <PolarGrid />
             <PolarAngleAxis dataKey="dimension" className="text-xs" />

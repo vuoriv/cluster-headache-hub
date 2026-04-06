@@ -265,7 +265,7 @@ export function GenderCaregiversInsight() {
           </p>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={relationshipConfig} className="h-[300px] w-full">
+          <ChartContainer config={relationshipConfig} className="aspect-[16/9] w-full">
             <BarChart data={data.caregiver_relationships}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="type" tick={{ fontSize: 12 }} />
@@ -287,11 +287,11 @@ export function GenderCaregiversInsight() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={concernConfig} className="h-[220px] w-full">
-              <BarChart data={data.caregiver_top_concerns.slice(0, 5)} layout="vertical" margin={{ left: 10 }}>
+            <ChartContainer config={concernConfig} style={{ height: `${Math.min(data.caregiver_top_concerns.length, 5) * 40 + 40}px` }} className="w-full">
+              <BarChart data={data.caregiver_top_concerns.slice(0, 5)} layout="vertical" margin={{ left: 8 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 10 }} />
-                <YAxis type="category" dataKey="concern" width={130} tick={{ fontSize: 9 }} />
+                <YAxis type="category" dataKey="concern" width={110} tick={{ fontSize: 9 }} />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Bar dataKey="count" fill="var(--color-count)" radius={[0, 4, 4, 0]} />
               </BarChart>
@@ -307,7 +307,7 @@ export function GenderCaregiversInsight() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={treatmentCompareConfig} className="h-[220px] w-full">
+            <ChartContainer config={treatmentCompareConfig} className="aspect-[4/3] w-full">
               <BarChart data={treatmentCompareData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="treatment" tick={{ fontSize: 9 }} angle={-30} textAnchor="end" height={50} />

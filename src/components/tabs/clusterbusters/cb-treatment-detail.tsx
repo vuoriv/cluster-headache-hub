@@ -258,7 +258,7 @@ export function CbTreatmentDetail({ slug, onNavigate }: CbTreatmentDetailProps) 
             <CardDescription className="text-xs">Forum mentions per year</CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={timelineConfig} className="h-[160px] w-full">
+            <ChartContainer config={timelineConfig} className="aspect-[21/9] w-full">
               <AreaChart data={profile.timeline} margin={{ left: 0, right: 0 }}>
                 <CartesianGrid vertical={false} />
                 <XAxis dataKey="year" tickLine={false} axisLine={false} />

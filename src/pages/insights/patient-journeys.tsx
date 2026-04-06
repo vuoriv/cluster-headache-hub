@@ -165,7 +165,7 @@ export function PatientJourneys() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={spanChartConfig} className="h-[220px] w-full">
+            <ChartContainer config={spanChartConfig} className="aspect-[4/3] w-full">
               <BarChart data={spanData} margin={{ top: 8, right: 8, bottom: 8, left: 8 }}>
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
                 <XAxis dataKey="label" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />
@@ -189,11 +189,11 @@ export function PatientJourneys() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={treatmentChartConfig} className="h-[220px] w-full">
-              <BarChart data={treatmentData} layout="vertical" margin={{ top: 8, right: 8, bottom: 8, left: 80 }}>
+            <ChartContainer config={treatmentChartConfig} style={{ height: `${treatmentData.length * 32 + 40}px` }} className="w-full">
+              <BarChart data={treatmentData} layout="vertical" margin={{ top: 8, right: 8, bottom: 8, left: 8 }}>
                 <CartesianGrid horizontal={false} strokeDasharray="3 3" />
                 <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />
-                <YAxis type="category" dataKey="treatment" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} width={80} />
+                <YAxis type="category" dataKey="treatment" tickLine={false} axisLine={false} tick={{ fontSize: 9 }} width={80} />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Bar dataKey="count" radius={[0, 4, 4, 0]}>
                   {treatmentData.map((_, i) => (

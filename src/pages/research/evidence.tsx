@@ -311,7 +311,7 @@ export function EvidenceDashboard() {
           <CardContent>
             <ChartContainer
               config={resultPieConfig}
-              className="h-[300px] w-full"
+              className="aspect-square w-full max-w-[300px] mx-auto"
             >
               <PieChart>
                 <ChartTooltip content={<ChartTooltipContent />} />
@@ -333,7 +333,7 @@ export function EvidenceDashboard() {
                     />
                   ))}
                 </Pie>
-                <Legend />
+                <Legend wrapperStyle={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8 }} />
               </PieChart>
             </ChartContainer>
           </CardContent>
@@ -354,12 +354,13 @@ export function EvidenceDashboard() {
           <CardContent>
             <ChartContainer
               config={evidenceQualityConfig}
-              className="h-[300px] w-full"
+              style={{ height: `${evidenceQualityData.length * 36 + 40}px` }}
+              className="w-full"
             >
               <BarChart
                 data={evidenceQualityData}
                 layout="vertical"
-                margin={{ left: 10 }}
+                margin={{ left: 8 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis
@@ -370,8 +371,8 @@ export function EvidenceDashboard() {
                 <YAxis
                   type="category"
                   dataKey="category"
-                  width={120}
-                  tick={{ fontSize: 11 }}
+                  width={100}
+                  tick={{ fontSize: 10 }}
                 />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Bar
@@ -400,20 +401,20 @@ export function EvidenceDashboard() {
         <CardContent>
           <ChartContainer
             config={categoryResultConfig}
-            className="h-[350px] w-full"
+            className="aspect-[4/3] w-full"
           >
             <BarChart data={categoryResultData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 dataKey="category"
-                tick={{ fontSize: 10 }}
+                tick={{ fontSize: 9 }}
                 angle={-35}
                 textAnchor="end"
                 height={60}
               />
               <YAxis tick={{ fontSize: 10 }} />
               <ChartTooltip content={<ChartTooltipContent />} />
-              <Legend />
+              <Legend wrapperStyle={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8 }} />
               <Bar
                 dataKey="positive"
                 fill={RESULT_COLORS.positive}
@@ -459,20 +460,21 @@ export function EvidenceDashboard() {
           <CardContent>
             <ChartContainer
               config={trialStatusConfig}
-              className="h-[280px] w-full"
+              style={{ height: `${trialStatusData.length * 36 + 40}px` }}
+              className="w-full"
             >
               <BarChart
                 data={trialStatusData}
                 layout="vertical"
-                margin={{ left: 10 }}
+                margin={{ left: 8 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 10 }} />
                 <YAxis
                   type="category"
                   dataKey="status"
-                  width={170}
-                  tick={{ fontSize: 11 }}
+                  width={130}
+                  tick={{ fontSize: 9 }}
                 />
                 <ChartTooltip
                   content={
@@ -503,20 +505,21 @@ export function EvidenceDashboard() {
           <CardContent>
             <ChartContainer
               config={sponsorConfig}
-              className="h-[280px] w-full"
+              style={{ height: `${topSponsorsData.length * 36 + 40}px` }}
+              className="w-full"
             >
               <BarChart
                 data={topSponsorsData}
                 layout="vertical"
-                margin={{ left: 10 }}
+                margin={{ left: 8 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 10 }} />
                 <YAxis
                   type="category"
                   dataKey="sponsor"
-                  width={200}
-                  tick={{ fontSize: 10 }}
+                  width={150}
+                  tick={{ fontSize: 9 }}
                 />
                 <ChartTooltip
                   content={

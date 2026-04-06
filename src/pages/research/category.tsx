@@ -141,15 +141,15 @@ export function CategoryPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} className="h-[220px] w-full">
-              <BarChart data={data.study_type_distribution.slice(0, 8)} layout="vertical" margin={{ left: 10 }}>
+            <ChartContainer config={chartConfig} style={{ height: `${Math.min(data.study_type_distribution.length, 8) * 32 + 40}px` }} className="w-full">
+              <BarChart data={data.study_type_distribution.slice(0, 8)} layout="vertical" margin={{ left: 8 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 10 }} />
                 <YAxis
                   type="category"
                   dataKey="type"
                   tick={{ fontSize: 9 }}
-                  width={120}
+                  width={100}
                   tickFormatter={(v) => STUDY_TYPE_LABELS[v] ?? v}
                 />
                 <ChartTooltip content={<ChartTooltipContent />} />
@@ -201,7 +201,7 @@ export function CategoryPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} className="h-[160px] w-full">
+            <ChartContainer config={chartConfig} className="aspect-[21/9] w-full">
               <AreaChart data={yearData} margin={{ left: 0, right: 0 }}>
                 <CartesianGrid vertical={false} />
                 <XAxis dataKey="year" tick={{ fontSize: 10 }} />

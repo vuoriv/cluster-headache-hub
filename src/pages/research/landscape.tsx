@@ -307,20 +307,21 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={studyTypeConfig}
-              className="h-[300px] w-full"
+              style={{ height: `${studyTypeData.length * 32 + 40}px` }}
+              className="w-full"
             >
               <BarChart
                 data={studyTypeData}
                 layout="vertical"
-                margin={{ left: 10 }}
+                margin={{ left: 8 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 10 }} />
                 <YAxis
                   type="category"
                   dataKey="type"
-                  width={130}
-                  tick={{ fontSize: 11 }}
+                  width={110}
+                  tick={{ fontSize: 9 }}
                 />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Bar
@@ -347,7 +348,7 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={evidenceTierConfig}
-              className="h-[300px] w-full"
+              className="aspect-[4/3] w-full"
             >
               <BarChart data={evidenceTierData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -389,7 +390,7 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={papersPerYearConfig}
-              className="h-[280px] w-full"
+              className="aspect-[4/3] w-full"
             >
               <AreaChart data={papersPerYearData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -426,20 +427,21 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={categoryConfig}
-              className="h-[280px] w-full"
+              style={{ height: `${categoryData.length * 32 + 40}px` }}
+              className="w-full"
             >
               <BarChart
                 data={categoryData}
                 layout="vertical"
-                margin={{ left: 10 }}
+                margin={{ left: 8 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 10 }} />
                 <YAxis
                   type="category"
                   dataKey="category"
-                  width={120}
-                  tick={{ fontSize: 11 }}
+                  width={100}
+                  tick={{ fontSize: 10 }}
                 />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Bar
@@ -466,7 +468,7 @@ export function ResearchLandscape() {
           </p>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={volumeConfig} className="h-[350px] w-full">
+          <ChartContainer config={volumeConfig} className="aspect-[16/9] w-full">
             <AreaChart data={volumeData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
@@ -476,7 +478,7 @@ export function ResearchLandscape() {
               />
               <YAxis tick={{ fontSize: 10 }} />
               <ChartTooltip content={<ChartTooltipContent />} />
-              <Legend />
+              <Legend wrapperStyle={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8 }} />
               {["nerve-block", "neuromodulation", "oxygen", "cgrp", "psychedelic"].map(
                 (cat) => (
                   <Area
