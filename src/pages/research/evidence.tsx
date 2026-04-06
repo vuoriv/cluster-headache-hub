@@ -354,7 +354,7 @@ export function EvidenceDashboard() {
           <CardContent>
             <ChartContainer
               config={evidenceQualityConfig}
-              style={{ height: `${evidenceQualityData.length * 28 + 30}px` }}
+              style={{ height: `${evidenceQualityData.length * 24 + 24}px` }}
               className="w-full"
             >
               <BarChart
@@ -401,7 +401,7 @@ export function EvidenceDashboard() {
         <CardContent>
           <ChartContainer
             config={categoryResultConfig}
-            className="aspect-[4/3] w-full"
+            className="aspect-[3/2] w-full"
           >
             <BarChart data={categoryResultData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -460,7 +460,7 @@ export function EvidenceDashboard() {
           <CardContent>
             <ChartContainer
               config={trialStatusConfig}
-              style={{ height: `${trialStatusData.length * 28 + 30}px` }}
+              style={{ height: `${trialStatusData.length * 24 + 24}px` }}
               className="w-full"
             >
               <BarChart
@@ -505,7 +505,7 @@ export function EvidenceDashboard() {
           <CardContent>
             <ChartContainer
               config={sponsorConfig}
-              style={{ height: `${topSponsorsData.length * 28 + 30}px` }}
+              style={{ height: `${topSponsorsData.length * 24 + 24}px` }}
               className="w-full"
             >
               <BarChart

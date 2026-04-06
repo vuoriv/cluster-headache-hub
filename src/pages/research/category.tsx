@@ -141,7 +141,7 @@ export function CategoryPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} style={{ height: `${Math.min(data.study_type_distribution.length, 8) * 28 + 30}px` }} className="w-full">
+            <ChartContainer config={chartConfig} style={{ height: `${Math.min(data.study_type_distribution.length, 8) * 24 + 24}px` }} className="w-full">
               <BarChart data={data.study_type_distribution.slice(0, 8)} layout="vertical" margin={{ left: 8 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 10 }} />

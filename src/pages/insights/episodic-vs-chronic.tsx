@@ -183,7 +183,7 @@ export function EpisodicVsChronic() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={comparisonChartConfig} style={{ height: `${comparisonData.length * 26 + 40}px` }} className="w-full">
+            <ChartContainer config={comparisonChartConfig} style={{ height: `${comparisonData.length * 24 + 24}px` }} className="w-full">
               <BarChart data={comparisonData} layout="vertical" margin={{ top: 4, right: 8, bottom: 4, left: 8 }}>
                 <CartesianGrid horizontal={false} strokeDasharray="3 3" />
                 <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />

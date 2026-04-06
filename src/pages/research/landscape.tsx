@@ -307,7 +307,7 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={studyTypeConfig}
-              style={{ height: `${studyTypeData.length * 28 + 30}px` }}
+              style={{ height: `${studyTypeData.length * 24 + 24}px` }}
               className="w-full"
             >
               <BarChart
@@ -348,7 +348,7 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={evidenceTierConfig}
-              className="aspect-[4/3] w-full"
+              className="aspect-[3/2] w-full"
             >
               <BarChart data={evidenceTierData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -390,7 +390,7 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={papersPerYearConfig}
-              className="aspect-[4/3] w-full"
+              className="aspect-[3/2] w-full"
             >
               <AreaChart data={papersPerYearData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -427,7 +427,7 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={categoryConfig}
-              style={{ height: `${categoryData.length * 28 + 30}px` }}
+              style={{ height: `${categoryData.length * 24 + 24}px` }}
               className="w-full"
             >
               <BarChart

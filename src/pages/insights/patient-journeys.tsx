@@ -165,7 +165,7 @@ export function PatientJourneys() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={spanChartConfig} className="aspect-[4/3] w-full">
+            <ChartContainer config={spanChartConfig} className="aspect-[3/2] w-full">
               <BarChart data={spanData} margin={{ top: 8, right: 8, bottom: 8, left: 8 }}>
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
                 <XAxis dataKey="label" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />
@@ -189,7 +189,7 @@ export function PatientJourneys() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={treatmentChartConfig} style={{ height: `${treatmentData.length * 28 + 30}px` }} className="w-full">
+            <ChartContainer config={treatmentChartConfig} style={{ height: `${treatmentData.length * 24 + 24}px` }} className="w-full">
               <BarChart data={treatmentData} layout="vertical" margin={{ top: 8, right: 8, bottom: 8, left: 8 }}>
                 <CartesianGrid horizontal={false} strokeDasharray="3 3" />
                 <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />

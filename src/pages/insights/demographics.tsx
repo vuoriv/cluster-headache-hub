@@ -197,7 +197,7 @@ export function DemographicsInsight() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={postsPerYearConfig} className="aspect-[4/3] w-full">
+            <ChartContainer config={postsPerYearConfig} className="aspect-[3/2] w-full">
               <AreaChart data={postsChartData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="year" tick={{ fontSize: 10 }} />
@@ -218,7 +218,7 @@ export function DemographicsInsight() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={activityConfig} className="aspect-[4/3] w-full">
+            <ChartContainer config={activityConfig} className="aspect-[3/2] w-full">
               <BarChart data={activityChartData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="bucket" tick={{ fontSize: 10 }} />
@@ -242,7 +242,7 @@ export function DemographicsInsight() {
           </p>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={forumConfig} style={{ height: `${forumChartData.length * 30 + 30}px` }} className="w-full">
+          <ChartContainer config={forumConfig} style={{ height: `${forumChartData.length * 24 + 24}px` }} className="w-full">
             <BarChart data={forumChartData} layout="vertical" margin={{ left: 8 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" tick={{ fontSize: 10 }} />
