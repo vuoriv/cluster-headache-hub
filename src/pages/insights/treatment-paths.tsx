@@ -149,7 +149,7 @@ export function TreatmentPaths() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={barConfig} style={{ height: `${Math.min(data.full_toolkit_ranking.length, 8) * 32 + 40}px` }} className="w-full">
+            <ChartContainer config={barConfig} style={{ height: `${Math.min(data.full_toolkit_ranking.length, 8) * 28 + 30}px` }} className="w-full">
               <BarChart data={data.full_toolkit_ranking.slice(0, 8)} layout="vertical" margin={{ left: 8, right: 10 }}>
                 <CartesianGrid horizontal={false} />
                 <XAxis type="number" tickLine={false} axisLine={false} />

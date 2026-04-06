@@ -287,7 +287,7 @@ export function GenderCaregiversInsight() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={concernConfig} style={{ height: `${Math.min(data.caregiver_top_concerns.length, 5) * 40 + 40}px` }} className="w-full">
+            <ChartContainer config={concernConfig} style={{ height: `${Math.min(data.caregiver_top_concerns.length, 5) * 28 + 30}px` }} className="w-full">
               <BarChart data={data.caregiver_top_concerns.slice(0, 5)} layout="vertical" margin={{ left: 8 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 10 }} />

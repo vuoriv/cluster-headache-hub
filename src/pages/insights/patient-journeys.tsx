@@ -189,7 +189,7 @@ export function PatientJourneys() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={treatmentChartConfig} style={{ height: `${treatmentData.length * 32 + 40}px` }} className="w-full">
+            <ChartContainer config={treatmentChartConfig} style={{ height: `${treatmentData.length * 28 + 30}px` }} className="w-full">
               <BarChart data={treatmentData} layout="vertical" margin={{ top: 8, right: 8, bottom: 8, left: 8 }}>
                 <CartesianGrid horizontal={false} strokeDasharray="3 3" />
                 <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />

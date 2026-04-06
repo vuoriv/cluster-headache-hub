@@ -307,7 +307,7 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={studyTypeConfig}
-              style={{ height: `${studyTypeData.length * 32 + 40}px` }}
+              style={{ height: `${studyTypeData.length * 28 + 30}px` }}
               className="w-full"
             >
               <BarChart
@@ -427,7 +427,7 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={categoryConfig}
-              style={{ height: `${categoryData.length * 32 + 40}px` }}
+              style={{ height: `${categoryData.length * 28 + 30}px` }}
               className="w-full"
             >
               <BarChart

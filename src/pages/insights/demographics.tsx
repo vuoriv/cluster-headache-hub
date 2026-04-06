@@ -242,7 +242,7 @@ export function DemographicsInsight() {
           </p>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={forumConfig} style={{ height: `${forumChartData.length * 40 + 40}px` }} className="w-full">
+          <ChartContainer config={forumConfig} style={{ height: `${forumChartData.length * 30 + 30}px` }} className="w-full">
             <BarChart data={forumChartData} layout="vertical" margin={{ left: 8 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" tick={{ fontSize: 10 }} />
