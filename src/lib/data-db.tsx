@@ -45,9 +45,63 @@ export interface ResearchPaper {
   journal: string
   pubDate: string
   abstract: string
+  abstractStructured: Record<string, string> | null
   meshTerms: string[]
+  authorKeywords: string[]
+  affiliations: string[]
+  doi: string | null
+  pmcid: string | null
+  fullTextSections: Record<string, string> | null
+  nctIdsCited: string[]
+  isOa: boolean
+  oaUrl: string | null
+  oaStatus: string | null
   category: string
   relevanceScore: number
+}
+
+export interface PaperAnalysis {
+  pmid: string
+  outcome: string
+  plainSummary: string | null
+  keyFinding: string | null
+  sampleSize: number | null
+  studyType: string
+  evidenceTier: number
+  interventionsStudied: string[]
+  analysisSource: string
+}
+
+export interface TrialAnalysis {
+  nctId: string
+  whatTested: string | null
+  keyResult: string | null
+  verdict: string
+  patientRelevance: string | null
+  doseTested: string | null
+  sampleSize: number | null
+}
+
+export interface PaperTrialLink {
+  pmid: string
+  nctId: string
+  linkType: "confirmed" | "related"
+}
+
+export interface CategoryStats {
+  category: string
+  paperCount: number
+  trialCount: number
+  activeTrialCount: number
+  positiveOutcomeCount: number
+  avgEvidenceTier: number
+  oaRate: number
+  papersLinkedToTrials: number
+  topAuthors: Array<{ name: string; count: number }>
+  topInstitutions: Array<{ name: string; count: number }>
+  papersPerYear: Record<string, number>
+  studyTypeDistribution: Array<{ type: string; count: number }>
+  resultDistribution: Array<{ result: string; count: number }>
 }
 
 export interface PipelineMeta {
@@ -102,6 +156,14 @@ interface DataDbContextValue {
   // Insights
   getInsight: <T = unknown>(slug: string) => T | null
   getTopAuthors: (limit?: number) => string[]
+
+  // Analyses & links
+  getPaperAnalysis: (pmid: string) => PaperAnalysis | null
+  getTrialAnalysis: (nctId: string) => TrialAnalysis | null
+  getLinkedPapers: (nctId: string) => Array<ResearchPaper & { linkType: string }>
+  getLinkedTrials: (pmid: string) => Array<ResearchTrial & { linkType: string }>
+  getCategoryStats: (category: string) => CategoryStats | null
+  getResearchStats: () => Record<string, unknown>
 
   // Community
   getCommunityGroups: () => CommunityGroup[]
@@ -160,9 +222,19 @@ function mapPaper(row: unknown[]): ResearchPaper {
     journal: row[3] as string,
     pubDate: row[4] as string,
     abstract: row[5] as string,
-    meshTerms: parseJsonSafe(row[6] as string, []),
-    category: row[7] as string,
-    relevanceScore: row[8] as number,
+    abstractStructured: parseJsonSafe(row[6] as string, null),
+    meshTerms: parseJsonSafe(row[7] as string, []),
+    authorKeywords: parseJsonSafe(row[8] as string, []),
+    affiliations: parseJsonSafe(row[9] as string, []),
+    doi: row[10] as string | null,
+    pmcid: row[11] as string | null,
+    fullTextSections: parseJsonSafe(row[12] as string, null),
+    nctIdsCited: parseJsonSafe(row[13] as string, []),
+    isOa: (row[14] as number) === 1,
+    oaUrl: row[15] as string | null,
+    oaStatus: row[16] as string | null,
+    category: row[17] as string,
+    relevanceScore: row[18] as number,
   }
 }
 
@@ -215,7 +287,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
 
   const getForumStats = useCallback((): ForumStats | null => {
     if (!db) return null
-    const rows = db.exec("SELECT key, value FROM forum_stats")
+    const rows = db.exec("SELECT key, value FROM cb_forum_stats")
     if (rows.length === 0) return null
     const obj: Record<string, unknown> = {}
     for (const row of rows[0].values) {
@@ -227,7 +299,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
   const getTreatmentRankings = useCallback((): TreatmentRanking[] => {
     if (!db) return []
     const rows = db.exec(
-      "SELECT slug, name, category, total_mentions, positive_rate, normalized_mentions, composite_score FROM treatment_rankings ORDER BY composite_score DESC",
+      "SELECT slug, name, category, total_mentions, positive_rate, normalized_mentions, composite_score FROM cb_treatment_rankings ORDER BY composite_score DESC",
     )
     if (rows.length === 0) return []
     return rows[0].values.map((row) => ({
@@ -244,7 +316,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
   const getTimeline = useCallback((): TimelineData | null => {
     if (!db) return null
     const rows = db.exec(
-      "SELECT year, treatment_name, mentions FROM timeline ORDER BY year",
+      "SELECT year, treatment_name, mentions FROM cb_timeline ORDER BY year",
     )
     if (rows.length === 0) return null
     const perYear: Record<string, Record<string, number>> = {}
@@ -261,7 +333,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
   const getOutcomes = useCallback((): OutcomesMap => {
     if (!db) return {}
     const rows = db.exec(
-      "SELECT treatment_name, total_mentions, rated_posts, positive, negative, partial, neutral, mixed, positive_rate, negative_rate, partial_rate FROM outcomes",
+      "SELECT treatment_name, total_mentions, rated_posts, positive, negative, partial, neutral, mixed, positive_rate, negative_rate, partial_rate FROM cb_outcomes",
     )
     if (rows.length === 0) return {}
     const map: OutcomesMap = {}
@@ -286,7 +358,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     (treatmentName: string): OutcomeData | null => {
       if (!db) return null
       const stmt = db.prepare(
-        "SELECT total_mentions, rated_posts, positive, negative, partial, neutral, mixed, positive_rate, negative_rate, partial_rate FROM outcomes WHERE treatment_name = ?",
+        "SELECT total_mentions, rated_posts, positive, negative, partial, neutral, mixed, positive_rate, negative_rate, partial_rate FROM cb_outcomes WHERE treatment_name = ?",
       )
       stmt.bind([treatmentName])
       if (!stmt.step()) {
@@ -313,7 +385,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
 
   const getCoOccurrence = useCallback((): CoOccurrenceMap => {
     if (!db) return {}
-    const rows = db.exec("SELECT treatment1, treatment2, count FROM co_occurrence")
+    const rows = db.exec("SELECT treatment1, treatment2, count FROM cb_co_occurrence")
     if (rows.length === 0) return {}
     const map: CoOccurrenceMap = {}
     for (const row of rows[0].values) {
@@ -330,7 +402,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     (slug: string): TreatmentProfile | null => {
       if (!db) return null
       const stmt = db.prepare(
-        "SELECT data FROM treatment_profiles WHERE slug = ?",
+        "SELECT data FROM cb_treatment_profiles WHERE slug = ?",
       )
       stmt.bind([slug])
       if (!stmt.step()) {
@@ -346,7 +418,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
 
   const getRecommendationData = useCallback((): RecommendationData | null => {
     if (!db) return null
-    const rows = db.exec("SELECT key, value FROM recommendation_data")
+    const rows = db.exec("SELECT key, value FROM cb_recommendation_data")
     if (rows.length === 0) return null
     const obj: Record<string, unknown> = {}
     for (const row of rows[0].values) {
@@ -361,7 +433,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     (params: ResearchSearchParams): ResearchPaper[] => {
       if (!db) return []
       let sql =
-        "SELECT pmid, title, authors, journal, pub_date, abstract, mesh_terms, category, relevance_score FROM papers WHERE 1=1"
+        "SELECT pmid, title, authors, journal, pub_date, abstract, abstract_structured, mesh_terms, author_keywords, affiliations, doi, pmcid, full_text_sections, nct_ids_cited, is_oa, oa_url, oa_status, category, relevance_score FROM pa_papers WHERE 1=1"
       const binds: SqlValue[] = []
 
       if (params.query) {
@@ -405,7 +477,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     (params: TrialSearchParams): ResearchTrial[] => {
       if (!db) return []
       let sql =
-        "SELECT nct_id, title, status, phase, study_type, sponsor, enrollment, start_date, end_date, interventions, summary, conditions, category, relevance_score FROM trials WHERE 1=1"
+        "SELECT nct_id, title, status, phase, study_type, sponsor, enrollment, start_date, end_date, interventions, summary, conditions, category, relevance_score FROM tr_trials WHERE 1=1"
       const binds: SqlValue[] = []
 
       if (params.query) {
@@ -444,7 +516,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
   const getActiveTrials = useCallback((): ResearchTrial[] => {
     if (!db) return []
     const rows = db.exec(
-      "SELECT nct_id, title, status, phase, study_type, sponsor, enrollment, start_date, end_date, interventions, summary, conditions, category, relevance_score FROM trials WHERE status IN ('RECRUITING', 'NOT_YET_RECRUITING', 'ACTIVE_NOT_RECRUITING') ORDER BY relevance_score DESC",
+      "SELECT nct_id, title, status, phase, study_type, sponsor, enrollment, start_date, end_date, interventions, summary, conditions, category, relevance_score FROM tr_trials WHERE status IN ('RECRUITING', 'NOT_YET_RECRUITING', 'ACTIVE_NOT_RECRUITING') ORDER BY relevance_score DESC",
     )
     if (rows.length === 0) return []
     return rows[0].values.map(mapTrial)
@@ -454,7 +526,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     (nctId: string): ResearchTrial | null => {
       if (!db) return null
       const stmt = db.prepare(
-        "SELECT nct_id, title, status, phase, study_type, sponsor, enrollment, start_date, end_date, interventions, summary, conditions, category, relevance_score FROM trials WHERE nct_id = ?",
+        "SELECT nct_id, title, status, phase, study_type, sponsor, enrollment, start_date, end_date, interventions, summary, conditions, category, relevance_score FROM tr_trials WHERE nct_id = ?",
       )
       stmt.bind([nctId])
       if (!stmt.step()) {
@@ -472,7 +544,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     (pmid: string): ResearchPaper | null => {
       if (!db) return null
       const stmt = db.prepare(
-        "SELECT pmid, title, authors, journal, pub_date, abstract, mesh_terms, category, relevance_score FROM papers WHERE pmid = ?",
+        "SELECT pmid, title, authors, journal, pub_date, abstract, abstract_structured, mesh_terms, author_keywords, affiliations, doi, pmcid, full_text_sections, nct_ids_cited, is_oa, oa_url, oa_status, category, relevance_score FROM pa_papers WHERE pmid = ?",
       )
       stmt.bind([pmid])
       if (!stmt.step()) {
@@ -488,7 +560,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
 
   const getMeta = useCallback((): PipelineMeta | null => {
     if (!db) return null
-    const rows = db.exec("SELECT key, value FROM pipeline_meta")
+    const rows = db.exec("SELECT key, value FROM rs_stats")
     if (rows.length === 0) return null
     const obj: Record<string, string> = {}
     for (const row of rows[0].values) {
@@ -506,7 +578,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
   const getCategories = useCallback((): string[] => {
     if (!db) return []
     const rows = db.exec(
-      "SELECT DISTINCT category FROM trials UNION SELECT DISTINCT category FROM papers ORDER BY category",
+      "SELECT DISTINCT category FROM tr_trials UNION SELECT DISTINCT category FROM pa_papers ORDER BY category",
     )
     if (rows.length === 0) return []
     return rows[0].values.map((r) => r[0] as string)
@@ -517,7 +589,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
       if (!db) return []
       const rows = db.exec(
         `SELECT DISTINCT substr(authors, 1, instr(authors || ',', ',') - 1) as first_author, COUNT(*) as cnt
-         FROM papers WHERE authors IS NOT NULL AND authors != ''
+         FROM pa_papers WHERE authors IS NOT NULL AND authors != ''
          GROUP BY first_author HAVING cnt >= 3
          ORDER BY cnt DESC LIMIT ${limit}`,
       )
@@ -530,7 +602,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
   const getCommunityGroups = useCallback((): CommunityGroup[] => {
     if (!db) return []
     const rows = db.exec(
-      "SELECT name, country, region, platform, url, language, description, members, tags, contact_email FROM community_groups ORDER BY region, country, name",
+      "SELECT name, country, region, platform, url, language, description, members, tags, contact_email FROM co_groups ORDER BY region, country, name",
     )
     if (rows.length === 0) return []
     return rows[0].values.map((r) => ({
@@ -550,7 +622,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
   const getInsight = useCallback(
     <T = unknown>(slug: string): T | null => {
       if (!db) return null
-      const stmt = db.prepare("SELECT data FROM insights WHERE slug = ?")
+      const stmt = db.prepare("SELECT data FROM cb_insights WHERE slug = ?")
       stmt.bind([slug])
       if (!stmt.step()) {
         stmt.free()
@@ -562,6 +634,169 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     },
     [db],
   )
+
+  const getPaperAnalysis = useCallback(
+    (pmid: string): PaperAnalysis | null => {
+      if (!db) return null
+      try {
+        const stmt = db.prepare(
+          "SELECT pmid, outcome, plain_summary, key_finding, sample_size, study_type, evidence_tier, interventions_studied, analysis_source FROM pa_analyses WHERE pmid = ?",
+        )
+        stmt.bind([pmid])
+        if (!stmt.step()) {
+          stmt.free()
+          return null
+        }
+        const row = stmt.get()
+        stmt.free()
+        return {
+          pmid: row[0] as string,
+          outcome: row[1] as string,
+          plainSummary: row[2] as string | null,
+          keyFinding: row[3] as string | null,
+          sampleSize: row[4] as number | null,
+          studyType: row[5] as string,
+          evidenceTier: row[6] as number,
+          interventionsStudied: parseJsonSafe(row[7] as string, []),
+          analysisSource: row[8] as string,
+        }
+      } catch {
+        return null
+      }
+    },
+    [db],
+  )
+
+  const getTrialAnalysis = useCallback(
+    (nctId: string): TrialAnalysis | null => {
+      if (!db) return null
+      try {
+        const stmt = db.prepare(
+          "SELECT nct_id, what_tested, key_result, verdict, patient_relevance, dose_tested, sample_size FROM tr_analyses WHERE nct_id = ?",
+        )
+        stmt.bind([nctId])
+        if (!stmt.step()) {
+          stmt.free()
+          return null
+        }
+        const row = stmt.get()
+        stmt.free()
+        return {
+          nctId: row[0] as string,
+          whatTested: row[1] as string | null,
+          keyResult: row[2] as string | null,
+          verdict: row[3] as string,
+          patientRelevance: row[4] as string | null,
+          doseTested: row[5] as string | null,
+          sampleSize: row[6] as number | null,
+        }
+      } catch {
+        return null
+      }
+    },
+    [db],
+  )
+
+  const getLinkedPapers = useCallback(
+    (nctId: string): Array<ResearchPaper & { linkType: string }> => {
+      if (!db) return []
+      try {
+        const stmt = db.prepare(
+          "SELECT p.pmid, p.title, p.authors, p.journal, p.pub_date, p.abstract, p.abstract_structured, p.mesh_terms, p.author_keywords, p.affiliations, p.doi, p.pmcid, p.full_text_sections, p.nct_ids_cited, p.is_oa, p.oa_url, p.oa_status, p.category, p.relevance_score, l.link_type FROM pa_papers p JOIN rs_paper_trial_links l ON p.pmid = l.pmid WHERE l.nct_id = ? ORDER BY l.link_type, p.pub_date DESC",
+        )
+        stmt.bind([nctId])
+        const results: Array<ResearchPaper & { linkType: string }> = []
+        while (stmt.step()) {
+          const row = stmt.get()
+          results.push({
+            ...mapPaper(row),
+            linkType: row[19] as string,
+          })
+        }
+        stmt.free()
+        return results
+      } catch {
+        return []
+      }
+    },
+    [db],
+  )
+
+  const getLinkedTrials = useCallback(
+    (pmid: string): Array<ResearchTrial & { linkType: string }> => {
+      if (!db) return []
+      try {
+        const stmt = db.prepare(
+          "SELECT t.nct_id, t.title, t.status, t.phase, t.study_type, t.sponsor, t.enrollment, t.start_date, t.end_date, t.interventions, t.summary, t.conditions, t.category, t.relevance_score, l.link_type FROM tr_trials t JOIN rs_paper_trial_links l ON t.nct_id = l.nct_id WHERE l.pmid = ? ORDER BY l.link_type",
+        )
+        stmt.bind([pmid])
+        const results: Array<ResearchTrial & { linkType: string }> = []
+        while (stmt.step()) {
+          const row = stmt.get()
+          results.push({
+            ...mapTrial(row),
+            linkType: row[14] as string,
+          })
+        }
+        stmt.free()
+        return results
+      } catch {
+        return []
+      }
+    },
+    [db],
+  )
+
+  const getCategoryStats = useCallback(
+    (category: string): CategoryStats | null => {
+      if (!db) return null
+      try {
+        const stmt = db.prepare(
+          "SELECT category, paper_count, trial_count, active_trial_count, positive_outcome_count, avg_evidence_tier, oa_rate, papers_linked_to_trials, top_authors, top_institutions, papers_per_year, study_type_distribution, result_distribution FROM rs_category_stats WHERE category = ?",
+        )
+        stmt.bind([category])
+        if (!stmt.step()) {
+          stmt.free()
+          return null
+        }
+        const row = stmt.get()
+        stmt.free()
+        return {
+          category: row[0] as string,
+          paperCount: row[1] as number,
+          trialCount: row[2] as number,
+          activeTrialCount: row[3] as number,
+          positiveOutcomeCount: row[4] as number,
+          avgEvidenceTier: row[5] as number,
+          oaRate: row[6] as number,
+          papersLinkedToTrials: row[7] as number,
+          topAuthors: parseJsonSafe(row[8] as string, []),
+          topInstitutions: parseJsonSafe(row[9] as string, []),
+          papersPerYear: parseJsonSafe(row[10] as string, {}),
+          studyTypeDistribution: parseJsonSafe(row[11] as string, []),
+          resultDistribution: parseJsonSafe(row[12] as string, []),
+        }
+      } catch {
+        return null
+      }
+    },
+    [db],
+  )
+
+  const getResearchStats = useCallback((): Record<string, unknown> => {
+    if (!db) return {}
+    try {
+      const rows = db.exec("SELECT key, value FROM rs_stats")
+      if (rows.length === 0) return {}
+      const obj: Record<string, unknown> = {}
+      for (const row of rows[0].values) {
+        obj[row[0] as string] = parseJsonSafe(row[1] as string, row[1])
+      }
+      return obj
+    } catch {
+      return {}
+    }
+  }, [db])
 
   const value: DataDbContextValue = {
     loading,
@@ -583,6 +818,12 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     getCategories,
     getInsight,
     getTopAuthors,
+    getPaperAnalysis,
+    getTrialAnalysis,
+    getLinkedPapers,
+    getLinkedTrials,
+    getCategoryStats,
+    getResearchStats,
     getCommunityGroups,
   }
 
