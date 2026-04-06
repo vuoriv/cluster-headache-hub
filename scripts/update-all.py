@@ -140,8 +140,8 @@ def main():
     # Summary
     elapsed = time.time() - start
     db = sqlite3.connect(DATA_DB)
-    papers = db.execute("SELECT COUNT(*) FROM papers").fetchone()[0]
-    trials = db.execute("SELECT COUNT(*) FROM trials").fetchone()[0]
+    papers = db.execute("SELECT COUNT(*) FROM pa_papers").fetchone()[0]
+    trials = db.execute("SELECT COUNT(*) FROM tr_trials").fetchone()[0]
     tables = [r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
     db.close()
 

@@ -155,7 +155,7 @@ def analyze_papers(db_path):
     conn.row_factory = sqlite3.Row
 
     papers = conn.execute(
-        "SELECT pmid, title, abstract, category, pub_date, relevance_score FROM papers"
+        "SELECT pmid, title, abstract, category, pub_date, relevance_score FROM pa_papers"
     ).fetchall()
 
     results = []
@@ -253,7 +253,7 @@ def analyze_trials(db_path):
 
     trials = conn.execute(
         "SELECT nct_id, title, status, phase, study_type, sponsor, "
-        "enrollment, start_date, end_date, category, summary FROM trials"
+        "enrollment, start_date, end_date, category, summary FROM tr_trials"
     ).fetchall()
     conn.close()
 
@@ -298,20 +298,21 @@ def store_analyses(db_path, paper_analyses):
     print("Storing paper analyses...")
     conn = sqlite3.connect(db_path)
     conn.execute("""
-        CREATE TABLE IF NOT EXISTS paper_analyses (
+        CREATE TABLE IF NOT EXISTS pa_analyses (
             pmid TEXT PRIMARY KEY,
             study_type TEXT,
             result TEXT,
             sample_size INTEGER,
-            evidence_tier INTEGER
+            evidence_tier INTEGER,
+            analysis_source TEXT DEFAULT 'regex'
         )
     """)
-    conn.execute("DELETE FROM paper_analyses")
+    conn.execute("DELETE FROM pa_analyses")
 
     for p in paper_analyses:
         conn.execute(
-            "INSERT INTO paper_analyses VALUES (?, ?, ?, ?, ?)",
-            (p["pmid"], p["study_type"], p["result"], p["sample_size"], p["evidence_tier"]),
+            "INSERT INTO pa_analyses VALUES (?, ?, ?, ?, ?, ?)",
+            (p["pmid"], p["study_type"], p["result"], p["sample_size"], p["evidence_tier"], 'regex'),
         )
 
     conn.commit()

@@ -28,6 +28,43 @@ DATA_DB = os.path.join(PROJECT_ROOT, "public", "data.db")
 TRIAL_ANALYSES_PATH = os.path.join(PROJECT_ROOT, "src", "data", "trials", "trial-analyses.json")
 
 DEFAULT_BASE_URL = "https://api.cerebras.ai/v1"
+
+
+def ensure_tr_analyses_table(conn):
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS tr_analyses (
+            nct_id TEXT PRIMARY KEY,
+            what_tested TEXT,
+            key_result TEXT,
+            verdict TEXT,
+            patient_relevance TEXT,
+            dose_tested TEXT,
+            sample_size INTEGER
+        )
+    """)
+    conn.commit()
+
+
+def seed_from_json(conn):
+    """One-time migration from JSON to DB."""
+    if conn.execute("SELECT COUNT(*) FROM tr_analyses").fetchone()[0] > 0:
+        return
+    json_path = os.path.join(PROJECT_ROOT, "src", "data", "trials", "trial-analyses.json")
+    if not os.path.exists(json_path):
+        return
+    with open(json_path) as f:
+        analyses = json.load(f)
+    for a in analyses:
+        conn.execute(
+            "INSERT OR REPLACE INTO tr_analyses VALUES (?,?,?,?,?,?,?)",
+            (a["nct_id"], a.get("what_tested"), a.get("key_result"),
+             a.get("verdict"), a.get("patient_relevance"),
+             a.get("dose_tested"), a.get("sample_size")),
+        )
+    conn.commit()
+    print(f"  Seeded {len(analyses)} trial analyses from JSON")
+
+
 DEFAULT_MODEL = "qwen-3-235b-a22b-instruct-2507"
 
 TRIAL_PROMPT = """You are analyzing a clinical trial for cluster headache. Based on the information below, provide a structured analysis.
@@ -93,33 +130,39 @@ def call_llm(prompt, api_key, base_url, model):
 
 def analyze_new_trials(db_path, api_key, base_url, model):
     """Find trials without analyses and analyze them."""
-    # Load existing analyses
-    existing = {}
-    if os.path.exists(TRIAL_ANALYSES_PATH):
-        with open(TRIAL_ANALYSES_PATH) as f:
-            for a in json.load(f):
-                existing[a["nct_id"]] = a
-
-    # Get all trials from DB
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
+
+    ensure_tr_analyses_table(conn)
+    seed_from_json(conn)
+
+    # Load existing analyses from DB
+    rows = conn.execute("SELECT nct_id, what_tested, key_result, verdict, patient_relevance, dose_tested, sample_size FROM tr_analyses").fetchall()
+    existing = {r[0]: {
+        "nct_id": r[0], "what_tested": r[1], "key_result": r[2],
+        "verdict": r[3], "patient_relevance": r[4], "dose_tested": r[5],
+        "sample_size": r[6],
+    } for r in rows}
+
+    # Get all trials from DB
     trials = conn.execute("""
         SELECT nct_id, title, status, phase, sponsor, enrollment,
                start_date, end_date, summary, category, raw_json
-        FROM trials
+        FROM tr_trials
     """).fetchall()
-    conn.close()
 
     # Find new trials
     new_trials = [t for t in trials if t["nct_id"] not in existing]
 
     if not new_trials:
+        conn.close()
         print("  No new trials to analyze")
         return 0
 
     print(f"  Found {len(new_trials)} new trials to analyze")
 
     analyzed = 0
+    new_analyses = []
     for t in new_trials:
         print(f"  Analyzing {t['nct_id']}: {t['title'][:60]}...")
 
@@ -157,13 +200,13 @@ def analyze_new_trials(db_path, api_key, base_url, model):
             result = call_llm(prompt, api_key, base_url, model)
             result["nct_id"] = t["nct_id"]
             result["sample_size"] = t["enrollment"]
-            existing[t["nct_id"]] = result
+            new_analyses.append(result)
             analyzed += 1
             time.sleep(1)  # Rate limit courtesy
         except Exception as e:
             print(f"    ERROR: {e}")
             # Add placeholder
-            existing[t["nct_id"]] = {
+            new_analyses.append({
                 "nct_id": t["nct_id"],
                 "what_tested": t["summary"][:150] if t["summary"] else "Analysis pending",
                 "key_result": "Automated analysis failed — manual review needed",
@@ -171,15 +214,20 @@ def analyze_new_trials(db_path, api_key, base_url, model):
                 "patient_relevance": "Check ClinicalTrials.gov for details",
                 "dose_tested": None,
                 "sample_size": t["enrollment"],
-            }
+            })
 
-    # Write updated analyses
-    all_analyses = list(existing.values())
-    os.makedirs(os.path.dirname(TRIAL_ANALYSES_PATH), exist_ok=True)
-    with open(TRIAL_ANALYSES_PATH, "w") as f:
-        json.dump(all_analyses, f, indent=2)
+    # Write new analyses to DB
+    for a in new_analyses:
+        conn.execute(
+            "INSERT OR REPLACE INTO tr_analyses VALUES (?,?,?,?,?,?,?)",
+            (a["nct_id"], a["what_tested"], a["key_result"], a["verdict"],
+             a["patient_relevance"], a["dose_tested"], a.get("sample_size")),
+        )
+    conn.commit()
+    conn.close()
 
-    print(f"  Analyzed {analyzed} new trials ({len(all_analyses)} total)")
+    total = len(existing) + len(new_analyses)  # existing = pre-existing rows, new_analyses = just added
+    print(f"  Analyzed {analyzed} new trials ({total} total)")
     return analyzed
 
 

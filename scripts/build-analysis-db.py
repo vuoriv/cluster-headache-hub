@@ -11,12 +11,12 @@ DATA_DIR = os.path.join(PROJECT_ROOT, "src", "data")
 OUTPUT_DB = os.path.join(PROJECT_ROOT, "data", "analysis.db")
 
 SCHEMA = """
-CREATE TABLE IF NOT EXISTS forum_stats (
+CREATE TABLE IF NOT EXISTS cb_forum_stats (
   key TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS treatment_rankings (
+CREATE TABLE IF NOT EXISTS cb_treatment_rankings (
   slug TEXT PRIMARY KEY,
   name TEXT NOT NULL,
   category TEXT NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS treatment_rankings (
   composite_score REAL NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS outcomes (
+CREATE TABLE IF NOT EXISTS cb_outcomes (
   treatment_name TEXT PRIMARY KEY,
   total_mentions INTEGER,
   rated_posts INTEGER,
@@ -40,33 +40,33 @@ CREATE TABLE IF NOT EXISTS outcomes (
   partial_rate REAL
 );
 
-CREATE TABLE IF NOT EXISTS timeline (
+CREATE TABLE IF NOT EXISTS cb_timeline (
   year INTEGER NOT NULL,
   treatment_name TEXT NOT NULL,
   mentions INTEGER NOT NULL,
   PRIMARY KEY (year, treatment_name)
 );
 
-CREATE TABLE IF NOT EXISTS co_occurrence (
+CREATE TABLE IF NOT EXISTS cb_co_occurrence (
   treatment1 TEXT NOT NULL,
   treatment2 TEXT NOT NULL,
   count INTEGER NOT NULL,
   PRIMARY KEY (treatment1, treatment2)
 );
 
-CREATE TABLE IF NOT EXISTS treatment_profiles (
+CREATE TABLE IF NOT EXISTS cb_treatment_profiles (
   slug TEXT PRIMARY KEY,
   name TEXT NOT NULL,
   category TEXT NOT NULL,
   data TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS recommendation_data (
+CREATE TABLE IF NOT EXISTS cb_recommendation_data (
   key TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS insights (
+CREATE TABLE IF NOT EXISTS cb_insights (
   slug TEXT PRIMARY KEY,
   data TEXT NOT NULL
 );
@@ -87,16 +87,16 @@ def build_db():
     cursor = conn.cursor()
     cursor.executescript(SCHEMA)
 
-    # forum_stats: store each top-level key as a row
+    # cb_forum_stats: store each top-level key as a row
     stats = load_json("forum-stats.json")
     for key, value in stats.items():
         cursor.execute(
-            "INSERT INTO forum_stats (key, value) VALUES (?, ?)",
+            "INSERT INTO cb_forum_stats (key, value) VALUES (?, ?)",
             (key, json.dumps(value)),
         )
-    print(f"  forum_stats: {len(stats)} rows")
+    print(f"  cb_forum_stats: {len(stats)} rows")
 
-    # treatment_rankings
+    # cb_treatment_rankings
     rankings = load_json("treatment-rankings.json")
     # Build slug->category map from recommendation data for category info
     rec_data = load_json("recommendation-data.json")
@@ -107,7 +107,7 @@ def build_db():
     for r in rankings:
         category = category_map.get(r["slug"], "conventional")
         cursor.execute(
-            "INSERT INTO treatment_rankings (slug, name, category, total_mentions, positive_rate, normalized_mentions, composite_score) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO cb_treatment_rankings (slug, name, category, total_mentions, positive_rate, normalized_mentions, composite_score) VALUES (?, ?, ?, ?, ?, ?, ?)",
             (
                 r["slug"],
                 r["treatment"],
@@ -118,13 +118,13 @@ def build_db():
                 r["composite_score"],
             ),
         )
-    print(f"  treatment_rankings: {len(rankings)} rows")
+    print(f"  cb_treatment_rankings: {len(rankings)} rows")
 
-    # outcomes
+    # cb_outcomes
     outcomes = load_json("outcomes.json")
     for treatment_name, o in outcomes.items():
         cursor.execute(
-            "INSERT INTO outcomes (treatment_name, total_mentions, rated_posts, positive, negative, partial, neutral, mixed, positive_rate, negative_rate, partial_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO cb_outcomes (treatment_name, total_mentions, rated_posts, positive, negative, partial, neutral, mixed, positive_rate, negative_rate, partial_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (
                 treatment_name,
                 o["total_mentions"],
@@ -139,34 +139,34 @@ def build_db():
                 o["partial_rate"],
             ),
         )
-    print(f"  outcomes: {len(outcomes)} rows")
+    print(f"  cb_outcomes: {len(outcomes)} rows")
 
-    # timeline
+    # cb_timeline
     timeline = load_json("timeline.json")
     row_count = 0
     for year_str, treatments in timeline["per_year"].items():
         year = int(year_str)
         for treatment_name, mentions in treatments.items():
             cursor.execute(
-                "INSERT INTO timeline (year, treatment_name, mentions) VALUES (?, ?, ?)",
+                "INSERT INTO cb_timeline (year, treatment_name, mentions) VALUES (?, ?, ?)",
                 (year, treatment_name, mentions),
             )
             row_count += 1
-    print(f"  timeline: {row_count} rows")
+    print(f"  cb_timeline: {row_count} rows")
 
-    # co_occurrence
+    # cb_co_occurrence
     co_occ = load_json("co-occurrence.json")
     row_count = 0
     for t1, pairs in co_occ.items():
         for t2, count in pairs.items():
             cursor.execute(
-                "INSERT INTO co_occurrence (treatment1, treatment2, count) VALUES (?, ?, ?)",
+                "INSERT INTO cb_co_occurrence (treatment1, treatment2, count) VALUES (?, ?, ?)",
                 (t1, t2, count),
             )
             row_count += 1
-    print(f"  co_occurrence: {row_count} rows")
+    print(f"  cb_co_occurrence: {row_count} rows")
 
-    # treatment_profiles
+    # cb_treatment_profiles
     treatments_dir = os.path.join(DATA_DIR, "treatments")
     profile_count = 0
     for filename in sorted(os.listdir(treatments_dir)):
@@ -177,21 +177,21 @@ def build_db():
         with open(filepath, "r") as f:
             profile = json.load(f)
         cursor.execute(
-            "INSERT INTO treatment_profiles (slug, name, category, data) VALUES (?, ?, ?, ?)",
+            "INSERT INTO cb_treatment_profiles (slug, name, category, data) VALUES (?, ?, ?, ?)",
             (slug, profile["name"], profile["category"], json.dumps(profile)),
         )
         profile_count += 1
-    print(f"  treatment_profiles: {profile_count} rows")
+    print(f"  cb_treatment_profiles: {profile_count} rows")
 
-    # recommendation_data
+    # cb_recommendation_data
     for key, value in rec_data.items():
         cursor.execute(
-            "INSERT INTO recommendation_data (key, value) VALUES (?, ?)",
+            "INSERT INTO cb_recommendation_data (key, value) VALUES (?, ?)",
             (key, json.dumps(value)),
         )
-    print(f"  recommendation_data: {len(rec_data)} rows")
+    print(f"  cb_recommendation_data: {len(rec_data)} rows")
 
-    # insights
+    # cb_insights
     insights_dir = os.path.join(DATA_DIR, "insights")
     if os.path.isdir(insights_dir):
         insight_count = 0
@@ -203,17 +203,17 @@ def build_db():
             with open(filepath, "r") as f:
                 data = json.load(f)
             cursor.execute(
-                "INSERT INTO insights (slug, data) VALUES (?, ?)",
+                "INSERT INTO cb_insights (slug, data) VALUES (?, ?)",
                 (slug, json.dumps(data)),
             )
             insight_count += 1
-        print(f"  insights: {insight_count} rows")
+        print(f"  cb_insights: {insight_count} rows")
 
-    # community_groups
+    # co_groups
     groups_file = os.path.join(DATA_DIR, "community-groups.json")
     if os.path.exists(groups_file):
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS community_groups (
+            CREATE TABLE IF NOT EXISTS co_groups (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
                 country TEXT NOT NULL,
@@ -227,15 +227,15 @@ def build_db():
                 contact_email TEXT
             )
         """)
-        cursor.execute("DELETE FROM community_groups")
+        cursor.execute("DELETE FROM co_groups")
         groups = json.load(open(groups_file))
         for g in groups:
             cursor.execute(
-                "INSERT INTO community_groups (name, country, region, platform, url, language, description, members, tags, contact_email) VALUES (?,?,?,?,?,?,?,?,?,?)",
+                "INSERT INTO co_groups (name, country, region, platform, url, language, description, members, tags, contact_email) VALUES (?,?,?,?,?,?,?,?,?,?)",
                 (g["name"], g["country"], g["region"], g["platform"], g["url"],
                  g["language"], g["description"], g.get("members"), json.dumps(g.get("tags", [])), g.get("contact_email")),
             )
-        print(f"  community_groups: {len(groups)} rows")
+        print(f"  co_groups: {len(groups)} rows")
 
     conn.commit()
     conn.close()

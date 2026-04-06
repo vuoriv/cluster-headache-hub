@@ -303,20 +303,33 @@ def enrich_trial(t):
 # ── Database ──
 
 SCHEMA = """
-CREATE TABLE IF NOT EXISTS papers (
+CREATE TABLE IF NOT EXISTS pa_papers (
   pmid TEXT PRIMARY KEY,
   title TEXT NOT NULL,
   authors TEXT,
   journal TEXT,
   pub_date TEXT,
   abstract TEXT,
+  abstract_structured TEXT,
   mesh_terms TEXT,
+  author_keywords TEXT,
+  affiliations TEXT,
+  doi TEXT,
+  pmcid TEXT,
+  full_text_sections TEXT,
+  nct_ids_cited TEXT,
+  is_oa INTEGER,
+  oa_url TEXT,
+  oa_status TEXT,
   category TEXT,
   relevance_score REAL,
   last_updated TEXT
 );
+CREATE INDEX IF NOT EXISTS idx_pa_papers_category ON pa_papers(category);
+CREATE INDEX IF NOT EXISTS idx_pa_papers_pub_date ON pa_papers(pub_date);
+CREATE INDEX IF NOT EXISTS idx_pa_papers_doi ON pa_papers(doi);
 
-CREATE TABLE IF NOT EXISTS trials (
+CREATE TABLE IF NOT EXISTS tr_trials (
   nct_id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
   status TEXT NOT NULL,
@@ -334,16 +347,13 @@ CREATE TABLE IF NOT EXISTS trials (
   last_updated TEXT,
   raw_json TEXT
 );
+CREATE INDEX IF NOT EXISTS idx_tr_trials_category ON tr_trials(category);
+CREATE INDEX IF NOT EXISTS idx_tr_trials_status ON tr_trials(status);
 
-CREATE TABLE IF NOT EXISTS pipeline_meta (
+CREATE TABLE IF NOT EXISTS rs_stats (
   key TEXT PRIMARY KEY,
   value TEXT
 );
-
-CREATE INDEX IF NOT EXISTS idx_papers_category ON papers(category);
-CREATE INDEX IF NOT EXISTS idx_papers_pub_date ON papers(pub_date);
-CREATE INDEX IF NOT EXISTS idx_trials_category ON trials(category);
-CREATE INDEX IF NOT EXISTS idx_trials_status ON trials(status);
 """
 
 
@@ -356,17 +366,18 @@ def build_db(db_path, papers, trials):
     conn.executescript(SCHEMA)
 
     # Clear research tables only (preserve analysis tables)
-    conn.execute("DELETE FROM papers")
-    conn.execute("DELETE FROM trials")
-    conn.execute("DELETE FROM pipeline_meta")
+    conn.execute("DELETE FROM pa_papers")
+    conn.execute("DELETE FROM tr_trials")
+    conn.execute("DELETE FROM rs_stats")
 
     # Insert papers
     for p in papers:
         cat, score = enrich_paper(p)
         conn.execute(
-            "INSERT OR REPLACE INTO papers VALUES (?,?,?,?,?,?,?,?,?,?)",
+            "INSERT OR REPLACE INTO pa_papers VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (p["pmid"], p["title"], p["authors"], p["journal"], p["pub_date"],
-             p["abstract"], json.dumps(p["mesh_terms"]), cat, score, now),
+             p["abstract"], None, json.dumps(p["mesh_terms"]), None, None,
+             None, None, None, None, None, None, None, cat, score, now),
         )
     print(f"  Inserted {len(papers)} papers")
 
@@ -374,7 +385,7 @@ def build_db(db_path, papers, trials):
     for t in trials:
         cat, score = enrich_trial(t)
         conn.execute(
-            "INSERT OR REPLACE INTO trials VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT OR REPLACE INTO tr_trials VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (t["nct_id"], t["title"], t["status"], t["phase"], t["study_type"],
              t["sponsor"], t["enrollment"], t["start_date"], t["end_date"],
              t["interventions"], t["summary"], t["conditions"], cat, score, now,
@@ -383,15 +394,15 @@ def build_db(db_path, papers, trials):
     print(f"  Inserted {len(trials)} trials")
 
     # Metadata
-    conn.execute("INSERT INTO pipeline_meta VALUES (?, ?)", ("last_run", now))
-    conn.execute("INSERT INTO pipeline_meta VALUES (?, ?)", ("paper_count", str(len(papers))))
-    conn.execute("INSERT INTO pipeline_meta VALUES (?, ?)", ("trial_count", str(len(trials))))
+    conn.execute("INSERT INTO rs_stats VALUES (?, ?)", ("last_run", now))
+    conn.execute("INSERT INTO rs_stats VALUES (?, ?)", ("paper_count", str(len(papers))))
+    conn.execute("INSERT INTO rs_stats VALUES (?, ?)", ("trial_count", str(len(trials))))
 
     cat_counts = {}
     for p in papers:
         cat, _ = enrich_paper(p)
         cat_counts[cat] = cat_counts.get(cat, 0) + 1
-    conn.execute("INSERT INTO pipeline_meta VALUES (?, ?)", ("paper_categories", json.dumps(cat_counts)))
+    conn.execute("INSERT INTO rs_stats VALUES (?, ?)", ("paper_categories", json.dumps(cat_counts)))
 
     conn.commit()
     conn.close()

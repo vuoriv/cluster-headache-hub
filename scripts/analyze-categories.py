@@ -50,8 +50,8 @@ def main():
         papers = conn.execute("""
             SELECT p.pmid, p.title, p.authors, p.pub_date, p.abstract, p.journal,
                    pa.study_type, pa.result, pa.sample_size, pa.evidence_tier
-            FROM papers p
-            LEFT JOIN paper_analyses pa ON p.pmid = pa.pmid
+            FROM pa_papers p
+            LEFT JOIN pa_analyses pa ON p.pmid = pa.pmid
             WHERE p.category = ?
             ORDER BY p.relevance_score DESC
         """, (category,)).fetchall()
@@ -59,7 +59,7 @@ def main():
         # Trials
         trials = conn.execute("""
             SELECT nct_id, title, status, phase, sponsor, enrollment, start_date, end_date
-            FROM trials WHERE category = ?
+            FROM tr_trials WHERE category = ?
             ORDER BY relevance_score DESC
         """, (category,)).fetchall()
 
