@@ -96,10 +96,7 @@ def main():
         "Phase 2a: Classify papers (study type, result, evidence tier)",
     )
 
-    run(
-        [sys.executable, os.path.join(SCRIPT_DIR, "analyze-categories.py")],
-        "Phase 2b: Generate per-category deep dives",
-    )
+    # Phase 2b: Category stats now built by analyze-research.py (rs_category_stats table)
 
     # Phase 3: Forum analysis (optional — needs clusterbusters.db)
     if args.forum_db and os.path.exists(args.forum_db):
