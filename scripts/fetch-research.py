@@ -18,6 +18,8 @@ import time
 from pathlib import Path
 from urllib.parse import urlencode
 
+import xml.etree.ElementTree as ET
+
 import requests
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -232,6 +234,259 @@ def fetch_trials():
     return all_trials
 
 
+# ── EFETCH Enrichment ──
+
+
+def parse_efetch_xml(xml_text):
+    """Parse EFETCH XML response, return dict of pmid -> enrichment data."""
+    results = {}
+    try:
+        root = ET.fromstring(xml_text)
+    except ET.ParseError:
+        return results
+    for article in root.findall(".//PubmedArticle"):
+        pmid_el = article.find(".//PMID")
+        if pmid_el is None or pmid_el.text is None:
+            continue
+        pmid = pmid_el.text
+        data = {}
+
+        # Structured abstract
+        abstract_parts = {}
+        for at in article.findall(".//AbstractText"):
+            label = (at.get("Label") or "").lower()
+            text = "".join(at.itertext()).strip()
+            if label and text:
+                abstract_parts[label] = text
+        data["abstract_structured"] = json.dumps(abstract_parts) if abstract_parts else None
+
+        # Author keywords
+        keywords = [kw.text for kw in article.findall(".//Keyword") if kw.text]
+        data["author_keywords"] = json.dumps(keywords) if keywords else None
+
+        # Affiliations
+        affiliations = list(set(
+            aff.text for aff in article.findall(".//AffiliationInfo/Affiliation")
+            if aff.text
+        ))
+        data["affiliations"] = json.dumps(affiliations) if affiliations else None
+
+        # DOI
+        doi = None
+        for aid in article.findall(".//ArticleId"):
+            if aid.get("IdType") == "doi" and aid.text:
+                doi = aid.text
+                break
+        data["doi"] = doi
+
+        # PMCID
+        pmcid = None
+        for aid in article.findall(".//ArticleId"):
+            if aid.get("IdType") == "pmc" and aid.text:
+                pmcid = aid.text
+                break
+        data["pmcid"] = pmcid
+
+        # NCT IDs cited in abstract
+        full_abstract = " ".join("".join(at.itertext()) for at in article.findall(".//AbstractText"))
+        nct_ids = list(set(re.findall(r"NCT\d{8}", full_abstract)))
+        data["nct_ids_cited"] = json.dumps(nct_ids) if nct_ids else None
+
+        results[pmid] = data
+    return results
+
+
+def enrich_papers_efetch(conn, api_key=None):
+    """Fetch structured metadata via EFETCH for papers not yet enriched."""
+    cursor = conn.execute("SELECT pmid FROM pa_papers WHERE doi IS NULL")
+    pmids = [row[0] for row in cursor.fetchall()]
+    if not pmids:
+        print("  All papers already enriched via EFETCH")
+        return
+
+    print(f"  Enriching {len(pmids)} papers via EFETCH...")
+    delay = 0.1 if api_key else 0.35
+    batch_size = 200
+
+    for i in range(0, len(pmids), batch_size):
+        batch = pmids[i:i + batch_size]
+        params = {"db": "pubmed", "id": ",".join(batch), "retmode": "xml"}
+        if api_key:
+            params["api_key"] = api_key
+
+        try:
+            resp = requests.get(EFETCH, params=params, timeout=30)
+            resp.raise_for_status()
+            enrichments = parse_efetch_xml(resp.text)
+
+            for pmid, data in enrichments.items():
+                conn.execute("""
+                    UPDATE pa_papers SET
+                        abstract_structured = ?,
+                        author_keywords = ?,
+                        affiliations = ?,
+                        doi = ?,
+                        pmcid = ?,
+                        nct_ids_cited = ?
+                    WHERE pmid = ? AND doi IS NULL
+                """, (
+                    data["abstract_structured"], data["author_keywords"],
+                    data["affiliations"], data["doi"], data["pmcid"],
+                    data["nct_ids_cited"], pmid,
+                ))
+            conn.commit()
+            print(f"    Enriched batch {i // batch_size + 1} ({len(enrichments)} papers)")
+        except Exception as e:
+            print(f"    EFETCH batch error: {e}")
+
+        time.sleep(delay)
+
+
+# ── Full Text & OA ──
+
+
+def extract_fulltext_sections(xml_text):
+    """Extract results, discussion, conclusion from PMC XML."""
+    sections = {}
+    try:
+        root = ET.fromstring(xml_text)
+        for sec in root.findall(".//sec"):
+            sec_type = (sec.get("sec-type") or "").lower()
+            title_el = sec.find("title")
+            title = (title_el.text or "").lower() if title_el is not None else ""
+
+            key = None
+            if "result" in sec_type or "result" in title:
+                key = "results"
+            elif "discussion" in sec_type or "discussion" in title:
+                key = "discussion"
+            elif "conclusion" in sec_type or "conclusion" in title:
+                key = "conclusion"
+
+            if key and key not in sections:
+                text = " ".join(sec.itertext()).strip()
+                if len(text) > 50:
+                    sections[key] = text[:10000]
+    except Exception:
+        pass
+    return sections if sections else None
+
+
+def fetch_pmc_fulltext(pmcid, api_key=None):
+    """Fetch full text XML from PMC."""
+    params = {"db": "pmc", "id": pmcid, "retmode": "xml"}
+    if api_key:
+        params["api_key"] = api_key
+    try:
+        resp = requests.get(EFETCH, params=params, timeout=30)
+        resp.raise_for_status()
+        return extract_fulltext_sections(resp.text)
+    except Exception:
+        return None
+
+
+def fetch_europepmc_fulltext(pmcid):
+    """Fetch full text XML from Europe PMC."""
+    url = f"https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/fullTextXML"
+    try:
+        resp = requests.get(url, timeout=30)
+        if resp.status_code == 200:
+            return extract_fulltext_sections(resp.text)
+    except Exception:
+        pass
+    return None
+
+
+def retrieve_full_texts(conn, api_key=None):
+    """Waterfall: PMC -> Europe PMC -> Unpaywall HTML. Stop on first success."""
+    cursor = conn.execute(
+        "SELECT pmid, pmcid, oa_url FROM pa_papers WHERE full_text_sections IS NULL AND (pmcid IS NOT NULL OR oa_url IS NOT NULL)"
+    )
+    papers = cursor.fetchall()
+    if not papers:
+        print("  No papers need full text retrieval")
+        return
+
+    print(f"  Attempting full text retrieval for {len(papers)} papers...")
+    delay = 0.1 if api_key else 0.35
+    found = 0
+
+    for pmid, pmcid, oa_url in papers:
+        sections = None
+
+        if pmcid and not sections:
+            sections = fetch_pmc_fulltext(pmcid, api_key)
+            time.sleep(delay)
+
+        if pmcid and not sections:
+            sections = fetch_europepmc_fulltext(pmcid)
+            time.sleep(0.1)
+
+        if not sections and oa_url and not oa_url.endswith(".pdf"):
+            try:
+                resp = requests.get(oa_url, timeout=15, headers={"User-Agent": "ClusterHeadacheHub/1.0"})
+                if resp.status_code == 200 and "text/html" in resp.headers.get("content-type", ""):
+                    text = re.sub(r"<script[^>]*>[\s\S]*?</script>", "", resp.text)
+                    text = re.sub(r"<style[^>]*>[\s\S]*?</style>", "", text)
+                    text = re.sub(r"<[^>]+>", " ", text)
+                    text = re.sub(r"\s+", " ", text).strip()
+                    if len(text) > 500:
+                        sections = {"full_text": text[:20000]}
+            except Exception:
+                pass
+            time.sleep(1)
+
+        if sections:
+            conn.execute(
+                "UPDATE pa_papers SET full_text_sections = ? WHERE pmid = ?",
+                (json.dumps(sections), pmid),
+            )
+            found += 1
+
+    conn.commit()
+    print(f"  Retrieved full text for {found}/{len(papers)} papers")
+
+
+def fetch_unpaywall_status(conn):
+    """Fetch OA status from Unpaywall for papers with DOI."""
+    cursor = conn.execute(
+        "SELECT pmid, doi FROM pa_papers WHERE doi IS NOT NULL AND oa_status IS NULL"
+    )
+    papers = cursor.fetchall()
+    if not papers:
+        print("  All papers already have OA status")
+        return
+
+    print(f"  Fetching Unpaywall OA status for {len(papers)} papers...")
+    found = 0
+    for pmid, doi in papers:
+        try:
+            resp = requests.get(
+                f"https://api.unpaywall.org/v2/{doi}",
+                params={"email": "ville.vuori@willba.app"},
+                timeout=10,
+            )
+            if resp.status_code == 200:
+                data = resp.json()
+                is_oa = 1 if data.get("is_oa") else 0
+                oa_url = None
+                best_loc = data.get("best_oa_location")
+                if best_loc:
+                    oa_url = best_loc.get("url_for_landing_page") or best_loc.get("url")
+                oa_status = data.get("oa_status", "closed")
+                conn.execute(
+                    "UPDATE pa_papers SET is_oa = ?, oa_url = ?, oa_status = ? WHERE pmid = ?",
+                    (is_oa, oa_url, oa_status, pmid),
+                )
+                found += 1
+        except Exception as e:
+            print(f"    Unpaywall error for {doi}: {e}")
+        time.sleep(1)
+
+    conn.commit()
+    print(f"  Got OA status for {found}/{len(papers)} papers")
+
+
 # ── Enrichment ──
 
 CATEGORY_PATTERNS = [
@@ -405,6 +660,17 @@ def build_db(db_path, papers, trials):
     conn.execute("INSERT INTO rs_stats VALUES (?, ?)", ("paper_categories", json.dumps(cat_counts)))
 
     conn.commit()
+
+    # Phase B: EFETCH enrichment
+    api_key = os.environ.get("NCBI_API_KEY")
+    enrich_papers_efetch(conn, api_key)
+
+    # Phase C: Full text retrieval
+    retrieve_full_texts(conn, api_key)
+
+    # Phase D: Unpaywall OA status
+    fetch_unpaywall_status(conn)
+
     conn.close()
     print("  Done")
 
