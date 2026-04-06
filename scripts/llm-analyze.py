@@ -30,6 +30,23 @@ TRIAL_ANALYSES_PATH = os.path.join(PROJECT_ROOT, "src", "data", "trials", "trial
 DEFAULT_BASE_URL = "https://api.cerebras.ai/v1"
 
 
+def ensure_pa_analyses_table(conn):
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS pa_analyses (
+            pmid TEXT PRIMARY KEY,
+            outcome TEXT,
+            plain_summary TEXT,
+            key_finding TEXT,
+            sample_size INTEGER,
+            study_type TEXT,
+            evidence_tier INTEGER,
+            interventions_studied TEXT,
+            analysis_source TEXT DEFAULT 'ai'
+        )
+    """)
+    conn.commit()
+
+
 def ensure_tr_analyses_table(conn):
     conn.execute("""
         CREATE TABLE IF NOT EXISTS tr_analyses (
@@ -94,6 +111,43 @@ Respond with ONLY a JSON object (no markdown, no explanation):
 }}"""
 
 
+PAPER_PROMPT = """You are analyzing a research paper about cluster headache. Based on the content below, provide a structured analysis written for patients, not doctors.
+
+Title: {title}
+Authors: {authors}
+Journal: {journal} ({year})
+Category: {category}
+MeSH Terms: {mesh_terms}
+
+Content:
+{content}
+
+Respond with ONLY a JSON object (no markdown, no explanation):
+{{
+  "outcome": "showed_benefit|no_benefit|mixed|inconclusive|basic_science",
+  "plain_summary": "2-3 sentence explanation of what was studied and found, written for a CH patient with no medical background",
+  "key_finding": "single sentence - the most important result with numbers if available",
+  "sample_size": null,
+  "study_type": "rct|observational|case_report|review|meta_analysis|basic_science|other",
+  "evidence_tier": 3,
+  "interventions_studied": ["treatment1"]
+}}
+
+Evidence tier guide:
+1 = meta-analysis or systematic review combining multiple studies
+2 = randomized controlled trial (RCT)
+3 = observational study or cohort
+4 = case series (multiple patients, no control)
+5 = case report, editorial, basic science, or lab research
+
+For outcome:
+- showed_benefit = the treatment clearly helped patients
+- no_benefit = the treatment did not help
+- mixed = some benefit but not convincing
+- inconclusive = results unclear or too early
+- basic_science = no treatment was tested (lab research, imaging, genetics)"""
+
+
 def call_llm(prompt, api_key, base_url, model):
     """Call OpenAI-compatible API."""
     import requests
@@ -126,6 +180,90 @@ def call_llm(prompt, api_key, base_url, model):
         text = text.strip()
 
     return json.loads(text)
+
+
+def analyze_papers(conn, api_key, base_url, model):
+    """AI analysis of papers with abstracts/full text."""
+    ensure_pa_analyses_table(conn)
+
+    existing = set(
+        r[0] for r in conn.execute("SELECT pmid FROM pa_analyses WHERE analysis_source = 'ai'").fetchall()
+    )
+
+    cursor = conn.execute("""
+        SELECT pmid, title, authors, journal, pub_date, abstract,
+               abstract_structured, full_text_sections, category, mesh_terms
+        FROM pa_papers
+        WHERE abstract IS NOT NULL AND abstract != ''
+    """)
+    papers = cursor.fetchall()
+    new_papers = [p for p in papers if p[0] not in existing]
+
+    if not new_papers:
+        print("  No new papers to analyze")
+        return
+
+    print(f"  Analyzing {len(new_papers)} papers with LLM...")
+
+    for i, paper in enumerate(new_papers):
+        pmid, title, authors, journal, pub_date, abstract, abstract_structured, full_text_sections, category, mesh_terms = paper
+        year = (pub_date or "")[:4]
+
+        # Pick richest content
+        content = ""
+        if full_text_sections:
+            try:
+                sections = json.loads(full_text_sections)
+                content = "\n\n".join(f"[{k.upper()}]\n{v}" for k, v in sections.items())
+            except Exception:
+                content = abstract or ""
+        elif abstract_structured:
+            try:
+                sections = json.loads(abstract_structured)
+                content = "\n\n".join(f"[{k.upper()}]\n{v}" for k, v in sections.items())
+            except Exception:
+                content = abstract or ""
+        else:
+            content = abstract or ""
+
+        if len(content.strip()) < 50:
+            continue
+
+        prompt = PAPER_PROMPT.format(
+            title=title or "",
+            authors=authors or "",
+            journal=journal or "",
+            year=year,
+            category=category or "",
+            mesh_terms=mesh_terms or "[]",
+            content=content[:8000],
+        )
+
+        try:
+            result = call_llm(prompt, api_key, base_url, model)
+            conn.execute(
+                "INSERT OR REPLACE INTO pa_analyses VALUES (?,?,?,?,?,?,?,?,?)",
+                (
+                    pmid,
+                    result.get("outcome", "inconclusive"),
+                    result.get("plain_summary"),
+                    result.get("key_finding"),
+                    result.get("sample_size"),
+                    result.get("study_type", "other"),
+                    result.get("evidence_tier", 5),
+                    json.dumps(result.get("interventions_studied", [])),
+                    "ai",
+                ),
+            )
+            conn.commit()
+            if (i + 1) % 50 == 0:
+                print(f"    Analyzed {i + 1}/{len(new_papers)} papers")
+        except Exception as e:
+            print(f"    Error analyzing PMID {pmid}: {e}")
+
+        time.sleep(1)
+
+    print(f"  Completed AI analysis of papers")
 
 
 def analyze_new_trials(db_path, api_key, base_url, model):
@@ -259,6 +397,12 @@ def main():
 
     # Analyze new trials
     new_count = analyze_new_trials(args.db, args.api_key, args.base_url, args.model)
+
+    # Paper AI analysis
+    conn = sqlite3.connect(args.db)
+    ensure_pa_analyses_table(conn)
+    analyze_papers(conn, args.api_key, args.base_url, args.model)
+    conn.close()
 
     print(f"\n=== LLM Analysis Complete ({new_count} new analyses) ===")
 

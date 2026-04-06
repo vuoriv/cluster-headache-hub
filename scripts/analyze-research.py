@@ -293,6 +293,276 @@ def analyze_trials(db_path):
     }
 
 
+def build_paper_trial_links(conn):
+    """Build cross-links between papers and trials."""
+    conn.execute("DROP TABLE IF EXISTS rs_paper_trial_links")
+    conn.execute("""
+        CREATE TABLE rs_paper_trial_links (
+            pmid TEXT NOT NULL,
+            nct_id TEXT NOT NULL,
+            link_type TEXT NOT NULL,
+            PRIMARY KEY (pmid, nct_id)
+        )
+    """)
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_rs_links_nct ON rs_paper_trial_links(nct_id)")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_rs_links_pmid ON rs_paper_trial_links(pmid)")
+
+    # Confirmed links: papers citing NCT IDs
+    cursor = conn.execute(
+        "SELECT pmid, nct_ids_cited FROM pa_papers WHERE nct_ids_cited IS NOT NULL"
+    )
+    trial_ids = set(r[0] for r in conn.execute("SELECT nct_id FROM tr_trials").fetchall())
+
+    confirmed = 0
+    for pmid, nct_json in cursor.fetchall():
+        try:
+            nct_ids = json.loads(nct_json)
+        except Exception:
+            continue
+        for nct_id in nct_ids:
+            if nct_id in trial_ids:
+                conn.execute(
+                    "INSERT OR IGNORE INTO rs_paper_trial_links VALUES (?, ?, 'confirmed')",
+                    (pmid, nct_id),
+                )
+                confirmed += 1
+
+    # Related links: same category + overlapping interventions
+    cursor = conn.execute("""
+        SELECT p.pmid, p.category, a.interventions_studied, t.nct_id, t.interventions
+        FROM pa_papers p
+        JOIN pa_analyses a ON p.pmid = a.pmid
+        JOIN tr_trials t ON p.category = t.category
+        WHERE a.interventions_studied IS NOT NULL
+          AND t.interventions IS NOT NULL
+          AND NOT EXISTS (
+              SELECT 1 FROM rs_paper_trial_links l
+              WHERE l.pmid = p.pmid AND l.nct_id = t.nct_id
+          )
+    """)
+
+    related = 0
+    for row in cursor.fetchall():
+        pmid, category, paper_ints_json, nct_id, trial_ints_json = row
+        try:
+            paper_ints = set(i.lower() for i in json.loads(paper_ints_json))
+            trial_ints = set(i.lower() for i in json.loads(trial_ints_json))
+        except Exception:
+            continue
+        if paper_ints & trial_ints:
+            conn.execute(
+                "INSERT OR IGNORE INTO rs_paper_trial_links VALUES (?, ?, 'related')",
+                (pmid, nct_id),
+            )
+            related += 1
+
+    conn.commit()
+    print(f"  Built {confirmed} confirmed + {related} related paper-trial links")
+
+
+def build_category_stats(conn):
+    """Build rs_category_stats table."""
+    conn.execute("DROP TABLE IF EXISTS rs_category_stats")
+    conn.execute("""
+        CREATE TABLE rs_category_stats (
+            category TEXT PRIMARY KEY,
+            paper_count INTEGER,
+            trial_count INTEGER,
+            active_trial_count INTEGER,
+            positive_outcome_count INTEGER,
+            avg_evidence_tier REAL,
+            oa_rate REAL,
+            papers_linked_to_trials INTEGER,
+            top_authors TEXT,
+            top_institutions TEXT,
+            papers_per_year TEXT,
+            study_type_distribution TEXT,
+            result_distribution TEXT
+        )
+    """)
+
+    categories = [r[0] for r in conn.execute(
+        "SELECT DISTINCT category FROM pa_papers WHERE category IS NOT NULL UNION SELECT DISTINCT category FROM tr_trials WHERE category IS NOT NULL ORDER BY category"
+    ).fetchall()]
+
+    for cat in categories:
+        paper_count = conn.execute("SELECT COUNT(*) FROM pa_papers WHERE category = ?", (cat,)).fetchone()[0]
+        trial_count = conn.execute("SELECT COUNT(*) FROM tr_trials WHERE category = ?", (cat,)).fetchone()[0]
+        active_trial_count = conn.execute(
+            "SELECT COUNT(*) FROM tr_trials WHERE category = ? AND status IN ('RECRUITING','NOT_YET_RECRUITING','ACTIVE_NOT_RECRUITING')",
+            (cat,),
+        ).fetchone()[0]
+
+        # Use 'result' column (regex) or 'outcome' column (AI) depending on what exists
+        positive_count = conn.execute(
+            "SELECT COUNT(*) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE p.category = ? AND (a.result = 'positive' OR a.outcome = 'showed_benefit')",
+            (cat,),
+        ).fetchone()[0]
+
+        avg_tier = conn.execute(
+            "SELECT AVG(a.evidence_tier) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE p.category = ? AND a.evidence_tier IS NOT NULL",
+            (cat,),
+        ).fetchone()[0] or 0
+
+        oa_count = conn.execute("SELECT COUNT(*) FROM pa_papers WHERE category = ? AND is_oa = 1", (cat,)).fetchone()[0]
+        oa_rate = oa_count / paper_count if paper_count > 0 else 0
+
+        linked = conn.execute(
+            "SELECT COUNT(DISTINCT l.pmid) FROM rs_paper_trial_links l JOIN pa_papers p ON l.pmid = p.pmid WHERE p.category = ?",
+            (cat,),
+        ).fetchone()[0]
+
+        # Top authors
+        author_counts = Counter()
+        for (authors_str,) in conn.execute("SELECT authors FROM pa_papers WHERE category = ? AND authors IS NOT NULL", (cat,)).fetchall():
+            first = authors_str.split(",")[0].strip()
+            if first and first != "et al.":
+                author_counts[first] += 1
+        top_authors = [{"name": n, "count": c} for n, c in author_counts.most_common(10)]
+
+        # Top institutions
+        inst_counts = Counter()
+        for (affs_json,) in conn.execute("SELECT affiliations FROM pa_papers WHERE category = ? AND affiliations IS NOT NULL", (cat,)).fetchall():
+            try:
+                for aff in json.loads(affs_json):
+                    parts = aff.split(",")
+                    inst = parts[0].strip() if parts else aff
+                    if len(inst) > 5:
+                        inst_counts[inst] += 1
+            except Exception:
+                pass
+        top_institutions = [{"name": n, "count": c} for n, c in inst_counts.most_common(10)]
+
+        # Papers per year
+        year_counts = {}
+        for (pd,) in conn.execute("SELECT pub_date FROM pa_papers WHERE category = ? AND pub_date IS NOT NULL", (cat,)).fetchall():
+            y = pd[:4]
+            year_counts[y] = year_counts.get(y, 0) + 1
+
+        # Study type distribution - handle both old (study_type) and new (study_type) columns
+        study_types = conn.execute(
+            "SELECT a.study_type, COUNT(*) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE p.category = ? AND a.study_type IS NOT NULL GROUP BY a.study_type ORDER BY COUNT(*) DESC",
+            (cat,),
+        ).fetchall()
+        study_type_dist = [{"type": t, "count": c} for t, c in study_types]
+
+        # Result distribution - use outcome if available, fall back to result
+        results = conn.execute(
+            "SELECT COALESCE(a.outcome, a.result) as r, COUNT(*) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE p.category = ? GROUP BY r ORDER BY COUNT(*) DESC",
+            (cat,),
+        ).fetchall()
+        result_dist = [{"result": r, "count": c} for r, c in results]
+
+        conn.execute(
+            "INSERT INTO rs_category_stats VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (cat, paper_count, trial_count, active_trial_count, positive_count,
+             round(avg_tier, 2), round(oa_rate, 3), linked,
+             json.dumps(top_authors), json.dumps(top_institutions),
+             json.dumps(year_counts), json.dumps(study_type_dist), json.dumps(result_dist)),
+        )
+
+    conn.commit()
+    print(f"  Built category stats for {len(categories)} categories")
+
+
+def build_global_stats(conn):
+    """Build rs_stats table with global research statistics."""
+    conn.execute("DROP TABLE IF EXISTS rs_stats")
+    conn.execute("CREATE TABLE rs_stats (key TEXT PRIMARY KEY, value TEXT)")
+
+    def put(key, value):
+        conn.execute("INSERT INTO rs_stats VALUES (?, ?)", (key, json.dumps(value)))
+
+    put("last_run", datetime.now().isoformat())
+    put("paper_count", conn.execute("SELECT COUNT(*) FROM pa_papers").fetchone()[0])
+    put("trial_count", conn.execute("SELECT COUNT(*) FROM tr_trials").fetchone()[0])
+    put("papers_with_abstracts", conn.execute("SELECT COUNT(*) FROM pa_papers WHERE abstract IS NOT NULL AND abstract != ''").fetchone()[0])
+    put("papers_with_full_text", conn.execute("SELECT COUNT(*) FROM pa_papers WHERE full_text_sections IS NOT NULL").fetchone()[0])
+
+    total_with_doi = conn.execute("SELECT COUNT(*) FROM pa_papers WHERE doi IS NOT NULL").fetchone()[0]
+    oa = conn.execute("SELECT COUNT(*) FROM pa_papers WHERE is_oa = 1").fetchone()[0]
+    put("oa_rate", round(oa / total_with_doi, 3) if total_with_doi > 0 else 0)
+
+    # Study type distribution
+    rows = conn.execute("SELECT study_type, COUNT(*) FROM pa_analyses WHERE study_type IS NOT NULL GROUP BY study_type ORDER BY COUNT(*) DESC").fetchall()
+    put("study_type_distribution", [{"type": t, "count": c} for t, c in rows])
+
+    # Result/outcome distribution - use COALESCE for compatibility
+    rows = conn.execute("SELECT COALESCE(outcome, result) as r, COUNT(*) FROM pa_analyses GROUP BY r ORDER BY COUNT(*) DESC").fetchall()
+    put("result_distribution", [{"result": r, "count": c} for r, c in rows])
+
+    # Evidence tier
+    rows = conn.execute("SELECT evidence_tier, COUNT(*) FROM pa_analyses WHERE evidence_tier IS NOT NULL GROUP BY evidence_tier ORDER BY evidence_tier").fetchall()
+    put("evidence_tier_distribution", [{"tier": t, "count": c} for t, c in rows])
+
+    # Papers per year
+    rows = conn.execute("SELECT SUBSTR(pub_date, 1, 4) as year, COUNT(*) FROM pa_papers WHERE pub_date IS NOT NULL GROUP BY year ORDER BY year").fetchall()
+    put("papers_per_year", {y: c for y, c in rows})
+
+    # Category results
+    cat_results = {}
+    for (cat,) in conn.execute("SELECT DISTINCT category FROM pa_papers WHERE category IS NOT NULL").fetchall():
+        rows = conn.execute(
+            "SELECT COALESCE(a.outcome, a.result) as r, COUNT(*) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE p.category = ? GROUP BY r",
+            (cat,),
+        ).fetchall()
+        cat_results[cat] = [{"result": r, "count": c} for r, c in rows]
+    put("category_results", cat_results)
+
+    # Category avg evidence
+    rows = conn.execute(
+        "SELECT p.category, AVG(a.evidence_tier) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE a.evidence_tier IS NOT NULL GROUP BY p.category"
+    ).fetchall()
+    put("category_avg_evidence", {cat: round(avg, 2) for cat, avg in rows})
+
+    # Trial stats
+    rows = conn.execute("SELECT status, COUNT(*) FROM tr_trials GROUP BY status ORDER BY COUNT(*) DESC").fetchall()
+    put("trial_status_distribution", [{"status": s, "count": c} for s, c in rows])
+
+    rows = conn.execute("SELECT phase, COUNT(*) FROM tr_trials GROUP BY phase ORDER BY COUNT(*) DESC").fetchall()
+    put("trial_phase_distribution", [{"phase": p, "count": c} for p, c in rows])
+
+    rows = conn.execute("SELECT sponsor, COUNT(*) FROM tr_trials GROUP BY sponsor ORDER BY COUNT(*) DESC LIMIT 15").fetchall()
+    put("trial_top_sponsors", [{"sponsor": s, "count": c} for s, c in rows])
+
+    rows = conn.execute("SELECT category, AVG(enrollment) FROM tr_trials WHERE enrollment IS NOT NULL GROUP BY category").fetchall()
+    put("trial_avg_enrollment_by_category", {cat: round(avg) for cat, avg in rows})
+
+    # Research volume by category
+    volume = {}
+    for (cat,) in conn.execute("SELECT DISTINCT category FROM pa_papers WHERE category IS NOT NULL").fetchall():
+        rows = conn.execute(
+            "SELECT SUBSTR(pub_date, 1, 4), COUNT(*) FROM pa_papers WHERE category = ? AND pub_date IS NOT NULL GROUP BY SUBSTR(pub_date, 1, 4)",
+            (cat,),
+        ).fetchall()
+        volume[cat] = {y: c for y, c in rows}
+    put("research_volume_by_category", volume)
+
+    # Top authors
+    author_counts = Counter()
+    for (authors_str,) in conn.execute("SELECT authors FROM pa_papers WHERE authors IS NOT NULL").fetchall():
+        first = authors_str.split(",")[0].strip()
+        if first and first != "et al.":
+            author_counts[first] += 1
+    put("top_authors", [{"name": n, "count": c} for n, c in author_counts.most_common(20)])
+
+    # Top institutions
+    inst_counts = Counter()
+    for (affs_json,) in conn.execute("SELECT affiliations FROM pa_papers WHERE affiliations IS NOT NULL").fetchall():
+        try:
+            for aff in json.loads(affs_json):
+                parts = aff.split(",")
+                inst = parts[0].strip() if parts else aff
+                if len(inst) > 5:
+                    inst_counts[inst] += 1
+        except Exception:
+            pass
+    put("top_institutions", [{"name": n, "count": c} for n, c in inst_counts.most_common(20)])
+
+    conn.commit()
+    print("  Built global research stats")
+
+
 def store_analyses(db_path, paper_analyses):
     """Store per-paper analysis results in the database."""
     print("Storing paper analyses...")
@@ -332,6 +602,13 @@ def main():
     # Analyze papers
     paper_data = analyze_papers(args.db)
     store_analyses(args.db, paper_data["papers"])
+
+    # Cross-linking and stats aggregation
+    conn = sqlite3.connect(args.db)
+    build_paper_trial_links(conn)
+    build_category_stats(conn)
+    build_global_stats(conn)
+    conn.close()
 
     # Analyze trials
     trial_data = analyze_trials(args.db)
