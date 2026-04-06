@@ -233,7 +233,7 @@ export function CyclePatternsInsight() {
           </p>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={trendConfig} className="min-h-[200px] w-full">
+          <ChartContainer config={trendConfig} className="min-h-[200px] max-h-[300px] w-full">
             <AreaChart data={data.treatment_trends}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="year" tick={{ fontSize: 12 }} />

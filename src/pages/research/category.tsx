@@ -201,7 +201,7 @@ export function CategoryPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+            <ChartContainer config={chartConfig} className="min-h-[200px] max-h-[300px] w-full">
               <AreaChart data={yearData} margin={{ left: 0, right: 0 }}>
                 <CartesianGrid vertical={false} />
                 <XAxis dataKey="year" tick={{ fontSize: 10 }} />

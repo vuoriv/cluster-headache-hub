@@ -265,7 +265,7 @@ export function GenderCaregiversInsight() {
           </p>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={relationshipConfig} className="min-h-[200px] w-full">
+          <ChartContainer config={relationshipConfig} className="min-h-[200px] max-h-[300px] w-full">
             <BarChart data={data.caregiver_relationships}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="type" tick={{ fontSize: 12 }} />

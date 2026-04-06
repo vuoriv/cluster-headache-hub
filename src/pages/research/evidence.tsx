@@ -401,7 +401,7 @@ export function EvidenceDashboard() {
         <CardContent>
           <ChartContainer
             config={categoryResultConfig}
-            className="min-h-[200px] w-full"
+            className="min-h-[200px] max-h-[300px] w-full"
           >
             <BarChart data={categoryResultData}>
               <CartesianGrid strokeDasharray="3 3" />
