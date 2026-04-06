@@ -311,7 +311,7 @@ export function EvidenceDashboard() {
           <CardContent>
             <ChartContainer
               config={resultPieConfig}
-              className="aspect-square w-full max-w-[300px] mx-auto"
+              className="mx-auto aspect-square max-h-[250px]"
             >
               <PieChart>
                 <ChartTooltip content={<ChartTooltipContent />} />
@@ -401,7 +401,7 @@ export function EvidenceDashboard() {
         <CardContent>
           <ChartContainer
             config={categoryResultConfig}
-            className="aspect-[3/2] w-full"
+            className="min-h-[200px] w-full"
           >
             <BarChart data={categoryResultData}>
               <CartesianGrid strokeDasharray="3 3" />

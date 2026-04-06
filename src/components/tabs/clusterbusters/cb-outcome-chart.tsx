@@ -47,7 +47,7 @@ export function CbOutcomeChart({ outcomes, treatmentName }: CbOutcomeChartProps)
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="mx-auto min-h-[200px] max-w-[280px]">
+        <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px]">
           <PieChart>
             <ChartTooltip
               content={

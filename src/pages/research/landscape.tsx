@@ -348,7 +348,7 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={evidenceTierConfig}
-              className="aspect-[3/2] w-full"
+              className="min-h-[200px] w-full"
             >
               <BarChart data={evidenceTierData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -390,7 +390,7 @@ export function ResearchLandscape() {
           <CardContent>
             <ChartContainer
               config={papersPerYearConfig}
-              className="aspect-[3/2] w-full"
+              className="min-h-[200px] w-full"
             >
               <AreaChart data={papersPerYearData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -468,7 +468,7 @@ export function ResearchLandscape() {
           </p>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={volumeConfig} className="aspect-[16/9] w-full">
+          <ChartContainer config={volumeConfig} className="min-h-[200px] w-full">
             <AreaChart data={volumeData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis

@@ -197,7 +197,7 @@ export function DemographicsInsight() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={postsPerYearConfig} className="aspect-[3/2] w-full">
+            <ChartContainer config={postsPerYearConfig} className="min-h-[200px] w-full">
               <AreaChart data={postsChartData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="year" tick={{ fontSize: 10 }} />
@@ -218,7 +218,7 @@ export function DemographicsInsight() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={activityConfig} className="aspect-[3/2] w-full">
+            <ChartContainer config={activityConfig} className="min-h-[200px] w-full">
               <BarChart data={activityChartData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="bucket" tick={{ fontSize: 10 }} />

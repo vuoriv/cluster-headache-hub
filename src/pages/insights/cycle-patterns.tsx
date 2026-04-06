@@ -187,7 +187,7 @@ export function CyclePatternsInsight() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={seasonalConfig} className="aspect-[3/2] w-full">
+            <ChartContainer config={seasonalConfig} className="min-h-[200px] w-full">
               <BarChart data={data.seasonal}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="month" tick={{ fontSize: 10 }} />
@@ -208,7 +208,7 @@ export function CyclePatternsInsight() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={hourlyConfig} className="aspect-[3/2] w-full">
+            <ChartContainer config={hourlyConfig} className="min-h-[200px] w-full">
               <BarChart data={hourlyChartData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="label" tick={{ fontSize: 9 }} interval={3} />
@@ -233,7 +233,7 @@ export function CyclePatternsInsight() {
           </p>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={trendConfig} className="aspect-[16/9] w-full">
+          <ChartContainer config={trendConfig} className="min-h-[200px] w-full">
             <AreaChart data={data.treatment_trends}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="year" tick={{ fontSize: 12 }} />

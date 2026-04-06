@@ -217,7 +217,7 @@ export function GenderCaregiversInsight() {
         </CardHeader>
         <CardContent>
           <div className="flex flex-col items-center sm:flex-row sm:items-start gap-6">
-            <ChartContainer config={genderConfig} className="h-[250px] w-[250px]">
+            <ChartContainer config={genderConfig} className="mx-auto aspect-square max-h-[250px]">
               <PieChart>
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Pie
@@ -265,7 +265,7 @@ export function GenderCaregiversInsight() {
           </p>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={relationshipConfig} className="aspect-[16/9] w-full">
+          <ChartContainer config={relationshipConfig} className="min-h-[200px] w-full">
             <BarChart data={data.caregiver_relationships}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="type" tick={{ fontSize: 12 }} />
@@ -307,7 +307,7 @@ export function GenderCaregiversInsight() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={treatmentCompareConfig} className="aspect-[3/2] w-full">
+            <ChartContainer config={treatmentCompareConfig} className="min-h-[200px] w-full">
               <BarChart data={treatmentCompareData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="treatment" tick={{ fontSize: 9 }} angle={-30} textAnchor="end" height={50} />

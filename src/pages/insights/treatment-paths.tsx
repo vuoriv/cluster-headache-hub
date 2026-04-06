@@ -129,7 +129,7 @@ export function TreatmentPaths() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={barConfig} className="aspect-[3/2] w-full">
+            <ChartContainer config={barConfig} className="min-h-[200px] w-full">
               <BarChart data={data.toolkit_size_distribution} margin={{ left: 0, right: 0 }}>
                 <CartesianGrid vertical={false} />
                 <XAxis dataKey="size" tickLine={false} axisLine={false} />

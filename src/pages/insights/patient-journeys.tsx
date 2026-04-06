@@ -165,7 +165,7 @@ export function PatientJourneys() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={spanChartConfig} className="aspect-[3/2] w-full">
+            <ChartContainer config={spanChartConfig} className="min-h-[200px] w-full">
               <BarChart data={spanData} margin={{ top: 8, right: 8, bottom: 8, left: 8 }}>
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
                 <XAxis dataKey="label" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />

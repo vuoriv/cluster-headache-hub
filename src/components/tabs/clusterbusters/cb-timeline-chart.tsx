@@ -53,7 +53,7 @@ export function CbTimelineChart({ timeline }: CbTimelineChartProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="aspect-[3/2] w-full">
+        <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
           <AreaChart data={chartData} margin={{ left: 0, right: 0 }}>
             <CartesianGrid vertical={false} />
             <XAxis dataKey="year" tickLine={false} axisLine={false} />
