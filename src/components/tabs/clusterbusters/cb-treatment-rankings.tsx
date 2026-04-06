@@ -48,13 +48,13 @@ export function CbTreatmentRankings({ rankings, onNavigate }: CbTreatmentRanking
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="min-h-[400px] w-full">
+        <ChartContainer config={chartConfig} className="min-h-[500px] w-full">
           <BarChart data={chartData} layout="vertical" margin={{ left: 8, right: 16 }}>
             <CartesianGrid horizontal={false} />
             <YAxis
               dataKey="treatment"
               type="category"
-              width={160}
+              width={120}
               tickLine={false}
               axisLine={false}
               tick={({ x, y, payload }) => (
@@ -63,7 +63,7 @@ export function CbTreatmentRankings({ rankings, onNavigate }: CbTreatmentRanking
                   y={y}
                   dy={4}
                   textAnchor="end"
-                  className="cursor-pointer fill-muted-foreground text-xs hover:fill-foreground"
+                  className="cursor-pointer fill-muted-foreground text-[10px] sm:text-xs hover:fill-foreground"
                   onClick={() => onNavigate(chartData.find(d => d.treatment === payload.value)?.slug ?? "")}
                 >
                   {payload.value}

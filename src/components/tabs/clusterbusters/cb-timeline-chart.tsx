@@ -59,7 +59,7 @@ export function CbTimelineChart({ timeline }: CbTimelineChartProps) {
             <XAxis dataKey="year" tickLine={false} axisLine={false} />
             <YAxis tickLine={false} axisLine={false} />
             <ChartTooltip content={<ChartTooltipContent />} />
-            <ChartLegend content={<ChartLegendContent />} />
+            <ChartLegend content={<ChartLegendContent className="flex-wrap" />} />
             {TOP_TREATMENTS.map((t) => (
               <Area
                 key={t.slug}
