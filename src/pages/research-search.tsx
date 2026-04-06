@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useRef, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { Search, BookOpen, ChevronDown, ChevronUp, ExternalLink, ArrowLeft } from "lucide-react"
+import { Search, BookOpen, ChevronDown, ChevronUp, ExternalLink, ArrowLeft, FlaskConical } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
@@ -15,6 +15,17 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { useDataDb, type ResearchPaper } from "@/lib/data-db"
 import { CATEGORY_CONFIG } from "@/lib/research-categories"
 import { cn } from "@/lib/utils"
+
+const OUTCOME_BADGES: Record<string, { label: string; variant: "success" | "destructive" | "warning" | "secondary" | "outline" }> = {
+  showed_benefit: { label: "Showed Benefit", variant: "success" },
+  no_benefit: { label: "No Benefit", variant: "destructive" },
+  mixed: { label: "Mixed", variant: "warning" },
+  inconclusive: { label: "Inconclusive", variant: "secondary" },
+  basic_science: { label: "Basic Science", variant: "outline" },
+  // Legacy result values from regex analysis
+  positive: { label: "Showed Benefit", variant: "success" },
+  negative: { label: "No Benefit", variant: "destructive" },
+}
 
 const BATCH_SIZE = 30
 
@@ -244,6 +255,9 @@ function PaperCard({
   onToggle: () => void
   onAuthorClick: (author: string) => void
 }) {
+  const { getPaperAnalysis, getLinkedTrials } = useDataDb()
+  const analysis = getPaperAnalysis(paper.pmid)
+  const linkedTrials = getLinkedTrials(paper.pmid)
   const catConfig = CATEGORY_CONFIG[paper.category]
   const year = paper.pubDate?.slice(0, 4) || ""
   const firstAuthor = paper.authors?.split(",")[0]?.trim()
@@ -288,10 +302,45 @@ function PaperCard({
               {year}
             </Badge>
           )}
+          {/* Outcome badge */}
+          {analysis?.outcome && OUTCOME_BADGES[analysis.outcome] && (
+            <Badge variant={OUTCOME_BADGES[analysis.outcome].variant}>
+              {OUTCOME_BADGES[analysis.outcome].label}
+            </Badge>
+          )}
+
+          {/* Evidence tier */}
+          {analysis?.evidenceTier && (
+            <Badge variant="outline" className="text-[0.6rem]">
+              Tier {analysis.evidenceTier}
+            </Badge>
+          )}
+
+          {/* OA badge */}
+          {paper.isOa && paper.oaUrl && (
+            <a href={paper.oaUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+              <Badge variant="success" className="text-[0.6rem]">Open Access</Badge>
+            </a>
+          )}
+
           <span className="text-[0.65rem] text-muted-foreground">
             {paper.journal}
           </span>
         </div>
+
+        {/* Collapsed summary */}
+        {!expanded && (
+          <>
+            {analysis?.plainSummary ? (
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground line-clamp-2">{analysis.plainSummary}</p>
+            ) : paper.abstract ? (
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground line-clamp-2">{paper.abstract}</p>
+            ) : null}
+            {analysis?.keyFinding && (
+              <p className="mt-1 text-xs font-medium">{analysis.keyFinding}</p>
+            )}
+          </>
+        )}
       </CardHeader>
 
       {expanded && (
@@ -313,6 +362,27 @@ function PaperCard({
                   {term}
                 </Badge>
               ))}
+            </div>
+          )}
+
+          {linkedTrials.length > 0 && (
+            <div className="mt-3 border-t pt-3">
+              <p className="text-xs font-medium mb-2">Linked Clinical Trials</p>
+              <div className="flex flex-col gap-1">
+                {linkedTrials.map((trial) => (
+                  <Link
+                    key={trial.nctId}
+                    to={`/trials?q=${trial.nctId}`}
+                    className="flex items-center gap-2 text-xs text-primary hover:underline"
+                  >
+                    <FlaskConical className="size-3 shrink-0" />
+                    <span className="truncate">{trial.nctId} — {trial.title}</span>
+                    <Badge variant={trial.linkType === "confirmed" ? "info" : "outline"} className="shrink-0 text-[0.5rem]">
+                      {trial.linkType}
+                    </Badge>
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
 

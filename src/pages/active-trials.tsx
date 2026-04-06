@@ -279,6 +279,7 @@ function TrialCard({
       {expanded && (
         <CardContent className="pt-0">
           <TrialAnalysis nctId={trial.nctId} />
+          <LinkedPapers nctId={trial.nctId} />
 
           {trial.summary && (
             <details className="mb-3">
@@ -329,6 +330,69 @@ function TrialCard({
         </CardContent>
       )}
     </Card>
+  )
+}
+
+function LinkedPapers({ nctId }: { nctId: string }) {
+  const { getLinkedPapers } = useDataDb()
+  const papers = getLinkedPapers(nctId)
+
+  if (papers.length === 0) return null
+
+  const confirmed = papers.filter((p) => p.linkType === "confirmed")
+  const related = papers.filter((p) => p.linkType === "related").slice(0, 5)
+
+  return (
+    <div className="mt-3 border-t pt-3">
+      {confirmed.length > 0 && (
+        <div className="mb-3">
+          <p className="text-xs font-semibold mb-1.5">
+            Papers citing this trial ({confirmed.length})
+          </p>
+          {confirmed.map((paper) => (
+            <a
+              key={paper.pmid}
+              href={`https://pubmed.ncbi.nlm.nih.gov/${paper.pmid}/`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-2 rounded-md p-2 text-xs hover:bg-muted/50 transition-colors"
+            >
+              <ExternalLink className="mt-0.5 size-3 shrink-0 text-muted-foreground" />
+              <div className="min-w-0">
+                <span className="font-medium line-clamp-1">{paper.title}</span>
+                <span className="block text-muted-foreground">
+                  {paper.authors} — {paper.journal} ({paper.pubDate?.slice(0, 4)})
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+      {related.length > 0 && (
+        <div>
+          <p className="text-xs font-semibold mb-1.5">
+            Related papers ({related.length})
+          </p>
+          {related.map((paper) => (
+            <a
+              key={paper.pmid}
+              href={`https://pubmed.ncbi.nlm.nih.gov/${paper.pmid}/`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-2 rounded-md p-2 text-xs hover:bg-muted/50 transition-colors"
+            >
+              <ExternalLink className="mt-0.5 size-3 shrink-0 text-muted-foreground" />
+              <div className="min-w-0">
+                <span className="font-medium line-clamp-1">{paper.title}</span>
+                <span className="block text-muted-foreground">
+                  {paper.authors} — {paper.journal} ({paper.pubDate?.slice(0, 4)})
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 
