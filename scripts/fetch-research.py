@@ -629,10 +629,11 @@ def build_db(db_path, papers, trials):
     for p in papers:
         cat, score = enrich_paper(p)
         conn.execute(
-            "INSERT OR REPLACE INTO pa_papers VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            """INSERT OR REPLACE INTO pa_papers
+               (pmid, title, authors, journal, pub_date, abstract, mesh_terms, category, relevance_score, last_updated)
+               VALUES (?,?,?,?,?,?,?,?,?,?)""",
             (p["pmid"], p["title"], p["authors"], p["journal"], p["pub_date"],
-             p["abstract"], None, json.dumps(p["mesh_terms"]), None, None,
-             None, None, None, None, None, None, None, cat, score, now),
+             p["abstract"], json.dumps(p["mesh_terms"]), cat, score, now),
         )
     print(f"  Inserted {len(papers)} papers", flush=True)
 
