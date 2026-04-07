@@ -328,6 +328,19 @@ def build_paper_trial_links(conn):
                 confirmed += 1
 
     # Related links: same category + overlapping interventions
+    # interventions_studied column only exists after AI analysis — skip if not present
+    has_interventions_col = False
+    try:
+        conn.execute("SELECT interventions_studied FROM pa_analyses LIMIT 1")
+        has_interventions_col = True
+    except Exception:
+        pass
+
+    if not has_interventions_col:
+        conn.commit()
+        print(f"  Built {confirmed} confirmed + 0 related paper-trial links (no AI analysis yet)")
+        return
+
     cursor = conn.execute("""
         SELECT p.pmid, p.category, a.interventions_studied, t.nct_id, t.interventions
         FROM pa_papers p
@@ -358,6 +371,22 @@ def build_paper_trial_links(conn):
 
     conn.commit()
     print(f"  Built {confirmed} confirmed + {related} related paper-trial links")
+
+
+def _has_column(conn, table, column):
+    """Check if a column exists in a table."""
+    try:
+        conn.execute(f"SELECT {column} FROM {table} LIMIT 1")
+        return True
+    except Exception:
+        return False
+
+
+def _result_expr(conn):
+    """Return SQL expression for outcome/result depending on available columns."""
+    if _has_column(conn, "pa_analyses", "outcome"):
+        return "COALESCE(a.outcome, a.result)"
+    return "a.result"
 
 
 def build_category_stats(conn):
@@ -395,7 +424,7 @@ def build_category_stats(conn):
 
         # Use 'result' column (regex) or 'outcome' column (AI) depending on what exists
         positive_count = conn.execute(
-            "SELECT COUNT(*) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE p.category = ? AND (a.result = 'positive' OR a.outcome = 'showed_benefit')",
+            f"SELECT COUNT(*) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE p.category = ? AND ({_result_expr(conn)} IN ('positive', 'showed_benefit'))",
             (cat,),
         ).fetchone()[0]
 
@@ -448,7 +477,7 @@ def build_category_stats(conn):
 
         # Result distribution - use outcome if available, fall back to result
         results = conn.execute(
-            "SELECT COALESCE(a.outcome, a.result) as r, COUNT(*) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE p.category = ? GROUP BY r ORDER BY COUNT(*) DESC",
+            f"SELECT {_result_expr(conn)} as r, COUNT(*) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE p.category = ? GROUP BY r ORDER BY COUNT(*) DESC",
             (cat,),
         ).fetchall()
         result_dist = [{"result": r, "count": c} for r, c in results]
@@ -488,7 +517,8 @@ def build_global_stats(conn):
     put("study_type_distribution", [{"type": t, "count": c} for t, c in rows])
 
     # Result/outcome distribution - use COALESCE for compatibility
-    rows = conn.execute("SELECT COALESCE(outcome, result) as r, COUNT(*) FROM pa_analyses GROUP BY r ORDER BY COUNT(*) DESC").fetchall()
+    result_col = "COALESCE(outcome, result)" if _has_column(conn, "pa_analyses", "outcome") else "result"
+    rows = conn.execute(f"SELECT {result_col} as r, COUNT(*) FROM pa_analyses GROUP BY r ORDER BY COUNT(*) DESC").fetchall()
     put("result_distribution", [{"result": r, "count": c} for r, c in rows])
 
     # Evidence tier
@@ -503,7 +533,7 @@ def build_global_stats(conn):
     cat_results = {}
     for (cat,) in conn.execute("SELECT DISTINCT category FROM pa_papers WHERE category IS NOT NULL").fetchall():
         rows = conn.execute(
-            "SELECT COALESCE(a.outcome, a.result) as r, COUNT(*) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE p.category = ? GROUP BY r",
+            f"SELECT {_result_expr(conn)} as r, COUNT(*) FROM pa_analyses a JOIN pa_papers p ON a.pmid = p.pmid WHERE p.category = ? GROUP BY r",
             (cat,),
         ).fetchall()
         cat_results[cat] = [{"result": r, "count": c} for r, c in rows]
