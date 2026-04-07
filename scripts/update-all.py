@@ -26,7 +26,7 @@ def run(cmd, description):
     print(f"\n{'='*60}")
     print(f"  {description}")
     print(f"{'='*60}\n")
-    result = subprocess.run(cmd, cwd=PROJECT_ROOT)
+    result = subprocess.run(cmd, cwd=PROJECT_ROOT, env={"PYTHONUNBUFFERED": "1", **os.environ})
     if result.returncode != 0:
         print(f"\n  FAILED: {description}")
         sys.exit(1)

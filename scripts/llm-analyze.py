@@ -79,7 +79,7 @@ def seed_from_json(conn):
              a.get("dose_tested"), a.get("sample_size")),
         )
     conn.commit()
-    print(f"  Seeded {len(analyses)} trial analyses from JSON")
+    print(f"  Seeded {len(analyses)} trial analyses from JSON", flush=True)
 
 
 DEFAULT_MODEL = "qwen-3-235b-a22b-instruct-2507"
@@ -200,10 +200,10 @@ def analyze_papers(conn, api_key, base_url, model):
     new_papers = [p for p in papers if p[0] not in existing]
 
     if not new_papers:
-        print("  No new papers to analyze")
+        print("  No new papers to analyze", flush=True)
         return
 
-    print(f"  Analyzing {len(new_papers)} papers with LLM...")
+    print(f"  Analyzing {len(new_papers)} papers with LLM...", flush=True)
 
     for i, paper in enumerate(new_papers):
         pmid, title, authors, journal, pub_date, abstract, abstract_structured, full_text_sections, category, mesh_terms = paper
@@ -257,13 +257,13 @@ def analyze_papers(conn, api_key, base_url, model):
             )
             conn.commit()
             if (i + 1) % 50 == 0:
-                print(f"    Analyzed {i + 1}/{len(new_papers)} papers")
+                print(f"    Analyzed {i + 1}/{len(new_papers)} papers", flush=True)
         except Exception as e:
-            print(f"    Error analyzing PMID {pmid}: {e}")
+            print(f"    Error analyzing PMID {pmid}: {e}", flush=True)
 
         time.sleep(1)
 
-    print(f"  Completed AI analysis of papers")
+    print(f"  Completed AI analysis of papers", flush=True)
 
 
 def analyze_new_trials(db_path, api_key, base_url, model):
@@ -294,15 +294,15 @@ def analyze_new_trials(db_path, api_key, base_url, model):
 
     if not new_trials:
         conn.close()
-        print("  No new trials to analyze")
+        print("  No new trials to analyze", flush=True)
         return 0
 
-    print(f"  Found {len(new_trials)} new trials to analyze")
+    print(f"  Found {len(new_trials)} new trials to analyze", flush=True)
 
     analyzed = 0
     new_analyses = []
     for t in new_trials:
-        print(f"  Analyzing {t['nct_id']}: {t['title'][:60]}...")
+        print(f"  Analyzing {t['nct_id']}: {t['title'][:60]}...", flush=True)
 
         # Check for results data
         results_section = ""
@@ -342,7 +342,7 @@ def analyze_new_trials(db_path, api_key, base_url, model):
             analyzed += 1
             time.sleep(1)  # Rate limit courtesy
         except Exception as e:
-            print(f"    ERROR: {e}")
+            print(f"    ERROR: {e}", flush=True)
             # Add placeholder
             new_analyses.append({
                 "nct_id": t["nct_id"],
@@ -365,7 +365,7 @@ def analyze_new_trials(db_path, api_key, base_url, model):
     conn.close()
 
     total = len(existing) + len(new_analyses)  # existing = pre-existing rows, new_analyses = just added
-    print(f"  Analyzed {analyzed} new trials ({total} total)")
+    print(f"  Analyzed {analyzed} new trials ({total} total)", flush=True)
     return analyzed
 
 
@@ -381,18 +381,18 @@ def main():
     args = parser.parse_args()
 
     if not args.api_key:
-        print("ERROR: No API key. Set CEREBRAS_API_KEY or use --api-key")
+        print("ERROR: No API key. Set CEREBRAS_API_KEY or use --api-key", flush=True)
         sys.exit(1)
 
-    print("=== LLM Analysis (Cerebras/Qwen3) ===\n")
+    print("=== LLM Analysis (Cerebras/Qwen3) ===\n", flush=True)
 
     # Test API connection
-    print("  Testing API connection...")
+    print("  Testing API connection...", flush=True)
     try:
         test = call_llm("Respond with only: {\"status\": \"ok\"}", args.api_key, args.base_url, args.model)
-        print(f"  API OK: {test}\n")
+        print(f"  API OK: {test}\n", flush=True)
     except Exception as e:
-        print(f"  API test failed: {e}")
+        print(f"  API test failed: {e}", flush=True)
         sys.exit(1)
 
     # Analyze new trials
@@ -404,7 +404,7 @@ def main():
     analyze_papers(conn, args.api_key, args.base_url, args.model)
     conn.close()
 
-    print(f"\n=== LLM Analysis Complete ({new_count} new analyses) ===")
+    print(f"\n=== LLM Analysis Complete ({new_count} new analyses) ===", flush=True)
 
 
 if __name__ == "__main__":

@@ -150,7 +150,7 @@ def compute_evidence_tier(study_type, sample_size, year):
 
 def analyze_papers(db_path):
     """Analyze all papers and return structured results."""
-    print("Analyzing papers...")
+    print("Analyzing papers...", flush=True)
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
 
@@ -209,9 +209,9 @@ def analyze_papers(db_path):
     for cat, tiers in category_evidence.items():
         cat_avg_evidence[cat] = round(sum(tiers) / len(tiers), 2) if tiers else 5
 
-    print(f"  Analyzed {total} papers ({with_abstract} with abstracts)")
-    print(f"  Study types: {dict(study_types.most_common(5))}")
-    print(f"  Results: {dict(result_counts.most_common())}")
+    print(f"  Analyzed {total} papers ({with_abstract} with abstracts)", flush=True)
+    print(f"  Study types: {dict(study_types.most_common(5))}", flush=True)
+    print(f"  Results: {dict(result_counts.most_common())}", flush=True)
 
     return {
         "papers": results,
@@ -247,7 +247,7 @@ def analyze_papers(db_path):
 
 def analyze_trials(db_path):
     """Analyze trial data for additional insights."""
-    print("Analyzing trials...")
+    print("Analyzing trials...", flush=True)
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
 
@@ -281,7 +281,7 @@ def analyze_trials(db_path):
     for cat, enrollments in enrollment_by_cat.items():
         avg_enrollment[cat] = round(sum(enrollments) / len(enrollments))
 
-    print(f"  Analyzed {len(trials)} trials")
+    print(f"  Analyzed {len(trials)} trials", flush=True)
 
     return {
         "total_trials": len(trials),
@@ -338,7 +338,7 @@ def build_paper_trial_links(conn):
 
     if not has_interventions_col:
         conn.commit()
-        print(f"  Built {confirmed} confirmed + 0 related paper-trial links (no AI analysis yet)")
+        print(f"  Built {confirmed} confirmed + 0 related paper-trial links (no AI analysis yet)", flush=True)
         return
 
     cursor = conn.execute("""
@@ -370,7 +370,7 @@ def build_paper_trial_links(conn):
             related += 1
 
     conn.commit()
-    print(f"  Built {confirmed} confirmed + {related} related paper-trial links")
+    print(f"  Built {confirmed} confirmed + {related} related paper-trial links", flush=True)
 
 
 def _has_column(conn, table, column):
@@ -491,7 +491,7 @@ def build_category_stats(conn):
         )
 
     conn.commit()
-    print(f"  Built category stats for {len(categories)} categories")
+    print(f"  Built category stats for {len(categories)} categories", flush=True)
 
 
 def build_global_stats(conn):
@@ -590,12 +590,12 @@ def build_global_stats(conn):
     put("top_institutions", [{"name": n, "count": c} for n, c in inst_counts.most_common(20)])
 
     conn.commit()
-    print("  Built global research stats")
+    print("  Built global research stats", flush=True)
 
 
 def store_analyses(db_path, paper_analyses):
     """Store per-paper analysis results in the database."""
-    print("Storing paper analyses...")
+    print("Storing paper analyses...", flush=True)
     conn = sqlite3.connect(db_path)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS pa_analyses (
@@ -617,7 +617,7 @@ def store_analyses(db_path, paper_analyses):
 
     conn.commit()
     conn.close()
-    print(f"  Stored {len(paper_analyses)} analyses")
+    print(f"  Stored {len(paper_analyses)} analyses", flush=True)
 
 
 def main():
@@ -627,7 +627,7 @@ def main():
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    print("=== Deep Research Analysis ===\n")
+    print("=== Deep Research Analysis ===\n", flush=True)
 
     # Analyze papers
     paper_data = analyze_papers(args.db)
@@ -646,13 +646,13 @@ def main():
     # Write insight files
     with open(os.path.join(OUTPUT_DIR, "paper-stats.json"), "w") as f:
         json.dump(paper_data["stats"], f, indent=2)
-    print(f"\n  Wrote paper-stats.json")
+    print(f"\n  Wrote paper-stats.json", flush=True)
 
     with open(os.path.join(OUTPUT_DIR, "trial-stats.json"), "w") as f:
         json.dump(trial_data, f, indent=2)
-    print(f"  Wrote trial-stats.json")
+    print(f"  Wrote trial-stats.json", flush=True)
 
-    print("\n=== Analysis Complete ===")
+    print("\n=== Analysis Complete ===", flush=True)
 
 
 if __name__ == "__main__":

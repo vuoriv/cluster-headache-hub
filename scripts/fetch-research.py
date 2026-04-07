@@ -45,7 +45,7 @@ BATCH_DELAY = 0.4  # seconds between API calls
 
 def fetch_papers():
     """Fetch all cluster headache papers from PubMed."""
-    print("Fetching papers from PubMed...")
+    print("Fetching papers from PubMed...", flush=True)
 
     # Step 1: Search for PMIDs
     params = urlencode({
@@ -58,7 +58,7 @@ def fetch_papers():
     data = requests.get(f"{ESEARCH}?{params}").json()
     pmids = data["esearchresult"].get("idlist", [])
     total = int(data["esearchresult"].get("count", 0))
-    print(f"  Found {len(pmids)} PMIDs (total matches: {total})")
+    print(f"  Found {len(pmids)} PMIDs (total matches: {total})", flush=True)
 
     if not pmids:
         return []
@@ -72,7 +72,7 @@ def fetch_papers():
         batch = pmids[i:i + BATCH_SIZE]
 
         if batch_num % 5 == 1:
-            print(f"  Summaries batch {batch_num}/{total_batches}...")
+            print(f"  Summaries batch {batch_num}/{total_batches}...", flush=True)
 
         params = urlencode({"db": "pubmed", "id": ",".join(batch), "retmode": "json"})
         try:
@@ -103,7 +103,7 @@ def fetch_papers():
             time.sleep(BATCH_DELAY)
 
     # Step 3: Fetch abstracts + MeSH terms via efetch XML
-    print("  Fetching abstracts...")
+    print("  Fetching abstracts...", flush=True)
     abstract_batch = 50
     total_abs_batches = (len(papers) + abstract_batch - 1) // abstract_batch
 
@@ -113,7 +113,7 @@ def fetch_papers():
         ids = ",".join(p["pmid"] for p in batch)
 
         if batch_num % 20 == 1:
-            print(f"  Abstracts batch {batch_num}/{total_abs_batches}...")
+            print(f"  Abstracts batch {batch_num}/{total_abs_batches}...", flush=True)
 
         try:
             params = urlencode({
@@ -135,7 +135,7 @@ def fetch_papers():
             time.sleep(BATCH_DELAY)
 
     with_abs = sum(1 for p in papers if p["abstract"])
-    print(f"  Fetched {len(papers)} papers ({with_abs} with abstracts)")
+    print(f"  Fetched {len(papers)} papers ({with_abs} with abstracts)", flush=True)
     return papers
 
 
@@ -182,7 +182,7 @@ CT_STATUSES = [
 
 def fetch_trials():
     """Fetch all cluster headache trials from ClinicalTrials.gov."""
-    print("Fetching trials from ClinicalTrials.gov...")
+    print("Fetching trials from ClinicalTrials.gov...", flush=True)
     all_trials = []
     next_token = None
 
@@ -230,7 +230,7 @@ def fetch_trials():
             break
         time.sleep(0.2)
 
-    print(f"  Fetched {len(all_trials)} trials")
+    print(f"  Fetched {len(all_trials)} trials", flush=True)
     return all_trials
 
 
@@ -301,10 +301,10 @@ def enrich_papers_efetch(conn, api_key=None):
     cursor = conn.execute("SELECT pmid FROM pa_papers WHERE doi IS NULL")
     pmids = [row[0] for row in cursor.fetchall()]
     if not pmids:
-        print("  All papers already enriched via EFETCH")
+        print("  All papers already enriched via EFETCH", flush=True)
         return
 
-    print(f"  Enriching {len(pmids)} papers via EFETCH...")
+    print(f"  Enriching {len(pmids)} papers via EFETCH...", flush=True)
     delay = 0.1 if api_key else 0.35
     batch_size = 200
 
@@ -335,9 +335,9 @@ def enrich_papers_efetch(conn, api_key=None):
                     data["nct_ids_cited"], pmid,
                 ))
             conn.commit()
-            print(f"    Enriched batch {i // batch_size + 1} ({len(enrichments)} papers)")
+            print(f"    Enriched batch {i // batch_size + 1} ({len(enrichments)} papers)", flush=True)
         except Exception as e:
-            print(f"    EFETCH batch error: {e}")
+            print(f"    EFETCH batch error: {e}", flush=True)
 
         time.sleep(delay)
 
@@ -404,10 +404,10 @@ def retrieve_full_texts(conn, api_key=None):
     )
     papers = cursor.fetchall()
     if not papers:
-        print("  No papers need full text retrieval")
+        print("  No papers need full text retrieval", flush=True)
         return
 
-    print(f"  Attempting full text retrieval for {len(papers)} papers...")
+    print(f"  Attempting full text retrieval for {len(papers)} papers...", flush=True)
     delay = 0.1 if api_key else 0.35
     found = 0
 
@@ -444,7 +444,7 @@ def retrieve_full_texts(conn, api_key=None):
             found += 1
 
     conn.commit()
-    print(f"  Retrieved full text for {found}/{len(papers)} papers")
+    print(f"  Retrieved full text for {found}/{len(papers)} papers", flush=True)
 
 
 def fetch_unpaywall_status(conn):
@@ -454,10 +454,10 @@ def fetch_unpaywall_status(conn):
     )
     papers = cursor.fetchall()
     if not papers:
-        print("  All papers already have OA status")
+        print("  All papers already have OA status", flush=True)
         return
 
-    print(f"  Fetching Unpaywall OA status for {len(papers)} papers...")
+    print(f"  Fetching Unpaywall OA status for {len(papers)} papers...", flush=True)
     found = 0
     for pmid, doi in papers:
         try:
@@ -480,11 +480,11 @@ def fetch_unpaywall_status(conn):
                 )
                 found += 1
         except Exception as e:
-            print(f"    Unpaywall error for {doi}: {e}")
+            print(f"    Unpaywall error for {doi}: {e}", flush=True)
         time.sleep(1)
 
     conn.commit()
-    print(f"  Got OA status for {found}/{len(papers)} papers")
+    print(f"  Got OA status for {found}/{len(papers)} papers", flush=True)
 
 
 # ── Enrichment ──
@@ -614,7 +614,7 @@ CREATE TABLE IF NOT EXISTS rs_stats (
 
 def build_db(db_path, papers, trials):
     """Write enriched data to SQLite."""
-    print(f"Building database at {db_path}...")
+    print(f"Building database at {db_path}...", flush=True)
     now = __import__("datetime").datetime.utcnow().isoformat()
 
     conn = sqlite3.connect(db_path)
@@ -634,7 +634,7 @@ def build_db(db_path, papers, trials):
              p["abstract"], None, json.dumps(p["mesh_terms"]), None, None,
              None, None, None, None, None, None, None, cat, score, now),
         )
-    print(f"  Inserted {len(papers)} papers")
+    print(f"  Inserted {len(papers)} papers", flush=True)
 
     # Insert trials
     for t in trials:
@@ -646,7 +646,7 @@ def build_db(db_path, papers, trials):
              t["interventions"], t["summary"], t["conditions"], cat, score, now,
              t["raw_json"]),
         )
-    print(f"  Inserted {len(trials)} trials")
+    print(f"  Inserted {len(trials)} trials", flush=True)
 
     # Metadata
     conn.execute("INSERT INTO rs_stats VALUES (?, ?)", ("last_run", now))
@@ -672,7 +672,7 @@ def build_db(db_path, papers, trials):
     fetch_unpaywall_status(conn)
 
     conn.close()
-    print("  Done")
+    print("  Done", flush=True)
 
 
 # ── Main ──
@@ -684,7 +684,7 @@ def main():
     parser.add_argument("--skip-trials", action="store_true")
     args = parser.parse_args()
 
-    print("=== Research Data Pipeline (Python) ===\n")
+    print("=== Research Data Pipeline (Python) ===\n", flush=True)
     start = time.time()
 
     papers = [] if args.skip_papers else fetch_papers()
@@ -696,9 +696,9 @@ def main():
     active = [t for t in trials if t["status"] in ("RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING")]
     with_abs = sum(1 for p in papers if p["abstract"])
 
-    print(f"\n=== Pipeline complete in {elapsed:.1f}s ===")
-    print(f"  Papers: {len(papers)} ({with_abs} with abstracts)")
-    print(f"  Trials: {len(trials)} ({len(active)} active)")
+    print(f"\n=== Pipeline complete in {elapsed:.1f}s ===", flush=True)
+    print(f"  Papers: {len(papers)} ({with_abs} with abstracts)", flush=True)
+    print(f"  Trials: {len(trials)} ({len(active)} active)", flush=True)
 
 
 if __name__ == "__main__":
