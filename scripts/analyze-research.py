@@ -650,6 +650,7 @@ def build_subcategories(conn):
             term TEXT NOT NULL,
             paper_count INTEGER NOT NULL DEFAULT 0,
             trial_count INTEGER NOT NULL DEFAULT 0,
+            search_terms TEXT NOT NULL DEFAULT '[]',
             PRIMARY KEY (category, term)
         )
     """)
@@ -659,6 +660,11 @@ def build_subcategories(conn):
         "UNION SELECT DISTINCT category FROM tr_trials WHERE category IS NOT NULL "
         "ORDER BY category"
     ).fetchall()]
+
+    # Build reverse map: normalized label → set of raw terms that map to it
+    reverse_aliases = defaultdict(set)
+    for raw, normalized in TERM_ALIASES.items():
+        reverse_aliases[normalized].add(raw)
 
     # First pass: collect all term counts per category
     all_data = {}
@@ -745,9 +751,11 @@ def build_subcategories(conn):
         for term in set(tpc) | set(ttc):
             if term_primary[term] != cat:
                 continue
+            # Include all raw alias keys + the normalized label itself for frontend matching
+            search = sorted(reverse_aliases.get(term, set()) | {term.lower()})
             conn.execute(
-                "INSERT INTO rs_subcategories (category, term, paper_count, trial_count) VALUES (?, ?, ?, ?)",
-                (cat, term, tpc.get(term, 0), ttc.get(term, 0)),
+                "INSERT INTO rs_subcategories (category, term, paper_count, trial_count, search_terms) VALUES (?, ?, ?, ?, ?)",
+                (cat, term, tpc.get(term, 0), ttc.get(term, 0), json.dumps(search)),
             )
             total_rows += 1
 

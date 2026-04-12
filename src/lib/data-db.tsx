@@ -108,6 +108,7 @@ export interface Subcategory {
   term: string
   paperCount: number
   trialCount: number
+  searchTerms: string[]
 }
 
 export interface PipelineMeta {
@@ -796,7 +797,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
       if (!db) return []
       try {
         const stmt = db.prepare(
-          "SELECT term, paper_count, trial_count FROM rs_subcategories WHERE category = ? ORDER BY (paper_count + trial_count) DESC"
+          "SELECT term, paper_count, trial_count, search_terms FROM rs_subcategories WHERE category = ? ORDER BY (paper_count + trial_count) DESC"
         )
         stmt.bind([category])
         const results: Subcategory[] = []
@@ -806,6 +807,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
             term: row[0] as string,
             paperCount: row[1] as number,
             trialCount: row[2] as number,
+            searchTerms: parseJsonSafe(row[3] as string, []),
           })
         }
         stmt.free()

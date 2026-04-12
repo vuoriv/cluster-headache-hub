@@ -89,26 +89,31 @@ export function CategoryPage() {
     setSubcategoryFilter(null)
   }, [slug])
 
+  // Get search terms for the active filter (all raw alias keys that map to the selected label)
+  const activeSearchTerms = useMemo(() => {
+    if (!subcategoryFilter) return null
+    const sc = subcategories.find((s) => s.term === subcategoryFilter)
+    return sc?.searchTerms ?? [subcategoryFilter.toLowerCase()]
+  }, [subcategoryFilter, subcategories])
+
   const topPapers = useMemo(() => {
     if (loading || !slug) return []
     const all = searchPapers({ category: slug, limit: 200 })
-    if (!subcategoryFilter) return all.slice(0, 15)
-    const term = subcategoryFilter.toLowerCase()
+    if (!activeSearchTerms) return all.slice(0, 15)
     return all.filter((p) =>
-      p.meshTerms.some((t) => t.toLowerCase().includes(term)) ||
-      p.authorKeywords.some((t) => t.toLowerCase().includes(term)),
+      p.meshTerms.some((t) => activeSearchTerms.some((s) => t.toLowerCase().includes(s))) ||
+      p.authorKeywords.some((t) => activeSearchTerms.some((s) => t.toLowerCase().includes(s))),
     )
-  }, [loading, slug, searchPapers, subcategoryFilter])
+  }, [loading, slug, searchPapers, activeSearchTerms])
 
   const categoryTrials = useMemo(() => {
     if (loading || !slug) return []
     const all = searchTrials({ category: slug })
-    if (!subcategoryFilter) return all
-    const term = subcategoryFilter.toLowerCase()
+    if (!activeSearchTerms) return all
     return all.filter((t) =>
-      t.interventions.some((i) => i.toLowerCase().includes(term)),
+      t.interventions.some((i) => activeSearchTerms.some((s) => i.toLowerCase().includes(s))),
     )
-  }, [loading, slug, searchTrials, subcategoryFilter])
+  }, [loading, slug, searchTrials, activeSearchTerms])
 
   // Compute filtered stats when a subcategory is selected
   const filteredStats = useMemo(() => {
