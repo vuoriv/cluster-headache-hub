@@ -27,7 +27,7 @@ PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 DATA_DB = os.path.join(PROJECT_ROOT, "public", "data.db")
 TRIAL_ANALYSES_PATH = os.path.join(PROJECT_ROOT, "src", "data", "trials", "trial-analyses.json")
 
-DEFAULT_BASE_URL = "https://api.cerebras.ai/v1"
+DEFAULT_BASE_URL = "https://api.groq.com/openai/v1"
 
 
 def ensure_pa_analyses_table(conn):
@@ -110,7 +110,7 @@ def seed_from_json(conn):
     print(f"  Seeded {len(analyses)} trial analyses from JSON", flush=True)
 
 
-DEFAULT_MODEL = "qwen-3-235b-a22b-instruct-2507"
+DEFAULT_MODEL = "llama-3.1-70b-versatile"
 
 TRIAL_PROMPT = """You are analyzing a clinical trial for cluster headache. Based on the information below, provide a structured analysis.
 
@@ -647,7 +647,7 @@ def analyze_new_trials(db_path, api_key, base_url, model):
 
 def main():
     parser = argparse.ArgumentParser(description="LLM-powered analysis")
-    parser.add_argument("--api-key", default=os.environ.get("CEREBRAS_API_KEY"),
+    parser.add_argument("--api-key", default=os.environ.get("GROQ_API_KEY") or os.environ.get("CEREBRAS_API_KEY"),
                         help="API key (or set CEREBRAS_API_KEY env var)")
     parser.add_argument("--base-url", default=DEFAULT_BASE_URL,
                         help=f"API base URL (default: {DEFAULT_BASE_URL})")
