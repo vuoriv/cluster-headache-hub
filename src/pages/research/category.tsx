@@ -100,9 +100,10 @@ export function CategoryPage() {
     if (loading || !slug) return []
     const all = searchPapers({ category: slug, limit: 200 })
     if (!activeSearchTerms) return all.slice(0, 15)
+    const terms = new Set(activeSearchTerms)
     return all.filter((p) =>
-      p.meshTerms.some((t) => activeSearchTerms.some((s) => t.toLowerCase().includes(s))) ||
-      p.authorKeywords.some((t) => activeSearchTerms.some((s) => t.toLowerCase().includes(s))),
+      p.meshTerms.some((t) => terms.has(t.toLowerCase())) ||
+      p.authorKeywords.some((t) => terms.has(t.toLowerCase())),
     )
   }, [loading, slug, searchPapers, activeSearchTerms])
 
@@ -110,8 +111,9 @@ export function CategoryPage() {
     if (loading || !slug) return []
     const all = searchTrials({ category: slug })
     if (!activeSearchTerms) return all
+    const terms = new Set(activeSearchTerms)
     return all.filter((t) =>
-      t.interventions.some((i) => activeSearchTerms.some((s) => i.toLowerCase().includes(s))),
+      t.interventions.some((i) => terms.has(i.toLowerCase())),
     )
   }, [loading, slug, searchTrials, activeSearchTerms])
 
