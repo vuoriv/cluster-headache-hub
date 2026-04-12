@@ -20,7 +20,6 @@ import uuid
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 DATA_DB = os.path.join(PROJECT_ROOT, "public", "data.db")
-ANALYSIS_DB = os.path.join(PROJECT_ROOT, "data", "analysis.db")
 
 
 def ensure_pipeline_runs_table(db_path):
@@ -104,39 +103,6 @@ def run(cmd, description, db_path=None, run_id=None, phases=None):
                        phases_completed=json.dumps(phases or []))
         sys.exit(1)
 
-
-def merge_analysis_into_data():
-    """Merge all analysis tables from analysis.db into data.db."""
-    print(f"\n{'='*60}")
-    print(f"  Merging analysis.db → data.db")
-    print(f"{'='*60}\n")
-
-    if not os.path.exists(ANALYSIS_DB):
-        print(f"  ERROR: {ANALYSIS_DB} not found")
-        sys.exit(1)
-
-    src = sqlite3.connect(ANALYSIS_DB)
-    tables = {}
-    for row in src.execute("SELECT name, sql FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"):
-        name, create_sql = row
-        rows = src.execute(f"SELECT * FROM {name}").fetchall()
-        tables[name] = (create_sql, rows)
-    src.close()
-
-    db = sqlite3.connect(DATA_DB)
-    for name, (create_sql, rows) in tables.items():
-        db.execute(f"DROP TABLE IF EXISTS {name}")
-        db.execute(create_sql)
-        if rows:
-            placeholders = ",".join(["?"] * len(rows[0]))
-            db.executemany(f"INSERT INTO {name} VALUES ({placeholders})", rows)
-        count = db.execute(f"SELECT COUNT(*) FROM {name}").fetchone()[0]
-        print(f"  {name}: {count} rows")
-    db.commit()
-    db.close()
-
-    size_kb = os.path.getsize(DATA_DB) / 1024
-    print(f"\n  data.db updated ({size_kb:.0f} KB)")
 
 
 def main():
@@ -233,16 +199,12 @@ def main():
             db_path=DATA_DB, run_id=run_id, phases=phases,
         )
 
-        # Phase 6: Rebuild analysis.db
+        # Phase 6: Rebuild forum/community tables in data.db
         run(
             [sys.executable, os.path.join(SCRIPT_DIR, "build-analysis-db.py")],
-            "Phase 6: Rebuild analysis.db from JSON",
+            "Phase 6: Rebuild forum/community tables from JSON",
             db_path=DATA_DB, run_id=run_id, phases=phases,
         )
-
-        # Phase 7: Merge analysis tables into data.db
-        merge_analysis_into_data()
-        phases.append("Phase 7: Merge analysis.db → data.db")
 
         # Gather final stats
         db = sqlite3.connect(DATA_DB)

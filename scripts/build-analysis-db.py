@@ -8,7 +8,7 @@ import sqlite3
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 DATA_DIR = os.path.join(PROJECT_ROOT, "src", "data")
-OUTPUT_DB = os.path.join(PROJECT_ROOT, "data", "analysis.db")
+OUTPUT_DB = os.path.join(PROJECT_ROOT, "public", "data.db")
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS cb_forum_stats (
@@ -80,11 +80,15 @@ def load_json(filename):
 
 
 def build_db():
-    if os.path.exists(OUTPUT_DB):
-        os.remove(OUTPUT_DB)
-
     conn = sqlite3.connect(OUTPUT_DB)
     cursor = conn.cursor()
+
+    # Drop existing forum/community tables (recreated below)
+    for table in ["cb_forum_stats", "cb_treatment_rankings", "cb_outcomes",
+                  "cb_timeline", "cb_co_occurrence", "cb_treatment_profiles",
+                  "cb_recommendation_data", "cb_insights", "co_groups"]:
+        cursor.execute(f"DROP TABLE IF EXISTS {table}")
+
     cursor.executescript(SCHEMA)
 
     # cb_forum_stats: store each top-level key as a row
@@ -227,7 +231,6 @@ def build_db():
                 contact_email TEXT
             )
         """)
-        cursor.execute("DELETE FROM co_groups")
         groups = json.load(open(groups_file))
         for g in groups:
             cursor.execute(
@@ -244,5 +247,5 @@ def build_db():
 
 
 if __name__ == "__main__":
-    print("Building analysis.db from JSON data files...")
+    print("Building forum/community tables in data.db from JSON files...")
     build_db()
