@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Link, useParams, Navigate } from "react-router-dom"
 import { ArrowLeft, ExternalLink, FlaskConical, FileText, TrendingUp, Users } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator"
 import { Bar, BarChart, AreaChart, Area, XAxis, YAxis, CartesianGrid } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart"
 import { CATEGORY_CONFIG, STATUS_CONFIG, phaseLabel } from "@/lib/research-categories"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useDataDb, type CategoryStats } from "@/lib/data-db"
 
 const CATEGORY_META: Record<string, { name: string; description: string }> = {
@@ -69,22 +70,50 @@ const chartConfig: ChartConfig = {
 
 export function CategoryPage() {
   const { slug } = useParams<{ slug: string }>()
-  const { loading, getCategoryStats, searchPapers, searchTrials, getTrialAnalysis, getPaperAnalysis } = useDataDb()
+  const { loading, getCategoryStats, searchPapers, searchTrials, getTrialAnalysis, getPaperAnalysis, getSubcategories } = useDataDb()
 
   const data = useMemo((): CategoryStats | null => {
     if (loading || !slug) return null
     return getCategoryStats(slug)
   }, [loading, slug, getCategoryStats])
 
+  const subcategories = useMemo(() => {
+    if (loading || !slug) return []
+    return getSubcategories(slug)
+  }, [loading, slug, getSubcategories])
+
+  const [subcategoryFilter, setSubcategoryFilter] = useState<string | null>(null)
+
+  // Reset filter when navigating between categories
+  useEffect(() => {
+    setSubcategoryFilter(null)
+  }, [slug])
+
   const topPapers = useMemo(() => {
     if (loading || !slug) return []
-    return searchPapers({ category: slug, limit: 15 })
-  }, [loading, slug, searchPapers])
+    const all = searchPapers({ category: slug, limit: 200 })
+    if (!subcategoryFilter) return all.slice(0, 15)
+    const term = subcategoryFilter.toLowerCase()
+    return all.filter((p) => {
+      const searchStr = [
+        p.title.toLowerCase(),
+        p.meshTerms.join(" ").toLowerCase(),
+        p.authorKeywords.join(" ").toLowerCase(),
+      ].join(" ")
+      return searchStr.includes(term)
+    })
+  }, [loading, slug, searchPapers, subcategoryFilter])
 
   const categoryTrials = useMemo(() => {
     if (loading || !slug) return []
-    return searchTrials({ category: slug })
-  }, [loading, slug, searchTrials])
+    const all = searchTrials({ category: slug })
+    if (!subcategoryFilter) return all
+    const term = subcategoryFilter.toLowerCase()
+    return all.filter((t) => {
+      const searchStr = [t.title.toLowerCase(), t.interventions.join(" ").toLowerCase()].join(" ")
+      return searchStr.includes(term)
+    })
+  }, [loading, slug, searchTrials, subcategoryFilter])
 
   if (!slug || (!loading && !data)) {
     return <Navigate to="/research" replace />
@@ -119,6 +148,29 @@ export function CategoryPage() {
           </p>
         )}
       </div>
+
+      {/* Subcategory Filter */}
+      {subcategories.length > 1 && (
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-medium text-muted-foreground">Filter by</span>
+          <Select
+            value={subcategoryFilter ?? "all"}
+            onValueChange={(v) => setSubcategoryFilter(v === "all" ? null : v)}
+          >
+            <SelectTrigger className="w-[240px]">
+              <SelectValue placeholder="All treatments" />
+            </SelectTrigger>
+            <SelectContent className="max-h-[300px]">
+              <SelectItem value="all">All treatments</SelectItem>
+              {subcategories.slice(0, 30).map((sc) => (
+                <SelectItem key={sc.term} value={sc.term}>
+                  {sc.term} ({sc.paperCount + sc.trialCount})
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
 
       {/* Stats */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -215,10 +267,27 @@ export function CategoryPage() {
 
       <Separator />
 
+      {/* No results message */}
+      {subcategoryFilter && topPapers.length === 0 && categoryTrials.length === 0 && (
+        <div className="flex flex-col items-center gap-3 py-12 text-center">
+          <FileText className="size-10 text-muted-foreground/30" />
+          <p className="text-sm text-muted-foreground">
+            No papers or trials found matching "{subcategoryFilter}"
+          </p>
+        </div>
+      )}
+
       {/* Key Studies */}
       {topPapers.length > 0 && (
         <div>
-          <h3 className="mb-4 text-lg font-semibold">Key Studies</h3>
+          <h3 className="mb-4 text-lg font-semibold">
+            Key Studies
+            {subcategoryFilter && (
+              <span className="ml-2 text-sm font-normal text-muted-foreground">
+                ({topPapers.length} matching "{subcategoryFilter}")
+              </span>
+            )}
+          </h3>
           <p className="mb-4 text-xs text-muted-foreground">
             The most important papers in this category, ranked by evidence strength and sample size.
           </p>
@@ -277,7 +346,14 @@ export function CategoryPage() {
         <>
           <Separator />
           <div>
-            <h3 className="mb-2 text-lg font-semibold">Clinical Trials</h3>
+            <h3 className="mb-2 text-lg font-semibold">
+              Clinical Trials
+              {subcategoryFilter && (
+                <span className="ml-2 text-sm font-normal text-muted-foreground">
+                  ({categoryTrials.length} matching "{subcategoryFilter}")
+                </span>
+              )}
+            </h3>
             <p className="mb-4 text-xs text-muted-foreground">
               {categoryTrials.length} trials in this category — what was tested, what happened, and what's coming.
             </p>

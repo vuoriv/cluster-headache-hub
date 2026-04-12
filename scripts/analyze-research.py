@@ -494,6 +494,162 @@ def build_category_stats(conn):
     print(f"  Built category stats for {len(categories)} categories", flush=True)
 
 
+# Normalization map: maps raw lowercase terms to display labels.
+TERM_ALIASES = {
+    "lithium carbonate": "Lithium",
+    "lithium compounds": "Lithium",
+    "lithium": "Lithium",
+    "verapamil": "Verapamil",
+    "verapamil hydrochloride": "Verapamil",
+    "r-verapamil": "Verapamil",
+    "sumatriptan": "Sumatriptan",
+    "sumatriptan succinate": "Sumatriptan",
+    "topiramate": "Topiramate",
+    "melatonin": "Melatonin",
+    "prednisone": "Prednisone",
+    "prednisolone": "Prednisolone",
+    "methylprednisolone": "Methylprednisolone",
+    "indomethacin": "Indomethacin",
+    "methysergide": "Methysergide",
+    "ergotamine": "Ergotamine",
+    "valproic acid": "Valproic Acid",
+    "lamotrigine": "Lamotrigine",
+    "gabapentin": "Gabapentin",
+    "galcanezumab": "Galcanezumab",
+    "erenumab": "Erenumab",
+    "fremanezumab": "Fremanezumab",
+    "psilocybin": "Psilocybin",
+    "lysergic acid diethylamide": "LSD",
+    "lsd": "LSD",
+    "bol-148": "BOL-148",
+    "oxygen": "Oxygen",
+    "oxygen inhalation therapy": "Oxygen",
+    "hyperbaric oxygenation": "Hyperbaric Oxygen",
+    "botulinum toxins": "Botulinum Toxin",
+    "botulinum toxins, type a": "Botulinum Toxin",
+    "botulinum toxin": "Botulinum Toxin",
+    "lidocaine": "Lidocaine",
+    "bupivacaine": "Bupivacaine",
+    "gammacore": "Vagus Nerve Stimulation",
+    "vagus nerve stimulation": "Vagus Nerve Stimulation",
+    "non-invasive vagus nerve stimulation": "Vagus Nerve Stimulation",
+    "transcutaneous vagus nerve stimulation": "Vagus Nerve Stimulation",
+    "deep brain stimulation": "Deep Brain Stimulation",
+    "occipital nerve stimulation": "Occipital Nerve Stimulation",
+    "sphenopalatine ganglion": "SPG Stimulation/Block",
+    "sphenopalatine ganglion block": "SPG Stimulation/Block",
+    "spg stimulation": "SPG Stimulation/Block",
+    "greater occipital nerve": "Occipital Nerve Block",
+    "greater occipital nerve block": "Occipital Nerve Block",
+    "occipital nerve block": "Occipital Nerve Block",
+    "nerve block": "Nerve Block",
+    "vitamin d": "Vitamin D",
+    "cholecalciferol": "Vitamin D",
+    "vitamin d3": "Vitamin D",
+    "calcium channel blockers": "Calcium Channel Blockers",
+    "adrenal cortex hormones": "Corticosteroids",
+    "corticosteroids": "Corticosteroids",
+    "triptans": "Triptans",
+    "serotonin receptor agonists": "Triptans",
+    "anticonvulsants": "Anticonvulsants",
+    "calcitonin gene-related peptide": "CGRP",
+    "cgrp": "CGRP",
+}
+
+SKIP_TERMS = {
+    "humans", "male", "female", "adult", "middle aged", "young adult", "aged",
+    "adolescent", "child", "infant", "cluster headache", "cluster headaches",
+    "headache", "headaches", "treatment outcome", "prospective studies",
+    "retrospective studies", "migraine", "migraine disorders", "chronic disease",
+    "diagnosis, differential", "time factors", "double-blind method",
+    "cross-over studies", "pain", "brain", "magnetic resonance imaging",
+    "electroencephalography", "follow-up studies", "comorbidity",
+    "surveys and questionnaires", "quality of life", "prevalence",
+    "risk factors", "severity of illness index",
+    "trigeminal autonomic cephalalgia", "trigeminal autonomic cephalalgias",
+    "vascular headaches", "tension-type headache",
+    "hemicrania continua", "paroxysmal hemicrania",
+    "sunct", "suna", "epidemiology", "pathophysiology",
+    "case reports", "review", "meta-analysis",
+    "clinical trial", "randomized controlled trial",
+    "treatment", "drug therapy", "drug therapy, combination",
+    "neuromodulation", "neurostimulation",
+}
+
+
+def build_subcategories(conn):
+    """Build rs_subcategories table with treatment-specific terms per category."""
+    conn.execute("DROP TABLE IF EXISTS rs_subcategories")
+    conn.execute("""
+        CREATE TABLE rs_subcategories (
+            category TEXT NOT NULL,
+            term TEXT NOT NULL,
+            paper_count INTEGER NOT NULL DEFAULT 0,
+            trial_count INTEGER NOT NULL DEFAULT 0,
+            PRIMARY KEY (category, term)
+        )
+    """)
+
+    categories = [r[0] for r in conn.execute(
+        "SELECT DISTINCT category FROM pa_papers WHERE category IS NOT NULL "
+        "UNION SELECT DISTINCT category FROM tr_trials WHERE category IS NOT NULL "
+        "ORDER BY category"
+    ).fetchall()]
+
+    total_rows = 0
+    for cat in categories:
+        term_paper_counts = Counter()
+        term_trial_counts = Counter()
+
+        for (mesh_json, kw_json) in conn.execute(
+            "SELECT mesh_terms, author_keywords FROM pa_papers WHERE category = ?", (cat,)
+        ).fetchall():
+            terms = set()
+            for raw_json in (mesh_json, kw_json):
+                if not raw_json:
+                    continue
+                try:
+                    for t in json.loads(raw_json):
+                        low = t.lower().strip()
+                        if low and low not in SKIP_TERMS:
+                            normalized = TERM_ALIASES.get(low, t.strip().title())
+                            terms.add(normalized)
+                except Exception:
+                    pass
+            for term in terms:
+                term_paper_counts[term] += 1
+
+        for (interv_json,) in conn.execute(
+            "SELECT interventions FROM tr_trials WHERE category = ?", (cat,)
+        ).fetchall():
+            if not interv_json:
+                continue
+            try:
+                terms = set()
+                for t in json.loads(interv_json):
+                    low = t.lower().strip()
+                    if low and low not in SKIP_TERMS:
+                        normalized = TERM_ALIASES.get(low, t.strip().title())
+                        terms.add(normalized)
+                for term in terms:
+                    term_trial_counts[term] += 1
+            except Exception:
+                pass
+
+        all_terms = set(term_paper_counts.keys()) | set(term_trial_counts.keys())
+        for term in all_terms:
+            pc = term_paper_counts.get(term, 0)
+            tc = term_trial_counts.get(term, 0)
+            conn.execute(
+                "INSERT INTO rs_subcategories (category, term, paper_count, trial_count) VALUES (?, ?, ?, ?)",
+                (cat, term, pc, tc),
+            )
+            total_rows += 1
+
+    conn.commit()
+    print(f"  Built subcategories: {total_rows} terms across {len(categories)} categories", flush=True)
+
+
 def build_global_stats(conn):
     """Build rs_stats table with global research statistics."""
     conn.execute("DROP TABLE IF EXISTS rs_stats")
@@ -637,6 +793,7 @@ def main():
     conn = sqlite3.connect(args.db)
     build_paper_trial_links(conn)
     build_category_stats(conn)
+    build_subcategories(conn)
     build_global_stats(conn)
     conn.close()
 

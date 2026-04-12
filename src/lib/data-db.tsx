@@ -104,6 +104,12 @@ export interface CategoryStats {
   resultDistribution: Array<{ result: string; count: number }>
 }
 
+export interface Subcategory {
+  term: string
+  paperCount: number
+  trialCount: number
+}
+
 export interface PipelineMeta {
   lastRun: string
   trialCount: number
@@ -163,6 +169,7 @@ interface DataDbContextValue {
   getLinkedPapers: (nctId: string) => Array<ResearchPaper & { linkType: string }>
   getLinkedTrials: (pmid: string) => Array<ResearchTrial & { linkType: string }>
   getCategoryStats: (category: string) => CategoryStats | null
+  getSubcategories: (category: string) => Subcategory[]
   getResearchStats: () => Record<string, unknown>
 
   // Community
@@ -784,6 +791,32 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     [db],
   )
 
+  const getSubcategories = useCallback(
+    (category: string): Subcategory[] => {
+      if (!db) return []
+      try {
+        const stmt = db.prepare(
+          "SELECT term, paper_count, trial_count FROM rs_subcategories WHERE category = ? ORDER BY (paper_count + trial_count) DESC"
+        )
+        stmt.bind([category])
+        const results: Subcategory[] = []
+        while (stmt.step()) {
+          const row = stmt.get()
+          results.push({
+            term: row[0] as string,
+            paperCount: row[1] as number,
+            trialCount: row[2] as number,
+          })
+        }
+        stmt.free()
+        return results
+      } catch {
+        return []
+      }
+    },
+    [db],
+  )
+
   const getResearchStats = useCallback((): Record<string, unknown> => {
     if (!db) return {}
     try {
@@ -824,6 +857,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     getLinkedPapers,
     getLinkedTrials,
     getCategoryStats,
+    getSubcategories,
     getResearchStats,
     getCommunityGroups,
   }
