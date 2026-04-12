@@ -2,6 +2,12 @@
 
 Guidance for Claude Code when working with this repository.
 
+## Required Skills & Workflows
+
+- **Superpowers skills** — use brainstorming, writing-plans, systematic-debugging, test-driven-development, and other superpowers skills whenever they add value (feature work, bug fixes, planning, reviews)
+- **shadcn-ui skill** — MUST verify components, styling, conventions, and patterns follow shadcn guidelines when creating or modifying any frontend UI
+- **frontend-design skill** — use for any new pages or significant UI changes
+
 ## Project Overview
 
 **Cluster Headache Research Hub** — a static data-driven research platform combining clinical evidence (PubMed, ClinicalTrials.gov), community intelligence (ClusterBusters forum analysis), and a global patient group directory. Zero backend — all data served from a pre-built SQLite database via sql.js (WASM) in the browser.
