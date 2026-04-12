@@ -207,7 +207,7 @@ def call_llm(prompt, api_key, base_url, model):
         json={
             "model": model,
             "messages": [{"role": "user", "content": prompt}],
-            "max_tokens": 500,
+            "max_tokens": 4096,
             "temperature": 0.1,
         },
         timeout=30,
@@ -225,7 +225,7 @@ def call_llm(prompt, api_key, base_url, model):
             json={
                 "model": model,
                 "messages": [{"role": "user", "content": prompt}],
-                "max_tokens": 500,
+                "max_tokens": 4096,
                 "temperature": 0.1,
             },
             timeout=30,
@@ -271,7 +271,7 @@ Rules:
 - outcome: showed_benefit|no_benefit|mixed|inconclusive|basic_science"""
 
 
-BATCH_SIZE = 20
+BATCH_SIZE = 50
 
 
 def classify_papers_batch(conn, api_key, base_url, model):
