@@ -48,6 +48,10 @@ def ensure_pa_analyses_table(conn):
         )
     """)
     for col, coltype in [
+        ("outcome", "TEXT"),
+        ("plain_summary", "TEXT"),
+        ("key_finding", "TEXT"),
+        ("interventions_studied", "TEXT"),
         ("primary_interventions", "TEXT"),
         ("comparator_interventions", "TEXT"),
         ("topics", "TEXT"),
@@ -209,6 +213,24 @@ def call_llm(prompt, api_key, base_url, model):
         timeout=30,
     )
 
+    if response.status_code == 429:
+        # Rate limited — wait and retry once
+        time.sleep(10)
+        response = requests.post(
+            f"{base_url}/chat/completions",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": model,
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": 500,
+                "temperature": 0.1,
+            },
+            timeout=30,
+        )
+
     if response.status_code != 200:
         raise Exception(f"API error {response.status_code}: {response.text[:200]}")
 
@@ -305,7 +327,7 @@ def analyze_papers(conn, api_key, base_url, model):
                 )
                 conn.commit()
                 print(f"    Error analyzing PMID {pmid} (retry failed): {e2}", flush=True)
-                time.sleep(1)
+                time.sleep(2)
                 continue
 
         if not isinstance(result, dict):
@@ -335,7 +357,7 @@ def analyze_papers(conn, api_key, base_url, model):
         if (i + 1) % 50 == 0:
             print(f"    Analyzed {i + 1}/{len(new_papers)} papers", flush=True)
 
-        time.sleep(1)
+        time.sleep(2)
 
     error_count = conn.execute("SELECT COUNT(*) FROM rs_analysis_errors").fetchone()[0]
     if error_count:
@@ -418,7 +440,7 @@ def analyze_new_trials(db_path, api_key, base_url, model):
             result["sample_size"] = t["enrollment"]
             new_analyses.append(result)
             analyzed += 1
-            time.sleep(1)  # Rate limit courtesy
+            time.sleep(2)  # Rate limit courtesy
         except Exception as e:
             print(f"    ERROR: {e}", flush=True)
             # Add placeholder
