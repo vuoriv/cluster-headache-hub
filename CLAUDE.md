@@ -59,10 +59,7 @@ All data access goes through `DataDbProvider` context:
 
 ```tsx
 const { loading, getForumStats } = useDataDb()
-const data = useMemo(() => {
-  if (loading) return null
-  return getForumStats()
-}, [loading, getForumStats])
+const data = useMemo(() => (loading ? null : getForumStats()), [loading, getForumStats])
 ```
 
 Rules:
