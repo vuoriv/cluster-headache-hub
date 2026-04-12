@@ -110,7 +110,7 @@ def seed_from_json(conn):
     print(f"  Seeded {len(analyses)} trial analyses from JSON", flush=True)
 
 
-DEFAULT_MODEL = "llama-3.1-70b-versatile"
+DEFAULT_MODEL = "openai/gpt-oss-20b"
 
 TRIAL_PROMPT = """You are analyzing a clinical trial for cluster headache. Based on the information below, provide a structured analysis.
 
@@ -195,41 +195,33 @@ For topics:
 
 
 def call_llm(prompt, api_key, base_url, model):
-    """Call OpenAI-compatible API."""
+    """Call OpenAI-compatible API with JSON response format."""
     import requests
 
-    response = requests.post(
-        f"{base_url}/chat/completions",
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "model": model,
-            "messages": [{"role": "user", "content": prompt}],
-            "max_tokens": 4096,
-            "temperature": 0.1,
-        },
-        timeout=30,
-    )
+    body = {
+        "model": model,
+        "messages": [{"role": "user", "content": prompt}],
+        "max_tokens": 4096,
+        "temperature": 0.1,
+        "response_format": {"type": "json_object"},
+    }
 
-    if response.status_code == 429:
-        # Rate limited — wait and retry once
-        time.sleep(10)
-        response = requests.post(
+    def _post():
+        return requests.post(
             f"{base_url}/chat/completions",
             headers={
                 "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json",
             },
-            json={
-                "model": model,
-                "messages": [{"role": "user", "content": prompt}],
-                "max_tokens": 4096,
-                "temperature": 0.1,
-            },
-            timeout=30,
+            json=body,
+            timeout=60,
         )
+
+    response = _post()
+
+    if response.status_code == 429:
+        time.sleep(10)
+        response = _post()
 
     if response.status_code != 200:
         raise Exception(f"API error {response.status_code}: {response.text[:200]}")
@@ -271,7 +263,7 @@ Rules:
 - outcome: showed_benefit|no_benefit|mixed|inconclusive|basic_science"""
 
 
-BATCH_SIZE = 50
+BATCH_SIZE = 5
 
 
 def classify_papers_batch(conn, api_key, base_url, model):
@@ -408,7 +400,7 @@ def classify_papers_batch(conn, api_key, base_url, model):
         if batch_num % 10 == 0 or batch_num == total_batches:
             print(f"    Batch {batch_num}/{total_batches} ({classified} classified)", flush=True)
 
-        time.sleep(2)
+        time.sleep(15)
 
     error_count = conn.execute("SELECT COUNT(*) FROM rs_analysis_errors").fetchone()[0]
     if error_count:
@@ -665,7 +657,7 @@ def main():
     # Test API connection
     print("  Testing API connection...", flush=True)
     try:
-        test = call_llm("Respond with only: {\"status\": \"ok\"}", args.api_key, args.base_url, args.model)
+        test = call_llm("Respond with only this json: {\"status\": \"ok\"}", args.api_key, args.base_url, args.model)
         print(f"  API OK: {test}\n", flush=True)
     except Exception as e:
         print(f"  API test failed: {e}", flush=True)
