@@ -244,12 +244,10 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
   const [db, setDb] = useState<Database | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const initRef = useRef(false)
   const dbRef = useRef<Database | null>(null)
 
   useEffect(() => {
-    if (initRef.current) return
-    initRef.current = true
+    let cancelled = false
 
     const base = import.meta.env.BASE_URL
     const wasmUrl = `${base}sql-wasm.wasm`
@@ -262,19 +260,22 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
         if (!response.ok)
           throw new Error(`Failed to fetch data.db: ${response.status}`)
         const buffer = await response.arrayBuffer()
+        if (cancelled) return
         const database = new SQL.Database(new Uint8Array(buffer))
         dbRef.current = database
         setDb(database)
       } catch (e) {
+        if (cancelled) return
         setError(e instanceof Error ? e.message : "Failed to load database")
       } finally {
-        setLoading(false)
+        if (!cancelled) setLoading(false)
       }
     }
 
     load()
 
     return () => {
+      cancelled = true
       if (dbRef.current) {
         dbRef.current.close()
         dbRef.current = null
@@ -825,6 +826,32 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     getCategoryStats,
     getResearchStats,
     getCommunityGroups,
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-24">
+        <div className="flex flex-col items-center gap-3">
+          <div className="size-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+          <p className="text-sm text-muted-foreground">Loading data...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 px-4 text-center">
+        <h2 className="text-lg font-semibold">Failed to load data</h2>
+        <p className="max-w-md text-sm text-muted-foreground">{error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+        >
+          Reload page
+        </button>
+      </div>
+    )
   }
 
   return <DataDbContext.Provider value={value}>{children}</DataDbContext.Provider>

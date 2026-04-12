@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from "react"
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { DataDbProvider } from "@/lib/data-db"
+import { ErrorBoundary } from "@/components/error-boundary"
 import { Layout } from "@/components/layout/layout"
 import { FrontPage } from "@/pages/front-page"
 import { CommunityPage } from "@/pages/community"
@@ -33,30 +34,32 @@ export default function App() {
     <BrowserRouter basename="/cluster-headache-hub">
       <ScrollToTop />
       <TooltipProvider>
-        <DataDbProvider>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route index element={<FrontPage />} />
-              <Route
-                path="/clusterbusters/*"
-                element={
-                  <Suspense fallback={<LoadingFallback />}>
-                    <ClusterBustersPage />
-                  </Suspense>
-                }
-              />
-              <Route
-                path="/research/*"
-                element={
-                  <Suspense fallback={<LoadingFallback />}>
-                    <ResearchPage />
-                  </Suspense>
-                }
-              />
-              <Route path="/community" element={<CommunityPage />} />
-            </Route>
-          </Routes>
-        </DataDbProvider>
+        <ErrorBoundary>
+          <DataDbProvider>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route index element={<FrontPage />} />
+                <Route
+                  path="/clusterbusters/*"
+                  element={
+                    <Suspense fallback={<LoadingFallback />}>
+                      <ClusterBustersPage />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/research/*"
+                  element={
+                    <Suspense fallback={<LoadingFallback />}>
+                      <ResearchPage />
+                    </Suspense>
+                  }
+                />
+                <Route path="/community" element={<CommunityPage />} />
+              </Route>
+            </Routes>
+          </DataDbProvider>
+        </ErrorBoundary>
       </TooltipProvider>
     </BrowserRouter>
   )
