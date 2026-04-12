@@ -246,12 +246,188 @@ def call_llm(prompt, api_key, base_url, model):
     return json.loads(text)
 
 
+BATCH_CLASSIFY_PROMPT = """You are classifying research papers about cluster headache. For EACH paper below, identify the primary interventions studied, any comparator/control interventions, and research topics.
+
+{papers_block}
+
+Respond with ONLY a JSON array (no markdown, no explanation). One object per paper, in the same order:
+[
+  {{
+    "pmid": "12345678",
+    "primary_interventions": ["Treatment Name"],
+    "comparator_interventions": ["Placebo"],
+    "topics": [],
+    "study_type": "rct|observational|case_report|review|meta_analysis|basic_science|other",
+    "outcome": "showed_benefit|no_benefit|mixed|inconclusive|basic_science",
+    "evidence_tier": 3
+  }}
+]
+
+Rules:
+- primary_interventions: treatments THIS PAPER ACTUALLY STUDIES. Use canonical names (e.g., "Psilocybin" not "psilocybin mushroom", "LSD" not "lysergic acid diethylamide"). Empty if no treatment studied.
+- comparator_interventions: treatments mentioned as controls or context only. NOT the study focus.
+- topics: non-treatment themes (epidemiology, quality of life, sleep, comorbidity, genetics, chronobiology, depression, anxiety, diagnosis, prevalence, gender differences, smoking, alcohol, suicide, disability, classification, exercise, photophobia). Only if a MAIN FOCUS. Empty for treatment papers.
+- evidence_tier: 1=meta-analysis, 2=RCT, 3=observational, 4=case series, 5=case report/editorial/basic science
+- outcome: showed_benefit|no_benefit|mixed|inconclusive|basic_science"""
+
+
+BATCH_SIZE = 20
+
+
+def classify_papers_batch(conn, api_key, base_url, model):
+    """Fast batch classification of papers — primary interventions, topics, study type.
+
+    Sends batches of 20 papers (title + MeSH only) per API call.
+    Much faster than per-paper analysis: ~170 calls vs ~3400.
+    """
+    ensure_pa_analyses_table(conn)
+    ensure_analysis_errors_table(conn)
+
+    # Find papers that need classification (no primary_interventions yet)
+    existing = set()
+    try:
+        existing = set(
+            r[0] for r in conn.execute(
+                "SELECT pmid FROM pa_analyses WHERE primary_interventions IS NOT NULL AND primary_interventions != '[]'"
+            ).fetchall()
+        )
+    except Exception:
+        pass
+
+    cursor = conn.execute("""
+        SELECT pmid, title, category, mesh_terms, author_keywords
+        FROM pa_papers
+        WHERE title IS NOT NULL AND title != ''
+    """)
+    all_papers = cursor.fetchall()
+    papers_to_classify = [p for p in all_papers if p[0] not in existing]
+
+    if not papers_to_classify:
+        print("  No papers need batch classification", flush=True)
+        return
+
+    print(f"  Batch classifying {len(papers_to_classify)} papers ({BATCH_SIZE} per call)...", flush=True)
+
+    classified = 0
+    for batch_start in range(0, len(papers_to_classify), BATCH_SIZE):
+        batch = papers_to_classify[batch_start:batch_start + BATCH_SIZE]
+
+        # Build compact paper descriptions
+        paper_lines = []
+        for pmid, title, category, mesh_json, kw_json in batch:
+            mesh = ""
+            try:
+                terms = json.loads(mesh_json or "[]")
+                if terms:
+                    mesh = f" | MeSH: {', '.join(terms[:10])}"
+            except Exception:
+                pass
+            kw = ""
+            try:
+                terms = json.loads(kw_json or "[]")
+                if terms:
+                    kw = f" | Keywords: {', '.join(terms[:5])}"
+            except Exception:
+                pass
+            paper_lines.append(f"- PMID {pmid} [{category}]: {title}{mesh}{kw}")
+
+        papers_block = "\n".join(paper_lines)
+        prompt = BATCH_CLASSIFY_PROMPT.format(papers_block=papers_block)
+
+        try:
+            results = call_llm(prompt, api_key, base_url, model)
+        except Exception as e:
+            try:
+                time.sleep(5)
+                results = call_llm(prompt, api_key, base_url, model)
+            except Exception as e2:
+                print(f"    Batch error at {batch_start}: {e2}", flush=True)
+                for p in batch:
+                    conn.execute(
+                        "INSERT OR REPLACE INTO rs_analysis_errors (id, error, timestamp, retry_count) VALUES (?, ?, datetime('now'), COALESCE((SELECT retry_count FROM rs_analysis_errors WHERE id = ?), 0) + 1)",
+                        (p[0], f"Batch classify failed: {e2}", p[0]),
+                    )
+                conn.commit()
+                time.sleep(2)
+                continue
+
+        if not isinstance(results, list):
+            print(f"    Warning: batch at {batch_start} returned non-list, skipping", flush=True)
+            continue
+
+        # Match results to papers by pmid
+        result_map = {}
+        for r in results:
+            if isinstance(r, dict) and "pmid" in r:
+                result_map[str(r["pmid"])] = r
+
+        for pmid, title, category, mesh_json, kw_json in batch:
+            r = result_map.get(pmid)
+            if not r:
+                continue
+
+            # Check if paper already has a full analysis (from previous detailed run)
+            existing_row = conn.execute(
+                "SELECT analysis_source, plain_summary FROM pa_analyses WHERE pmid = ?", (pmid,)
+            ).fetchone()
+
+            if existing_row and existing_row[1]:
+                # Has detailed analysis — only update classification fields
+                conn.execute(
+                    "UPDATE pa_analyses SET primary_interventions = ?, comparator_interventions = ?, topics = ? WHERE pmid = ?",
+                    (
+                        json.dumps(r.get("primary_interventions", [])),
+                        json.dumps(r.get("comparator_interventions", [])),
+                        json.dumps(r.get("topics", [])),
+                        pmid,
+                    ),
+                )
+            else:
+                # No detailed analysis — insert batch classification
+                conn.execute(
+                    "INSERT OR REPLACE INTO pa_analyses (pmid, outcome, study_type, evidence_tier, analysis_source, primary_interventions, comparator_interventions, topics) VALUES (?,?,?,?,?,?,?,?)",
+                    (
+                        pmid,
+                        r.get("outcome", "inconclusive"),
+                        r.get("study_type", "other"),
+                        r.get("evidence_tier", 5),
+                        "ai-batch",
+                        json.dumps(r.get("primary_interventions", [])),
+                        json.dumps(r.get("comparator_interventions", [])),
+                        json.dumps(r.get("topics", [])),
+                    ),
+                )
+
+            conn.execute("DELETE FROM rs_analysis_errors WHERE id = ?", (pmid,))
+            classified += 1
+
+        conn.commit()
+
+        batch_num = batch_start // BATCH_SIZE + 1
+        total_batches = (len(papers_to_classify) + BATCH_SIZE - 1) // BATCH_SIZE
+        if batch_num % 10 == 0 or batch_num == total_batches:
+            print(f"    Batch {batch_num}/{total_batches} ({classified} classified)", flush=True)
+
+        time.sleep(2)
+
+    error_count = conn.execute("SELECT COUNT(*) FROM rs_analysis_errors").fetchone()[0]
+    if error_count:
+        print(f"  Warning: {error_count} papers have errors (see rs_analysis_errors)", flush=True)
+
+    print(f"  Batch classification complete: {classified} papers classified", flush=True)
+
+
 def analyze_papers(conn, api_key, base_url, model):
-    """AI analysis of papers with abstracts/full text."""
+    """Detailed AI analysis of papers — plain_summary, key_finding, sample_size.
+
+    Only processes papers that don't have a detailed analysis yet.
+    Papers with batch classification (ai-batch) are skipped — they already
+    have primary_interventions/topics which is what subcategories need.
+    """
     ensure_pa_analyses_table(conn)
 
     existing = set(
-        r[0] for r in conn.execute("SELECT pmid FROM pa_analyses WHERE analysis_source = 'ai'").fetchall()
+        r[0] for r in conn.execute("SELECT pmid FROM pa_analyses WHERE analysis_source IN ('ai', 'ai-batch')").fetchall()
     )
 
     # Re-queue previously failed papers for retry
@@ -498,7 +674,13 @@ def main():
     # Analyze new trials
     new_count = analyze_new_trials(args.db, args.api_key, args.base_url, args.model)
 
-    # Paper AI analysis
+    # Fast batch classification (primary_interventions, topics, study_type)
+    conn = sqlite3.connect(args.db)
+    ensure_pa_analyses_table(conn)
+    classify_papers_batch(conn, args.api_key, args.base_url, args.model)
+    conn.close()
+
+    # Detailed per-paper analysis (plain_summary, key_finding) — runs incrementally
     conn = sqlite3.connect(args.db)
     ensure_pa_analyses_table(conn)
     analyze_papers(conn, args.api_key, args.base_url, args.model)
