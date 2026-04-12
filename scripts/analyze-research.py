@@ -554,6 +554,27 @@ TERM_ALIASES = {
     "anticonvulsants": "Anticonvulsants",
     "calcitonin gene-related peptide": "CGRP",
     "cgrp": "CGRP",
+    "ketamine": "Ketamine",
+    "ketamine hydrochloride": "Ketamine",
+    "hallucinogens": "Hallucinogens",
+    "dimethyltryptamine": "DMT",
+    "dmt": "DMT",
+    "mescaline": "Mescaline",
+    "capsaicin": "Capsaicin",
+    "warfarin": "Warfarin",
+    "candesartan": "Candesartan",
+    "frovatriptan": "Frovatriptan",
+    "zolmitriptan": "Zolmitriptan",
+    "naratriptan": "Naratriptan",
+    "rizatriptan": "Rizatriptan",
+    "eletriptan": "Eletriptan",
+    "almotriptan": "Almotriptan",
+    "dihydroergotamine": "Dihydroergotamine",
+    "civamide": "Civamide",
+    "kudzu": "Kudzu",
+    "melatonin receptor agonists": "Melatonin",
+    "sodium oxybate": "Sodium Oxybate",
+    "low sodium oxybate": "Sodium Oxybate",
 }
 
 SKIP_TERMS = {
@@ -578,7 +599,13 @@ SKIP_TERMS = {
 
 
 def build_subcategories(conn):
-    """Build rs_subcategories table with treatment-specific terms per category."""
+    """Build rs_subcategories table with treatment-specific terms per category.
+
+    Only includes curated terms (from TERM_ALIASES) and only assigns each term
+    to the category where it appears most — prevents cross-contamination
+    (e.g., Verapamil won't appear under Psychedelic just because a few
+    psychedelic papers mention it as a comparator).
+    """
     conn.execute("DROP TABLE IF EXISTS rs_subcategories")
     conn.execute("""
         CREATE TABLE rs_subcategories (
@@ -596,11 +623,13 @@ def build_subcategories(conn):
         "ORDER BY category"
     ).fetchall()]
 
-    total_rows = 0
+    # First pass: collect all term counts per category
+    all_data = {}
     for cat in categories:
         term_paper_counts = Counter()
         term_trial_counts = Counter()
 
+        # Papers: MeSH terms + author keywords, curated only
         for (mesh_json, kw_json) in conn.execute(
             "SELECT mesh_terms, author_keywords FROM pa_papers WHERE category = ?", (cat,)
         ).fetchall():
@@ -611,14 +640,14 @@ def build_subcategories(conn):
                 try:
                     for t in json.loads(raw_json):
                         low = t.lower().strip()
-                        if low and low not in SKIP_TERMS:
-                            normalized = TERM_ALIASES.get(low, t.strip().title())
-                            terms.add(normalized)
+                        if low in TERM_ALIASES:
+                            terms.add(TERM_ALIASES[low])
                 except Exception:
                     pass
             for term in terms:
                 term_paper_counts[term] += 1
 
+        # Trials: interventions, curated only
         for (interv_json,) in conn.execute(
             "SELECT interventions FROM tr_trials WHERE category = ?", (cat,)
         ).fetchall():
@@ -628,21 +657,34 @@ def build_subcategories(conn):
                 terms = set()
                 for t in json.loads(interv_json):
                     low = t.lower().strip()
-                    if low and low not in SKIP_TERMS:
-                        normalized = TERM_ALIASES.get(low, t.strip().title())
-                        terms.add(normalized)
+                    if low in TERM_ALIASES:
+                        terms.add(TERM_ALIASES[low])
                 for term in terms:
                     term_trial_counts[term] += 1
             except Exception:
                 pass
 
-        all_terms = set(term_paper_counts.keys()) | set(term_trial_counts.keys())
-        for term in all_terms:
-            pc = term_paper_counts.get(term, 0)
-            tc = term_trial_counts.get(term, 0)
+        all_data[cat] = (term_paper_counts, term_trial_counts)
+
+    # Second pass: find primary category for each term (highest total count)
+    term_totals = defaultdict(lambda: defaultdict(int))
+    for cat, (tpc, ttc) in all_data.items():
+        for term in set(tpc) | set(ttc):
+            term_totals[term][cat] = tpc.get(term, 0) + ttc.get(term, 0)
+
+    term_primary = {}
+    for term, cat_counts in term_totals.items():
+        term_primary[term] = max(cat_counts, key=cat_counts.get)
+
+    # Third pass: only insert terms where this category is their primary
+    total_rows = 0
+    for cat, (tpc, ttc) in all_data.items():
+        for term in set(tpc) | set(ttc):
+            if term_primary[term] != cat:
+                continue
             conn.execute(
                 "INSERT INTO rs_subcategories (category, term, paper_count, trial_count) VALUES (?, ?, ?, ?)",
-                (cat, term, pc, tc),
+                (cat, term, tpc.get(term, 0), ttc.get(term, 0)),
             )
             total_rows += 1
 
