@@ -113,8 +113,8 @@ Rules:
 
 ```
 src/pages/                    # Page components (flat or nested by section)
-src/pages/research/           # Research sub-pages
-src/pages/insights/           # Insight detail pages
+src/pages/research/           # Research sub-pages (routes under /research/*)
+src/pages/insights/           # Insight pages (routes under /clusterbusters/insights/:slug)
 src/components/layout/        # Header, Layout
 src/components/tabs/{feature}/ # Feature sub-components (cb-landing.tsx, cb-compare.tsx)
 src/components/ui/            # shadcn components — don't modify for feature logic
