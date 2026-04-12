@@ -41,9 +41,21 @@ def ensure_pa_analyses_table(conn):
             study_type TEXT,
             evidence_tier INTEGER,
             interventions_studied TEXT,
-            analysis_source TEXT DEFAULT 'ai'
+            analysis_source TEXT DEFAULT 'ai',
+            primary_interventions TEXT,
+            comparator_interventions TEXT,
+            topics TEXT
         )
     """)
+    for col, coltype in [
+        ("primary_interventions", "TEXT"),
+        ("comparator_interventions", "TEXT"),
+        ("topics", "TEXT"),
+    ]:
+        try:
+            conn.execute(f"ALTER TABLE pa_analyses ADD COLUMN {col} {coltype}")
+        except Exception:
+            pass
     conn.commit()
 
 
@@ -57,6 +69,18 @@ def ensure_tr_analyses_table(conn):
             patient_relevance TEXT,
             dose_tested TEXT,
             sample_size INTEGER
+        )
+    """)
+    conn.commit()
+
+
+def ensure_analysis_errors_table(conn):
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS rs_analysis_errors (
+            id TEXT PRIMARY KEY,
+            error TEXT,
+            timestamp TEXT,
+            retry_count INTEGER DEFAULT 0
         )
     """)
     conn.commit()
@@ -130,7 +154,10 @@ Respond with ONLY a JSON object (no markdown, no explanation):
   "sample_size": null,
   "study_type": "rct|observational|case_report|review|meta_analysis|basic_science|other",
   "evidence_tier": 3,
-  "interventions_studied": ["treatment1"]
+  "interventions_studied": ["treatment1"],
+  "primary_interventions": ["Treatment Name"],
+  "comparator_interventions": ["Placebo"],
+  "topics": []
 }}
 
 Evidence tier guide:
@@ -145,7 +172,22 @@ For outcome:
 - no_benefit = the treatment did not help
 - mixed = some benefit but not convincing
 - inconclusive = results unclear or too early
-- basic_science = no treatment was tested (lab research, imaging, genetics)"""
+- basic_science = no treatment was tested (lab research, imaging, genetics)
+
+For primary_interventions:
+- Treatments/interventions THIS PAPER ACTUALLY STUDIES or evaluates
+- Use canonical drug names (e.g., "Psilocybin" not "psilocybin mushroom", "LSD" not "lysergic acid diethylamide")
+- Empty array if no specific treatment is studied (e.g., epidemiology paper)
+
+For comparator_interventions:
+- Treatments mentioned as controls, alternatives, or background context
+- NOT the focus of the study — just referenced for comparison
+- e.g., a psilocybin study that compares against verapamil: primary=["Psilocybin"], comparator=["Verapamil", "Placebo"]
+
+For topics:
+- Non-treatment research themes: epidemiology, quality of life, sleep, comorbidity, genetics, chronobiology, depression, anxiety, diagnosis, prevalence, gender differences, smoking, alcohol, suicide, disability, classification, exercise, photophobia
+- Only include if the topic is a MAIN FOCUS of the paper, not just mentioned
+- Empty array for treatment-focused papers"""
 
 
 def call_llm(prompt, api_key, base_url, model):
@@ -189,6 +231,15 @@ def analyze_papers(conn, api_key, base_url, model):
     existing = set(
         r[0] for r in conn.execute("SELECT pmid FROM pa_analyses WHERE analysis_source = 'ai'").fetchall()
     )
+
+    # Re-queue previously failed papers for retry
+    ensure_analysis_errors_table(conn)
+    failed_pmids = set(
+        r[0] for r in conn.execute("SELECT id FROM rs_analysis_errors WHERE retry_count < 3").fetchall()
+    )
+    if failed_pmids:
+        print(f"  Retrying {len(failed_pmids)} previously failed papers", flush=True)
+        existing -= failed_pmids
 
     cursor = conn.execute("""
         SELECT pmid, title, authors, journal, pub_date, abstract,
@@ -241,27 +292,54 @@ def analyze_papers(conn, api_key, base_url, model):
 
         try:
             result = call_llm(prompt, api_key, base_url, model)
-            conn.execute(
-                "INSERT OR REPLACE INTO pa_analyses VALUES (?,?,?,?,?,?,?,?,?)",
-                (
-                    pmid,
-                    result.get("outcome", "inconclusive"),
-                    result.get("plain_summary"),
-                    result.get("key_finding"),
-                    result.get("sample_size"),
-                    result.get("study_type", "other"),
-                    result.get("evidence_tier", 5),
-                    json.dumps(result.get("interventions_studied", [])),
-                    "ai",
-                ),
-            )
-            conn.commit()
-            if (i + 1) % 50 == 0:
-                print(f"    Analyzed {i + 1}/{len(new_papers)} papers", flush=True)
         except Exception as e:
-            print(f"    Error analyzing PMID {pmid}: {e}", flush=True)
+            # Retry once after 2s
+            try:
+                time.sleep(2)
+                result = call_llm(prompt, api_key, base_url, model)
+            except Exception as e2:
+                ensure_analysis_errors_table(conn)
+                conn.execute(
+                    "INSERT OR REPLACE INTO rs_analysis_errors (id, error, timestamp, retry_count) VALUES (?, ?, datetime('now'), COALESCE((SELECT retry_count FROM rs_analysis_errors WHERE id = ?), 0) + 1)",
+                    (pmid, str(e2), pmid),
+                )
+                conn.commit()
+                print(f"    Error analyzing PMID {pmid} (retry failed): {e2}", flush=True)
+                time.sleep(1)
+                continue
+
+        if not isinstance(result, dict):
+            print(f"    Warning: PMID {pmid} returned non-dict, skipping", flush=True)
+            continue
+
+        conn.execute(
+            "INSERT OR REPLACE INTO pa_analyses (pmid, outcome, plain_summary, key_finding, sample_size, study_type, evidence_tier, interventions_studied, analysis_source, primary_interventions, comparator_interventions, topics) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+            (
+                pmid,
+                result.get("outcome", "inconclusive"),
+                result.get("plain_summary"),
+                result.get("key_finding"),
+                result.get("sample_size"),
+                result.get("study_type", "other"),
+                result.get("evidence_tier", 5),
+                json.dumps(result.get("interventions_studied", [])),
+                "ai",
+                json.dumps(result.get("primary_interventions", [])),
+                json.dumps(result.get("comparator_interventions", [])),
+                json.dumps(result.get("topics", [])),
+            ),
+        )
+        conn.commit()
+        conn.execute("DELETE FROM rs_analysis_errors WHERE id = ?", (pmid,))
+
+        if (i + 1) % 50 == 0:
+            print(f"    Analyzed {i + 1}/{len(new_papers)} papers", flush=True)
 
         time.sleep(1)
+
+    error_count = conn.execute("SELECT COUNT(*) FROM rs_analysis_errors").fetchone()[0]
+    if error_count:
+        print(f"  Warning: {error_count} papers have analysis errors (see rs_analysis_errors table)", flush=True)
 
     print(f"  Completed AI analysis of papers", flush=True)
 
