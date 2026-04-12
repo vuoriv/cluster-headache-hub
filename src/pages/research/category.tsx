@@ -115,6 +115,56 @@ export function CategoryPage() {
     })
   }, [loading, slug, searchTrials, subcategoryFilter])
 
+  // Compute filtered stats when a subcategory is selected
+  const filteredStats = useMemo(() => {
+    if (!subcategoryFilter) return null
+
+    const analyses = topPapers.map((p) => getPaperAnalysis(p.pmid)).filter(Boolean)
+    const activeTrials = categoryTrials.filter((t) =>
+      ["RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING"].includes(t.status),
+    )
+
+    // Study type distribution
+    const studyTypeCounts: Record<string, number> = {}
+    for (const a of analyses) {
+      if (a?.studyType) studyTypeCounts[a.studyType] = (studyTypeCounts[a.studyType] || 0) + 1
+    }
+    const studyTypeDistribution = Object.entries(studyTypeCounts)
+      .map(([type, count]) => ({ type, count }))
+      .sort((a, b) => b.count - a.count)
+
+    // Result distribution
+    const resultCounts: Record<string, number> = {}
+    for (const a of analyses) {
+      const r = a?.outcome ?? "unknown"
+      resultCounts[r] = (resultCounts[r] || 0) + 1
+    }
+    const resultDistribution = Object.entries(resultCounts)
+      .map(([result, count]) => ({ result, count }))
+      .sort((a, b) => b.count - a.count)
+
+    // Papers per year
+    const yearCounts: Record<string, number> = {}
+    for (const p of topPapers) {
+      if (p.pubDate) {
+        const y = p.pubDate.slice(0, 4)
+        yearCounts[y] = (yearCounts[y] || 0) + 1
+      }
+    }
+
+    const positiveCount = resultCounts["positive"] ?? 0
+
+    return {
+      paperCount: topPapers.length,
+      trialCount: categoryTrials.length,
+      activeTrialCount: activeTrials.length,
+      positiveCount,
+      studyTypeDistribution,
+      resultDistribution,
+      papersPerYear: yearCounts,
+    }
+  }, [subcategoryFilter, topPapers, categoryTrials, getPaperAnalysis])
+
   if (!slug || (!loading && !data)) {
     return <Navigate to="/research" replace />
   }
@@ -125,10 +175,22 @@ export function CategoryPage() {
 
   const meta = CATEGORY_META[data.category]
   const catConfig = CATEGORY_CONFIG[data.category]
-  const yearData = Object.entries(data.papersPerYear)
+
+  // Use filtered stats when a subcategory is selected, otherwise use pre-aggregated data
+  const displayStats = filteredStats ?? {
+    paperCount: data.paperCount,
+    trialCount: data.trialCount,
+    activeTrialCount: data.activeTrialCount,
+    positiveCount: data.resultDistribution.find((r) => r.result === "positive")?.count ?? 0,
+    studyTypeDistribution: data.studyTypeDistribution,
+    resultDistribution: data.resultDistribution,
+    papersPerYear: data.papersPerYear,
+  }
+
+  const yearData = Object.entries(displayStats.papersPerYear)
     .map(([year, count]) => ({ year, count }))
     .filter((d) => parseInt(d.year) >= 2000)
-  const positiveCount = data.resultDistribution.find((r) => r.result === "positive")?.count ?? 0
+    .sort((a, b) => a.year.localeCompare(b.year))
 
   return (
     <div className="flex flex-col gap-8">
@@ -174,10 +236,10 @@ export function CategoryPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard icon={<FileText className="size-4" />} value={data.paperCount} label="Papers" />
-        <StatCard icon={<TrendingUp className="size-4" />} value={positiveCount} label="Showed Benefit" />
-        <StatCard icon={<FlaskConical className="size-4" />} value={data.activeTrialCount} label="Active Trials" />
-        <StatCard icon={<Users className="size-4" />} value={data.trialCount} label="Trials" />
+        <StatCard icon={<FileText className="size-4" />} value={displayStats.paperCount} label="Papers" />
+        <StatCard icon={<TrendingUp className="size-4" />} value={displayStats.positiveCount} label="Showed Benefit" />
+        <StatCard icon={<FlaskConical className="size-4" />} value={displayStats.activeTrialCount} label="Active Trials" />
+        <StatCard icon={<Users className="size-4" />} value={displayStats.trialCount} label="Trials" />
       </div>
 
       <Separator />
@@ -192,8 +254,8 @@ export function CategoryPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} style={{ height: `${Math.min(data.studyTypeDistribution.length, 8) * 24 + 24}px` }} className="w-full">
-              <BarChart data={data.studyTypeDistribution.slice(0, 8)} layout="vertical" margin={{ left: 8 }}>
+            <ChartContainer config={chartConfig} style={{ height: `${Math.min(displayStats.studyTypeDistribution.length, 8) * 24 + 24}px` }} className="w-full">
+              <BarChart data={displayStats.studyTypeDistribution.slice(0, 8)} layout="vertical" margin={{ left: 8 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 10 }} />
                 <YAxis
@@ -219,10 +281,10 @@ export function CategoryPage() {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-3 pt-2">
-              {data.resultDistribution
+              {displayStats.resultDistribution
                 .filter((r) => r.result !== "unknown")
                 .map((r) => {
-                  const total = data.resultDistribution.reduce((s, x) => s + x.count, 0)
+                  const total = displayStats.resultDistribution.reduce((s, x) => s + x.count, 0)
                   const pct = total > 0 ? Math.round((r.count / total) * 100) : 0
                   return (
                     <div key={r.result} className="flex items-center gap-3">

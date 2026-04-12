@@ -648,7 +648,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
       if (!db) return null
       try {
         const stmt = db.prepare(
-          "SELECT pmid, outcome, plain_summary, key_finding, sample_size, study_type, evidence_tier, interventions_studied, analysis_source FROM pa_analyses WHERE pmid = ?",
+          "SELECT pmid, study_type, result, sample_size, evidence_tier, analysis_source FROM pa_analyses WHERE pmid = ?",
         )
         stmt.bind([pmid])
         if (!stmt.step()) {
@@ -659,14 +659,14 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
         stmt.free()
         return {
           pmid: row[0] as string,
-          outcome: row[1] as string,
-          plainSummary: row[2] as string | null,
-          keyFinding: row[3] as string | null,
-          sampleSize: row[4] as number | null,
-          studyType: row[5] as string,
-          evidenceTier: row[6] as number,
-          interventionsStudied: parseJsonSafe(row[7] as string, []),
-          analysisSource: row[8] as string,
+          outcome: row[2] as string,
+          plainSummary: null,
+          keyFinding: null,
+          sampleSize: row[3] as number | null,
+          studyType: row[1] as string,
+          evidenceTier: row[4] as number,
+          interventionsStudied: [],
+          analysisSource: row[5] as string,
         }
       } catch {
         return null
