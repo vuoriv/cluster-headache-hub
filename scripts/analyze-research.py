@@ -494,163 +494,12 @@ def build_category_stats(conn):
     print(f"  Built category stats for {len(categories)} categories", flush=True)
 
 
-# Normalization map: maps raw lowercase terms to display labels.
-TERM_ALIASES = {
-    "lithium carbonate": "Lithium",
-    "lithium compounds": "Lithium",
-    "lithium": "Lithium",
-    "verapamil": "Verapamil",
-    "verapamil hydrochloride": "Verapamil",
-    "r-verapamil": "Verapamil",
-    "sumatriptan": "Sumatriptan",
-    "sumatriptan succinate": "Sumatriptan",
-    "topiramate": "Topiramate",
-    "melatonin": "Melatonin",
-    "prednisone": "Prednisone",
-    "prednisolone": "Prednisolone",
-    "methylprednisolone": "Methylprednisolone",
-    "indomethacin": "Indomethacin",
-    "methysergide": "Methysergide",
-    "ergotamine": "Ergotamine",
-    "valproic acid": "Valproic Acid",
-    "lamotrigine": "Lamotrigine",
-    "gabapentin": "Gabapentin",
-    "galcanezumab": "Galcanezumab",
-    "erenumab": "Erenumab",
-    "fremanezumab": "Fremanezumab",
-    "psilocybin": "Psilocybin",
-    "lysergic acid diethylamide": "LSD",
-    "lsd": "LSD",
-    "lsd tartrate": "LSD",
-    "bol-148": "BOL-148",
-    "oxygen": "Oxygen",
-    "oxygen inhalation therapy": "Oxygen",
-    "hyperbaric oxygenation": "Hyperbaric Oxygen",
-    "botulinum toxins": "Botulinum Toxin",
-    "botulinum toxins, type a": "Botulinum Toxin",
-    "botulinum toxin": "Botulinum Toxin",
-    "botulinum toxin type a 25 iu": "Botulinum Toxin",
-    "lidocaine": "Lidocaine",
-    "bupivacaine": "Bupivacaine",
-    "gammacore": "Vagus Nerve Stimulation",
-    "vagus nerve stimulation": "Vagus Nerve Stimulation",
-    "non-invasive vagus nerve stimulation": "Vagus Nerve Stimulation",
-    "transcutaneous vagus nerve stimulation": "Vagus Nerve Stimulation",
-    "deep brain stimulation": "Deep Brain Stimulation",
-    "occipital nerve stimulation": "Occipital Nerve Stimulation",
-    "sphenopalatine ganglion": "SPG Stimulation/Block",
-    "sphenopalatine ganglion block": "SPG Stimulation/Block",
-    "spg stimulation": "SPG Stimulation/Block",
-    "greater occipital nerve": "Occipital Nerve Block",
-    "greater occipital nerve block": "Occipital Nerve Block",
-    "occipital nerve block": "Occipital Nerve Block",
-    "nerve block": "Nerve Block",
-    "vitamin d": "Vitamin D",
-    "cholecalciferol": "Vitamin D",
-    "vitamin d3": "Vitamin D",
-    "calcium channel blockers": "Calcium Channel Blockers",
-    "adrenal cortex hormones": "Corticosteroids",
-    "corticosteroids": "Corticosteroids",
-    "triptans": "Triptans",
-    "serotonin receptor agonists": "Triptans",
-    "anticonvulsants": "Anticonvulsants",
-    "calcitonin gene-related peptide": "CGRP",
-    "cgrp": "CGRP",
-    "ketamine": "Ketamine",
-    "ketamine hydrochloride": "Ketamine",
-    "hallucinogens": "Hallucinogens",
-    "dimethyltryptamine": "DMT",
-    "dmt": "DMT",
-    "mescaline": "Mescaline",
-    "capsaicin": "Capsaicin",
-    "warfarin": "Warfarin",
-    "candesartan": "Candesartan",
-    "frovatriptan": "Frovatriptan",
-    "zolmitriptan": "Zolmitriptan",
-    "naratriptan": "Naratriptan",
-    "rizatriptan": "Rizatriptan",
-    "eletriptan": "Eletriptan",
-    "almotriptan": "Almotriptan",
-    "dihydroergotamine": "Dihydroergotamine",
-    "civamide": "Civamide",
-    "civamide (zucapsaicin)": "Civamide",
-    "eptinezumab": "Eptinezumab",
-    "dexamethasone": "Dexamethasone",
-    "ketorolac": "Ketorolac",
-    "high flow oxygen": "Oxygen",
-    "low flow oxygen": "Oxygen",
-    "galcanezumab 300 mg": "Galcanezumab",
-    "kudzu": "Kudzu",
-    "melatonin receptor agonists": "Melatonin",
-    "sodium oxybate": "Sodium Oxybate",
-    "low sodium oxybate": "Sodium Oxybate",
-    # Observational / epidemiological topics
-    "epidemiology": "Epidemiology",
-    "comorbidity": "Comorbidity",
-    "diagnosis": "Diagnosis",
-    "misdiagnosis": "Misdiagnosis",
-    "quality of life": "Quality of Life",
-    "disability": "Disability",
-    "chronobiology": "Chronobiology",
-    "circadian rhythm": "Chronobiology",
-    "circadian rhythms": "Chronobiology",
-    "circannual": "Chronobiology",
-    "sleep": "Sleep",
-    "sleep disorders": "Sleep",
-    "alcohol": "Alcohol",
-    "smoking": "Smoking",
-    "tobacco": "Smoking",
-    "depression": "Depression",
-    "depressive disorder": "Depression",
-    "anxiety": "Anxiety",
-    "suicide": "Suicide",
-    "suicidal ideation": "Suicide",
-    "prevalence": "Prevalence",
-    "classification": "Classification",
-    "genetics": "Genetics",
-    "sex factors": "Gender Differences",
-    # Non-pharma approaches
-    "exercise": "Exercise",
-    "physical activity": "Exercise",
-    "acupuncture": "Acupuncture",
-    "photophobia": "Photophobia",
-    "yoga": "Yoga",
-    "meditation": "Meditation",
-    "mindfulness": "Mindfulness",
-    "diet": "Diet",
-    "biofeedback": "Biofeedback",
-    "cognitive behavioral therapy": "Cognitive Behavioral Therapy",
-    "psychotherapy": "Psychotherapy",
-}
-
-SKIP_TERMS = {
-    "humans", "male", "female", "adult", "middle aged", "young adult", "aged",
-    "adolescent", "child", "infant", "cluster headache", "cluster headaches",
-    "headache", "headaches", "treatment outcome", "prospective studies",
-    "retrospective studies", "migraine", "migraine disorders", "chronic disease",
-    "diagnosis, differential", "time factors", "double-blind method",
-    "cross-over studies", "pain", "brain", "magnetic resonance imaging",
-    "electroencephalography", "follow-up studies", "comorbidity",
-    "surveys and questionnaires",
-    "risk factors", "severity of illness index",
-    "trigeminal autonomic cephalalgia", "trigeminal autonomic cephalalgias",
-    "vascular headaches", "tension-type headache",
-    "hemicrania continua", "paroxysmal hemicrania",
-    "sunct", "suna", "epidemiology", "pathophysiology",
-    "case reports", "review", "meta-analysis",
-    "clinical trial", "randomized controlled trial",
-    "treatment", "drug therapy", "drug therapy, combination",
-    "neuromodulation", "neurostimulation",
-}
-
-
 def build_subcategories(conn):
-    """Build rs_subcategories table with treatment-specific terms per category.
+    """Build rs_subcategories table from AI-classified paper interventions/topics.
 
-    Only includes curated terms (from TERM_ALIASES) and only assigns each term
-    to the category where it appears most — prevents cross-contamination
-    (e.g., Verapamil won't appear under Psychedelic just because a few
-    psychedelic papers mention it as a comparator).
+    Reads primary_interventions and topics from pa_analyses (populated by
+    llm-analyze.py). Each term is assigned to the category where it appears
+    as a primary intervention/topic most often.
     """
     conn.execute("DROP TABLE IF EXISTS rs_subcategories")
     conn.execute("""
@@ -664,76 +513,102 @@ def build_subcategories(conn):
         )
     """)
 
+    # Check if AI analyses exist
+    has_ai = False
+    try:
+        count = conn.execute(
+            "SELECT COUNT(*) FROM pa_analyses WHERE primary_interventions IS NOT NULL"
+        ).fetchone()[0]
+        has_ai = count > 0
+    except Exception:
+        pass
+
+    if not has_ai:
+        print("  Skipping subcategories: no AI analyses with primary_interventions found", flush=True)
+        print("  Run llm-analyze.py first to populate AI analyses", flush=True)
+        return
+
     categories = [r[0] for r in conn.execute(
         "SELECT DISTINCT category FROM pa_papers WHERE category IS NOT NULL "
         "UNION SELECT DISTINCT category FROM tr_trials WHERE category IS NOT NULL "
         "ORDER BY category"
     ).fetchall()]
 
-    # Build reverse map: normalized label → set of raw terms that map to it
-    reverse_aliases = defaultdict(set)
-    for raw, normalized in TERM_ALIASES.items():
-        reverse_aliases[normalized].add(raw)
+    # Collect canonical → raw term mappings for search_terms
+    canonical_to_raw = defaultdict(set)
 
-    # First pass: collect all term counts per category
+    # First pass: collect term counts per category from AI analyses
     all_data = {}
     for cat in categories:
         term_paper_counts = Counter()
-        term_trial_counts = Counter()
 
-        # Papers: MeSH terms + author keywords, curated only
-        for (mesh_json, kw_json) in conn.execute(
-            "SELECT mesh_terms, author_keywords FROM pa_papers WHERE category = ?", (cat,)
+        for (pmid, pi_json, topics_json, mesh_json, kw_json) in conn.execute(
+            """SELECT a.pmid, a.primary_interventions, a.topics, p.mesh_terms, p.author_keywords
+               FROM pa_analyses a
+               JOIN pa_papers p ON a.pmid = p.pmid
+               WHERE p.category = ? AND a.primary_interventions IS NOT NULL""",
+            (cat,),
         ).fetchall():
-            terms = set()
+            canonical_terms = set()
+
+            # Primary interventions
+            try:
+                for term in json.loads(pi_json or "[]"):
+                    t = term.strip()
+                    if t:
+                        canonical_terms.add(t)
+            except Exception:
+                pass
+
+            # Topics (for observational/non-pharma categories)
+            try:
+                for term in json.loads(topics_json or "[]"):
+                    t = term.strip()
+                    if t:
+                        canonical_terms.add(t)
+            except Exception:
+                pass
+
+            # Build canonical → raw MeSH/keyword mapping for search_terms
+            raw_terms = set()
             for raw_json in (mesh_json, kw_json):
                 if not raw_json:
                     continue
                 try:
                     for t in json.loads(raw_json):
-                        low = t.lower().strip()
-                        if low in TERM_ALIASES:
-                            terms.add(TERM_ALIASES[low])
+                        raw_terms.add(t.lower().strip())
                 except Exception:
                     pass
-            for term in terms:
-                term_paper_counts[term] += 1
 
-        # Trials: interventions, curated only
+            for canonical in canonical_terms:
+                term_paper_counts[canonical] += 1
+                canonical_to_raw[canonical.lower()].update(raw_terms)
+
+        # Trial interventions: normalize against known canonical names
+        term_trial_counts = Counter()
+        known_canonical = {t.lower(): t for t in term_paper_counts.keys()}
+
         for (interv_json,) in conn.execute(
             "SELECT interventions FROM tr_trials WHERE category = ?", (cat,)
         ).fetchall():
             if not interv_json:
                 continue
             try:
-                terms = set()
-                for t in json.loads(interv_json):
-                    low = t.lower().strip()
-                    if low in TERM_ALIASES:
-                        terms.add(TERM_ALIASES[low])
-                for term in terms:
-                    term_trial_counts[term] += 1
+                for intervention in json.loads(interv_json):
+                    low = intervention.lower().strip()
+                    if low in known_canonical:
+                        term_trial_counts[known_canonical[low]] += 1
+                    else:
+                        for canon_low, canon in known_canonical.items():
+                            if canon_low in low or low in canon_low:
+                                term_trial_counts[canon] += 1
+                                break
             except Exception:
                 pass
 
         all_data[cat] = (term_paper_counts, term_trial_counts)
 
-    # Second pass: find primary category for each term (highest total count).
-    # "other" is a catch-all — deprioritize it so treatments land in their
-    # proper category (e.g., Sumatriptan → pharmacology, not other).
-    # Topic terms (epidemiology, sleep, etc.) prefer observational/non-pharma.
-    DEPRIORITIZED_CATS = {"other"}
-    TOPIC_TERMS = {
-        "Epidemiology", "Comorbidity", "Diagnosis", "Misdiagnosis",
-        "Quality of Life", "Disability", "Chronobiology", "Sleep",
-        "Alcohol", "Smoking", "Depression", "Anxiety", "Suicide",
-        "Prevalence", "Classification", "Genetics", "Gender Differences",
-        "Exercise", "Acupuncture", "Photophobia", "Yoga", "Meditation",
-        "Mindfulness", "Diet", "Biofeedback", "Cognitive Behavioral Therapy",
-        "Psychotherapy",
-    }
-    TOPIC_CATS = {"observational", "non-pharma"}
-
+    # Second pass: assign each term to its primary category (highest count)
     term_totals = defaultdict(lambda: defaultdict(int))
     for cat, (tpc, ttc) in all_data.items():
         for term in set(tpc) | set(ttc):
@@ -741,27 +616,16 @@ def build_subcategories(conn):
 
     term_primary = {}
     for term, cat_counts in term_totals.items():
-        if term in TOPIC_TERMS:
-            # Topic terms prefer observational/non-pharma categories
-            topic_cats = {c: n for c, n in cat_counts.items() if c in TOPIC_CATS}
-            if topic_cats:
-                term_primary[term] = max(topic_cats, key=topic_cats.get)
-                continue
-        # Treatment terms: prefer non-catch-all categories
-        preferred = {c: n for c, n in cat_counts.items() if c not in DEPRIORITIZED_CATS}
-        if preferred:
-            term_primary[term] = max(preferred, key=preferred.get)
-        else:
-            term_primary[term] = max(cat_counts, key=cat_counts.get)
+        term_primary[term] = max(cat_counts, key=cat_counts.get)
 
-    # Third pass: only insert terms where this category is their primary
+    # Third pass: insert terms assigned to their primary category
     total_rows = 0
     for cat, (tpc, ttc) in all_data.items():
         for term in set(tpc) | set(ttc):
             if term_primary[term] != cat:
                 continue
-            # Include all raw alias keys + the normalized label itself for frontend matching
-            search = sorted(reverse_aliases.get(term, set()) | {term.lower()})
+            raw = canonical_to_raw.get(term.lower(), set())
+            search = sorted(raw | {term.lower()})
             conn.execute(
                 "INSERT INTO rs_subcategories (category, term, paper_count, trial_count, search_terms) VALUES (?, ?, ?, ?, ?)",
                 (cat, term, tpc.get(term, 0), ttc.get(term, 0), json.dumps(search)),
@@ -769,7 +633,7 @@ def build_subcategories(conn):
             total_rows += 1
 
     conn.commit()
-    print(f"  Built subcategories: {total_rows} terms across {len(categories)} categories", flush=True)
+    print(f"  Built subcategories: {total_rows} terms across {len(categories)} categories (AI-driven)", flush=True)
 
 
 def build_global_stats(conn):
@@ -901,9 +765,19 @@ def store_analyses(db_path, paper_analyses):
 def main():
     parser = argparse.ArgumentParser(description="Deep Research Analysis")
     parser.add_argument("--db", default=DEFAULT_DB)
+    parser.add_argument("--skip-subcategories", action="store_true",
+                        help="Skip building subcategories (done separately after LLM analysis)")
+    parser.add_argument("--only-subcategories", action="store_true",
+                        help="Only build subcategories (run after LLM analysis)")
     args = parser.parse_args()
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    if args.only_subcategories:
+        conn = sqlite3.connect(args.db)
+        build_subcategories(conn)
+        conn.close()
+        return
 
     print("=== Deep Research Analysis ===\n", flush=True)
 
@@ -915,7 +789,8 @@ def main():
     conn = sqlite3.connect(args.db)
     build_paper_trial_links(conn)
     build_category_stats(conn)
-    build_subcategories(conn)
+    if not args.skip_subcategories:
+        build_subcategories(conn)
     build_global_stats(conn)
     conn.close()
 

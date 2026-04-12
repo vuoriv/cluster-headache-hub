@@ -89,14 +89,12 @@ def main():
     else:
         print("\n  Skipping fetch (--skip-fetch)")
 
-    # Phase 2: Classify papers and generate research insights
+    # Phase 2: Classify papers with regex (study type, result, evidence tier)
     run(
         [sys.executable, os.path.join(SCRIPT_DIR, "analyze-research.py"),
-         "--db", DATA_DB],
-        "Phase 2a: Classify papers (study type, result, evidence tier)",
+         "--db", DATA_DB, "--skip-subcategories"],
+        "Phase 2: Classify papers (regex analysis, category stats)",
     )
-
-    # Phase 2b: Category stats now built by analyze-research.py (rs_category_stats table)
 
     # Phase 3: Forum analysis (optional — needs clusterbusters.db)
     if args.forum_db and os.path.exists(args.forum_db):
@@ -115,23 +113,30 @@ def main():
     else:
         print("\n  Skipping forum analysis (no --forum-db provided)")
 
-    # Phase 3.5: LLM analysis of new trials (if API key available)
+    # Phase 4: LLM analysis of papers and trials (if API key available)
     api_key = os.environ.get("CEREBRAS_API_KEY")
     if api_key:
         run(
             [sys.executable, os.path.join(SCRIPT_DIR, "llm-analyze.py")],
-            "Phase 3.5: LLM analysis of new trials (Cerebras/Qwen3)",
+            "Phase 4: LLM analysis of papers and trials (Cerebras/Qwen3)",
         )
     else:
         print("\n  Skipping LLM analysis (no CEREBRAS_API_KEY set)")
 
-    # Phase 4: Rebuild analysis.db from all JSON files
+    # Phase 5: Build subcategories (uses AI data from Phase 4)
     run(
-        [sys.executable, os.path.join(SCRIPT_DIR, "build-analysis-db.py")],
-        "Phase 4: Rebuild analysis.db from JSON",
+        [sys.executable, os.path.join(SCRIPT_DIR, "analyze-research.py"),
+         "--db", DATA_DB, "--only-subcategories"],
+        "Phase 5: Build subcategories from AI analyses",
     )
 
-    # Phase 5: Merge analysis tables into data.db
+    # Phase 6: Rebuild analysis.db from all JSON files
+    run(
+        [sys.executable, os.path.join(SCRIPT_DIR, "build-analysis-db.py")],
+        "Phase 6: Rebuild analysis.db from JSON",
+    )
+
+    # Phase 7: Merge analysis tables into data.db
     merge_analysis_into_data()
 
     # Summary
