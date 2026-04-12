@@ -575,6 +575,43 @@ TERM_ALIASES = {
     "melatonin receptor agonists": "Melatonin",
     "sodium oxybate": "Sodium Oxybate",
     "low sodium oxybate": "Sodium Oxybate",
+    # Observational / epidemiological topics
+    "epidemiology": "Epidemiology",
+    "comorbidity": "Comorbidity",
+    "diagnosis": "Diagnosis",
+    "misdiagnosis": "Misdiagnosis",
+    "quality of life": "Quality of Life",
+    "disability": "Disability",
+    "chronobiology": "Chronobiology",
+    "circadian rhythm": "Chronobiology",
+    "circadian rhythms": "Chronobiology",
+    "circannual": "Chronobiology",
+    "sleep": "Sleep",
+    "sleep disorders": "Sleep",
+    "alcohol": "Alcohol",
+    "smoking": "Smoking",
+    "tobacco": "Smoking",
+    "depression": "Depression",
+    "depressive disorder": "Depression",
+    "anxiety": "Anxiety",
+    "suicide": "Suicide",
+    "suicidal ideation": "Suicide",
+    "prevalence": "Prevalence",
+    "classification": "Classification",
+    "genetics": "Genetics",
+    "sex factors": "Gender Differences",
+    # Non-pharma approaches
+    "exercise": "Exercise",
+    "physical activity": "Exercise",
+    "acupuncture": "Acupuncture",
+    "photophobia": "Photophobia",
+    "yoga": "Yoga",
+    "meditation": "Meditation",
+    "mindfulness": "Mindfulness",
+    "diet": "Diet",
+    "biofeedback": "Biofeedback",
+    "cognitive behavioral therapy": "Cognitive Behavioral Therapy",
+    "psychotherapy": "Psychotherapy",
 }
 
 SKIP_TERMS = {
@@ -585,7 +622,7 @@ SKIP_TERMS = {
     "diagnosis, differential", "time factors", "double-blind method",
     "cross-over studies", "pain", "brain", "magnetic resonance imaging",
     "electroencephalography", "follow-up studies", "comorbidity",
-    "surveys and questionnaires", "quality of life", "prevalence",
+    "surveys and questionnaires",
     "risk factors", "severity of illness index",
     "trigeminal autonomic cephalalgia", "trigeminal autonomic cephalalgias",
     "vascular headaches", "tension-type headache",
@@ -666,7 +703,22 @@ def build_subcategories(conn):
 
         all_data[cat] = (term_paper_counts, term_trial_counts)
 
-    # Second pass: find primary category for each term (highest total count)
+    # Second pass: find primary category for each term (highest total count).
+    # "other" is a catch-all — deprioritize it so treatments land in their
+    # proper category (e.g., Sumatriptan → pharmacology, not other).
+    # Topic terms (epidemiology, sleep, etc.) prefer observational/non-pharma.
+    DEPRIORITIZED_CATS = {"other"}
+    TOPIC_TERMS = {
+        "Epidemiology", "Comorbidity", "Diagnosis", "Misdiagnosis",
+        "Quality of Life", "Disability", "Chronobiology", "Sleep",
+        "Alcohol", "Smoking", "Depression", "Anxiety", "Suicide",
+        "Prevalence", "Classification", "Genetics", "Gender Differences",
+        "Exercise", "Acupuncture", "Photophobia", "Yoga", "Meditation",
+        "Mindfulness", "Diet", "Biofeedback", "Cognitive Behavioral Therapy",
+        "Psychotherapy",
+    }
+    TOPIC_CATS = {"observational", "non-pharma"}
+
     term_totals = defaultdict(lambda: defaultdict(int))
     for cat, (tpc, ttc) in all_data.items():
         for term in set(tpc) | set(ttc):
@@ -674,7 +726,18 @@ def build_subcategories(conn):
 
     term_primary = {}
     for term, cat_counts in term_totals.items():
-        term_primary[term] = max(cat_counts, key=cat_counts.get)
+        if term in TOPIC_TERMS:
+            # Topic terms prefer observational/non-pharma categories
+            topic_cats = {c: n for c, n in cat_counts.items() if c in TOPIC_CATS}
+            if topic_cats:
+                term_primary[term] = max(topic_cats, key=topic_cats.get)
+                continue
+        # Treatment terms: prefer non-catch-all categories
+        preferred = {c: n for c, n in cat_counts.items() if c not in DEPRIORITIZED_CATS}
+        if preferred:
+            term_primary[term] = max(preferred, key=preferred.get)
+        else:
+            term_primary[term] = max(cat_counts, key=cat_counts.get)
 
     # Third pass: only insert terms where this category is their primary
     total_rows = 0
