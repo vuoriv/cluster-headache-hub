@@ -6,6 +6,7 @@ import { ErrorBoundary } from "@/components/error-boundary"
 import { Layout } from "@/components/layout/layout"
 import { FrontPage } from "@/pages/front-page"
 import { CommunityPage } from "@/pages/community"
+import { DiagnosticsPage } from "@/pages/diagnostics"
 
 const ClusterBustersPage = lazy(() => import("@/pages/clusterbusters"))
 const ResearchPage = lazy(() => import("@/pages/research-page"))
@@ -56,6 +57,7 @@ export default function App() {
                   }
                 />
                 <Route path="/community" element={<CommunityPage />} />
+                <Route path="/diagnostics" element={<DiagnosticsPage />} />
               </Route>
             </Routes>
           </DataDbProvider>

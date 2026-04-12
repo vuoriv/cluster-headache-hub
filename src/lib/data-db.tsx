@@ -111,6 +111,42 @@ export interface Subcategory {
   searchTerms: string[]
 }
 
+export interface PipelineRun {
+  runId: string
+  startedAt: string
+  finishedAt: string | null
+  status: "running" | "success" | "failure"
+  errorMessage: string | null
+  phasesCompleted: string[]
+  papersAnalyzed: number
+  trialsAnalyzed: number
+  forumPostsAnalyzed: number
+  trigger: string
+  log: string
+}
+
+export interface AnalysisCoverage {
+  totalPapers: number
+  aiAnalyzed: number
+  regexOnly: number
+  errorCount: number
+  totalTrials: number
+  aiTrials: number
+}
+
+export interface AnalysisError {
+  id: string
+  error: string
+  timestamp: string
+  retryCount: number
+}
+
+export interface DataFreshness {
+  newestPaperDate: string | null
+  newestTrialDate: string | null
+  lastRunAt: string | null
+}
+
 export interface PipelineMeta {
   lastRun: string
   trialCount: number
@@ -175,6 +211,12 @@ interface DataDbContextValue {
 
   // Community
   getCommunityGroups: () => CommunityGroup[]
+
+  // Diagnostics
+  getPipelineRuns: () => PipelineRun[]
+  getAnalysisCoverage: () => AnalysisCoverage
+  getAnalysisErrors: () => AnalysisError[]
+  getDataFreshness: () => DataFreshness
 }
 
 export interface CommunityGroup {
@@ -819,6 +861,109 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     [db],
   )
 
+  const getPipelineRuns = useCallback((): PipelineRun[] => {
+    if (!db) return []
+    try {
+      const rows = db.exec(
+        "SELECT run_id, started_at, finished_at, status, error_message, phases_completed, papers_analyzed, trials_analyzed, forum_posts_analyzed, trigger, log FROM rs_pipeline_runs ORDER BY started_at DESC",
+      )
+      if (rows.length === 0) return []
+      return rows[0].values.map((row) => ({
+        runId: row[0] as string,
+        startedAt: row[1] as string,
+        finishedAt: row[2] as string | null,
+        status: row[3] as "running" | "success" | "failure",
+        errorMessage: row[4] as string | null,
+        phasesCompleted: parseJsonSafe(row[5] as string, []),
+        papersAnalyzed: (row[6] as number) ?? 0,
+        trialsAnalyzed: (row[7] as number) ?? 0,
+        forumPostsAnalyzed: (row[8] as number) ?? 0,
+        trigger: (row[9] as string) ?? "",
+        log: (row[10] as string) ?? "",
+      }))
+    } catch {
+      return []
+    }
+  }, [db])
+
+  const getAnalysisCoverage = useCallback((): AnalysisCoverage => {
+    if (!db) return { totalPapers: 0, aiAnalyzed: 0, regexOnly: 0, errorCount: 0, totalTrials: 0, aiTrials: 0 }
+    try {
+      const paperRows = db.exec("SELECT COUNT(*) FROM pa_papers")
+      const totalPapers = (paperRows[0]?.values[0]?.[0] as number) ?? 0
+
+      const aiRows = db.exec("SELECT COUNT(*) FROM pa_analyses WHERE analysis_source = 'ai'")
+      const aiAnalyzed = (aiRows[0]?.values[0]?.[0] as number) ?? 0
+
+      const regexRows = db.exec("SELECT COUNT(*) FROM pa_analyses WHERE analysis_source = 'regex'")
+      const regexOnly = (regexRows[0]?.values[0]?.[0] as number) ?? 0
+
+      let errorCount = 0
+      try {
+        const errRows = db.exec("SELECT COUNT(*) FROM rs_analysis_errors")
+        errorCount = (errRows[0]?.values[0]?.[0] as number) ?? 0
+      } catch {
+        // table may not exist
+      }
+
+      const trialRows = db.exec("SELECT COUNT(*) FROM tr_trials")
+      const totalTrials = (trialRows[0]?.values[0]?.[0] as number) ?? 0
+
+      let aiTrials = 0
+      try {
+        const aiTrialRows = db.exec("SELECT COUNT(*) FROM tr_analyses")
+        aiTrials = (aiTrialRows[0]?.values[0]?.[0] as number) ?? 0
+      } catch {
+        // table may not exist
+      }
+
+      return { totalPapers, aiAnalyzed, regexOnly, errorCount, totalTrials, aiTrials }
+    } catch {
+      return { totalPapers: 0, aiAnalyzed: 0, regexOnly: 0, errorCount: 0, totalTrials: 0, aiTrials: 0 }
+    }
+  }, [db])
+
+  const getAnalysisErrors = useCallback((): AnalysisError[] => {
+    if (!db) return []
+    try {
+      const rows = db.exec(
+        "SELECT id, error, timestamp, retry_count FROM rs_analysis_errors ORDER BY timestamp DESC",
+      )
+      if (rows.length === 0) return []
+      return rows[0].values.map((row) => ({
+        id: row[0] as string,
+        error: row[1] as string,
+        timestamp: row[2] as string,
+        retryCount: (row[3] as number) ?? 0,
+      }))
+    } catch {
+      return []
+    }
+  }, [db])
+
+  const getDataFreshness = useCallback((): DataFreshness => {
+    if (!db) return { newestPaperDate: null, newestTrialDate: null, lastRunAt: null }
+    try {
+      const paperRows = db.exec("SELECT MAX(pub_date) FROM pa_papers")
+      const newestPaperDate = (paperRows[0]?.values[0]?.[0] as string | null) ?? null
+
+      const trialRows = db.exec("SELECT MAX(start_date) FROM tr_trials")
+      const newestTrialDate = (trialRows[0]?.values[0]?.[0] as string | null) ?? null
+
+      let lastRunAt: string | null = null
+      try {
+        const runRows = db.exec("SELECT MAX(started_at) FROM rs_pipeline_runs")
+        lastRunAt = (runRows[0]?.values[0]?.[0] as string | null) ?? null
+      } catch {
+        // table may not exist
+      }
+
+      return { newestPaperDate, newestTrialDate, lastRunAt }
+    } catch {
+      return { newestPaperDate: null, newestTrialDate: null, lastRunAt: null }
+    }
+  }, [db])
+
   const getResearchStats = useCallback((): Record<string, unknown> => {
     if (!db) return {}
     try {
@@ -862,6 +1007,10 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
     getSubcategories,
     getResearchStats,
     getCommunityGroups,
+    getPipelineRuns,
+    getAnalysisCoverage,
+    getAnalysisErrors,
+    getDataFreshness,
   }
 
   if (loading) {
