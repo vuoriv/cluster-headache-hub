@@ -94,14 +94,10 @@ export function CategoryPage() {
     const all = searchPapers({ category: slug, limit: 200 })
     if (!subcategoryFilter) return all.slice(0, 15)
     const term = subcategoryFilter.toLowerCase()
-    return all.filter((p) => {
-      const searchStr = [
-        p.title.toLowerCase(),
-        p.meshTerms.join(" ").toLowerCase(),
-        p.authorKeywords.join(" ").toLowerCase(),
-      ].join(" ")
-      return searchStr.includes(term)
-    })
+    return all.filter((p) =>
+      p.meshTerms.some((t) => t.toLowerCase().includes(term)) ||
+      p.authorKeywords.some((t) => t.toLowerCase().includes(term)),
+    )
   }, [loading, slug, searchPapers, subcategoryFilter])
 
   const categoryTrials = useMemo(() => {
@@ -109,10 +105,9 @@ export function CategoryPage() {
     const all = searchTrials({ category: slug })
     if (!subcategoryFilter) return all
     const term = subcategoryFilter.toLowerCase()
-    return all.filter((t) => {
-      const searchStr = [t.title.toLowerCase(), t.interventions.join(" ").toLowerCase()].join(" ")
-      return searchStr.includes(term)
-    })
+    return all.filter((t) =>
+      t.interventions.some((i) => i.toLowerCase().includes(term)),
+    )
   }, [loading, slug, searchTrials, subcategoryFilter])
 
   // Compute filtered stats when a subcategory is selected
