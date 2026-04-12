@@ -5,6 +5,11 @@ on:
     # Every Sunday at midnight UTC
     - cron: '0 0 * * 0'
   workflow_dispatch:
+    inputs:
+      skip_fetch:
+        description: 'Skip API fetching (reuse existing data)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -29,7 +34,12 @@ jobs:
       - name: Run update pipeline
         env:
           CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
-        run: python scripts/update-all.py
+        run: |
+          ARGS=""
+          if [ "${{ inputs.skip_fetch }}" = "true" ]; then
+            ARGS="--skip-fetch"
+          fi
+          python scripts/update-all.py $ARGS
 
       - name: Check for changes
         id: changes
