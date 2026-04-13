@@ -116,7 +116,13 @@ export function CategoryPage() {
     if (!activeSearchTerms) return all
     const terms = new Set(activeSearchTerms)
     return all.filter((t) =>
-      t.interventions.some((i) => terms.has(i.toLowerCase())),
+      t.interventions.some((i) => {
+        const low = i.toLowerCase()
+        for (const term of terms) {
+          if (low.includes(term) || term.includes(low)) return true
+        }
+        return false
+      }),
     )
   }, [loading, slug, searchTrials, activeSearchTerms])
 

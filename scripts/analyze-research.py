@@ -649,6 +649,7 @@ def build_subcategories(conn, api_key=None, base_url=None, model=None):
                 term_paper_counts[canonical] += 1
 
         # Trial interventions: normalize against known canonical names
+        # Count each trial at most once per canonical term
         term_trial_counts = Counter()
         known_canonical = {t.lower(): t for t in term_paper_counts.keys()}
 
@@ -658,15 +659,18 @@ def build_subcategories(conn, api_key=None, base_url=None, model=None):
             if not interv_json:
                 continue
             try:
+                matched_in_trial = set()
                 for intervention in json.loads(interv_json):
                     low = intervention.lower().strip()
                     if low in known_canonical:
-                        term_trial_counts[known_canonical[low]] += 1
+                        matched_in_trial.add(known_canonical[low])
                     else:
                         for canon_low, canon in known_canonical.items():
                             if canon_low in low or low in canon_low:
-                                term_trial_counts[canon] += 1
+                                matched_in_trial.add(canon)
                                 break
+                for canon in matched_in_trial:
+                    term_trial_counts[canon] += 1
             except Exception:
                 pass
 
@@ -758,20 +762,113 @@ def build_subcategories(conn, api_key=None, base_url=None, model=None):
                 print(f"    {cat}: {before} → {after} terms", flush=True)
             time.sleep(1)
 
-    # Third pass: insert normalized terms
+    # Pre-load paper analyses and trial interventions for accurate counting
+    cat_paper_terms = defaultdict(list)  # cat -> [(set_of_lowered_terms), ...]
+    for cat in set(c for c in assigned):
+        for (pi_json, topics_json) in conn.execute(
+            """SELECT a.primary_interventions, a.topics FROM pa_analyses a
+               JOIN pa_papers p ON a.pmid = p.pmid
+               WHERE p.category = ? AND a.primary_interventions IS NOT NULL""",
+            (cat,),
+        ).fetchall():
+            terms = set()
+            for raw in (pi_json, topics_json):
+                try:
+                    for t in json.loads(raw or "[]"):
+                        terms.add(t.lower().strip())
+                except Exception:
+                    pass
+            cat_paper_terms[cat].append(terms)
+
+    cat_trial_interventions = defaultdict(list)  # cat -> [list_of_lowered_interventions, ...]
+    for cat in set(c for c in assigned):
+        for (interv_json,) in conn.execute(
+            "SELECT interventions FROM tr_trials WHERE category = ?", (cat,)
+        ).fetchall():
+            try:
+                interventions = [t.lower().strip() for t in json.loads(interv_json or "[]")]
+                cat_trial_interventions[cat].append(interventions)
+            except Exception:
+                pass
+
+    # Third pass: insert with accurate counts from source data
     total_rows = 0
     for cat, (tpc, ttc) in assigned.items():
         for term in set(tpc) | set(ttc):
             variants = canonical_variants.get(term.lower(), set())
             search = sorted(variants | {term.lower()})
+
+            # Count papers matching search_terms via AI classifications
+            paper_count = sum(
+                1 for paper_terms in cat_paper_terms[cat]
+                if any(s in paper_terms for s in search)
+            )
+            # Count trials matching search_terms via substring match
+            trial_count = 0
+            for trial_interventions in cat_trial_interventions[cat]:
+                for interv in trial_interventions:
+                    if any(s in interv or interv in s for s in search):
+                        trial_count += 1
+                        break
+
+            if paper_count == 0 and trial_count == 0:
+                continue
+
             conn.execute(
                 "INSERT INTO rs_subcategories (category, term, paper_count, trial_count, search_terms) VALUES (?, ?, ?, ?, ?)",
-                (cat, term, tpc.get(term, 0), ttc.get(term, 0), json.dumps(search)),
+                (cat, term, paper_count, trial_count, json.dumps(search)),
             )
             total_rows += 1
 
     conn.commit()
     print(f"  Built subcategories: {total_rows} terms across {len(categories)} categories (AI-driven)", flush=True)
+
+    # Validate: recount from source data and flag mismatches
+    mismatches = 0
+    for (cat, term, db_papers, db_trials, search_json) in conn.execute(
+        "SELECT category, term, paper_count, trial_count, search_terms FROM rs_subcategories ORDER BY category, paper_count DESC"
+    ).fetchall():
+        search = json.loads(search_json)
+        # Count papers via AI primary_interventions + topics
+        actual_papers = 0
+        for (pi_json, topics_json) in conn.execute(
+            """SELECT a.primary_interventions, a.topics FROM pa_analyses a
+               JOIN pa_papers p ON a.pmid = p.pmid
+               WHERE p.category = ? AND a.primary_interventions IS NOT NULL""",
+            (cat,),
+        ).fetchall():
+            terms_in_paper = set()
+            for raw in (pi_json, topics_json):
+                try:
+                    for t in json.loads(raw or "[]"):
+                        terms_in_paper.add(t.lower().strip())
+                except Exception:
+                    pass
+            if any(s in terms_in_paper for s in search):
+                actual_papers += 1
+
+        # Count trials via substring match (same as frontend)
+        actual_trials = 0
+        for (interv_json,) in conn.execute(
+            "SELECT interventions FROM tr_trials WHERE category = ?", (cat,)
+        ).fetchall():
+            try:
+                for intervention in json.loads(interv_json or "[]"):
+                    low = intervention.lower().strip()
+                    if any(s in low or low in s for s in search):
+                        actual_trials += 1
+                        break
+            except Exception:
+                pass
+
+        if actual_papers != db_papers or actual_trials != db_trials:
+            print(f"    MISMATCH {cat}/{term}: DB={db_papers}p+{db_trials}t, actual={actual_papers}p+{actual_trials}t", flush=True)
+            mismatches += 1
+
+    if mismatches:
+        print(f"  Warning: {mismatches} subcategory count mismatches found", flush=True)
+    else:
+        print(f"  Validation passed: all subcategory counts match source data", flush=True)
 
 
 def build_global_stats(conn):
