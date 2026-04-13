@@ -21,6 +21,8 @@ import sqlite3
 from collections import Counter, defaultdict
 from datetime import datetime
 
+import time
+
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 DEFAULT_DB = os.path.join(PROJECT_ROOT, "public", "data.db")
@@ -494,7 +496,84 @@ def build_category_stats(conn):
     print(f"  Built category stats for {len(categories)} categories", flush=True)
 
 
-def build_subcategories(conn):
+CATEGORY_DESCRIPTIONS = {
+    "psychedelic": "Psychedelic substances and related compounds (psilocybin, LSD, DMT, BOL-148, etc.)",
+    "cgrp": "CGRP monoclonal antibodies and gepants (galcanezumab, erenumab, fremanezumab, rimegepant, etc.)",
+    "oxygen": "Oxygen therapy and hyperbaric treatments",
+    "pharmacology": "Pharmaceutical treatments (verapamil, lithium, triptans, steroids, melatonin, etc.)",
+    "nerve-block": "Nerve blocks, injections, and procedural interventions (ONB, SPG, botox, etc.)",
+    "neuromodulation": "Neuromodulation devices and stimulation (VNS, ONS, DBS, TMS, etc.)",
+    "non-pharma": "Non-pharmacological approaches (behavioral, exercise, acupuncture, diet, etc.)",
+    "observational": "Observational/epidemiological topics (prevalence, genetics, sleep, comorbidity, etc.)",
+    "vitamin-d": "Vitamin D and related supplements",
+    "other": "General headache research, pathophysiology, neuroimaging, diagnosis",
+}
+
+
+def normalize_subcategory_terms(category, terms_with_counts, api_key, base_url, model):
+    """Use AI to merge synonym terms and remove irrelevant ones for a category.
+
+    Returns dict mapping original_term -> canonical_term (or None to remove).
+    """
+    import requests
+
+    if not api_key or len(terms_with_counts) < 3:
+        return {}
+
+    cat_desc = CATEGORY_DESCRIPTIONS.get(category, category)
+    term_list = "\n".join(f"- {term} ({count})" for term, count in terms_with_counts)
+
+    prompt = f"""You are normalizing subcategory terms for a research category: "{category}" ({cat_desc}).
+
+Below are terms extracted by AI from cluster headache research papers in this category, with paper counts.
+
+{term_list}
+
+Task: Group synonyms under ONE canonical name and flag terms that do NOT belong to this category.
+
+Rules:
+1. MERGE synonyms: "LSD" and "Lysergic acid diethylamide" → keep "LSD" (shorter, more recognized). "Ketamine" and "Ketamine infusion" → keep "Ketamine".
+2. KEEP the term with the highest count as the canonical name.
+3. REMOVE terms that are generic research concepts, not specific to this category (e.g., "Self Medication", "Alternative treatments", "prophylaxis" in a psychedelic category). But if a term IS a form of the category topic, keep it even if generic-sounding.
+4. Only remove if truly irrelevant to the category. When in doubt, KEEP.
+
+Respond with ONLY a JSON object mapping EVERY input term to its canonical name, or null to remove:
+{{"Lysergic acid diethylamide": "LSD", "LSD": "LSD", "Self Medication": null, "Ketamine infusion": "Ketamine", ...}}"""
+
+    try:
+        body = {
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 4096,
+            "temperature": 0.1,
+        }
+        resp = requests.post(
+            f"{base_url}/chat/completions",
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+            json=body,
+            timeout=60,
+        )
+        if resp.status_code != 200:
+            print(f"    Normalization API error for {category}: {resp.status_code}", flush=True)
+            return {}
+
+        text = resp.json()["choices"][0]["message"]["content"].strip()
+        if text.startswith("```"):
+            text = text.split("\n", 1)[1] if "\n" in text else text[3:]
+        if text.endswith("```"):
+            text = text[:-3]
+        text = text.strip()
+
+        mapping = json.loads(text)
+        if not isinstance(mapping, dict):
+            return {}
+        return mapping
+    except Exception as e:
+        print(f"    Normalization failed for {category}: {e}", flush=True)
+        return {}
+
+
+def build_subcategories(conn, api_key=None, base_url=None, model=None):
     """Build rs_subcategories table from AI-classified paper interventions/topics.
 
     Reads primary_interventions and topics from pa_analyses (populated by
@@ -631,13 +710,60 @@ def build_subcategories(conn):
     for term, cat_counts in term_totals.items():
         term_primary[term] = max(cat_counts, key=cat_counts.get)
 
-    # Third pass: insert terms assigned to their primary category
-    total_rows = 0
+    # Build per-category assigned terms (only terms whose primary category is this one)
+    assigned = defaultdict(lambda: (Counter(), Counter()))
     for cat, (tpc, ttc) in all_data.items():
         for term in set(tpc) | set(ttc):
             if term_primary[term] != cat:
                 continue
-            search = [term.lower()]
+            assigned[cat][0][term] = tpc.get(term, 0)
+            assigned[cat][1][term] = ttc.get(term, 0)
+
+    # AI normalization: merge synonyms and remove irrelevant terms AFTER category assignment
+    canonical_variants = defaultdict(set)  # canonical_lower -> {variant1_lower, ...}
+
+    if api_key:
+        print("  Normalizing subcategory terms with AI...", flush=True)
+        for cat in sorted(assigned.keys()):
+            tpc, ttc = assigned[cat]
+            all_terms = set(tpc) | set(ttc)
+            if len(all_terms) < 3:
+                continue
+            terms_with_counts = sorted(
+                [(t, tpc.get(t, 0) + ttc.get(t, 0)) for t in all_terms],
+                key=lambda x: -x[1],
+            )
+            mapping = normalize_subcategory_terms(cat, terms_with_counts, api_key, base_url, model)
+            if not mapping:
+                continue
+
+            new_tpc = Counter()
+            new_ttc = Counter()
+            for term, count in tpc.items():
+                canonical = mapping.get(term, term)
+                if canonical is None:
+                    continue
+                new_tpc[canonical] += count
+                canonical_variants[canonical.lower()].add(term.lower())
+            for term, count in ttc.items():
+                canonical = mapping.get(term, term)
+                if canonical is None:
+                    continue
+                new_ttc[canonical] += count
+                canonical_variants[canonical.lower()].add(term.lower())
+            assigned[cat] = (new_tpc, new_ttc)
+            before = len(all_terms)
+            after = len(set(new_tpc) | set(new_ttc))
+            if before != after:
+                print(f"    {cat}: {before} → {after} terms", flush=True)
+            time.sleep(1)
+
+    # Third pass: insert normalized terms
+    total_rows = 0
+    for cat, (tpc, ttc) in assigned.items():
+        for term in set(tpc) | set(ttc):
+            variants = canonical_variants.get(term.lower(), set())
+            search = sorted(variants | {term.lower()})
             conn.execute(
                 "INSERT INTO rs_subcategories (category, term, paper_count, trial_count, search_terms) VALUES (?, ?, ?, ?, ?)",
                 (cat, term, tpc.get(term, 0), ttc.get(term, 0), json.dumps(search)),
@@ -781,13 +907,25 @@ def main():
                         help="Skip building subcategories (done separately after LLM analysis)")
     parser.add_argument("--only-subcategories", action="store_true",
                         help="Only build subcategories (run after LLM analysis)")
+    parser.add_argument("--api-key", default=None,
+                        help="API key for AI term normalization (auto-detects from env)")
+    parser.add_argument("--base-url",
+                        default="https://generativelanguage.googleapis.com/v1beta/openai",
+                        help="API base URL")
+    parser.add_argument("--model", default="gemini-2.5-flash-lite",
+                        help="Model for term normalization")
     args = parser.parse_args()
+
+    # Auto-detect API key from environment
+    api_key = args.api_key or os.environ.get("GOOGLE_API_KEY") or os.environ.get("GROQ_API_KEY") or os.environ.get("CEREBRAS_API_KEY")
+    base_url = args.base_url
+    model = args.model
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     if args.only_subcategories:
         conn = sqlite3.connect(args.db)
-        build_subcategories(conn)
+        build_subcategories(conn, api_key=api_key, base_url=base_url, model=model)
         conn.close()
         return
 
@@ -802,7 +940,7 @@ def main():
     build_paper_trial_links(conn)
     build_category_stats(conn)
     if not args.skip_subcategories:
-        build_subcategories(conn)
+        build_subcategories(conn, api_key=api_key, base_url=base_url, model=model)
     build_global_stats(conn)
     conn.close()
 
