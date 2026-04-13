@@ -496,18 +496,70 @@ def build_category_stats(conn):
     print(f"  Built category stats for {len(categories)} categories", flush=True)
 
 
-CATEGORY_DESCRIPTIONS = {
-    "psychedelic": "Psychedelic substances and related compounds (psilocybin, LSD, DMT, BOL-148, etc.)",
-    "cgrp": "CGRP monoclonal antibodies and gepants (galcanezumab, erenumab, fremanezumab, rimegepant, etc.)",
-    "oxygen": "Oxygen therapy and hyperbaric treatments",
-    "pharmacology": "Pharmaceutical treatments (verapamil, lithium, triptans, steroids, melatonin, etc.)",
-    "nerve-block": "Nerve blocks, injections, and procedural interventions (ONB, SPG, botox, etc.)",
-    "neuromodulation": "Neuromodulation devices and stimulation (VNS, ONS, DBS, TMS, etc.)",
-    "non-pharma": "Non-pharmacological approaches (behavioral, exercise, acupuncture, diet, etc.)",
-    "observational": "Observational/epidemiological topics (prevalence, genetics, sleep, comorbidity, etc.)",
-    "vitamin-d": "Vitamin D and related supplements",
-    "other": "General headache research, pathophysiology, neuroimaging, diagnosis",
+CATEGORY_RULES = {
+    "psychedelic": {
+        "desc": "Psychedelic and dissociative substances",
+        "keep": "specific substance/compound names (Psilocybin, LSD, DMT, Ketamine, BOL-148, Mescaline, MDMA, etc.). ALSO keep ONE generic 'Psychedelics (general)' for terms about the class as a whole (Psychedelics, Hallucinogens, Classic psychedelics, etc.)",
+        "remove": "non-substance terms like 'Self Medication', 'Alternative treatments', 'Harm reduction', methodology terms.",
+        "merge": "'Lysergic acid diethylamide' → 'LSD'. '2-bromo-lysergic acid diethylamide' → 'BOL-148'. 'Ketamine infusion' → 'Ketamine'. Strip dosages: '0.143 mg/kg Psilocybin' → 'Psilocybin'. Merge all generic class terms: 'Psychedelics' / 'Hallucinogens' / 'Classic psychedelics' / 'Classical psychedelics' → 'Psychedelics (general)'.",
+    },
+    "cgrp": {
+        "desc": "CGRP-targeting treatments",
+        "keep": "specific drug names (Galcanezumab, Erenumab, Fremanezumab, Eptinezumab, Rimegepant, Atogepant). Keep ONE 'CGRP therapies (general)' for papers about the class as a whole.",
+        "remove": "generic terms like 'monoclonal antibodies', 'preventive treatment', 'headache'. Remove non-drug terms.",
+        "merge": "Brand names to generic: 'Emgality' → 'Galcanezumab', 'Aimovig' → 'Erenumab'. All class-level terms ('CGRP monoclonal antibodies', 'anti-CGRP', 'Calcitonin Gene-Related Peptide', 'CGRP inhibitors') → 'CGRP therapies (general)'. Merge receptor antagonist terms into 'Gepants'.",
+    },
+    "oxygen": {
+        "desc": "Oxygen-based treatments",
+        "keep": "oxygen delivery methods and related treatments (High-flow oxygen, Hyperbaric oxygen, Demand valve oxygen)",
+        "remove": "terms that are not oxygen treatments. Keep ONLY oxygen-specific subcategories.",
+        "merge": "'Oxygen Inhalation Therapy' → 'Oxygen therapy'. 'Hyperbaric oxygenation' → 'Hyperbaric oxygen therapy'.",
+    },
+    "pharmacology": {
+        "desc": "Pharmaceutical drugs",
+        "keep": "specific drug/compound names only (Verapamil, Lithium, Sumatriptan, Prednisone, Melatonin, Topiramate, etc.)",
+        "remove": "generic drug classes when specific drugs exist ('Calcium Channel Blockers' if 'Verapamil' exists, 'Corticosteroids' if 'Prednisone' exists). Remove procedure terms ('Greater occipital nerve injection'). Remove non-drug terms.",
+        "merge": "'Lithium Carbonate' / 'Lithium salts' → 'Lithium'. 'Prednisolone' → 'Prednisone' (same class). Strip dosages and routes.",
+    },
+    "nerve-block": {
+        "desc": "Nerve blocks, injections, and procedural interventions",
+        "keep": "specific procedures (Occipital nerve block, SPG block, Botulinum toxin, Steroid injection, Radiofrequency ablation, etc.). Keep ONE 'Nerve blocks (general)' for generic injection/procedure papers.",
+        "remove": "drug-only terms that belong in pharmacology. Remove non-procedure terms.",
+        "merge": "'Greater occipital nerve block' / 'GON block' / 'GON infiltration' → 'Occipital nerve block'. 'Sphenopalatine ganglion block' / 'SPG block' → 'SPG block'. 'Botulinum toxin' / 'Botulinum Toxin Type A' / 'OnabotulinumtoxinA' → 'Botulinum toxin'. Generic 'Nerve block' / 'injection' → 'Nerve blocks (general)'.",
+    },
+    "neuromodulation": {
+        "desc": "Neuromodulation devices and stimulation techniques",
+        "keep": "specific stimulation techniques (Deep brain stimulation, Vagus nerve stimulation, Occipital nerve stimulation, TMS, tDCS, gammaCore). Keep ONE 'Neuromodulation (general)' for papers about the field broadly.",
+        "remove": "generic terms that don't name a technique ('Electric Stimulation', 'Neurostimulation'). Remove anatomical targets without technique ('Hypothalamus'). Remove non-neuromodulation terms.",
+        "merge": "'Non-invasive vagus nerve stimulation' / 'gammaCore' / 'nVNS' → 'Non-invasive VNS'. 'Hypothalamic deep brain stimulation' / 'Hypothalamic stimulation' → 'Deep brain stimulation'. 'Transcutaneous electrical nerve stimulation' / 'TENS' → 'TENS'. 'Repetitive Transcranial Magnetic Stimulation' / 'TMS' → 'TMS'. Generic 'Neuromodulation' / 'Neurostimulation' → 'Neuromodulation (general)'.",
+    },
+    "non-pharma": {
+        "desc": "Non-pharmacological approaches",
+        "keep": "specific interventions (Acupuncture, Biofeedback, CBT, Exercise, Yoga, Meditation, Diet, etc.). Keep ONE 'Non-pharma (general)' for papers about alternative approaches broadly.",
+        "remove": "vague terms ('Behavior', 'Psychology', 'Therapy', 'Lifestyle'). Remove terms that belong in other categories.",
+        "merge": "'Cognitive behavioral therapy' / 'CBT' / 'Behavior Therapy' → 'CBT'. 'Physical exercise' / 'Aerobic exercise' → 'Exercise'. Generic approach terms → 'Non-pharma (general)'.",
+    },
+    "observational": {
+        "desc": "Observational and epidemiological research topics",
+        "keep": "specific research topics (Epidemiology, Genetics, Sleep, Circadian rhythm, Comorbidity, Quality of life, Gender differences, Pregnancy, etc.)",
+        "remove": "generic methodology terms ('Cohort study', 'Retrospective', 'Survey'). Remove treatment names that belong in other categories.",
+        "merge": "'Circadian rhythm' / 'Chronobiology' / 'Biological clocks' → 'Circadian rhythm'. 'Quality of Life' / 'Patient-reported outcomes' → 'Quality of life'.",
+    },
+    "vitamin-d": {
+        "desc": "Vitamin D and related supplements",
+        "keep": "specific supplements (Vitamin D3, Calcium, Magnesium, Omega-3)",
+        "remove": "generic terms not related to supplementation.",
+        "merge": "'Vitamin D' / 'Cholecalciferol' / 'Vitamin D3' → 'Vitamin D'.",
+    },
+    "other": {
+        "desc": "General headache research, pathophysiology, neuroimaging, diagnosis",
+        "keep": "specific research areas (Neuroimaging, Pathophysiology, Trigeminal system, Diagnostic criteria, Classification) or drug names not covered by other categories",
+        "remove": "generic terms that could apply to any category ('Humans', 'Treatment', 'Disease').",
+        "merge": "Merge imaging variants: 'fMRI' / 'Functional MRI' → 'fMRI'. Merge diagnostic terms.",
+    },
 }
+
+CHUNK_SIZE = 100  # max terms per API call to avoid JSON truncation
 
 
 def normalize_subcategory_terms(category, terms_with_counts, api_key, base_url, model):
@@ -520,57 +572,72 @@ def normalize_subcategory_terms(category, terms_with_counts, api_key, base_url, 
     if not api_key or len(terms_with_counts) < 3:
         return {}
 
-    cat_desc = CATEGORY_DESCRIPTIONS.get(category, category)
-    term_list = "\n".join(f"- {term} ({count})" for term, count in terms_with_counts)
+    rules = CATEGORY_RULES.get(category, {
+        "desc": category,
+        "keep": "terms specific to this category",
+        "remove": "generic terms not specific to this category",
+        "merge": "synonyms and variants of the same concept",
+    })
 
-    prompt = f"""You are normalizing subcategory terms for a research category: "{category}" ({cat_desc}).
+    full_mapping = {}
+    # Process in chunks to avoid JSON truncation on large categories
+    for chunk_start in range(0, len(terms_with_counts), CHUNK_SIZE):
+        chunk = terms_with_counts[chunk_start:chunk_start + CHUNK_SIZE]
+        term_list = "\n".join(f"- {term} ({count})" for term, count in chunk)
 
-Below are terms extracted by AI from cluster headache research papers in this category, with paper counts.
+        prompt = f"""Normalize these subcategory terms for the "{category}" research category.
 
+Category: {rules['desc']}
+
+Terms to normalize:
 {term_list}
 
-Task: Group synonyms under ONE canonical name and flag terms that do NOT belong to this category.
+RULES — follow these exactly:
 
-Rules:
-1. MERGE synonyms: "LSD" and "Lysergic acid diethylamide" → keep "LSD" (shorter, more recognized). "Ketamine" and "Ketamine infusion" → keep "Ketamine".
-2. KEEP the term with the highest count as the canonical name.
-3. REMOVE terms that are generic research concepts, not specific to this category (e.g., "Self Medication", "Alternative treatments", "prophylaxis" in a psychedelic category). But if a term IS a form of the category topic, keep it even if generic-sounding.
-4. Only remove if truly irrelevant to the category. When in doubt, KEEP.
+KEEP: {rules['keep']}
+REMOVE (null): {rules['remove']}
+MERGE examples: {rules['merge']}
 
-Respond with ONLY a JSON object mapping EVERY input term to its canonical name, or null to remove:
-{{"Lysergic acid diethylamide": "LSD", "LSD": "LSD", "Self Medication": null, "Ketamine infusion": "Ketamine", ...}}"""
+General:
+- Strip dosages, routes, formulations from drug names ("0.143 mg/kg Psilocybin" → "Psilocybin")
+- Use the shortest well-known name as canonical ("Lysergic acid diethylamide" → "LSD")
+- When merging, use the term with the highest count as canonical name
+- Map EVERY input term to either a canonical name or null
 
-    try:
-        body = {
-            "model": model,
-            "messages": [{"role": "user", "content": prompt}],
-            "max_tokens": 4096,
-            "temperature": 0.1,
-        }
-        resp = requests.post(
-            f"{base_url}/chat/completions",
-            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-            json=body,
-            timeout=60,
-        )
-        if resp.status_code != 200:
-            print(f"    Normalization API error for {category}: {resp.status_code}", flush=True)
-            return {}
+Respond with ONLY a JSON object, no markdown:
+{{"term1": "canonical", "term2": "canonical", "term3": null, ...}}"""
 
-        text = resp.json()["choices"][0]["message"]["content"].strip()
-        if text.startswith("```"):
-            text = text.split("\n", 1)[1] if "\n" in text else text[3:]
-        if text.endswith("```"):
-            text = text[:-3]
-        text = text.strip()
+        try:
+            body = {
+                "model": model,
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": 4096,
+                "temperature": 0.1,
+            }
+            resp = requests.post(
+                f"{base_url}/chat/completions",
+                headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+                json=body,
+                timeout=90,
+            )
+            if resp.status_code != 200:
+                print(f"    Normalization API error for {category} chunk {chunk_start}: {resp.status_code}", flush=True)
+                continue
 
-        mapping = json.loads(text)
-        if not isinstance(mapping, dict):
-            return {}
-        return mapping
-    except Exception as e:
-        print(f"    Normalization failed for {category}: {e}", flush=True)
-        return {}
+            text = resp.json()["choices"][0]["message"]["content"].strip()
+            if text.startswith("```"):
+                text = text.split("\n", 1)[1] if "\n" in text else text[3:]
+            if text.endswith("```"):
+                text = text[:-3]
+            text = text.strip()
+
+            mapping = json.loads(text)
+            if isinstance(mapping, dict):
+                full_mapping.update(mapping)
+        except Exception as e:
+            print(f"    Normalization failed for {category} chunk {chunk_start}: {e}", flush=True)
+
+    return full_mapping
 
 
 def build_subcategories(conn, api_key=None, base_url=None, model=None):
@@ -761,6 +828,28 @@ def build_subcategories(conn, api_key=None, base_url=None, model=None):
             if before != after:
                 print(f"    {cat}: {before} → {after} terms", flush=True)
             time.sleep(1)
+
+    # Re-merge case-insensitive duplicates introduced by AI normalization
+    for cat in list(assigned.keys()):
+        tpc, ttc = assigned[cat]
+        # Find case variants and pick highest-count as display name
+        low_to_best = {}
+        for term in set(tpc) | set(ttc):
+            low = term.lower()
+            total = tpc.get(term, 0) + ttc.get(term, 0)
+            if low not in low_to_best or total > (tpc.get(low_to_best[low], 0) + ttc.get(low_to_best[low], 0)):
+                low_to_best[low] = term
+        new_tpc = Counter()
+        new_ttc = Counter()
+        for term, count in tpc.items():
+            best = low_to_best[term.lower()]
+            new_tpc[best] += count
+            canonical_variants[best.lower()].add(term.lower())
+        for term, count in ttc.items():
+            best = low_to_best[term.lower()]
+            new_ttc[best] += count
+            canonical_variants[best.lower()].add(term.lower())
+        assigned[cat] = (new_tpc, new_ttc)
 
     # Pre-load paper analyses and trial interventions for accurate counting
     cat_paper_terms = defaultdict(list)  # cat -> [(set_of_lowered_terms), ...]
