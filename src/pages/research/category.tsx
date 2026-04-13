@@ -28,12 +28,16 @@ const STUDY_TYPE_LABELS: Record<string, string> = {
   rct: "Clinical Trials (RCTs)",
   "clinical-trial": "Other Clinical Trials",
   "meta-analysis": "Meta-Analyses",
+  meta_analysis: "Meta-Analyses",
   "systematic-review": "Systematic Reviews",
   observational: "Observational Studies",
   "case-report": "Case Reports",
+  case_report: "Case Reports",
   "case-series": "Case Series",
+  case_series: "Case Series",
   review: "Reviews",
   "basic-science": "Lab / Imaging Research",
+  basic_science: "Lab / Imaging Research",
   guideline: "Guidelines",
   protocol: "Study Protocols",
   editorial: "Editorials / Letters",
@@ -42,17 +46,23 @@ const STUDY_TYPE_LABELS: Record<string, string> = {
 
 const RESULT_LABELS: Record<string, string> = {
   positive: "Showed Benefit",
+  showed_benefit: "Showed Benefit",
   negative: "No Benefit",
+  no_benefit: "No Benefit",
   mixed: "Mixed Results",
   inconclusive: "Inconclusive",
+  basic_science: "Basic Science",
   unknown: "Not Classifiable",
 }
 
 const RESULT_COLORS: Record<string, string> = {
   positive: "var(--chart-2)",
+  showed_benefit: "var(--chart-2)",
   negative: "var(--chart-5)",
+  no_benefit: "var(--chart-5)",
   mixed: "var(--chart-3)",
   inconclusive: "var(--chart-9)",
+  basic_science: "var(--chart-4)",
   unknown: "var(--muted-foreground)",
 }
 
@@ -163,7 +173,7 @@ export function CategoryPage() {
       }
     }
 
-    const positiveCount = resultCounts["positive"] ?? 0
+    const positiveCount = (resultCounts["positive"] ?? 0) + (resultCounts["showed_benefit"] ?? 0)
 
     return {
       paperCount: topPapers.length,
@@ -192,7 +202,8 @@ export function CategoryPage() {
     paperCount: data.paperCount,
     trialCount: data.trialCount,
     activeTrialCount: data.activeTrialCount,
-    positiveCount: data.resultDistribution.find((r) => r.result === "positive")?.count ?? 0,
+    positiveCount: (data.resultDistribution.find((r) => r.result === "positive")?.count ?? 0) +
+      (data.resultDistribution.find((r) => r.result === "showed_benefit")?.count ?? 0),
     studyTypeDistribution: data.studyTypeDistribution,
     resultDistribution: data.resultDistribution,
     papersPerYear: data.papersPerYear,
