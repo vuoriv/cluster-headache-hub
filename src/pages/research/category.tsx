@@ -3,6 +3,7 @@ import { Link, useParams, Navigate } from "react-router-dom"
 import { ArrowLeft, ExternalLink, FlaskConical, FileText, TrendingUp, Users } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { PaperCard } from "@/components/paper-card"
 import { Separator } from "@/components/ui/separator"
 import { Bar, BarChart, AreaChart, Area, XAxis, YAxis, CartesianGrid } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart"
@@ -358,51 +359,9 @@ export function CategoryPage() {
             The most important papers in this category, ranked by evidence strength and sample size.
           </p>
           <div className="flex flex-col gap-2">
-            {topPapers.map((p) => {
-              const analysis = getPaperAnalysis(p.pmid)
-              return (
-                <Card key={p.pmid} className="hover:shadow-sm transition-all">
-                  <CardContent className="py-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0 flex-1">
-                        <h4 className="text-sm font-medium leading-snug">{p.title}</h4>
-                        <p className="mt-1 text-xs text-muted-foreground">{p.authors}</p>
-                      </div>
-                      <a
-                        href={`https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="shrink-0 text-muted-foreground hover:text-primary"
-                      >
-                        <ExternalLink className="size-3.5" />
-                      </a>
-                    </div>
-                    <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                      {analysis?.outcome && (
-                        <Badge
-                          variant={analysis.outcome === "positive" ? "success" : analysis.outcome === "negative" ? "destructive" : "secondary"}
-                          className="text-[0.6rem]"
-                        >
-                          {RESULT_LABELS[analysis.outcome] ?? analysis.outcome}
-                        </Badge>
-                      )}
-                      {analysis?.studyType && (
-                        <Badge variant="outline" className="text-[0.6rem]">
-                          {STUDY_TYPE_LABELS[analysis.studyType] ?? analysis.studyType}
-                        </Badge>
-                      )}
-                      {p.pubDate && (
-                        <Badge variant="outline" className="text-[0.6rem]">{p.pubDate.slice(0, 4)}</Badge>
-                      )}
-                      {analysis?.sampleSize && (
-                        <span className="text-[0.6rem] text-muted-foreground">n={analysis.sampleSize}</span>
-                      )}
-                      <span className="text-[0.6rem] text-muted-foreground">{p.journal}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              )
-            })}
+            {topPapers.map((p) => (
+              <PaperCard key={p.pmid} paper={p} />
+            ))}
           </div>
         </div>
       )}
