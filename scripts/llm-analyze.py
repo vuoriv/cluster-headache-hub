@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-LLM-powered analysis for trials and papers using Cerebras/Qwen3.
+LLM-powered analysis for trials and papers using LLM.
 
 Analyzes:
 1. New trials without existing analyses → what was tested, verdict, patient relevance
 2. Top papers needing better classification → key finding summary
 
-Uses OpenAI-compatible API (works with Cerebras, Groq, OpenRouter, etc.)
+Uses OpenAI-compatible API (works with Google AI Studio, Groq, Cerebras, OpenRouter, etc.)
 
 Usage:
   python scripts/llm-analyze.py --api-key KEY [--base-url URL] [--model MODEL] [--db PATH]
@@ -658,7 +658,7 @@ def main():
         print("ERROR: No API key. Set CEREBRAS_API_KEY or use --api-key", flush=True)
         sys.exit(1)
 
-    print("=== LLM Analysis (Cerebras/Qwen3) ===\n", flush=True)
+    print("=== LLM Analysis (LLM) ===\n", flush=True)
 
     # Test API connection
     print("  Testing API connection...", flush=True)

@@ -23,7 +23,7 @@ fetch-research.py               Browser loads data.db via sql.js (WASM)
 analyze-research.py             DataDbProvider → synchronous SQL queries
   ↓ regex classification
 llm-analyze.py                  React pages render from query results
-  ↓ Cerebras/Qwen3 AI analysis
+  ↓ LLM AI analysis
 build-analysis-db.py            No server — entirely client-side
   ↓ forum/community JSON → SQL
 public/data.db ─────────────→  fetched by browser at page load
@@ -41,7 +41,7 @@ Zero backend. Everything is pre-computed in the pipeline and shipped as a single
 | Fonts | DM Sans Variable, DM Serif Display |
 | Icons | Lucide React |
 | Pipeline | Python 3.11, sqlite3, requests |
-| AI | Cerebras API (Qwen3) for paper/trial analysis |
+| AI | OpenAI-compatible LLM API for paper/trial analysis |
 | Deploy | GitHub Pages via GitHub Actions |
 
 ## Development
@@ -67,7 +67,7 @@ The pipeline runs weekly via GitHub Actions (`weekly-update.yml`) and can be tri
 
 1. **Fetch** — PubMed E-utilities API + ClinicalTrials.gov API
 2. **Classify** — Regex-based study type and outcome classification
-3. **AI Analysis** — Cerebras/Qwen3 classifies primary interventions, comparators, and topics per paper
+3. **AI Analysis** — LLM classifies primary interventions, comparators, and topics per paper
 4. **Forum/Community** — Rebuilds ClusterBusters forum analysis and community group tables from JSON
 5. **Subcategories** — Builds treatment subcategory index from AI classifications
 

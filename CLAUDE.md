@@ -21,7 +21,7 @@ Guidance for Claude Code when working with this repository.
 Python pipeline (scripts/)          React frontend (src/)
   fetch-research.py                   App.tsx → BrowserRouter
   analyze-research.py                 DataDbProvider → sql.js WASM
-  llm-analyze.py (Cerebras/Qwen3)    useDataDb() → synchronous SQL
+  llm-analyze.py (LLM analysis)      useDataDb() → synchronous SQL
   build-analysis-db.py                Pages render from DB queries
        ↓
   public/data.db (SQLite)  ←──────  fetched at runtime by browser
@@ -32,7 +32,7 @@ All data lives in `public/data.db`. The research pipeline writes directly to it.
 ## Tech Stack
 
 **Frontend**: React 19 | TypeScript (strict) | Vite 7 | Tailwind CSS v4 | shadcn/ui (radix-nova) | Recharts | sql.js | React Router 7 | Lucide icons
-**Pipeline**: Python 3.11 | sqlite3 | requests | Cerebras API (Qwen3)
+**Pipeline**: Python 3.11 | sqlite3 | requests | OpenAI-compatible LLM API (Google AI Studio default)
 **Fonts**: DM Sans Variable (body) | DM Serif Display (headings)
 **Deploy**: GitHub Pages via GitHub Actions
 
