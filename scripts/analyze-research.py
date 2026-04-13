@@ -534,9 +534,6 @@ def build_subcategories(conn):
         "ORDER BY category"
     ).fetchall()]
 
-    # Collect canonical → raw term mappings for search_terms
-    canonical_to_raw = defaultdict(set)
-
     # First pass: collect term counts per category from AI analyses
     all_data = {}
     for cat in categories:
@@ -569,20 +566,8 @@ def build_subcategories(conn):
             except Exception:
                 pass
 
-            # Build canonical → raw MeSH/keyword mapping for search_terms
-            raw_terms = set()
-            for raw_json in (mesh_json, kw_json):
-                if not raw_json:
-                    continue
-                try:
-                    for t in json.loads(raw_json):
-                        raw_terms.add(t.lower().strip())
-                except Exception:
-                    pass
-
             for canonical in canonical_terms:
                 term_paper_counts[canonical] += 1
-                canonical_to_raw[canonical.lower()].update(raw_terms)
 
         # Trial interventions: normalize against known canonical names
         term_trial_counts = Counter()
@@ -608,6 +593,34 @@ def build_subcategories(conn):
 
         all_data[cat] = (term_paper_counts, term_trial_counts)
 
+    # Normalize: merge case-insensitive duplicates across all categories
+    # Pick the casing variant with the highest total count as the canonical display name
+    global_variant_counts = Counter()  # exact_term -> total count across all cats
+    for cat, (tpc, ttc) in all_data.items():
+        for term in set(tpc) | set(ttc):
+            global_variant_counts[term] += tpc.get(term, 0) + ttc.get(term, 0)
+
+    # Map lowercased -> best display name (highest count variant)
+    low_to_canonical = {}
+    for term, count in global_variant_counts.items():
+        low = term.lower()
+        if low not in low_to_canonical or count > global_variant_counts[low_to_canonical[low]]:
+            low_to_canonical[low] = term
+
+    # Re-aggregate using canonical names
+    normalized_data = {}
+    for cat, (tpc, ttc) in all_data.items():
+        new_tpc = Counter()
+        new_ttc = Counter()
+        for term, count in tpc.items():
+            canonical = low_to_canonical[term.lower()]
+            new_tpc[canonical] += count
+        for term, count in ttc.items():
+            canonical = low_to_canonical[term.lower()]
+            new_ttc[canonical] += count
+        normalized_data[cat] = (new_tpc, new_ttc)
+    all_data = normalized_data
+
     # Second pass: assign each term to its primary category (highest count)
     term_totals = defaultdict(lambda: defaultdict(int))
     for cat, (tpc, ttc) in all_data.items():
@@ -624,8 +637,7 @@ def build_subcategories(conn):
         for term in set(tpc) | set(ttc):
             if term_primary[term] != cat:
                 continue
-            raw = canonical_to_raw.get(term.lower(), set())
-            search = sorted(raw | {term.lower()})
+            search = [term.lower()]
             conn.execute(
                 "INSERT INTO rs_subcategories (category, term, paper_count, trial_count, search_terms) VALUES (?, ?, ?, ?, ?)",
                 (cat, term, tpc.get(term, 0), ttc.get(term, 0), json.dumps(search)),

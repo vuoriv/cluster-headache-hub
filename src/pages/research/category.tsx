@@ -98,14 +98,16 @@ export function CategoryPage() {
 
   const topPapers = useMemo(() => {
     if (loading || !slug) return []
-    const all = searchPapers({ category: slug, limit: 200 })
+    const limit = activeSearchTerms ? 5000 : 200
+    const all = searchPapers({ category: slug, limit })
     if (!activeSearchTerms) return all.slice(0, 15)
     const terms = new Set(activeSearchTerms)
-    return all.filter((p) =>
-      p.meshTerms.some((t) => terms.has(t.toLowerCase())) ||
-      p.authorKeywords.some((t) => terms.has(t.toLowerCase())),
-    )
-  }, [loading, slug, searchPapers, activeSearchTerms])
+    return all.filter((p) => {
+      const analysis = getPaperAnalysis(p.pmid)
+      if (!analysis) return false
+      return analysis.interventionsStudied.some((i) => terms.has(i.toLowerCase()))
+    })
+  }, [loading, slug, searchPapers, activeSearchTerms, getPaperAnalysis])
 
   const categoryTrials = useMemo(() => {
     if (loading || !slug) return []

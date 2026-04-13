@@ -506,7 +506,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
       }
 
       sql += " ORDER BY relevance_score DESC, pub_date DESC"
-      const limit = Math.max(1, Math.min(200, Math.floor(Number(params.limit) || 50)))
+      const limit = Math.max(1, Math.min(10000, Math.floor(Number(params.limit) || 50)))
       const offset = Math.max(0, Math.floor(Number(params.offset) || 0))
       sql += " LIMIT ? OFFSET ?"
       binds.push(limit, offset)
@@ -691,7 +691,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
       if (!db) return null
       try {
         const stmt = db.prepare(
-          "SELECT pmid, study_type, result, sample_size, evidence_tier, analysis_source FROM pa_analyses WHERE pmid = ?",
+          "SELECT pmid, study_type, result, sample_size, evidence_tier, analysis_source, primary_interventions, topics FROM pa_analyses WHERE pmid = ?",
         )
         stmt.bind([pmid])
         if (!stmt.step()) {
@@ -700,6 +700,14 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
         }
         const row = stmt.get()
         stmt.free()
+        let interventionsStudied: string[] = []
+        try {
+          const pi = JSON.parse((row[6] as string) || "[]")
+          const topics = JSON.parse((row[7] as string) || "[]")
+          interventionsStudied = [...pi, ...topics]
+        } catch {
+          // ignore parse errors
+        }
         return {
           pmid: row[0] as string,
           outcome: row[2] as string,
@@ -708,7 +716,7 @@ export function DataDbProvider({ children }: { children: ReactNode }) {
           sampleSize: row[3] as number | null,
           studyType: row[1] as string,
           evidenceTier: row[4] as number,
-          interventionsStudied: [],
+          interventionsStudied,
           analysisSource: row[5] as string,
         }
       } catch {

@@ -180,7 +180,7 @@ def main():
             print("\n  Skipping forum analysis (no --forum-db provided)")
 
         # Phase 4: LLM analysis
-        api_key = os.environ.get("GROQ_API_KEY") or os.environ.get("CEREBRAS_API_KEY")
+        api_key = os.environ.get("GOOGLE_API_KEY") or os.environ.get("GROQ_API_KEY") or os.environ.get("CEREBRAS_API_KEY")
         if api_key:
             run(
                 [sys.executable, os.path.join(SCRIPT_DIR, "llm-analyze.py")],
@@ -188,7 +188,7 @@ def main():
                 db_path=DATA_DB, run_id=run_id, phases=phases,
             )
         else:
-            print("\n  Skipping LLM analysis (no GROQ_API_KEY or CEREBRAS_API_KEY set)")
+            print("\n  Skipping LLM analysis (no GOOGLE_API_KEY, GROQ_API_KEY, or CEREBRAS_API_KEY set)")
             phases.append("Phase 4: Skipped (no API key)")
 
         # Phase 5: Build subcategories

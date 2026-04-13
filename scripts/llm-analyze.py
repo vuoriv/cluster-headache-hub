@@ -27,7 +27,7 @@ PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 DATA_DB = os.path.join(PROJECT_ROOT, "public", "data.db")
 TRIAL_ANALYSES_PATH = os.path.join(PROJECT_ROOT, "src", "data", "trials", "trial-analyses.json")
 
-DEFAULT_BASE_URL = "https://api.groq.com/openai/v1"
+DEFAULT_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai"
 
 
 def ensure_pa_analyses_table(conn):
@@ -110,7 +110,7 @@ def seed_from_json(conn):
     print(f"  Seeded {len(analyses)} trial analyses from JSON", flush=True)
 
 
-DEFAULT_MODEL = "openai/gpt-oss-20b"
+DEFAULT_MODEL = "gemini-2.5-flash-lite"
 
 TRIAL_PROMPT = """You are analyzing a clinical trial for cluster headache. Based on the information below, provide a structured analysis.
 
@@ -201,9 +201,8 @@ def call_llm(prompt, api_key, base_url, model):
     body = {
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 4096,
+        "max_tokens": 8192,
         "temperature": 0.1,
-        "response_format": {"type": "json_object"},
     }
 
     def _post():
@@ -228,14 +227,21 @@ def call_llm(prompt, api_key, base_url, model):
 
     text = response.json()["choices"][0]["message"]["content"].strip()
 
-    # Clean markdown wrapping if present
+    # Clean markdown wrapping if present (```json ... ``` or ``` ... ```)
     if text.startswith("```"):
+        # Remove opening ``` or ```json line
         text = text.split("\n", 1)[1] if "\n" in text else text[3:]
-        if text.endswith("```"):
-            text = text[:-3]
-        text = text.strip()
+    if text.endswith("```"):
+        text = text[:-3]
+    text = text.strip()
 
-    return json.loads(text)
+    # Handle cases where model returns a wrapper object with "results" key
+    parsed = json.loads(text)
+    if isinstance(parsed, dict) and len(parsed) == 1:
+        key = next(iter(parsed))
+        if isinstance(parsed[key], list):
+            return parsed[key]
+    return parsed
 
 
 BATCH_CLASSIFY_PROMPT = """You are classifying research papers about cluster headache. For EACH paper below, identify the primary interventions studied, any comparator/control interventions, and research topics.
@@ -263,7 +269,7 @@ Rules:
 - outcome: showed_benefit|no_benefit|mixed|inconclusive|basic_science"""
 
 
-BATCH_SIZE = 5
+BATCH_SIZE = 10
 
 
 def classify_papers_batch(conn, api_key, base_url, model):
@@ -280,7 +286,7 @@ def classify_papers_batch(conn, api_key, base_url, model):
     try:
         existing = set(
             r[0] for r in conn.execute(
-                "SELECT pmid FROM pa_analyses WHERE primary_interventions IS NOT NULL AND primary_interventions != '[]'"
+                "SELECT pmid FROM pa_analyses WHERE primary_interventions IS NOT NULL"
             ).fetchall()
         )
     except Exception:
@@ -400,7 +406,7 @@ def classify_papers_batch(conn, api_key, base_url, model):
         if batch_num % 10 == 0 or batch_num == total_batches:
             print(f"    Batch {batch_num}/{total_batches} ({classified} classified)", flush=True)
 
-        time.sleep(15)
+        time.sleep(5)
 
     error_count = conn.execute("SELECT COUNT(*) FROM rs_analysis_errors").fetchone()[0]
     if error_count:
@@ -639,7 +645,7 @@ def analyze_new_trials(db_path, api_key, base_url, model):
 
 def main():
     parser = argparse.ArgumentParser(description="LLM-powered analysis")
-    parser.add_argument("--api-key", default=os.environ.get("GROQ_API_KEY") or os.environ.get("CEREBRAS_API_KEY"),
+    parser.add_argument("--api-key", default=os.environ.get("GOOGLE_API_KEY") or os.environ.get("GROQ_API_KEY") or os.environ.get("CEREBRAS_API_KEY"),
                         help="API key (or set CEREBRAS_API_KEY env var)")
     parser.add_argument("--base-url", default=DEFAULT_BASE_URL,
                         help=f"API base URL (default: {DEFAULT_BASE_URL})")
