@@ -166,7 +166,23 @@ export function PaperCard({
 
       {expanded && (
         <CardContent className="pt-0">
-          {paper.abstract ? (
+          {paper.abstractStructured &&
+          Object.keys(paper.abstractStructured).length > 0 ? (
+            <div className="mb-3 flex flex-col gap-2">
+              {Object.entries(paper.abstractStructured).map(
+                ([section, text]) => (
+                  <div key={section}>
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-wider text-muted-foreground">
+                      {formatLabel(section)}
+                    </p>
+                    <p className="text-xs leading-relaxed text-muted-foreground">
+                      {decodeHtmlEntities(text)}
+                    </p>
+                  </div>
+                ),
+              )}
+            </div>
+          ) : paper.abstract ? (
             <p className="mb-3 text-xs leading-relaxed text-muted-foreground">
               {decodeHtmlEntities(paper.abstract)}
             </p>
