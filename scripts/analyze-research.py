@@ -505,9 +505,9 @@ CATEGORY_RULES = {
     },
     "cgrp": {
         "desc": "CGRP-targeting treatments",
-        "keep": "specific drug names (Galcanezumab, Erenumab, Fremanezumab, Eptinezumab, Rimegepant, Atogepant). Keep ONE 'CGRP therapies (general)' for papers about the class as a whole.",
-        "remove": "generic terms like 'monoclonal antibodies', 'preventive treatment', 'headache'. Remove non-drug terms.",
-        "merge": "Brand names to generic: 'Emgality' → 'Galcanezumab', 'Aimovig' → 'Erenumab'. All class-level terms ('CGRP monoclonal antibodies', 'anti-CGRP', 'Calcitonin Gene-Related Peptide', 'CGRP inhibitors') → 'CGRP therapies (general)'. Merge receptor antagonist terms into 'Gepants'.",
+        "keep": "ONLY these: specific drug names (Galcanezumab, Erenumab, Fremanezumab, Eptinezumab, Rimegepant, Atogepant, Gepants) and ONE 'CGRP therapies (general)'. Nothing else.",
+        "remove": "REMOVE everything that is not a specific CGRP drug name or 'CGRP therapies (general)'. This includes: biomarkers, neuropeptides, PACAP, VIP, BDNF, Substance P, neurobiology, neurophysiology, mechanisms, neuroanatomy, forecasting, costs, clinical trials, pathophysiology, any MeSH terms, any general medical terms, any methodology terms. Be AGGRESSIVE — if in doubt, remove it.",
+        "merge": "ALL CGRP class terms → 'CGRP therapies (general)': 'Calcitonin Gene-Related Peptide', 'CGRP', 'CGRP monoclonal antibodies', 'anti-CGRP', 'CGRP inhibitors', 'CGRP antagonists', 'CGRP Receptor Antagonists', 'Monoclonal antibodies', 'Anti-CGRP monoclonal antibodies', etc. ALL gepant variants → 'Gepants'. Brand→generic: 'Emgality'→'Galcanezumab', 'Aimovig'→'Erenumab'.",
     },
     "oxygen": {
         "desc": "Oxygen-based treatments",
@@ -523,9 +523,9 @@ CATEGORY_RULES = {
     },
     "nerve-block": {
         "desc": "Nerve blocks, injections, and procedural interventions",
-        "keep": "specific procedures (Occipital nerve block, SPG block, Botulinum toxin, Steroid injection, Radiofrequency ablation, etc.). Keep ONE 'Nerve blocks (general)' for generic injection/procedure papers.",
-        "remove": "drug-only terms that belong in pharmacology. Remove non-procedure terms.",
-        "merge": "'Greater occipital nerve block' / 'GON block' / 'GON infiltration' → 'Occipital nerve block'. 'Sphenopalatine ganglion block' / 'SPG block' → 'SPG block'. 'Botulinum toxin' / 'Botulinum Toxin Type A' / 'OnabotulinumtoxinA' → 'Botulinum toxin'. Generic 'Nerve block' / 'injection' → 'Nerve blocks (general)'.",
+        "keep": "ONLY specific named procedures: Occipital nerve block, SPG block, Botulinum toxin, Steroid injection, Radiofrequency ablation, Trigeminal nerve block, Lidocaine injection. Keep ONE 'Nerve blocks (general)'. Nothing else.",
+        "remove": "REMOVE: drug names without procedure context, anatomy terms alone, neuromodulation/stimulation terms (those belong in neuromodulation category), MeSH terms, methodology, symptoms, generic medical terms. Be AGGRESSIVE.",
+        "merge": "All occipital nerve block variants → 'Occipital nerve block'. All SPG block variants → 'SPG block'. 'Botulinum toxin' / 'Botulinum Toxin Type A' / 'OnabotulinumtoxinA' / 'Botox' → 'Botulinum toxin'. All stimulation terms → null (remove, belongs in neuromodulation). Generic procedures → 'Nerve blocks (general)'.",
     },
     "neuromodulation": {
         "desc": "Neuromodulation devices and stimulation techniques",
@@ -559,7 +559,7 @@ CATEGORY_RULES = {
     },
 }
 
-CHUNK_SIZE = 100  # max terms per API call to avoid JSON truncation
+CHUNK_SIZE = 50  # max terms per API call to avoid JSON truncation
 
 
 def normalize_subcategory_terms(category, terms_with_counts, api_key, base_url, model):
@@ -611,20 +611,25 @@ Respond with ONLY a JSON object, no markdown:
             body = {
                 "model": model,
                 "messages": [{"role": "user", "content": prompt}],
-                "max_tokens": 4096,
+                "max_tokens": 8192,
                 "temperature": 0.1,
             }
             resp = requests.post(
                 f"{base_url}/chat/completions",
                 headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
                 json=body,
-                timeout=90,
+                timeout=120,
             )
             if resp.status_code != 200:
                 print(f"    Normalization API error for {category} chunk {chunk_start}: {resp.status_code}", flush=True)
                 continue
 
             text = resp.json()["choices"][0]["message"]["content"].strip()
+            # Strip thinking tags from reasoning models
+            if "<think>" in text:
+                think_end = text.rfind("</think>")
+                if think_end != -1:
+                    text = text[think_end + 8:].strip()
             if text.startswith("```"):
                 text = text.split("\n", 1)[1] if "\n" in text else text[3:]
             if text.endswith("```"):
@@ -1098,7 +1103,7 @@ def main():
     parser.add_argument("--base-url",
                         default="https://generativelanguage.googleapis.com/v1beta/openai",
                         help="API base URL")
-    parser.add_argument("--model", default="gemini-2.5-flash-lite",
+    parser.add_argument("--model", default="gemini-2.5-flash",
                         help="Model for term normalization")
     args = parser.parse_args()
 
