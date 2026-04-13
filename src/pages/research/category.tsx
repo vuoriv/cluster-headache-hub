@@ -24,35 +24,12 @@ const CATEGORY_META: Record<string, { name: string; description: string }> = {
   "vitamin-d": { name: "Vitamin D Research", description: "Vitamin D3 regimen (Batch protocol). Emerging research area with strong community anecdotal support but limited clinical trial data so far." },
 }
 
-const STUDY_TYPE_LABELS: Record<string, string> = {
-  rct: "Clinical Trials (RCTs)",
-  "clinical-trial": "Other Clinical Trials",
-  "meta-analysis": "Meta-Analyses",
-  meta_analysis: "Meta-Analyses",
-  "systematic-review": "Systematic Reviews",
-  observational: "Observational Studies",
-  "case-report": "Case Reports",
-  case_report: "Case Reports",
-  "case-series": "Case Series",
-  case_series: "Case Series",
-  review: "Reviews",
-  "basic-science": "Lab / Imaging Research",
-  basic_science: "Lab / Imaging Research",
-  guideline: "Guidelines",
-  protocol: "Study Protocols",
-  editorial: "Editorials / Letters",
-  other: "Other",
-}
-
-const RESULT_LABELS: Record<string, string> = {
-  positive: "Showed Benefit",
-  showed_benefit: "Showed Benefit",
-  negative: "No Benefit",
-  no_benefit: "No Benefit",
-  mixed: "Mixed Results",
-  inconclusive: "Inconclusive",
-  basic_science: "Basic Science",
-  unknown: "Not Classifiable",
+function formatLabel(value: string): string {
+  if (!value) return ""
+  if (value === "rct") return "RCT"
+  return value
+    .replace(/[_-]/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
 const RESULT_COLORS: Record<string, string> = {
@@ -62,8 +39,6 @@ const RESULT_COLORS: Record<string, string> = {
   no_benefit: "var(--chart-5)",
   mixed: "var(--chart-3)",
   inconclusive: "var(--chart-9)",
-  basic_science: "var(--chart-4)",
-  unknown: "var(--muted-foreground)",
 }
 
 const VERDICT_CONFIG: Record<string, { label: string; variant: "success" | "destructive" | "warning" | "info" | "secondary" | "outline" }> = {
@@ -285,7 +260,7 @@ export function CategoryPage() {
                   dataKey="type"
                   tick={{ fontSize: 9 }}
                   width={100}
-                  tickFormatter={(v) => STUDY_TYPE_LABELS[v] ?? v}
+                  tickFormatter={(v) => formatLabel(v)}
                 />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Bar dataKey="count" fill="var(--chart-1)" radius={[0, 4, 4, 0]} />
@@ -310,7 +285,7 @@ export function CategoryPage() {
                   const pct = total > 0 ? Math.round((r.count / total) * 100) : 0
                   return (
                     <div key={r.result} className="flex items-center gap-3">
-                      <span className="w-24 text-xs font-medium">{RESULT_LABELS[r.result] ?? r.result}</span>
+                      <span className="w-24 text-xs font-medium">{formatLabel(r.result)}</span>
                       <div className="flex-1 rounded-full bg-muted h-3 overflow-hidden">
                         <div
                           className="h-full rounded-full"

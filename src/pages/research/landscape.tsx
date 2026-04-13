@@ -63,19 +63,10 @@ const CATEGORY_COLORS: Record<string, string> = {
   "vitamin-d": "oklch(0.7 0.15 90)",
 }
 
-const STUDY_TYPE_LABELS: Record<string, string> = {
-  "basic-science": "Basic Science",
-  rct: "RCT",
-  other: "Other",
-  "clinical-trial": "Clinical Trial",
-  "case-report": "Case Report",
-  review: "Review",
-  observational: "Observational",
-  "case-series": "Case Series",
-  guideline: "Guideline",
-  "meta-analysis": "Meta-Analysis",
-  "systematic-review": "Systematic Review",
-  editorial: "Editorial",
+function formatLabel(value: string): string {
+  if (!value) return ""
+  if (value === "rct") return "RCT"
+  return value.replace(/[_-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -113,7 +104,7 @@ export function ResearchLandscape() {
       .filter((s) => s.type !== "other")
       .sort((a, b) => a.count - b.count)
       .map((s) => ({
-        type: STUDY_TYPE_LABELS[s.type] ?? s.type,
+        type: formatLabel(s.type),
         count: s.count,
       }))
   }, [stats])

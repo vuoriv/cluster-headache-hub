@@ -43,12 +43,10 @@ const RESULT_COLORS: Record<string, string> = {
   unknown: "oklch(0.5 0.03 250)",
 }
 
-const RESULT_LABELS: Record<string, string> = {
-  positive: "Positive",
-  negative: "Negative",
-  mixed: "Mixed",
-  inconclusive: "Inconclusive",
-  unknown: "Unknown",
+function formatLabel(value: string): string {
+  if (!value) return ""
+  if (value === "rct") return "RCT"
+  return value.replace(/[_-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -166,7 +164,7 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
       knownResults
         .filter((r) => r.result !== "unknown")
         .map((r) => ({
-          name: RESULT_LABELS[r.result] ?? r.result,
+          name: formatLabel(r.result),
           value: r.count,
           key: r.result,
         })),

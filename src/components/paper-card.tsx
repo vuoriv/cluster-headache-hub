@@ -6,37 +6,26 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { useDataDb, type ResearchPaper } from "@/lib/data-db"
 import { CATEGORY_CONFIG } from "@/lib/research-categories"
 
-const OUTCOME_BADGES: Record<
-  string,
-  { label: string; variant: "success" | "destructive" | "warning" | "secondary" | "outline" }
-> = {
-  showed_benefit: { label: "Showed Benefit", variant: "success" },
-  no_benefit: { label: "No Benefit", variant: "destructive" },
-  mixed: { label: "Mixed", variant: "warning" },
-  inconclusive: { label: "Inconclusive", variant: "secondary" },
-  basic_science: { label: "Basic Science", variant: "outline" },
-  positive: { label: "Showed Benefit", variant: "success" },
-  negative: { label: "No Benefit", variant: "destructive" },
+type BadgeVariant = "success" | "destructive" | "warning" | "secondary" | "outline"
+
+const OUTCOME_VARIANT: Record<string, BadgeVariant> = {
+  showed_benefit: "success",
+  positive: "success",
+  no_benefit: "destructive",
+  negative: "destructive",
+  mixed: "warning",
 }
 
-const STUDY_TYPE_LABELS: Record<string, string> = {
-  rct: "Clinical Trial (RCT)",
-  "clinical-trial": "Clinical Trial",
-  "meta-analysis": "Meta-Analysis",
-  meta_analysis: "Meta-Analysis",
-  "systematic-review": "Systematic Review",
-  observational: "Observational",
-  "case-report": "Case Report",
-  case_report: "Case Report",
-  "case-series": "Case Series",
-  case_series: "Case Series",
-  review: "Review",
-  "basic-science": "Basic Science",
-  basic_science: "Basic Science",
-  guideline: "Guideline",
-  protocol: "Protocol",
-  editorial: "Editorial",
-  other: "Other",
+function outcomeVariant(outcome: string): BadgeVariant {
+  return OUTCOME_VARIANT[outcome] ?? "secondary"
+}
+
+function formatLabel(value: string): string {
+  if (!value) return ""
+  if (value === "rct") return "RCT"
+  return value
+    .replace(/[_-]/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
 function decodeHtmlEntities(text: string): string {
@@ -113,14 +102,14 @@ export function PaperCard({
               {catConfig.label}
             </Badge>
           )}
-          {analysis?.outcome && OUTCOME_BADGES[analysis.outcome] && (
-            <Badge variant={OUTCOME_BADGES[analysis.outcome].variant}>
-              {OUTCOME_BADGES[analysis.outcome].label}
+          {analysis?.outcome && (
+            <Badge variant={outcomeVariant(analysis.outcome)}>
+              {formatLabel(analysis.outcome)}
             </Badge>
           )}
           {analysis?.studyType && (
             <Badge variant="outline" className="text-[0.6rem]">
-              {STUDY_TYPE_LABELS[analysis.studyType] ?? analysis.studyType}
+              {formatLabel(analysis.studyType)}
             </Badge>
           )}
           {analysis?.evidenceTier && (
