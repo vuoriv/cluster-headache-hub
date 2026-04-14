@@ -209,7 +209,7 @@ export function PaperCard({
                 {linkedTrials.map((trial) => (
                   <Link
                     key={trial.nctId}
-                    to={`/trials?q=${trial.nctId}`}
+                    to={`/research/trials?q=${trial.nctId}`}
                     className="flex items-center gap-2 text-xs text-primary hover:underline"
                   >
                     <FlaskConical className="size-3 shrink-0" />
