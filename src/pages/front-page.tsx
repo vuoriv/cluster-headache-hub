@@ -65,7 +65,7 @@ export function FrontPage() {
           ) : (
             <>
               <StatCard
-                to="/trials"
+                to="/research/trials"
                 value={stats.activeTrials}
                 label="Active Trials"
                 sublabel={`${stats.recruiting} recruiting`}
