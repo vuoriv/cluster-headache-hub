@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: weekly-update
@@ -60,4 +61,11 @@ jobs:
           git add public/data.db src/data/
           git diff --cached --quiet || git commit -m "chore: weekly data update $(date -u +%Y-%m-%d)"
           git push
-        # The push triggers deploy.yml which handles the GitHub Pages build + deploy
+
+      # GITHUB_TOKEN pushes never trigger on-push workflows, so deploy.yml
+      # must be dispatched explicitly (workflow_dispatch is exempt)
+      - name: Trigger Pages deploy
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main
