@@ -228,9 +228,34 @@ class TestCrossCategoryPrevention:
 
 
 class TestSearchTerms:
-    """search_terms should map raw MeSH/keywords to canonical names."""
+    """search_terms hold the canonical term plus AI-term variants merged into it.
 
-    def test_raw_mesh_terms_included(self):
+    Raw MeSH/keywords are deliberately NOT included: attaching every MeSH
+    term of a paper to all its canonical terms inflated match counts
+    (removed in c61b247 so stored counts match actual filtered results).
+    """
+
+    def test_case_variants_merge_into_one_subcategory(self):
+        conn = create_test_db()
+
+        insert_paper(conn, "p1", "pharmacology", keywords=["verapamil"])
+        insert_analysis(conn, "p1", primary=["Verapamil"])
+        insert_paper(conn, "p2", "pharmacology", keywords=["verapamil"])
+        insert_analysis(conn, "p2", primary=["verapamil"])
+
+        conn.commit()
+        build_subcategories(conn)
+
+        pharm = get_subcategories(conn, "pharmacology")
+        vera = [s for s in pharm if s["term"].lower() == "verapamil"]
+
+        # One merged subcategory counting both papers, searchable by the
+        # lowered canonical term
+        assert len(vera) == 1
+        assert vera[0]["papers"] == 2
+        assert "verapamil" in vera[0]["search"]
+
+    def test_raw_mesh_terms_not_included(self):
         conn = create_test_db()
 
         insert_paper(conn, "p1", "psychedelic",
@@ -244,9 +269,9 @@ class TestSearchTerms:
         psych = get_subcategories(conn, "psychedelic")
         lsd = next(s for s in psych if s["term"] == "LSD")
 
-        # search_terms should include both the raw MeSH term and the keyword
-        assert "lysergic acid diethylamide" in lsd["search"]
-        assert "lsd" in lsd["search"]
+        # Only the canonical term — generic MeSH like "Cluster Headache" must
+        # not leak in and match unrelated papers/trials
+        assert lsd["search"] == ["lsd"]
 
     def test_canonical_name_always_in_search_terms(self):
         conn = create_test_db()
