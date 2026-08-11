@@ -1,36 +1,36 @@
 {
-  "total_trials": 106,
+  "total_trials": 108,
   "status_distribution": [
     {
       "status": "COMPLETED",
-      "count": 66
-    },
-    {
-      "status": "RECRUITING",
-      "count": 15
+      "count": 68
     },
     {
       "status": "TERMINATED",
-      "count": 15
+      "count": 16
+    },
+    {
+      "status": "RECRUITING",
+      "count": 13
     },
     {
       "status": "NOT_YET_RECRUITING",
       "count": 4
     },
     {
+      "status": "ACTIVE_NOT_RECRUITING",
+      "count": 3
+    },
+    {
       "status": "ENROLLING_BY_INVITATION",
       "count": 2
     },
     {
-      "status": "ACTIVE_NOT_RECRUITING",
-      "count": 2
-    },
-    {
-      "status": "WITHDRAWN",
+      "status": "SUSPENDED",
       "count": 1
     },
     {
-      "status": "SUSPENDED",
+      "status": "WITHDRAWN",
       "count": 1
     }
   ],
@@ -41,7 +41,7 @@
     },
     {
       "category": "nerve-block",
-      "count": 20
+      "count": 22
     },
     {
       "category": "cgrp",
@@ -79,11 +79,11 @@
   "phase_distribution": [
     {
       "phase": "NA",
-      "count": 40
+      "count": 42
     },
     {
       "phase": "PHASE2",
-      "count": 19
+      "count": 20
     },
     {
       "phase": "PHASE3",
@@ -100,11 +100,11 @@
   ],
   "top_sponsors": [
     {
-      "sponsor": "Leiden University Medical Center",
+      "sponsor": "Danish Headache Center",
       "count": 5
     },
     {
-      "sponsor": "Danish Headache Center",
+      "sponsor": "Leiden University Medical Center",
       "count": 5
     },
     {
@@ -113,22 +113,14 @@
     },
     {
       "sponsor": "The University of Texas Health Science Center, Houston",
-      "count": 4
+      "count": 5
     },
     {
       "sponsor": "Autonomic Technologies, Inc.",
       "count": 4
     },
     {
-      "sponsor": "Assistance Publique Hopitaux De Marseille",
-      "count": 3
-    },
-    {
-      "sponsor": "ElectroCore INC",
-      "count": 3
-    },
-    {
-      "sponsor": "Thomas Jefferson University",
+      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
       "count": 3
     },
     {
@@ -136,7 +128,23 @@
       "count": 3
     },
     {
-      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
+      "sponsor": "Beijing Tiantan Hospital",
+      "count": 3
+    },
+    {
+      "sponsor": "ElectroCore INC",
+      "count": 3
+    },
+    {
+      "sponsor": "Centre Hospitalier Universitaire de Nice",
+      "count": 3
+    },
+    {
+      "sponsor": "Thomas Jefferson University",
+      "count": 3
+    },
+    {
+      "sponsor": "Assistance Publique Hopitaux De Marseille",
       "count": 3
     },
     {
@@ -144,32 +152,24 @@
       "count": 3
     },
     {
-      "sponsor": "Beijing Tiantan Hospital",
-      "count": 3
-    },
-    {
-      "sponsor": "H. Lundbeck A/S",
+      "sponsor": "Charite University, Berlin, Germany",
       "count": 2
     },
     {
       "sponsor": "Salvia BioElectronics",
       "count": 2
-    },
-    {
-      "sponsor": "Winston Laboratories",
-      "count": 2
     }
   ],
   "avg_enrollment_by_category": {
-    "other": 76,
-    "psychedelic": 40,
-    "non-pharma": 239,
-    "pharmacology": 43,
+    "nerve-block": 55,
+    "cgrp": 156,
+    "other": 66,
     "neuromodulation": 38,
-    "cgrp": 161,
+    "psychedelic": 41,
     "observational": 1829,
-    "nerve-block": 59,
     "oxygen": 56,
+    "pharmacology": 43,
+    "non-pharma": 235,
     "vitamin-d": 27
   }
 }
