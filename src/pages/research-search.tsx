@@ -18,16 +18,30 @@ import { cn } from "@/lib/utils"
 const BATCH_SIZE = 30
 
 export function ResearchSearchPage() {
-  const { loading, error, searchPapers, getCategories, getMeta, getTopAuthors } = useDataDb()
+  const {
+    loading,
+    error,
+    searchPapers,
+    getCategories,
+    getMeta,
+    getTopAuthors,
+  } = useDataDb()
   const stats = useMemo(() => (loading ? null : getMeta()), [loading, getMeta])
-  const topAuthors = useMemo(() => (loading ? [] : getTopAuthors(150)), [loading, getTopAuthors])
+  const topAuthors = useMemo(
+    () => (loading ? [] : getTopAuthors(150)),
+    [loading, getTopAuthors]
+  )
 
   const [query, setQuery] = useState("")
   const [category, setCategory] = useState<string>("all")
   const [author, setAuthor] = useState<string>("all")
   const [yearFrom, setYearFrom] = useState<string>("")
   const [yearTo, setYearTo] = useState<string>("")
-  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE)
+  // visibleCount resets to BATCH_SIZE whenever the filter key changes,
+  // derived from the key mismatch instead of synced via an effect
+  const filtersKey = JSON.stringify([query, category, author, yearFrom, yearTo])
+  const [visible, setVisible] = useState({ key: filtersKey, count: BATCH_SIZE })
+  const visibleCount = visible.key === filtersKey ? visible.count : BATCH_SIZE
   const [expandedPmid, setExpandedPmid] = useState<string | null>(null)
   const sentinelRef = useRef<HTMLDivElement>(null)
 
@@ -50,21 +64,19 @@ export function ResearchSearchPage() {
 
   const papers = useMemo(
     () => allResults.slice(0, visibleCount),
-    [allResults, visibleCount],
+    [allResults, visibleCount]
   )
   const hasMore = visibleCount < allResults.length
-
-  // Reset visible count when filters change
-  useEffect(() => {
-    setVisibleCount(BATCH_SIZE)
-  }, [query, category, author, yearFrom, yearTo])
 
   // Infinite scroll via IntersectionObserver
   const loadMore = useCallback(() => {
     if (hasMore) {
-      setVisibleCount((prev) => prev + BATCH_SIZE)
+      setVisible((prev) => ({
+        key: filtersKey,
+        count: (prev.key === filtersKey ? prev.count : BATCH_SIZE) + BATCH_SIZE,
+      }))
     }
-  }, [hasMore])
+  }, [hasMore, filtersKey])
 
   useEffect(() => {
     const sentinel = sentinelRef.current
@@ -73,7 +85,7 @@ export function ResearchSearchPage() {
       (entries) => {
         if (entries[0].isIntersecting) loadMore()
       },
-      { rootMargin: "200px" },
+      { rootMargin: "200px" }
     )
     observer.observe(sentinel)
     return () => observer.disconnect()
@@ -90,21 +102,25 @@ export function ResearchSearchPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <Link to="/research" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+      <Link
+        to="/research"
+        className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+      >
         <ArrowLeft className="size-3.5" /> Back to Research
       </Link>
 
       <div>
         <h2 className="text-2xl font-bold">All Papers</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          {stats?.paperCount?.toLocaleString() ?? "—"}+ cluster headache papers from PubMed
+          {stats?.paperCount?.toLocaleString() ?? "—"}+ cluster headache papers
+          from PubMed
         </p>
       </div>
 
       {/* Search + Author + Year */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search by title, abstract, or author..."
             value={query}
@@ -119,7 +135,9 @@ export function ResearchSearchPage() {
           <SelectContent className="max-h-[300px]">
             <SelectItem value="all">All researchers</SelectItem>
             {topAuthors.map((a) => (
-              <SelectItem key={a} value={a}>{a}</SelectItem>
+              <SelectItem key={a} value={a}>
+                {a}
+              </SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -133,7 +151,9 @@ export function ResearchSearchPage() {
             min="1950"
             max="2030"
           />
-          <span className="flex items-center text-xs text-muted-foreground">–</span>
+          <span className="flex items-center text-xs text-muted-foreground">
+            –
+          </span>
           <Input
             type="number"
             placeholder="To"
@@ -154,7 +174,7 @@ export function ResearchSearchPage() {
             "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
             category === "all"
               ? "border-primary bg-primary text-primary-foreground"
-              : "border-border text-muted-foreground hover:text-foreground",
+              : "border-border text-muted-foreground hover:text-foreground"
           )}
         >
           All
@@ -171,7 +191,7 @@ export function ResearchSearchPage() {
                 "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
                 active
                   ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border text-muted-foreground hover:text-foreground",
+                  : "border-border text-muted-foreground hover:text-foreground"
               )}
             >
               {cfg.label}
@@ -214,7 +234,9 @@ export function ResearchSearchPage() {
                 showCategory
                 expanded={expandedPmid === paper.pmid}
                 onToggle={() =>
-                  setExpandedPmid(expandedPmid === paper.pmid ? null : paper.pmid)
+                  setExpandedPmid(
+                    expandedPmid === paper.pmid ? null : paper.pmid
+                  )
                 }
                 onAuthorClick={(a) => setAuthor(a)}
               />

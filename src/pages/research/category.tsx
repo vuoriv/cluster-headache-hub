@@ -1,35 +1,109 @@
-import { useEffect, useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { Link, useParams, Navigate } from "react-router-dom"
-import { ArrowLeft, ExternalLink, FlaskConical, FileText, TrendingUp, Users } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  ArrowLeft,
+  ExternalLink,
+  FlaskConical,
+  FileText,
+  TrendingUp,
+  Users,
+} from "lucide-react"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { PaperCard } from "@/components/paper-card"
 import { Separator } from "@/components/ui/separator"
-import { Bar, BarChart, AreaChart, Area, XAxis, YAxis, CartesianGrid } from "recharts"
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart"
-import { CATEGORY_CONFIG, STATUS_CONFIG, phaseLabel } from "@/lib/research-categories"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Bar,
+  BarChart,
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+} from "recharts"
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  type ChartConfig,
+} from "@/components/ui/chart"
+import {
+  CATEGORY_CONFIG,
+  STATUS_CONFIG,
+  phaseLabel,
+} from "@/lib/research-categories"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { useDataDb, type CategoryStats } from "@/lib/data-db"
 
 const CATEGORY_META: Record<string, { name: string; description: string }> = {
-  cgrp: { name: "CGRP Therapies", description: "Calcitonin gene-related peptide (CGRP) monoclonal antibodies and gepants. Galcanezumab is the only approved anti-CGRP for episodic CH." },
-  "nerve-block": { name: "Nerve Blocks & Injections", description: "Greater occipital nerve blocks, sphenopalatine ganglion blocks, botulinum toxin injections. Procedural interventions for refractory cases." },
-  neuromodulation: { name: "Neuromodulation & Stimulation", description: "Vagus nerve stimulation (gammaCore), occipital nerve stimulation, deep brain stimulation. Device-based therapies." },
-  "non-pharma": { name: "Non-Pharmacological Approaches", description: "Light therapy, behavioral approaches, acupuncture, exercise, yoga. Alternative and complementary treatments." },
-  observational: { name: "Observational & Epidemiological Studies", description: "Epidemiological studies, patient registries, natural history studies, and surveys describing CH patterns in populations." },
-  other: { name: "Other Research", description: "Cross-cutting research: genetics, neuroimaging, pathophysiology, diagnostic criteria, and general headache medicine." },
-  oxygen: { name: "Oxygen Therapy", description: "High-flow oxygen therapy — the community's #1 abortive. Evidence spans from early case reports to modern RCTs confirming 78% efficacy." },
-  pharmacology: { name: "Pharmacological Treatments", description: "Traditional pharmaceutical treatments: verapamil, lithium, prednisone, melatonin, triptans. The established medical toolkit." },
-  psychedelic: { name: "Psychedelic Treatments", description: "Psilocybin, LSD, BOL-148, and other psychedelic compounds for cluster headache. The community's most-discussed treatment category, now backed by Phase 2 clinical trials." },
-  "vitamin-d": { name: "Vitamin D Research", description: "Vitamin D3 regimen (Batch protocol). Emerging research area with strong community anecdotal support but limited clinical trial data so far." },
+  cgrp: {
+    name: "CGRP Therapies",
+    description:
+      "Calcitonin gene-related peptide (CGRP) monoclonal antibodies and gepants. Galcanezumab is the only approved anti-CGRP for episodic CH.",
+  },
+  "nerve-block": {
+    name: "Nerve Blocks & Injections",
+    description:
+      "Greater occipital nerve blocks, sphenopalatine ganglion blocks, botulinum toxin injections. Procedural interventions for refractory cases.",
+  },
+  neuromodulation: {
+    name: "Neuromodulation & Stimulation",
+    description:
+      "Vagus nerve stimulation (gammaCore), occipital nerve stimulation, deep brain stimulation. Device-based therapies.",
+  },
+  "non-pharma": {
+    name: "Non-Pharmacological Approaches",
+    description:
+      "Light therapy, behavioral approaches, acupuncture, exercise, yoga. Alternative and complementary treatments.",
+  },
+  observational: {
+    name: "Observational & Epidemiological Studies",
+    description:
+      "Epidemiological studies, patient registries, natural history studies, and surveys describing CH patterns in populations.",
+  },
+  other: {
+    name: "Other Research",
+    description:
+      "Cross-cutting research: genetics, neuroimaging, pathophysiology, diagnostic criteria, and general headache medicine.",
+  },
+  oxygen: {
+    name: "Oxygen Therapy",
+    description:
+      "High-flow oxygen therapy — the community's #1 abortive. Evidence spans from early case reports to modern RCTs confirming 78% efficacy.",
+  },
+  pharmacology: {
+    name: "Pharmacological Treatments",
+    description:
+      "Traditional pharmaceutical treatments: verapamil, lithium, prednisone, melatonin, triptans. The established medical toolkit.",
+  },
+  psychedelic: {
+    name: "Psychedelic Treatments",
+    description:
+      "Psilocybin, LSD, BOL-148, and other psychedelic compounds for cluster headache. The community's most-discussed treatment category, now backed by Phase 2 clinical trials.",
+  },
+  "vitamin-d": {
+    name: "Vitamin D Research",
+    description:
+      "Vitamin D3 regimen (Batch protocol). Emerging research area with strong community anecdotal support but limited clinical trial data so far.",
+  },
 }
 
 function formatLabel(value: string): string {
   if (!value) return ""
   if (value === "rct") return "RCT"
-  return value
-    .replace(/[_-]/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase())
+  return value.replace(/[_-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
 const RESULT_COLORS: Record<string, string> = {
@@ -41,7 +115,19 @@ const RESULT_COLORS: Record<string, string> = {
   inconclusive: "var(--chart-9)",
 }
 
-const VERDICT_CONFIG: Record<string, { label: string; variant: "success" | "destructive" | "warning" | "info" | "secondary" | "outline" }> = {
+const VERDICT_CONFIG: Record<
+  string,
+  {
+    label: string
+    variant:
+      | "success"
+      | "destructive"
+      | "warning"
+      | "info"
+      | "secondary"
+      | "outline"
+  }
+> = {
   success: { label: "Succeeded", variant: "success" },
   failure: { label: "Failed", variant: "destructive" },
   mixed: { label: "Mixed", variant: "warning" },
@@ -56,7 +142,15 @@ const chartConfig: ChartConfig = {
 
 export function CategoryPage() {
   const { slug } = useParams<{ slug: string }>()
-  const { loading, getCategoryStats, searchPapers, searchTrials, getTrialAnalysis, getPaperAnalysis, getSubcategories } = useDataDb()
+  const {
+    loading,
+    getCategoryStats,
+    searchPapers,
+    searchTrials,
+    getTrialAnalysis,
+    getPaperAnalysis,
+    getSubcategories,
+  } = useDataDb()
 
   const data = useMemo((): CategoryStats | null => {
     if (loading || !slug) return null
@@ -68,12 +162,18 @@ export function CategoryPage() {
     return getSubcategories(slug)
   }, [loading, slug, getSubcategories])
 
-  const [subcategoryFilter, setSubcategoryFilter] = useState<string | null>(null)
-
-  // Reset filter when navigating between categories
-  useEffect(() => {
-    setSubcategoryFilter(null)
-  }, [slug])
+  // Filter is scoped to its category: navigating to another slug derives
+  // back to null instead of resetting via an effect
+  const [filterSelection, setFilterSelection] = useState<{
+    slug: string | undefined
+    term: string | null
+  }>({ slug, term: null })
+  const subcategoryFilter =
+    filterSelection.slug === slug ? filterSelection.term : null
+  const setSubcategoryFilter = useCallback(
+    (term: string | null) => setFilterSelection({ slug, term }),
+    [slug]
+  )
 
   // Get search terms for the active filter (all raw alias keys that map to the selected label)
   const activeSearchTerms = useMemo(() => {
@@ -91,7 +191,9 @@ export function CategoryPage() {
     return all.filter((p) => {
       const analysis = getPaperAnalysis(p.pmid)
       if (!analysis) return false
-      return analysis.interventionsStudied.some((i) => terms.has(i.toLowerCase()))
+      return analysis.interventionsStudied.some((i) =>
+        terms.has(i.toLowerCase())
+      )
     })
   }, [loading, slug, searchPapers, activeSearchTerms, getPaperAnalysis])
 
@@ -107,7 +209,7 @@ export function CategoryPage() {
           if (low.includes(term) || term.includes(low)) return true
         }
         return false
-      }),
+      })
     )
   }, [loading, slug, searchTrials, activeSearchTerms])
 
@@ -115,15 +217,20 @@ export function CategoryPage() {
   const filteredStats = useMemo(() => {
     if (!subcategoryFilter) return null
 
-    const analyses = topPapers.map((p) => getPaperAnalysis(p.pmid)).filter(Boolean)
+    const analyses = topPapers
+      .map((p) => getPaperAnalysis(p.pmid))
+      .filter(Boolean)
     const activeTrials = categoryTrials.filter((t) =>
-      ["RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING"].includes(t.status),
+      ["RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING"].includes(
+        t.status
+      )
     )
 
     // Study type distribution
     const studyTypeCounts: Record<string, number> = {}
     for (const a of analyses) {
-      if (a?.studyType) studyTypeCounts[a.studyType] = (studyTypeCounts[a.studyType] || 0) + 1
+      if (a?.studyType)
+        studyTypeCounts[a.studyType] = (studyTypeCounts[a.studyType] || 0) + 1
     }
     const studyTypeDistribution = Object.entries(studyTypeCounts)
       .map(([type, count]) => ({ type, count }))
@@ -148,7 +255,8 @@ export function CategoryPage() {
       }
     }
 
-    const positiveCount = (resultCounts["positive"] ?? 0) + (resultCounts["showed_benefit"] ?? 0)
+    const positiveCount =
+      (resultCounts["positive"] ?? 0) + (resultCounts["showed_benefit"] ?? 0)
 
     return {
       paperCount: topPapers.length,
@@ -177,8 +285,11 @@ export function CategoryPage() {
     paperCount: data.paperCount,
     trialCount: data.trialCount,
     activeTrialCount: data.activeTrialCount,
-    positiveCount: (data.resultDistribution.find((r) => r.result === "positive")?.count ?? 0) +
-      (data.resultDistribution.find((r) => r.result === "showed_benefit")?.count ?? 0),
+    positiveCount:
+      (data.resultDistribution.find((r) => r.result === "positive")?.count ??
+        0) +
+      (data.resultDistribution.find((r) => r.result === "showed_benefit")
+        ?.count ?? 0),
     studyTypeDistribution: data.studyTypeDistribution,
     resultDistribution: data.resultDistribution,
     papersPerYear: data.papersPerYear,
@@ -191,15 +302,22 @@ export function CategoryPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <Link to="/research" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+      <Link
+        to="/research"
+        className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+      >
         <ArrowLeft className="size-3.5" /> Back to Research
       </Link>
 
       {/* Header */}
       <div>
         <div className="flex items-center gap-3">
-          <h2 className="text-2xl font-bold">{meta?.name ?? catConfig?.label ?? slug}</h2>
-          {catConfig && <Badge variant={catConfig.variant}>{catConfig.label}</Badge>}
+          <h2 className="text-2xl font-bold">
+            {meta?.name ?? catConfig?.label ?? slug}
+          </h2>
+          {catConfig && (
+            <Badge variant={catConfig.variant}>{catConfig.label}</Badge>
+          )}
         </div>
         {meta?.description && (
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
@@ -211,7 +329,9 @@ export function CategoryPage() {
       {/* Subcategory Filter */}
       {subcategories.length > 1 && (
         <div className="flex items-center gap-3">
-          <span className="text-xs font-medium text-muted-foreground">Filter by</span>
+          <span className="text-xs font-medium text-muted-foreground">
+            Filter by
+          </span>
           <Select
             value={subcategoryFilter ?? "all"}
             onValueChange={(v) => setSubcategoryFilter(v === "all" ? null : v)}
@@ -233,10 +353,26 @@ export function CategoryPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard icon={<FileText className="size-4" />} value={displayStats.paperCount} label="Papers" />
-        <StatCard icon={<TrendingUp className="size-4" />} value={displayStats.positiveCount} label="Showed Benefit" />
-        <StatCard icon={<FlaskConical className="size-4" />} value={displayStats.activeTrialCount} label="Active Trials" />
-        <StatCard icon={<Users className="size-4" />} value={displayStats.trialCount} label="Trials" />
+        <StatCard
+          icon={<FileText className="size-4" />}
+          value={displayStats.paperCount}
+          label="Papers"
+        />
+        <StatCard
+          icon={<TrendingUp className="size-4" />}
+          value={displayStats.positiveCount}
+          label="Showed Benefit"
+        />
+        <StatCard
+          icon={<FlaskConical className="size-4" />}
+          value={displayStats.activeTrialCount}
+          label="Active Trials"
+        />
+        <StatCard
+          icon={<Users className="size-4" />}
+          value={displayStats.trialCount}
+          label="Trials"
+        />
       </div>
 
       <Separator />
@@ -251,8 +387,18 @@ export function CategoryPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} style={{ height: `${Math.min(displayStats.studyTypeDistribution.length, 8) * 24 + 24}px` }} className="w-full">
-              <BarChart data={displayStats.studyTypeDistribution.slice(0, 8)} layout="vertical" margin={{ left: 8 }}>
+            <ChartContainer
+              config={chartConfig}
+              style={{
+                height: `${Math.min(displayStats.studyTypeDistribution.length, 8) * 24 + 24}px`,
+              }}
+              className="w-full"
+            >
+              <BarChart
+                data={displayStats.studyTypeDistribution.slice(0, 8)}
+                layout="vertical"
+                margin={{ left: 8 }}
+              >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 10 }} />
                 <YAxis
@@ -263,7 +409,11 @@ export function CategoryPage() {
                   tickFormatter={(v) => formatLabel(v)}
                 />
                 <ChartTooltip content={<ChartTooltipContent />} />
-                <Bar dataKey="count" fill="var(--chart-1)" radius={[0, 4, 4, 0]} />
+                <Bar
+                  dataKey="count"
+                  fill="var(--chart-1)"
+                  radius={[0, 4, 4, 0]}
+                />
               </BarChart>
             </ChartContainer>
           </CardContent>
@@ -273,7 +423,8 @@ export function CategoryPage() {
           <CardHeader>
             <CardTitle className="text-sm">Study Outcomes</CardTitle>
             <CardDescription className="text-xs">
-              Did the treatment work? Results across all studies in this category.
+              Did the treatment work? Results across all studies in this
+              category.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -281,18 +432,30 @@ export function CategoryPage() {
               {displayStats.resultDistribution
                 .filter((r) => r.result !== "unknown")
                 .map((r) => {
-                  const total = displayStats.resultDistribution.reduce((s, x) => s + x.count, 0)
-                  const pct = total > 0 ? Math.round((r.count / total) * 100) : 0
+                  const total = displayStats.resultDistribution.reduce(
+                    (s, x) => s + x.count,
+                    0
+                  )
+                  const pct =
+                    total > 0 ? Math.round((r.count / total) * 100) : 0
                   return (
                     <div key={r.result} className="flex items-center gap-3">
-                      <span className="w-24 text-xs font-medium">{formatLabel(r.result)}</span>
-                      <div className="flex-1 rounded-full bg-muted h-3 overflow-hidden">
+                      <span className="w-24 text-xs font-medium">
+                        {formatLabel(r.result)}
+                      </span>
+                      <div className="h-3 flex-1 overflow-hidden rounded-full bg-muted">
                         <div
                           className="h-full rounded-full"
-                          style={{ width: `${pct}%`, backgroundColor: RESULT_COLORS[r.result] ?? "var(--chart-1)" }}
+                          style={{
+                            width: `${pct}%`,
+                            backgroundColor:
+                              RESULT_COLORS[r.result] ?? "var(--chart-1)",
+                          }}
                         />
                       </div>
-                      <span className="w-12 text-right text-xs tabular-nums text-muted-foreground">{r.count}</span>
+                      <span className="w-12 text-right text-xs text-muted-foreground tabular-nums">
+                        {r.count}
+                      </span>
                     </div>
                   )
                 })}
@@ -307,17 +470,27 @@ export function CategoryPage() {
           <CardHeader>
             <CardTitle className="text-sm">Research Volume Over Time</CardTitle>
             <CardDescription className="text-xs">
-              Papers published per year since 2000. Growing interest shows this area is gaining attention.
+              Papers published per year since 2000. Growing interest shows this
+              area is gaining attention.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} className="min-h-[200px] max-h-[300px] w-full">
+            <ChartContainer
+              config={chartConfig}
+              className="max-h-[300px] min-h-[200px] w-full"
+            >
               <AreaChart data={yearData} margin={{ left: 0, right: 0 }}>
                 <CartesianGrid vertical={false} />
                 <XAxis dataKey="year" tick={{ fontSize: 10 }} />
                 <YAxis tick={{ fontSize: 10 }} />
                 <ChartTooltip content={<ChartTooltipContent />} />
-                <Area dataKey="count" type="monotone" fill="var(--chart-1)" stroke="var(--chart-1)" fillOpacity={0.2} />
+                <Area
+                  dataKey="count"
+                  type="monotone"
+                  fill="var(--chart-1)"
+                  stroke="var(--chart-1)"
+                  fillOpacity={0.2}
+                />
               </AreaChart>
             </ChartContainer>
           </CardContent>
@@ -327,14 +500,16 @@ export function CategoryPage() {
       <Separator />
 
       {/* No results message */}
-      {subcategoryFilter && topPapers.length === 0 && categoryTrials.length === 0 && (
-        <div className="flex flex-col items-center gap-3 py-12 text-center">
-          <FileText className="size-10 text-muted-foreground/30" />
-          <p className="text-sm text-muted-foreground">
-            No papers or trials found matching "{subcategoryFilter}"
-          </p>
-        </div>
-      )}
+      {subcategoryFilter &&
+        topPapers.length === 0 &&
+        categoryTrials.length === 0 && (
+          <div className="flex flex-col items-center gap-3 py-12 text-center">
+            <FileText className="size-10 text-muted-foreground/30" />
+            <p className="text-sm text-muted-foreground">
+              No papers or trials found matching "{subcategoryFilter}"
+            </p>
+          </div>
+        )}
 
       {/* Key Studies */}
       {topPapers.length > 0 && (
@@ -348,7 +523,8 @@ export function CategoryPage() {
             )}
           </h3>
           <p className="mb-4 text-xs text-muted-foreground">
-            The most important papers in this category, ranked by evidence strength and sample size.
+            The most important papers in this category, ranked by evidence
+            strength and sample size.
           </p>
           <div className="flex flex-col gap-2">
             {topPapers.map((p) => (
@@ -372,18 +548,25 @@ export function CategoryPage() {
               )}
             </h3>
             <p className="mb-4 text-xs text-muted-foreground">
-              {categoryTrials.length} trials in this category — what was tested, what happened, and what's coming.
+              {categoryTrials.length} trials in this category — what was tested,
+              what happened, and what's coming.
             </p>
             <div className="flex flex-col gap-3">
               {categoryTrials.map((t) => {
                 const analysis = getTrialAnalysis(t.nctId)
                 const statCfg = STATUS_CONFIG[t.status]
-                const verdictCfg = VERDICT_CONFIG[analysis?.verdict ?? "unknown"]
+                const verdictCfg =
+                  VERDICT_CONFIG[analysis?.verdict ?? "unknown"]
                 return (
-                  <Card key={t.nctId} className="hover:shadow-sm transition-all">
+                  <Card
+                    key={t.nctId}
+                    className="transition-all hover:shadow-sm"
+                  >
                     <CardContent className="py-4">
                       <div className="flex items-start justify-between gap-3">
-                        <h4 className="text-sm font-semibold leading-snug">{t.title}</h4>
+                        <h4 className="text-sm leading-snug font-semibold">
+                          {t.title}
+                        </h4>
                         <a
                           href={`https://clinicaltrials.gov/study/${t.nctId}`}
                           target="_blank"
@@ -393,32 +576,68 @@ export function CategoryPage() {
                           <ExternalLink className="size-3.5" />
                         </a>
                       </div>
-                      <p className="mt-1 text-xs text-muted-foreground">{t.sponsor}</p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {t.sponsor}
+                      </p>
 
                       <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                        {statCfg && <Badge variant={statCfg.variant} className="text-[0.6rem]">{statCfg.label}</Badge>}
-                        {verdictCfg && <Badge variant={verdictCfg.variant} className="text-[0.6rem]">{verdictCfg.label}</Badge>}
-                        <Badge variant="outline" className="text-[0.6rem]">{phaseLabel(t.phase)}</Badge>
-                        {t.enrollment && <span className="text-[0.6rem] text-muted-foreground">n={t.enrollment}</span>}
-                        {analysis?.doseTested && <Badge variant="outline" className="text-[0.6rem]">{analysis.doseTested}</Badge>}
+                        {statCfg && (
+                          <Badge
+                            variant={statCfg.variant}
+                            className="text-[0.6rem]"
+                          >
+                            {statCfg.label}
+                          </Badge>
+                        )}
+                        {verdictCfg && (
+                          <Badge
+                            variant={verdictCfg.variant}
+                            className="text-[0.6rem]"
+                          >
+                            {verdictCfg.label}
+                          </Badge>
+                        )}
+                        <Badge variant="outline" className="text-[0.6rem]">
+                          {phaseLabel(t.phase)}
+                        </Badge>
+                        {t.enrollment && (
+                          <span className="text-[0.6rem] text-muted-foreground">
+                            n={t.enrollment}
+                          </span>
+                        )}
+                        {analysis?.doseTested && (
+                          <Badge variant="outline" className="text-[0.6rem]">
+                            {analysis.doseTested}
+                          </Badge>
+                        )}
                       </div>
 
                       {analysis?.whatTested && (
                         <div className="mt-3 rounded-md bg-muted/40 p-3">
                           <p className="text-xs leading-relaxed">
-                            <span className="font-medium">What was tested: </span>
-                            <span className="text-muted-foreground">{analysis.whatTested}</span>
+                            <span className="font-medium">
+                              What was tested:{" "}
+                            </span>
+                            <span className="text-muted-foreground">
+                              {analysis.whatTested}
+                            </span>
                           </p>
                           {analysis.keyResult && (
                             <p className="mt-1.5 text-xs leading-relaxed">
                               <span className="font-medium">Result: </span>
-                              <span className="text-muted-foreground">{analysis.keyResult}</span>
+                              <span className="text-muted-foreground">
+                                {analysis.keyResult}
+                              </span>
                             </p>
                           )}
                           {analysis.patientRelevance && (
                             <p className="mt-1.5 text-xs leading-relaxed">
-                              <span className="font-medium">For patients: </span>
-                              <span className="text-muted-foreground">{analysis.patientRelevance}</span>
+                              <span className="font-medium">
+                                For patients:{" "}
+                              </span>
+                              <span className="text-muted-foreground">
+                                {analysis.patientRelevance}
+                              </span>
                             </p>
                           )}
                         </div>
@@ -435,15 +654,27 @@ export function CategoryPage() {
   )
 }
 
-function StatCard({ icon, value, label }: { icon: React.ReactNode; value: string | number; label: string }) {
+function StatCard({
+  icon,
+  value,
+  label,
+}: {
+  icon: React.ReactNode
+  value: string | number
+  label: string
+}) {
   return (
     <Card>
       <CardContent className="flex flex-col gap-1 py-3">
         <div className="flex items-center gap-2 text-muted-foreground">
           {icon}
-          <span className="text-[0.65rem] font-medium uppercase tracking-wider">{label}</span>
+          <span className="text-[0.65rem] font-medium tracking-wider uppercase">
+            {label}
+          </span>
         </div>
-        <span className="text-xl font-bold tabular-nums tracking-tight">{value}</span>
+        <span className="text-xl font-bold tracking-tight tabular-nums">
+          {value}
+        </span>
       </CardContent>
     </Card>
   )

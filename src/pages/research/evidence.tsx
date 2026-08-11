@@ -117,12 +117,50 @@ export function EvidenceDashboard() {
     return getResearchStats()
   }, [loading, getResearchStats])
 
-  const resultDistribution = stats?.result_distribution as Array<{ result: string; count: number }> ?? []
-  const studyTypeDistribution = stats?.study_type_distribution as Array<{ type: string; count: number }> ?? []
-const categoryResults = stats?.category_results as Record<string, Array<{ result: string; count: number }>> ?? {}
-  const categoryAvgEvidence = stats?.category_avg_evidence as Record<string, number> ?? {}
-  const trialStatusDistribution = stats?.trial_status_distribution as Array<{ status: string; count: number }> ?? []
-  const trialTopSponsors = stats?.trial_top_sponsors as Array<{ sponsor: string; count: number }> ?? []
+  const resultDistribution = useMemo(
+    () =>
+      (stats?.result_distribution as Array<{
+        result: string
+        count: number
+      }>) ?? [],
+    [stats]
+  )
+  const studyTypeDistribution = useMemo(
+    () =>
+      (stats?.study_type_distribution as Array<{
+        type: string
+        count: number
+      }>) ?? [],
+    [stats]
+  )
+  const categoryResults = useMemo(
+    () =>
+      (stats?.category_results as Record<
+        string,
+        Array<{ result: string; count: number }>
+      >) ?? {},
+    [stats]
+  )
+  const categoryAvgEvidence = useMemo(
+    () => (stats?.category_avg_evidence as Record<string, number>) ?? {},
+    [stats]
+  )
+  const trialStatusDistribution = useMemo(
+    () =>
+      (stats?.trial_status_distribution as Array<{
+        status: string
+        count: number
+      }>) ?? [],
+    [stats]
+  )
+  const trialTopSponsors = useMemo(
+    () =>
+      (stats?.trial_top_sponsors as Array<{
+        sponsor: string
+        count: number
+      }>) ?? [],
+    [stats]
+  )
 
   const knownResults = useMemo(
     () => resultDistribution.filter((r) => r.result !== "unknown"),
@@ -138,16 +176,21 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
     resultDistribution.find((r) => r.result === "positive")?.count ?? 0
   const negativeCount =
     resultDistribution.find((r) => r.result === "negative")?.count ?? 0
-  const positivePercent = totalKnown > 0 ? Math.round((positiveCount / totalKnown) * 100) : 0
-  const negativePercent = totalKnown > 0 ? Math.round((negativeCount / totalKnown) * 100) : 0
+  const positivePercent =
+    totalKnown > 0 ? Math.round((positiveCount / totalKnown) * 100) : 0
+  const negativePercent =
+    totalKnown > 0 ? Math.round((negativeCount / totalKnown) * 100) : 0
 
   const activeTrials = useMemo(
     () =>
       trialStatusDistribution
         .filter((s) =>
-          ["RECRUITING", "NOT_YET_RECRUITING", "ACTIVE_NOT_RECRUITING", "ENROLLING_BY_INVITATION"].includes(
-            s.status
-          )
+          [
+            "RECRUITING",
+            "NOT_YET_RECRUITING",
+            "ACTIVE_NOT_RECRUITING",
+            "ENROLLING_BY_INVITATION",
+          ].includes(s.status)
         )
         .reduce((sum, s) => sum + s.count, 0),
     [trialStatusDistribution]
@@ -223,15 +266,17 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
     [trialTopSponsors]
   )
 
-  const totalTrials = stats?.trial_count as number ?? 0
-  const completedCount = trialStatusDistribution.find((s) => s.status === "COMPLETED")?.count ?? 0
-  const recruitingCount = trialStatusDistribution.find((s) => s.status === "RECRUITING")?.count ?? 0
+  const totalTrials = (stats?.trial_count as number) ?? 0
+  const completedCount =
+    trialStatusDistribution.find((s) => s.status === "COMPLETED")?.count ?? 0
+  const recruitingCount =
+    trialStatusDistribution.find((s) => s.status === "RECRUITING")?.count ?? 0
 
   return (
     <div className="flex flex-col gap-8">
       <Link
         to="/research"
-        className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
+        className="flex w-fit items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="size-4" />
         Back to Research
@@ -242,7 +287,7 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
         <h1 className="text-3xl font-bold tracking-tight">
           Evidence Dashboard
         </h1>
-        <p className="mt-2 text-lg text-muted-foreground leading-relaxed max-w-2xl">
+        <p className="mt-2 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           Which treatments have real evidence? Of papers with classifiable
           results,{" "}
           <span className="font-semibold text-foreground">
@@ -268,7 +313,9 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
                 </div>
                 <div>
                   <p className="text-2xl font-bold">{positivePercent}%</p>
-                  <p className="text-xs text-muted-foreground">Studies Showing Benefit</p>
+                  <p className="text-xs text-muted-foreground">
+                    Studies Showing Benefit
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -279,7 +326,9 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
                 </div>
                 <div>
                   <p className="text-2xl font-bold">{negativePercent}%</p>
-                  <p className="text-xs text-muted-foreground">Studies Showing No Benefit</p>
+                  <p className="text-xs text-muted-foreground">
+                    Studies Showing No Benefit
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -290,7 +339,9 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
                 </div>
                 <div>
                   <p className="text-2xl font-bold">{rctPositive}</p>
-                  <p className="text-xs text-muted-foreground">Clinical Trials (RCTs)</p>
+                  <p className="text-xs text-muted-foreground">
+                    Clinical Trials (RCTs)
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -319,9 +370,10 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
           <CardHeader>
             <CardTitle className="text-sm">Study Outcomes</CardTitle>
             <CardDescription className="text-xs">
-              Did the treatment work? "Positive" = the treatment showed clear benefit.
-              "Negative" = it didn't work. "Mixed" = some benefit but not convincing.
-              "Inconclusive" = the study wasn't testing a treatment (lab research, reviews).
+              Did the treatment work? "Positive" = the treatment showed clear
+              benefit. "Negative" = it didn't work. "Mixed" = some benefit but
+              not convincing. "Inconclusive" = the study wasn't testing a
+              treatment (lab research, reviews).
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -345,11 +397,20 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
                   {resultPieData.map((entry) => (
                     <Cell
                       key={entry.key}
-                      fill={RESULT_COLORS[entry.key] ?? RESULT_COLORS.inconclusive}
+                      fill={
+                        RESULT_COLORS[entry.key] ?? RESULT_COLORS.inconclusive
+                      }
                     />
                   ))}
                 </Pie>
-                <Legend wrapperStyle={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8 }} />
+                <Legend
+                  wrapperStyle={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    gap: 8,
+                  }}
+                />
               </PieChart>
             </ChartContainer>
           </CardContent>
@@ -361,10 +422,11 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
               Evidence Strength by Treatment
             </CardTitle>
             <CardDescription className="text-xs">
-              Which treatments have the strongest research backing? Lower score = better evidence.
-              A score near 2 means mostly clinical trials with real patients. Near 4 means mostly
-              case reports and lab studies. Psychedelic and vitamin D research tends to be
-              higher quality because it's newer and uses modern trial designs.
+              Which treatments have the strongest research backing? Lower score
+              = better evidence. A score near 2 means mostly clinical trials
+              with real patients. Near 4 means mostly case reports and lab
+              studies. Psychedelic and vitamin D research tends to be higher
+              quality because it's newer and uses modern trial designs.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -379,11 +441,7 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
                 margin={{ left: 8 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis
-                  type="number"
-                  tick={{ fontSize: 10 }}
-                  domain={[0, 5]}
-                />
+                <XAxis type="number" tick={{ fontSize: 10 }} domain={[0, 5]} />
                 <YAxis
                   type="category"
                   dataKey="category"
@@ -409,15 +467,16 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
             Does It Work? Results by Treatment Category
           </CardTitle>
           <p className="text-sm text-muted-foreground">
-            For each treatment category, how many studies found it effective (positive),
-            ineffective (negative), or somewhere in between (mixed)?
-            Psychedelic research stands out: 27 positive results with zero negative.
+            For each treatment category, how many studies found it effective
+            (positive), ineffective (negative), or somewhere in between (mixed)?
+            Psychedelic research stands out: 27 positive results with zero
+            negative.
           </p>
         </CardHeader>
         <CardContent>
           <ChartContainer
             config={categoryResultConfig}
-            className="min-h-[200px] max-h-[300px] w-full"
+            className="max-h-[300px] min-h-[200px] w-full"
           >
             <BarChart data={categoryResultData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -430,7 +489,14 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
               />
               <YAxis tick={{ fontSize: 10 }} />
               <ChartTooltip content={<ChartTooltipContent />} />
-              <Legend wrapperStyle={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8 }} />
+              <Legend
+                wrapperStyle={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  gap: 8,
+                }}
+              />
               <Bar
                 dataKey="positive"
                 fill={RESULT_COLORS.positive}
@@ -467,10 +533,8 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
           <CardHeader>
             <CardTitle className="text-sm">Trial Status Distribution</CardTitle>
             <CardDescription className="text-xs">
-              {completedCount}{" "}
-              completed,{" "}
-              {recruitingCount}{" "}
-              currently recruiting.
+              {completedCount} completed, {recruitingCount} currently
+              recruiting.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -492,11 +556,7 @@ const categoryResults = stats?.category_results as Record<string, Array<{ result
                   width={130}
                   tick={{ fontSize: 9 }}
                 />
-                <ChartTooltip
-                  content={
-                    <ChartTooltipContent />
-                  }
-                />
+                <ChartTooltip content={<ChartTooltipContent />} />
                 <Bar dataKey="count" radius={[0, 4, 4, 0]}>
                   {trialStatusData.map((entry) => (
                     <Cell
