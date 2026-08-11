@@ -1078,17 +1078,19 @@ def store_analyses(db_path, paper_analyses):
             analysis_source TEXT DEFAULT 'regex'
         )
     """)
-    conn.execute("DELETE FROM pa_analyses")
+    conn.execute("DELETE FROM pa_analyses WHERE analysis_source = 'regex'")
 
+    stored = 0
     for p in paper_analyses:
-        conn.execute(
-            "INSERT INTO pa_analyses VALUES (?, ?, ?, ?, ?, ?)",
-            (p["pmid"], p["study_type"], p["result"], p["sample_size"], p["evidence_tier"], 'regex'),
+        cur = conn.execute(
+            "INSERT OR IGNORE INTO pa_analyses (pmid, study_type, result, sample_size, evidence_tier, analysis_source) VALUES (?, ?, ?, ?, ?, 'regex')",
+            (p["pmid"], p["study_type"], p["result"], p["sample_size"], p["evidence_tier"]),
         )
+        stored += cur.rowcount
 
     conn.commit()
     conn.close()
-    print(f"  Stored {len(paper_analyses)} analyses", flush=True)
+    print(f"  Stored {stored} regex analyses ({len(paper_analyses) - stored} already AI-analyzed)", flush=True)
 
 
 def main():
