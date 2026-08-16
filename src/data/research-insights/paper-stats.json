@@ -1,6 +1,6 @@
 {
-  "total_papers": 4455,
-  "with_abstracts": 3413,
+  "total_papers": 4456,
+  "with_abstracts": 3414,
   "study_type_distribution": [
     {
       "type": "other",
@@ -16,7 +16,7 @@
     },
     {
       "type": "observational",
-      "count": 261
+      "count": 262
     },
     {
       "type": "rct",
@@ -66,7 +66,7 @@
     },
     {
       "result": "mixed",
-      "count": 221
+      "count": 222
     },
     {
       "result": "negative",
@@ -84,7 +84,7 @@
     },
     {
       "tier": 3,
-      "count": 560
+      "count": 561
     },
     {
       "tier": 4,
@@ -174,9 +174,31 @@
     "2023": 109,
     "2024": 120,
     "2025": 128,
-    "2026": 103
+    "2026": 104
   },
   "category_results": {
+    "observational": [
+      {
+        "result": "inconclusive",
+        "count": 359
+      },
+      {
+        "result": "positive",
+        "count": 72
+      },
+      {
+        "result": "negative",
+        "count": 29
+      },
+      {
+        "result": "mixed",
+        "count": 16
+      },
+      {
+        "result": "unknown",
+        "count": 13
+      }
+    ],
     "nerve-block": [
       {
         "result": "positive",
@@ -327,28 +349,6 @@
         "count": 8
       }
     ],
-    "observational": [
-      {
-        "result": "inconclusive",
-        "count": 359
-      },
-      {
-        "result": "positive",
-        "count": 72
-      },
-      {
-        "result": "negative",
-        "count": 29
-      },
-      {
-        "result": "mixed",
-        "count": 15
-      },
-      {
-        "result": "unknown",
-        "count": 13
-      }
-    ],
     "oxygen": [
       {
         "result": "positive",
@@ -395,6 +395,52 @@
     ]
   },
   "category_study_types": {
+    "observational": [
+      {
+        "type": "basic-science",
+        "count": 185
+      },
+      {
+        "type": "observational",
+        "count": 107
+      },
+      {
+        "type": "other",
+        "count": 107
+      },
+      {
+        "type": "review",
+        "count": 21
+      },
+      {
+        "type": "case-series",
+        "count": 16
+      },
+      {
+        "type": "meta-analysis",
+        "count": 14
+      },
+      {
+        "type": "case-report",
+        "count": 11
+      },
+      {
+        "type": "clinical-trial",
+        "count": 11
+      },
+      {
+        "type": "guideline",
+        "count": 8
+      },
+      {
+        "type": "systematic-review",
+        "count": 5
+      },
+      {
+        "type": "rct",
+        "count": 4
+      }
+    ],
     "nerve-block": [
       {
         "type": "basic-science",
@@ -725,52 +771,6 @@
         "count": 2
       }
     ],
-    "observational": [
-      {
-        "type": "basic-science",
-        "count": 185
-      },
-      {
-        "type": "other",
-        "count": 107
-      },
-      {
-        "type": "observational",
-        "count": 106
-      },
-      {
-        "type": "review",
-        "count": 21
-      },
-      {
-        "type": "case-series",
-        "count": 16
-      },
-      {
-        "type": "meta-analysis",
-        "count": 14
-      },
-      {
-        "type": "case-report",
-        "count": 11
-      },
-      {
-        "type": "clinical-trial",
-        "count": 11
-      },
-      {
-        "type": "guideline",
-        "count": 8
-      },
-      {
-        "type": "systematic-review",
-        "count": 5
-      },
-      {
-        "type": "rct",
-        "count": 4
-      }
-    ],
     "oxygen": [
       {
         "type": "basic-science",
@@ -837,6 +837,7 @@
     ]
   },
   "category_avg_evidence": {
+    "observational": 3.77,
     "nerve-block": 3.78,
     "pharmacology": 4.28,
     "other": 4.53,
@@ -844,11 +845,61 @@
     "neuromodulation": 3.98,
     "psychedelic": 2.9,
     "cgrp": 3.33,
-    "observational": 3.77,
     "oxygen": 3.99,
     "vitamin-d": 2.5
   },
   "research_volume_by_category": {
+    "observational": {
+      "1958": 1,
+      "1975": 2,
+      "1976": 2,
+      "1977": 2,
+      "1979": 1,
+      "1980": 2,
+      "1981": 4,
+      "1982": 3,
+      "1984": 4,
+      "1987": 4,
+      "1988": 3,
+      "1989": 8,
+      "1990": 7,
+      "1991": 10,
+      "1992": 4,
+      "1993": 6,
+      "1994": 9,
+      "1995": 14,
+      "1996": 5,
+      "1997": 10,
+      "1998": 1,
+      "1999": 9,
+      "2000": 10,
+      "2001": 1,
+      "2002": 9,
+      "2003": 10,
+      "2004": 9,
+      "2005": 15,
+      "2006": 9,
+      "2007": 9,
+      "2008": 11,
+      "2009": 13,
+      "2010": 15,
+      "2011": 9,
+      "2012": 7,
+      "2013": 9,
+      "2014": 12,
+      "2015": 13,
+      "2016": 16,
+      "2017": 17,
+      "2018": 26,
+      "2019": 16,
+      "2020": 22,
+      "2021": 20,
+      "2022": 17,
+      "2023": 14,
+      "2024": 23,
+      "2025": 27,
+      "2026": 19
+    },
     "nerve-block": {
       "1950": 1,
       "1970": 1,
@@ -1195,57 +1246,6 @@
       "2024": 16,
       "2025": 22,
       "2026": 12
-    },
-    "observational": {
-      "1958": 1,
-      "1975": 2,
-      "1976": 2,
-      "1977": 2,
-      "1979": 1,
-      "1980": 2,
-      "1981": 4,
-      "1982": 3,
-      "1984": 4,
-      "1987": 4,
-      "1988": 3,
-      "1989": 8,
-      "1990": 7,
-      "1991": 10,
-      "1992": 4,
-      "1993": 6,
-      "1994": 9,
-      "1995": 14,
-      "1996": 5,
-      "1997": 10,
-      "1998": 1,
-      "1999": 9,
-      "2000": 10,
-      "2001": 1,
-      "2002": 9,
-      "2003": 10,
-      "2004": 9,
-      "2005": 15,
-      "2006": 9,
-      "2007": 9,
-      "2008": 11,
-      "2009": 13,
-      "2010": 15,
-      "2011": 9,
-      "2012": 7,
-      "2013": 9,
-      "2014": 12,
-      "2015": 13,
-      "2016": 16,
-      "2017": 17,
-      "2018": 26,
-      "2019": 16,
-      "2020": 22,
-      "2021": 20,
-      "2022": 17,
-      "2023": 14,
-      "2024": 23,
-      "2025": 27,
-      "2026": 18
     },
     "oxygen": {
       "1978": 2,

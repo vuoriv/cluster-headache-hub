@@ -1,5 +1,5 @@
 {
-  "total_trials": 108,
+  "total_trials": 109,
   "status_distribution": [
     {
       "status": "COMPLETED",
@@ -11,7 +11,7 @@
     },
     {
       "status": "RECRUITING",
-      "count": 13
+      "count": 14
     },
     {
       "status": "NOT_YET_RECRUITING",
@@ -49,7 +49,7 @@
     },
     {
       "category": "neuromodulation",
-      "count": 11
+      "count": 12
     },
     {
       "category": "observational",
@@ -79,7 +79,7 @@
   "phase_distribution": [
     {
       "phase": "NA",
-      "count": 42
+      "count": 43
     },
     {
       "phase": "PHASE2",
@@ -100,15 +100,11 @@
   ],
   "top_sponsors": [
     {
-      "sponsor": "Danish Headache Center",
-      "count": 5
-    },
-    {
       "sponsor": "Leiden University Medical Center",
       "count": 5
     },
     {
-      "sponsor": "Norwegian University of Science and Technology",
+      "sponsor": "Danish Headache Center",
       "count": 5
     },
     {
@@ -116,27 +112,15 @@
       "count": 5
     },
     {
+      "sponsor": "Norwegian University of Science and Technology",
+      "count": 5
+    },
+    {
       "sponsor": "Autonomic Technologies, Inc.",
       "count": 4
     },
     {
-      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
-      "count": 3
-    },
-    {
-      "sponsor": "University Hospital, Ghent",
-      "count": 3
-    },
-    {
-      "sponsor": "Beijing Tiantan Hospital",
-      "count": 3
-    },
-    {
       "sponsor": "ElectroCore INC",
-      "count": 3
-    },
-    {
-      "sponsor": "Centre Hospitalier Universitaire de Nice",
       "count": 3
     },
     {
@@ -148,28 +132,44 @@
       "count": 3
     },
     {
+      "sponsor": "Salvia BioElectronics",
+      "count": 3
+    },
+    {
+      "sponsor": "Beijing Tiantan Hospital",
+      "count": 3
+    },
+    {
+      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
+      "count": 3
+    },
+    {
+      "sponsor": "Centre Hospitalier Universitaire de Nice",
+      "count": 3
+    },
+    {
+      "sponsor": "University Hospital, Ghent",
+      "count": 3
+    },
+    {
       "sponsor": "Eli Lilly and Company",
       "count": 3
     },
     {
-      "sponsor": "Charite University, Berlin, Germany",
-      "count": 2
-    },
-    {
-      "sponsor": "Salvia BioElectronics",
+      "sponsor": "Winston Laboratories",
       "count": 2
     }
   ],
   "avg_enrollment_by_category": {
-    "nerve-block": 55,
-    "cgrp": 156,
     "other": 66,
-    "neuromodulation": 38,
-    "psychedelic": 41,
-    "observational": 1829,
+    "neuromodulation": 48,
+    "cgrp": 156,
     "oxygen": 56,
     "pharmacology": 43,
-    "non-pharma": 235,
-    "vitamin-d": 27
+    "observational": 1829,
+    "psychedelic": 41,
+    "nerve-block": 55,
+    "vitamin-d": 27,
+    "non-pharma": 235
   }
 }
