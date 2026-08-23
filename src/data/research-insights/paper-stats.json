@@ -1,6 +1,6 @@
 {
-  "total_papers": 4456,
-  "with_abstracts": 3414,
+  "total_papers": 4457,
+  "with_abstracts": 3415,
   "study_type_distribution": [
     {
       "type": "other",
@@ -16,7 +16,7 @@
     },
     {
       "type": "observational",
-      "count": 262
+      "count": 263
     },
     {
       "type": "rct",
@@ -66,7 +66,7 @@
     },
     {
       "result": "mixed",
-      "count": 222
+      "count": 223
     },
     {
       "result": "negative",
@@ -84,7 +84,7 @@
     },
     {
       "tier": 3,
-      "count": 561
+      "count": 562
     },
     {
       "tier": 4,
@@ -174,7 +174,7 @@
     "2023": 109,
     "2024": 120,
     "2025": 128,
-    "2026": 104
+    "2026": 105
   },
   "category_results": {
     "observational": [
@@ -192,7 +192,7 @@
       },
       {
         "result": "mixed",
-        "count": 16
+        "count": 17
       },
       {
         "result": "unknown",
@@ -402,7 +402,7 @@
       },
       {
         "type": "observational",
-        "count": 107
+        "count": 108
       },
       {
         "type": "other",
@@ -898,7 +898,7 @@
       "2023": 14,
       "2024": 23,
       "2025": 27,
-      "2026": 19
+      "2026": 20
     },
     "nerve-block": {
       "1950": 1,
