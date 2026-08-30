@@ -1,9 +1,9 @@
 {
-  "total_trials": 110,
+  "total_trials": 111,
   "status_distribution": [
     {
       "status": "COMPLETED",
-      "count": 68
+      "count": 69
     },
     {
       "status": "TERMINATED",
@@ -26,11 +26,11 @@
       "count": 2
     },
     {
-      "status": "SUSPENDED",
+      "status": "WITHDRAWN",
       "count": 1
     },
     {
-      "status": "WITHDRAWN",
+      "status": "SUSPENDED",
       "count": 1
     }
   ],
@@ -57,7 +57,7 @@
     },
     {
       "category": "pharmacology",
-      "count": 8
+      "count": 9
     },
     {
       "category": "psychedelic",
@@ -101,10 +101,10 @@
   "top_sponsors": [
     {
       "sponsor": "Leiden University Medical Center",
-      "count": 5
+      "count": 6
     },
     {
-      "sponsor": "Norwegian University of Science and Technology",
+      "sponsor": "The University of Texas Health Science Center, Houston",
       "count": 5
     },
     {
@@ -112,7 +112,7 @@
       "count": 5
     },
     {
-      "sponsor": "The University of Texas Health Science Center, Houston",
+      "sponsor": "Norwegian University of Science and Technology",
       "count": 5
     },
     {
@@ -120,31 +120,7 @@
       "count": 4
     },
     {
-      "sponsor": "University Hospital, Ghent",
-      "count": 3
-    },
-    {
-      "sponsor": "Eli Lilly and Company",
-      "count": 3
-    },
-    {
-      "sponsor": "Thomas Jefferson University",
-      "count": 3
-    },
-    {
       "sponsor": "Assistance Publique Hopitaux De Marseille",
-      "count": 3
-    },
-    {
-      "sponsor": "Centre Hospitalier Universitaire de Nice",
-      "count": 3
-    },
-    {
-      "sponsor": "Salvia BioElectronics",
-      "count": 3
-    },
-    {
-      "sponsor": "ElectroCore INC",
       "count": 3
     },
     {
@@ -156,20 +132,44 @@
       "count": 3
     },
     {
-      "sponsor": "Karolinska Institutet",
+      "sponsor": "University Hospital, Ghent",
+      "count": 3
+    },
+    {
+      "sponsor": "Centre Hospitalier Universitaire de Nice",
+      "count": 3
+    },
+    {
+      "sponsor": "Thomas Jefferson University",
+      "count": 3
+    },
+    {
+      "sponsor": "Eli Lilly and Company",
+      "count": 3
+    },
+    {
+      "sponsor": "ElectroCore INC",
+      "count": 3
+    },
+    {
+      "sponsor": "Salvia BioElectronics",
+      "count": 3
+    },
+    {
+      "sponsor": "Winston Laboratories",
       "count": 2
     }
   ],
   "avg_enrollment_by_category": {
-    "pharmacology": 43,
-    "observational": 1829,
     "non-pharma": 235,
     "other": 75,
     "nerve-block": 55,
-    "oxygen": 56,
-    "psychedelic": 41,
-    "cgrp": 156,
     "neuromodulation": 48,
-    "vitamin-d": 27
+    "cgrp": 156,
+    "vitamin-d": 27,
+    "pharmacology": 40,
+    "psychedelic": 41,
+    "observational": 1829,
+    "oxygen": 56
   }
 }
