@@ -1,5 +1,5 @@
 {
-  "total_trials": 111,
+  "total_trials": 110,
   "status_distribution": [
     {
       "status": "COMPLETED",
@@ -14,11 +14,11 @@
       "count": 15
     },
     {
-      "status": "NOT_YET_RECRUITING",
-      "count": 4
+      "status": "ACTIVE_NOT_RECRUITING",
+      "count": 3
     },
     {
-      "status": "ACTIVE_NOT_RECRUITING",
+      "status": "NOT_YET_RECRUITING",
       "count": 3
     },
     {
@@ -26,18 +26,18 @@
       "count": 2
     },
     {
-      "status": "WITHDRAWN",
+      "status": "SUSPENDED",
       "count": 1
     },
     {
-      "status": "SUSPENDED",
+      "status": "WITHDRAWN",
       "count": 1
     }
   ],
   "category_distribution": [
     {
       "category": "other",
-      "count": 28
+      "count": 27
     },
     {
       "category": "nerve-block",
@@ -108,11 +108,11 @@
       "count": 5
     },
     {
-      "sponsor": "Danish Headache Center",
+      "sponsor": "Norwegian University of Science and Technology",
       "count": 5
     },
     {
-      "sponsor": "Norwegian University of Science and Technology",
+      "sponsor": "Danish Headache Center",
       "count": 5
     },
     {
@@ -120,11 +120,19 @@
       "count": 4
     },
     {
-      "sponsor": "Assistance Publique Hopitaux De Marseille",
+      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
       "count": 3
     },
     {
-      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
+      "sponsor": "University Hospital, Ghent",
+      "count": 3
+    },
+    {
+      "sponsor": "ElectroCore INC",
+      "count": 3
+    },
+    {
+      "sponsor": "Assistance Publique Hopitaux De Marseille",
       "count": 3
     },
     {
@@ -132,7 +140,11 @@
       "count": 3
     },
     {
-      "sponsor": "University Hospital, Ghent",
+      "sponsor": "Eli Lilly and Company",
+      "count": 3
+    },
+    {
+      "sponsor": "Salvia BioElectronics",
       "count": 3
     },
     {
@@ -144,32 +156,20 @@
       "count": 3
     },
     {
-      "sponsor": "Eli Lilly and Company",
-      "count": 3
-    },
-    {
-      "sponsor": "ElectroCore INC",
-      "count": 3
-    },
-    {
-      "sponsor": "Salvia BioElectronics",
-      "count": 3
-    },
-    {
-      "sponsor": "Winston Laboratories",
+      "sponsor": "University of Roma La Sapienza",
       "count": 2
     }
   ],
   "avg_enrollment_by_category": {
-    "non-pharma": 235,
-    "other": 75,
-    "nerve-block": 55,
-    "neuromodulation": 48,
-    "cgrp": 156,
-    "vitamin-d": 27,
     "pharmacology": 40,
-    "psychedelic": 41,
+    "nerve-block": 55,
+    "oxygen": 56,
+    "cgrp": 156,
     "observational": 1829,
-    "oxygen": 56
+    "non-pharma": 235,
+    "psychedelic": 41,
+    "neuromodulation": 48,
+    "other": 59,
+    "vitamin-d": 27
   }
 }

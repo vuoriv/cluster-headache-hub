@@ -1,10 +1,10 @@
 {
-  "total_papers": 4461,
-  "with_abstracts": 3419,
+  "total_papers": 4464,
+  "with_abstracts": 3421,
   "study_type_distribution": [
     {
       "type": "other",
-      "count": 1617
+      "count": 1618
     },
     {
       "type": "basic-science",
@@ -16,11 +16,11 @@
     },
     {
       "type": "observational",
-      "count": 263
+      "count": 264
     },
     {
       "type": "rct",
-      "count": 231
+      "count": 232
     },
     {
       "type": "review",
@@ -54,7 +54,7 @@
   "result_distribution": [
     {
       "result": "inconclusive",
-      "count": 2014
+      "count": 2016
     },
     {
       "result": "positive",
@@ -62,7 +62,7 @@
     },
     {
       "result": "unknown",
-      "count": 1042
+      "count": 1043
     },
     {
       "result": "mixed",
@@ -80,11 +80,11 @@
     },
     {
       "tier": 2,
-      "count": 408
+      "count": 409
     },
     {
       "tier": 3,
-      "count": 564
+      "count": 565
     },
     {
       "tier": 4,
@@ -92,7 +92,7 @@
     },
     {
       "tier": 5,
-      "count": 2481
+      "count": 2482
     }
   ],
   "papers_per_year": {
@@ -174,13 +174,13 @@
     "2023": 109,
     "2024": 120,
     "2025": 128,
-    "2026": 109
+    "2026": 112
   },
   "category_results": {
     "non-pharma": [
       {
         "result": "inconclusive",
-        "count": 159
+        "count": 160
       },
       {
         "result": "positive",
@@ -206,7 +206,7 @@
       },
       {
         "result": "unknown",
-        "count": 798
+        "count": 799
       },
       {
         "result": "positive",
@@ -219,6 +219,28 @@
       {
         "result": "negative",
         "count": 37
+      }
+    ],
+    "pharmacology": [
+      {
+        "result": "inconclusive",
+        "count": 128
+      },
+      {
+        "result": "positive",
+        "count": 122
+      },
+      {
+        "result": "unknown",
+        "count": 82
+      },
+      {
+        "result": "mixed",
+        "count": 28
+      },
+      {
+        "result": "negative",
+        "count": 10
       }
     ],
     "cgrp": [
@@ -285,28 +307,6 @@
       {
         "result": "negative",
         "count": 16
-      }
-    ],
-    "pharmacology": [
-      {
-        "result": "inconclusive",
-        "count": 127
-      },
-      {
-        "result": "positive",
-        "count": 122
-      },
-      {
-        "result": "unknown",
-        "count": 82
-      },
-      {
-        "result": "mixed",
-        "count": 28
-      },
-      {
-        "result": "negative",
-        "count": 10
       }
     ],
     "neuromodulation": [
@@ -425,15 +425,15 @@
         "count": 8
       },
       {
+        "type": "rct",
+        "count": 7
+      },
+      {
         "type": "systematic-review",
         "count": 7
       },
       {
         "type": "meta-analysis",
-        "count": 6
-      },
-      {
-        "type": "rct",
         "count": 6
       },
       {
@@ -444,7 +444,7 @@
     "other": [
       {
         "type": "other",
-        "count": 1000
+        "count": 1001
       },
       {
         "type": "basic-science",
@@ -489,6 +489,52 @@
       {
         "type": "systematic-review",
         "count": 8
+      }
+    ],
+    "pharmacology": [
+      {
+        "type": "other",
+        "count": 137
+      },
+      {
+        "type": "basic-science",
+        "count": 103
+      },
+      {
+        "type": "case-report",
+        "count": 36
+      },
+      {
+        "type": "rct",
+        "count": 26
+      },
+      {
+        "type": "clinical-trial",
+        "count": 17
+      },
+      {
+        "type": "observational",
+        "count": 16
+      },
+      {
+        "type": "case-series",
+        "count": 12
+      },
+      {
+        "type": "review",
+        "count": 11
+      },
+      {
+        "type": "meta-analysis",
+        "count": 5
+      },
+      {
+        "type": "systematic-review",
+        "count": 4
+      },
+      {
+        "type": "guideline",
+        "count": 3
       }
     ],
     "cgrp": [
@@ -631,52 +677,6 @@
       {
         "type": "meta-analysis",
         "count": 8
-      }
-    ],
-    "pharmacology": [
-      {
-        "type": "other",
-        "count": 137
-      },
-      {
-        "type": "basic-science",
-        "count": 103
-      },
-      {
-        "type": "case-report",
-        "count": 36
-      },
-      {
-        "type": "rct",
-        "count": 26
-      },
-      {
-        "type": "clinical-trial",
-        "count": 17
-      },
-      {
-        "type": "observational",
-        "count": 15
-      },
-      {
-        "type": "case-series",
-        "count": 12
-      },
-      {
-        "type": "review",
-        "count": 11
-      },
-      {
-        "type": "meta-analysis",
-        "count": 5
-      },
-      {
-        "type": "systematic-review",
-        "count": 4
-      },
-      {
-        "type": "guideline",
-        "count": 3
       }
     ],
     "neuromodulation": [
@@ -837,12 +837,12 @@
     ]
   },
   "category_avg_evidence": {
-    "non-pharma": 3.87,
+    "non-pharma": 3.86,
     "other": 4.53,
+    "pharmacology": 4.28,
     "cgrp": 3.33,
     "observational": 3.77,
     "nerve-block": 3.78,
-    "pharmacology": 4.28,
     "neuromodulation": 3.98,
     "psychedelic": 2.9,
     "oxygen": 3.99,
@@ -898,7 +898,7 @@
       "2023": 4,
       "2024": 8,
       "2025": 13,
-      "2026": 13
+      "2026": 14
     },
     "other": {
       "1946": 1,
@@ -979,7 +979,61 @@
       "2023": 33,
       "2024": 28,
       "2025": 30,
-      "2026": 19
+      "2026": 20
+    },
+    "pharmacology": {
+      "1974": 1,
+      "1976": 1,
+      "1977": 2,
+      "1978": 6,
+      "1979": 7,
+      "1980": 9,
+      "1981": 5,
+      "1982": 6,
+      "1983": 10,
+      "1984": 10,
+      "1985": 8,
+      "1986": 6,
+      "1987": 5,
+      "1988": 4,
+      "1989": 7,
+      "1990": 3,
+      "1991": 6,
+      "1992": 4,
+      "1993": 6,
+      "1994": 6,
+      "1995": 6,
+      "1996": 4,
+      "1997": 3,
+      "1998": 6,
+      "1999": 4,
+      "2000": 7,
+      "2001": 9,
+      "2002": 15,
+      "2003": 13,
+      "2004": 13,
+      "2005": 14,
+      "2006": 15,
+      "2007": 11,
+      "2008": 8,
+      "2009": 7,
+      "2010": 6,
+      "2011": 9,
+      "2012": 7,
+      "2013": 10,
+      "2014": 4,
+      "2015": 10,
+      "2016": 11,
+      "2017": 5,
+      "2018": 7,
+      "2019": 5,
+      "2020": 7,
+      "2021": 8,
+      "2022": 7,
+      "2023": 7,
+      "2024": 9,
+      "2025": 4,
+      "2026": 7
     },
     "cgrp": {
       "1988": 1,
@@ -1124,60 +1178,6 @@
       "2024": 17,
       "2025": 12,
       "2026": 26
-    },
-    "pharmacology": {
-      "1974": 1,
-      "1976": 1,
-      "1977": 2,
-      "1978": 6,
-      "1979": 7,
-      "1980": 9,
-      "1981": 5,
-      "1982": 6,
-      "1983": 10,
-      "1984": 10,
-      "1985": 8,
-      "1986": 6,
-      "1987": 5,
-      "1988": 4,
-      "1989": 7,
-      "1990": 3,
-      "1991": 6,
-      "1992": 4,
-      "1993": 6,
-      "1994": 6,
-      "1995": 6,
-      "1996": 4,
-      "1997": 3,
-      "1998": 6,
-      "1999": 4,
-      "2000": 7,
-      "2001": 9,
-      "2002": 15,
-      "2003": 13,
-      "2004": 13,
-      "2005": 14,
-      "2006": 15,
-      "2007": 11,
-      "2008": 8,
-      "2009": 7,
-      "2010": 6,
-      "2011": 9,
-      "2012": 7,
-      "2013": 10,
-      "2014": 4,
-      "2015": 10,
-      "2016": 11,
-      "2017": 5,
-      "2018": 7,
-      "2019": 5,
-      "2020": 7,
-      "2021": 8,
-      "2022": 7,
-      "2023": 7,
-      "2024": 9,
-      "2025": 4,
-      "2026": 6
     },
     "neuromodulation": {
       "1978": 1,
