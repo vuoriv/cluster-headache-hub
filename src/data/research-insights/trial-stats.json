@@ -1,5 +1,5 @@
 {
-  "total_trials": 110,
+  "total_trials": 111,
   "status_distribution": [
     {
       "status": "COMPLETED",
@@ -11,7 +11,7 @@
     },
     {
       "status": "RECRUITING",
-      "count": 15
+      "count": 16
     },
     {
       "status": "ACTIVE_NOT_RECRUITING",
@@ -26,11 +26,11 @@
       "count": 2
     },
     {
-      "status": "SUSPENDED",
+      "status": "WITHDRAWN",
       "count": 1
     },
     {
-      "status": "WITHDRAWN",
+      "status": "SUSPENDED",
       "count": 1
     }
   ],
@@ -53,7 +53,7 @@
     },
     {
       "category": "observational",
-      "count": 10
+      "count": 11
     },
     {
       "category": "pharmacology",
@@ -108,11 +108,11 @@
       "count": 5
     },
     {
-      "sponsor": "Norwegian University of Science and Technology",
+      "sponsor": "Danish Headache Center",
       "count": 5
     },
     {
-      "sponsor": "Danish Headache Center",
+      "sponsor": "Norwegian University of Science and Technology",
       "count": 5
     },
     {
@@ -124,11 +124,7 @@
       "count": 3
     },
     {
-      "sponsor": "University Hospital, Ghent",
-      "count": 3
-    },
-    {
-      "sponsor": "ElectroCore INC",
+      "sponsor": "Salvia BioElectronics",
       "count": 3
     },
     {
@@ -136,15 +132,19 @@
       "count": 3
     },
     {
+      "sponsor": "ElectroCore INC",
+      "count": 3
+    },
+    {
       "sponsor": "Beijing Tiantan Hospital",
       "count": 3
     },
     {
-      "sponsor": "Eli Lilly and Company",
+      "sponsor": "University Hospital, Ghent",
       "count": 3
     },
     {
-      "sponsor": "Salvia BioElectronics",
+      "sponsor": "Eli Lilly and Company",
       "count": 3
     },
     {
@@ -156,20 +156,20 @@
       "count": 3
     },
     {
-      "sponsor": "University of Roma La Sapienza",
+      "sponsor": "Karolinska Institutet",
       "count": 2
     }
   ],
   "avg_enrollment_by_category": {
     "pharmacology": 40,
-    "nerve-block": 55,
-    "oxygen": 56,
-    "cgrp": 156,
-    "observational": 1829,
-    "non-pharma": 235,
-    "psychedelic": 41,
-    "neuromodulation": 48,
     "other": 59,
+    "nerve-block": 55,
+    "cgrp": 156,
+    "non-pharma": 235,
+    "neuromodulation": 48,
+    "observational": 1735,
+    "psychedelic": 41,
+    "oxygen": 56,
     "vitamin-d": 27
   }
 }
