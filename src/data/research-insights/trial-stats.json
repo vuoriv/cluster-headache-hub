@@ -6,19 +6,19 @@
       "count": 69
     },
     {
-      "status": "TERMINATED",
-      "count": 16
-    },
-    {
       "status": "RECRUITING",
       "count": 16
     },
     {
-      "status": "ACTIVE_NOT_RECRUITING",
-      "count": 3
+      "status": "TERMINATED",
+      "count": 16
     },
     {
       "status": "NOT_YET_RECRUITING",
+      "count": 3
+    },
+    {
+      "status": "ACTIVE_NOT_RECRUITING",
       "count": 3
     },
     {
@@ -120,7 +120,7 @@
       "count": 4
     },
     {
-      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
+      "sponsor": "University Hospital, Ghent",
       "count": 3
     },
     {
@@ -128,23 +128,15 @@
       "count": 3
     },
     {
-      "sponsor": "Assistance Publique Hopitaux De Marseille",
+      "sponsor": "Eli Lilly and Company",
       "count": 3
     },
     {
-      "sponsor": "ElectroCore INC",
+      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
       "count": 3
     },
     {
       "sponsor": "Beijing Tiantan Hospital",
-      "count": 3
-    },
-    {
-      "sponsor": "University Hospital, Ghent",
-      "count": 3
-    },
-    {
-      "sponsor": "Eli Lilly and Company",
       "count": 3
     },
     {
@@ -156,6 +148,14 @@
       "count": 3
     },
     {
+      "sponsor": "Assistance Publique Hopitaux De Marseille",
+      "count": 3
+    },
+    {
+      "sponsor": "ElectroCore INC",
+      "count": 3
+    },
+    {
       "sponsor": "Karolinska Institutet",
       "count": 2
     }
@@ -163,13 +163,13 @@
   "avg_enrollment_by_category": {
     "pharmacology": 40,
     "other": 59,
-    "nerve-block": 55,
-    "cgrp": 156,
-    "non-pharma": 235,
-    "neuromodulation": 48,
     "observational": 1735,
-    "psychedelic": 41,
+    "nerve-block": 55,
+    "neuromodulation": 48,
+    "cgrp": 156,
     "oxygen": 56,
+    "non-pharma": 235,
+    "psychedelic": 41,
     "vitamin-d": 27
   }
 }

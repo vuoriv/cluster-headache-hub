@@ -1,14 +1,14 @@
 {
-  "total_papers": 4466,
-  "with_abstracts": 3423,
+  "total_papers": 4470,
+  "with_abstracts": 3426,
   "study_type_distribution": [
     {
       "type": "other",
-      "count": 1618
+      "count": 1620
     },
     {
       "type": "basic-science",
-      "count": 1373
+      "count": 1374
     },
     {
       "type": "observational",
@@ -20,7 +20,7 @@
     },
     {
       "type": "rct",
-      "count": 232
+      "count": 233
     },
     {
       "type": "review",
@@ -54,15 +54,15 @@
   "result_distribution": [
     {
       "result": "inconclusive",
-      "count": 2018
+      "count": 2019
     },
     {
       "result": "positive",
-      "count": 1050
+      "count": 1051
     },
     {
       "result": "unknown",
-      "count": 1043
+      "count": 1044
     },
     {
       "result": "mixed",
@@ -70,13 +70,13 @@
     },
     {
       "result": "negative",
-      "count": 132
+      "count": 133
     }
   ],
   "evidence_tier_distribution": [
     {
       "tier": 1,
-      "count": 159
+      "count": 160
     },
     {
       "tier": 2,
@@ -88,11 +88,11 @@
     },
     {
       "tier": 4,
-      "count": 850
+      "count": 851
     },
     {
       "tier": 5,
-      "count": 2482
+      "count": 2484
     }
   ],
   "papers_per_year": {
@@ -171,10 +171,10 @@
     "2020": 157,
     "2021": 130,
     "2022": 130,
-    "2023": 109,
-    "2024": 120,
-    "2025": 128,
-    "2026": 114
+    "2023": 112,
+    "2024": 121,
+    "2025": 130,
+    "2026": 112
   },
   "category_results": {
     "other": [
@@ -188,7 +188,7 @@
       },
       {
         "result": "positive",
-        "count": 222
+        "count": 223
       },
       {
         "result": "mixed",
@@ -206,7 +206,7 @@
       },
       {
         "result": "inconclusive",
-        "count": 85
+        "count": 86
       },
       {
         "result": "mixed",
@@ -214,11 +214,33 @@
       },
       {
         "result": "unknown",
-        "count": 11
+        "count": 12
       },
       {
         "result": "negative",
         "count": 8
+      }
+    ],
+    "observational": [
+      {
+        "result": "inconclusive",
+        "count": 359
+      },
+      {
+        "result": "positive",
+        "count": 72
+      },
+      {
+        "result": "negative",
+        "count": 30
+      },
+      {
+        "result": "mixed",
+        "count": 17
+      },
+      {
+        "result": "unknown",
+        "count": 13
       }
     ],
     "non-pharma": [
@@ -263,28 +285,6 @@
       {
         "result": "negative",
         "count": 10
-      }
-    ],
-    "observational": [
-      {
-        "result": "inconclusive",
-        "count": 359
-      },
-      {
-        "result": "positive",
-        "count": 72
-      },
-      {
-        "result": "negative",
-        "count": 29
-      },
-      {
-        "result": "mixed",
-        "count": 17
-      },
-      {
-        "result": "unknown",
-        "count": 13
       }
     ],
     "nerve-block": [
@@ -402,7 +402,7 @@
       },
       {
         "type": "basic-science",
-        "count": 506
+        "count": 507
       },
       {
         "type": "case-report",
@@ -456,7 +456,7 @@
       },
       {
         "type": "other",
-        "count": 33
+        "count": 35
       },
       {
         "type": "clinical-trial",
@@ -493,6 +493,52 @@
       {
         "type": "case-series",
         "count": 2
+      }
+    ],
+    "observational": [
+      {
+        "type": "basic-science",
+        "count": 185
+      },
+      {
+        "type": "observational",
+        "count": 108
+      },
+      {
+        "type": "other",
+        "count": 107
+      },
+      {
+        "type": "review",
+        "count": 21
+      },
+      {
+        "type": "case-series",
+        "count": 16
+      },
+      {
+        "type": "meta-analysis",
+        "count": 14
+      },
+      {
+        "type": "case-report",
+        "count": 11
+      },
+      {
+        "type": "clinical-trial",
+        "count": 11
+      },
+      {
+        "type": "guideline",
+        "count": 8
+      },
+      {
+        "type": "rct",
+        "count": 5
+      },
+      {
+        "type": "systematic-review",
+        "count": 5
       }
     ],
     "non-pharma": [
@@ -585,52 +631,6 @@
       {
         "type": "guideline",
         "count": 3
-      }
-    ],
-    "observational": [
-      {
-        "type": "basic-science",
-        "count": 185
-      },
-      {
-        "type": "observational",
-        "count": 108
-      },
-      {
-        "type": "other",
-        "count": 107
-      },
-      {
-        "type": "review",
-        "count": 21
-      },
-      {
-        "type": "case-series",
-        "count": 16
-      },
-      {
-        "type": "meta-analysis",
-        "count": 14
-      },
-      {
-        "type": "case-report",
-        "count": 11
-      },
-      {
-        "type": "clinical-trial",
-        "count": 11
-      },
-      {
-        "type": "guideline",
-        "count": 8
-      },
-      {
-        "type": "systematic-review",
-        "count": 5
-      },
-      {
-        "type": "rct",
-        "count": 4
       }
     ],
     "nerve-block": [
@@ -838,10 +838,10 @@
   },
   "category_avg_evidence": {
     "other": 4.53,
-    "cgrp": 3.33,
+    "cgrp": 3.35,
+    "observational": 3.76,
     "non-pharma": 3.86,
     "pharmacology": 4.28,
-    "observational": 3.77,
     "nerve-block": 3.78,
     "neuromodulation": 3.98,
     "psychedelic": 2.9,
@@ -925,10 +925,10 @@
       "2020": 41,
       "2021": 29,
       "2022": 41,
-      "2023": 33,
-      "2024": 28,
-      "2025": 30,
-      "2026": 21
+      "2023": 35,
+      "2024": 29,
+      "2025": 31,
+      "2026": 18
     },
     "cgrp": {
       "1988": 1,
@@ -968,7 +968,58 @@
       "2023": 8,
       "2024": 16,
       "2025": 22,
-      "2026": 14
+      "2026": 16
+    },
+    "observational": {
+      "1958": 1,
+      "1975": 2,
+      "1976": 2,
+      "1977": 2,
+      "1979": 1,
+      "1980": 2,
+      "1981": 4,
+      "1982": 3,
+      "1984": 4,
+      "1987": 4,
+      "1988": 3,
+      "1989": 8,
+      "1990": 7,
+      "1991": 10,
+      "1992": 4,
+      "1993": 6,
+      "1994": 9,
+      "1995": 14,
+      "1996": 5,
+      "1997": 10,
+      "1998": 1,
+      "1999": 9,
+      "2000": 10,
+      "2001": 1,
+      "2002": 9,
+      "2003": 10,
+      "2004": 9,
+      "2005": 15,
+      "2006": 9,
+      "2007": 9,
+      "2008": 11,
+      "2009": 13,
+      "2010": 15,
+      "2011": 9,
+      "2012": 7,
+      "2013": 9,
+      "2014": 12,
+      "2015": 13,
+      "2016": 16,
+      "2017": 17,
+      "2018": 26,
+      "2019": 16,
+      "2020": 22,
+      "2021": 20,
+      "2022": 17,
+      "2023": 14,
+      "2024": 23,
+      "2025": 27,
+      "2026": 21
     },
     "non-pharma": {
       "1960": 1,
@@ -1075,57 +1126,6 @@
       "2025": 4,
       "2026": 7
     },
-    "observational": {
-      "1958": 1,
-      "1975": 2,
-      "1976": 2,
-      "1977": 2,
-      "1979": 1,
-      "1980": 2,
-      "1981": 4,
-      "1982": 3,
-      "1984": 4,
-      "1987": 4,
-      "1988": 3,
-      "1989": 8,
-      "1990": 7,
-      "1991": 10,
-      "1992": 4,
-      "1993": 6,
-      "1994": 9,
-      "1995": 14,
-      "1996": 5,
-      "1997": 10,
-      "1998": 1,
-      "1999": 9,
-      "2000": 10,
-      "2001": 1,
-      "2002": 9,
-      "2003": 10,
-      "2004": 9,
-      "2005": 15,
-      "2006": 9,
-      "2007": 9,
-      "2008": 11,
-      "2009": 13,
-      "2010": 15,
-      "2011": 9,
-      "2012": 7,
-      "2013": 9,
-      "2014": 12,
-      "2015": 13,
-      "2016": 16,
-      "2017": 17,
-      "2018": 26,
-      "2019": 16,
-      "2020": 22,
-      "2021": 20,
-      "2022": 17,
-      "2023": 14,
-      "2024": 23,
-      "2025": 27,
-      "2026": 20
-    },
     "nerve-block": {
       "1950": 1,
       "1970": 1,
@@ -1174,10 +1174,10 @@
       "2020": 25,
       "2021": 27,
       "2022": 16,
-      "2023": 15,
+      "2023": 16,
       "2024": 17,
-      "2025": 12,
-      "2026": 26
+      "2025": 13,
+      "2026": 24
     },
     "neuromodulation": {
       "1978": 1,
