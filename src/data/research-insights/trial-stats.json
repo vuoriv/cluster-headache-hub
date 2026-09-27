@@ -6,11 +6,11 @@
       "count": 69
     },
     {
-      "status": "RECRUITING",
+      "status": "TERMINATED",
       "count": 16
     },
     {
-      "status": "TERMINATED",
+      "status": "RECRUITING",
       "count": 16
     },
     {
@@ -104,7 +104,7 @@
       "count": 6
     },
     {
-      "sponsor": "The University of Texas Health Science Center, Houston",
+      "sponsor": "Norwegian University of Science and Technology",
       "count": 5
     },
     {
@@ -112,7 +112,7 @@
       "count": 5
     },
     {
-      "sponsor": "Norwegian University of Science and Technology",
+      "sponsor": "The University of Texas Health Science Center, Houston",
       "count": 5
     },
     {
@@ -120,27 +120,15 @@
       "count": 4
     },
     {
-      "sponsor": "University Hospital, Ghent",
-      "count": 3
-    },
-    {
-      "sponsor": "Salvia BioElectronics",
-      "count": 3
-    },
-    {
       "sponsor": "Eli Lilly and Company",
       "count": 3
     },
     {
-      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
+      "sponsor": "University Hospital, Ghent",
       "count": 3
     },
     {
       "sponsor": "Beijing Tiantan Hospital",
-      "count": 3
-    },
-    {
-      "sponsor": "Centre Hospitalier Universitaire de Nice",
       "count": 3
     },
     {
@@ -152,24 +140,36 @@
       "count": 3
     },
     {
+      "sponsor": "Centre Hospitalier Universitaire de Nice",
+      "count": 3
+    },
+    {
       "sponsor": "ElectroCore INC",
       "count": 3
     },
     {
-      "sponsor": "Karolinska Institutet",
+      "sponsor": "Salvia BioElectronics",
+      "count": 3
+    },
+    {
+      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
+      "count": 3
+    },
+    {
+      "sponsor": "University of Roma La Sapienza",
       "count": 2
     }
   ],
   "avg_enrollment_by_category": {
-    "pharmacology": 40,
-    "other": 59,
-    "observational": 1735,
-    "nerve-block": 55,
     "neuromodulation": 48,
     "cgrp": 156,
-    "oxygen": 56,
-    "non-pharma": 235,
+    "nerve-block": 55,
     "psychedelic": 41,
+    "other": 59,
+    "pharmacology": 40,
+    "observational": 1735,
+    "non-pharma": 235,
+    "oxygen": 56,
     "vitamin-d": 27
   }
 }
