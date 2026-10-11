@@ -6,19 +6,19 @@
       "count": 69
     },
     {
-      "status": "RECRUITING",
-      "count": 16
-    },
-    {
       "status": "TERMINATED",
       "count": 16
     },
     {
-      "status": "NOT_YET_RECRUITING",
-      "count": 3
+      "status": "RECRUITING",
+      "count": 16
     },
     {
       "status": "ACTIVE_NOT_RECRUITING",
+      "count": 3
+    },
+    {
+      "status": "NOT_YET_RECRUITING",
       "count": 3
     },
     {
@@ -26,11 +26,11 @@
       "count": 2
     },
     {
-      "status": "WITHDRAWN",
+      "status": "SUSPENDED",
       "count": 1
     },
     {
-      "status": "SUSPENDED",
+      "status": "WITHDRAWN",
       "count": 1
     }
   ],
@@ -104,7 +104,7 @@
       "count": 6
     },
     {
-      "sponsor": "The University of Texas Health Science Center, Houston",
+      "sponsor": "Danish Headache Center",
       "count": 5
     },
     {
@@ -112,7 +112,7 @@
       "count": 5
     },
     {
-      "sponsor": "Danish Headache Center",
+      "sponsor": "The University of Texas Health Science Center, Houston",
       "count": 5
     },
     {
@@ -120,19 +120,23 @@
       "count": 4
     },
     {
-      "sponsor": "Eli Lilly and Company",
-      "count": 3
-    },
-    {
-      "sponsor": "Assistance Publique Hopitaux De Marseille",
-      "count": 3
-    },
-    {
       "sponsor": "ElectroCore INC",
       "count": 3
     },
     {
+      "sponsor": "University Hospital, Ghent",
+      "count": 3
+    },
+    {
       "sponsor": "Beijing Tiantan Hospital",
+      "count": 3
+    },
+    {
+      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
+      "count": 3
+    },
+    {
+      "sponsor": "Assistance Publique Hopitaux De Marseille",
       "count": 3
     },
     {
@@ -144,7 +148,7 @@
       "count": 3
     },
     {
-      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
+      "sponsor": "Eli Lilly and Company",
       "count": 3
     },
     {
@@ -152,24 +156,20 @@
       "count": 3
     },
     {
-      "sponsor": "University Hospital, Ghent",
-      "count": 3
-    },
-    {
-      "sponsor": "University of Roma La Sapienza",
+      "sponsor": "H. Lundbeck A/S",
       "count": 2
     }
   ],
   "avg_enrollment_by_category": {
+    "other": 59,
+    "neuromodulation": 48,
+    "observational": 1735,
+    "cgrp": 156,
+    "oxygen": 56,
+    "nerve-block": 55,
     "psychedelic": 41,
     "pharmacology": 40,
-    "cgrp": 156,
-    "nerve-block": 55,
-    "other": 59,
-    "non-pharma": 235,
-    "observational": 1735,
-    "neuromodulation": 48,
-    "oxygen": 56,
-    "vitamin-d": 27
+    "vitamin-d": 27,
+    "non-pharma": 235
   }
 }
