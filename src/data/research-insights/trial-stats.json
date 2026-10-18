@@ -1,16 +1,16 @@
 {
-  "total_trials": 111,
+  "total_trials": 112,
   "status_distribution": [
     {
       "status": "COMPLETED",
       "count": 69
     },
     {
-      "status": "TERMINATED",
-      "count": 16
+      "status": "RECRUITING",
+      "count": 17
     },
     {
-      "status": "RECRUITING",
+      "status": "TERMINATED",
       "count": 16
     },
     {
@@ -49,7 +49,7 @@
     },
     {
       "category": "neuromodulation",
-      "count": 12
+      "count": 13
     },
     {
       "category": "observational",
@@ -79,7 +79,7 @@
   "phase_distribution": [
     {
       "phase": "NA",
-      "count": 44
+      "count": 45
     },
     {
       "phase": "PHASE2",
@@ -104,11 +104,11 @@
       "count": 6
     },
     {
-      "sponsor": "Danish Headache Center",
+      "sponsor": "Norwegian University of Science and Technology",
       "count": 5
     },
     {
-      "sponsor": "Norwegian University of Science and Technology",
+      "sponsor": "Danish Headache Center",
       "count": 5
     },
     {
@@ -124,23 +124,7 @@
       "count": 3
     },
     {
-      "sponsor": "University Hospital, Ghent",
-      "count": 3
-    },
-    {
-      "sponsor": "Beijing Tiantan Hospital",
-      "count": 3
-    },
-    {
-      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
-      "count": 3
-    },
-    {
-      "sponsor": "Assistance Publique Hopitaux De Marseille",
-      "count": 3
-    },
-    {
-      "sponsor": "Salvia BioElectronics",
+      "sponsor": "Eli Lilly and Company",
       "count": 3
     },
     {
@@ -148,7 +132,23 @@
       "count": 3
     },
     {
-      "sponsor": "Eli Lilly and Company",
+      "sponsor": "University Hospital, Ghent",
+      "count": 3
+    },
+    {
+      "sponsor": "Salvia BioElectronics",
+      "count": 3
+    },
+    {
+      "sponsor": "Beijing Tiantan Hospital",
+      "count": 3
+    },
+    {
+      "sponsor": "Assistance Publique Hopitaux De Marseille",
+      "count": 3
+    },
+    {
+      "sponsor": "Teva Branded Pharmaceutical Products R&D, Inc.",
       "count": 3
     },
     {
@@ -156,20 +156,20 @@
       "count": 3
     },
     {
-      "sponsor": "H. Lundbeck A/S",
+      "sponsor": "Charite University, Berlin, Germany",
       "count": 2
     }
   ],
   "avg_enrollment_by_category": {
+    "neuromodulation": 51,
     "other": 59,
-    "neuromodulation": 48,
-    "observational": 1735,
     "cgrp": 156,
-    "oxygen": 56,
-    "nerve-block": 55,
-    "psychedelic": 41,
     "pharmacology": 40,
-    "vitamin-d": 27,
-    "non-pharma": 235
+    "psychedelic": 41,
+    "observational": 1735,
+    "nerve-block": 55,
+    "non-pharma": 235,
+    "oxygen": 56,
+    "vitamin-d": 27
   }
 }
